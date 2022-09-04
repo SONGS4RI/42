@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 21:22:49 by siwolee           #+#    #+#             */
-/*   Updated: 2022/09/04 16:37:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/04 17:29:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ Sky	init_up(Sky bd, int col, int chk)
 	int	i;
 
 	i = -1;
-	if (chk == bd.size)
+	
+	while (++i < bd.size)
 	{
-		while (++i < bd.size)
-		{
-			bd.sq[i][col] = i + 1;
-			bd.init[i][col] = 1;
-		}
+		bd.sq[i][col] = i + 1;
+		bd.init[i][col] = 1;
 	}
 	return (bd);
 }
@@ -46,14 +44,13 @@ Sky	init_down(Sky bd, int col, int chk)
 	int	i;
 
 	i = -1;
-	if (chk == bd.size)
+	
+	while (++i < bd.size)
 	{
-		while (++i < bd.size)
-		{
-			bd.sq[i][col] = bd.size - i;
-			bd.init[i][col] = 1;
-		}
+		bd.sq[i][col] = bd.size - i;
+		bd.init[i][col] = 1;
 	}
+	
 	return (bd);
 }
 
@@ -62,14 +59,13 @@ Sky	init_left(Sky bd, int row, int chk)
 	int	i;
 
 	i = -1;
-	if (chk == bd.size)
+	
+	while (++i < bd.size)
 	{
-		while (++i < bd.size)
-		{
-			bd.sq[row][i] = i + 1;
-			bd.init[row][i] = 1;
-		}
+		bd.sq[row][i] = i + 1;
+		bd.init[row][i] = 1;
 	}
+	
 	return (bd);
 }
 
@@ -78,13 +74,11 @@ Sky	init_right(Sky bd, int row, int chk)
 	int	i;
 
 	i = -1;
-	if (chk == bd.size)
+	
+	while (++i <bd.size)
 	{
-		while (++i <bd.size)
-		{
-			bd.sq[row][i] = bd.size - i;
-			bd.init[row][i] = 1;
-		}
+		bd.sq[row][i] = bd.size - i;
+		bd.init[row][i] = 1;
 	}
 	return (bd);
 }
@@ -286,7 +280,7 @@ int	check_final(Sky bd)
 }
 ////////////////////////////////////       check_board          ///////////////////////////////////////////////////
 
-int	check_row_dup(Sky bd)
+int	check_col_dup(Sky bd)
 {
 	int	r;
 	
@@ -297,7 +291,7 @@ int	check_row_dup(Sky bd)
 	return (0);
 }
 
-int	check_col_dup(Sky bd)
+int	check_row_dup(Sky bd)
 {
 	int	c;
 	c = -1;
@@ -342,7 +336,7 @@ Sky	fill_board(Sky *bd, int n, int *cnt)
 		bd->r--;	
 	}
 
-	return (*bd);
+	return (*bd); 
 }
 
 //bd.sq[row][col]
@@ -400,7 +394,7 @@ int	main()
 	int	n;
 	Sky bd;
 	int	cnt[1];
-	char str[] =  "1 2 3 2 2 2 1 3 1 3 2 2 3 1 2 2"; // 컴파일 해서 보기 편하게 그냥 미리 넣었는데 나중에 argc argv로 바꾸면 될거같이요
+	char str[] =  "2 2 1 4 3 2 3 1 2 1 2 3 2 3 2 1"; // 컴파일 해서 보기 편하게 그냥 미리 넣었는데 나중에 argc argv로 바꾸면 될거같이요
 	
 	bd.c = 0;
 	bd.r = 0;
