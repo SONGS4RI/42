@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 21:22:49 by siwolee           #+#    #+#             */
-/*   Updated: 2022/09/04 13:27:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/04 15:10:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ Sky	fill_board(Sky *bd, int n, int *cnt)
 }
 
 //bd.sq[row][col]
-void	board_board(Sky bd, int n, int *cnt)  // ?? 
+void	board_board(Sky bd, int n, int *cnt)  
 {
 	int	i;
 	
@@ -265,21 +265,31 @@ void	board_board(Sky bd, int n, int *cnt)  // ??
 }
 ////////////////////////////////////        *char 입력값 구조체에 int 배열로 저장          ///////////////////////////////////////////////////
 
-void	get_chk(Sky *bd, char *s)  // 수정함
-{
+int	get_chk(Sky *bd, char *s)  // 4x4로 한다했을때 argv[1] 에 값들이 한문자열로 들어와서
+{								   // 그냥 1-4값들만 bd->chk 배열로 넘겨주었습니다.
 	int	i;
 	int j;
+	int	cnt;
 	char *str;
 	
+	cnt = 0;
 	str = s;
 	i = -1;
 	j = -1;
 	while (str[++i])
 	{
 		if (str[i] >= '1' && str[i] <= '4')
+		{
 			bd->chk[++j] = str[i] - '0';
+			cnt++;
+		}
+		else if((str[i] >= '5' && str[i] <= '9') || str[i] == '0')
+			return (0);
 	}
-	return ;
+	if (cnt == 16)
+		return (1);
+	else
+		return (0);
 }
 ////////////////////////////////////       main          ///////////////////////////////////////////////////
 
@@ -288,7 +298,7 @@ int	main()
 	int	n;
 	Sky bd;
 	int	cnt[1];
-	char str[] = "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2 "; // 
+	char str[] = "1 2 3 2 2 2 1 3 1 3 2 2 3 1 2 4 "; // 컴파일 해서 보기 편하게 그냥 미리 넣었는데 나중에 argc argv로 바꾸면 될거같이요
 	
 	bd.c = 0;
 	bd.r = 0;
@@ -300,9 +310,16 @@ int	main()
 	// if (argc == 2)
 	// {
 		
-		get_chk(&bd, str);
-		bd = init_board(bd);
-		board_board(bd, n, cnt);
+		if (get_chk(&bd, str))
+		{
+			bd = init_board(bd);
+			board_board(bd, n, cnt);
+		}
+		else
+		{
+			write(1,"Wrong",6);
+			return 0;
+		}
 	// }
 	// else write(1,"Wrong",6);
 	return (0);
