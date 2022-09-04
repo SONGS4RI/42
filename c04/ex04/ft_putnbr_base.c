@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/09/04 21:09:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/04 22:06:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    func(int nbr, char *base, int num)
 
     c = nbr%num;
     func(nbr/num, base, num);
-    write(1,base[c],1);
+    write(1,&base[c],1);
 }
 
 void ft_putnbr_base(int nbr, char *base)
@@ -68,5 +68,5 @@ void ft_putnbr_base(int nbr, char *base)
         func(nbr, base, num);
     }
 	else
-		return (0);
+		return;
 }

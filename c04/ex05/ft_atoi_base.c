@@ -6,14 +6,14 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:47:58 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/04 22:01:07 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/04 22:04:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-int ft_strlen(char *str)
+int ft_strlen1(char *str)
 {
     int cnt;
 
@@ -26,13 +26,13 @@ int ft_strlen(char *str)
     return cnt;
 }
 
-int check(char *str)
+int check1(char *str)
 {
     int i;
     int j;
 
     i = 0;
-    if(ft_strlen(str)<=1)
+    if(ft_strlen1(str)<=1)
         return 0;
     while(str[i])
     {
@@ -60,9 +60,9 @@ int ft_atoi_base(char *str, char *base)// str -> base
 	int i;
 	
 	res = 0;
-	str_len = ft_strlen(str);
-	base_len = ft_strlen(base);
-	if(check(base))
+	str_len = ft_strlen1(str);
+	base_len = ft_strlen1(base);
+	if(check1(base))
     {
         while(*str)
 		{
@@ -82,12 +82,4 @@ int ft_atoi_base(char *str, char *base)// str -> base
     }
 	else
 		return 0;
-}
-
-int main()
-{
-	char str[] = "15e";
-	char base[] = "0123456789abcdef";
-
-	printf("%d",ft_atoi_base(str,base));	
 }
