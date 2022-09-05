@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:50:09 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 16:18:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/05 18:52:22 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 int	ft_find_next_prime(int nb)
 {
 	int	i;
 	int	flag;
 
-	i = 2;
 	while (1)
 	{
+		i = 2;
 		flag = 1;
-		while (i < nb / 2)
+		while (i * i <= nb)
 		{
 			if (nb % i == 0)
 			{
@@ -33,4 +35,9 @@ int	ft_find_next_prime(int nb)
 		else
 			return (nb);
 	}
+}
+
+int main()
+{
+	printf("%d\n",ft_find_next_prime(2147483647));
 }
