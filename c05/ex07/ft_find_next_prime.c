@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:50:09 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 19:36:40 by user             ###   ########.fr       */
+/*   Updated: 2022/09/06 08:53:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 int	ft_find_next_prime(int nb)
 {
@@ -21,7 +19,7 @@ int	ft_find_next_prime(int nb)
 	{
 		i = 2;
 		flag = 1;
-		while (i * i <= nb)
+		while (i <= nb / i)
 		{
 			if (nb % i == 0)
 			{

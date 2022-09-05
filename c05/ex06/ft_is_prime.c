@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:15:47 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 19:34:07 by user             ###   ########.fr       */
+/*   Updated: 2022/09/06 08:53:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_is_prime(int nb)
 	i = 2;
 	if (nb <= 1)
 		return (0);
-	while (i * i <= nb)
+	while (i <= nb / i)
 	{
 		if (nb % i == 0)
 			return (0);

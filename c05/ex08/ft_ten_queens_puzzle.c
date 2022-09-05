@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_ten_queens_puzzle.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:02:16 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/06 08:55:18 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/06 08:55:51 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/06 08:56:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_sqrt(int nb)
-{
-	int	i;
-	int	sqrt;
+#include <unistd.h>
 
-	i = 0;
-	while ((i * i) <= nb)
-	{
-		if ((i * i) == nb)
-			return (i);
-		i++;
-	}
-	return (0);
+int ft_ten_queens_puzzle(void)
+{
+	
 }
