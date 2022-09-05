@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 15:50:09 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 18:52:22 by user             ###   ########.fr       */
+/*   Updated: 2022/09/05 19:36:40 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,4 @@ int	ft_find_next_prime(int nb)
 		else
 			return (nb);
 	}
-}
-
-int main()
-{
-	printf("%d\n",ft_find_next_prime(2147483647));
 }
