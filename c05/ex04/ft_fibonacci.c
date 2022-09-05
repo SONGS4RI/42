@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:01:27 by user              #+#    #+#             */
-/*   Updated: 2022/09/05 11:06:42 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/05 11:48:53 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/05 12:01:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+int	ft_fibonacci(int index)
 {
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}
+	if (index < 0)
+		return (-1);
+	if (index == 1)
+		return (1);
+	if (index == 0)
+		return (0);
+	return (ft_fibonacci(index - 1) + ft_fibonacci(index - 2));
 }

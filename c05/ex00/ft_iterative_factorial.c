@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_iterative_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:01:27 by user              #+#    #+#             */
-/*   Updated: 2022/09/05 11:06:42 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/05 10:47:20 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/05 11:35:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+int	ft_iterative_factorial(int nb)
+{	
+	int	res;
 
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}
+	res = 1;
+	while (nb > 0)
+		res *= nb--;
+	return (res);
 }

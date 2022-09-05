@@ -6,67 +6,76 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/09/04 22:06:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/05 11:06:47 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int ft_strlen(char *str)
+int	ft_strlen2(char *str)
 {
-    int cnt;
+	int	cnt;
 
-    cnt = 0;
-    while(*str)
-    {
-        str++;
-        cnt++;
-    }
-    return cnt;
+	cnt = 0;
+	while (*str)
+	{
+		str++;
+		cnt++;
+	}
+	return (cnt);
 }
 
-int check(char *str)
+int	check(char *str)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    if(ft_strlen(str)<=1)
-        return 0;
-    while(str[i])
-    {
-        j = i+1;
-        if(str[i] == '+' || str[i] == '-')
-            return 0;
-        while(str[j])
-        {
-            if(str[j]==str[i])
-                return 0;
-            j++;
-        }
-        i++;
-    }
-    return 1;
+	i = 0;
+	if (ft_strlen2(str) <= 1)
+		return (0);
+	while (str[i])
+	{
+		j = i + 1;
+		if (str[i] == '+' || str[i] == '-')
+			return (0);
+		while (str[j])
+		{
+			if (str[i] == str[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
-void    func(int nbr, char *base, int num)
+void	func(long long nbr, char *base, long long len)
 {
-    int c;
+	long long	c;
 
-    c = nbr%num;
-    func(nbr/num, base, num);
-    write(1,&base[c],1);
+	c = nbr % len;
+	if (nbr == 0)
+		return ;
+	func(nbr / len, base, len);
+	write(1, &base[c], 1);
 }
 
-void ft_putnbr_base(int nbr, char *base)
+void	ft_putnbr_base(int nbr, char *base)
 {
-    int num;
+	long long	num;
+	long long	len;
 
-    num = ft_strlen(base);
-    if(check(base))
-    {
-        func(nbr, base, num);
-    }
+	num = (long long)nbr;
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num *= -1;
+	}
+	if (num == 0)
+		write(1, base, 1);
+	len = ft_strlen2(base);
+	if (check(base))
+		func(num, base, len);
 	else
-		return;
+		return ;
 }

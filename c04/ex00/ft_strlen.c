@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:59:43 by user              #+#    #+#             */
-/*   Updated: 2022/09/02 17:01:06 by user             ###   ########.fr       */
+/*   Updated: 2022/09/05 11:06:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int cnt;
+	int	cnt;
 
-    cnt = 0;
-    while(*str)
-    {
-        str++;
-        cnt++;
-    }
-    return cnt;
+	cnt = 0;
+	while (*str)
+	{
+		str++;
+		cnt++;
+	}
+	return (cnt);
 }
