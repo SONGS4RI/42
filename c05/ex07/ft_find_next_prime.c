@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_prime.c                                      :+:      :+:    :+:   */
+/*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 12:15:47 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 15:49:20 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/05 15:50:09 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/05 16:18:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_prime(int nb)
+int	ft_find_next_prime(int nb)
 {
 	int	i;
 	int	flag;
 
-	flag = 1;
 	i = 2;
-	while (i <= nb / 2)
+	while (1)
 	{
-		if (nb % i == 0)
+		flag = 1;
+		while (i < nb / 2)
 		{
-			flag = 0;
-			break ;
+			if (nb % i == 0)
+			{
+				flag = 0;
+				break ;
+			}
+			i++;
 		}
-		i++;
+		if (flag == 0)
+			nb++;
+		else
+			return (nb);
 	}
-	if (nb == 0 || nb == 1)
-		return (0);
-	return (flag);
 }
