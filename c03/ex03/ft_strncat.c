@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/31 15:10:34 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/31 21:32:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include <unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
+int	ft_strlen(char *str)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (*str)
 	{
-		if (*str == '-')
-			minus *= -1;
 		str++;
+		cnt++;
 	}
-	while (*str >= '0' && *str <= '9')
+	return (cnt);
+}
+
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
+{
+	int				idx;
+	unsigned int	i;
+
+	i = 0;
+	idx = ft_strlen(dest);
+	while (*src && i < nb)
 	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
+		dest[idx] = *src;
+		src++;
+		idx++;
+		i++;
 	}
-	return (num);
+	dest[idx] = '\0';
+	return (dest);
 }

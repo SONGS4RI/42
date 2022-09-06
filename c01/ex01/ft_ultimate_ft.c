@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_ultimate_ft.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/27 21:45:24 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/27 21:54:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include<unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			minus *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
-	}
-	return (num);
+void	ft_ultimate_ft(int *********nbr)
+{
+	*********nbr = 42;
 }

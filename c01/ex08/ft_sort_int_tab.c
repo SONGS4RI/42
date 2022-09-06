@@ -1,34 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/28 14:53:42 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/30 15:23:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include<unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
+void	swap(int *a, int *b)
+{
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	j;
+	int	min;
+	int	idx;
+
+	i = 0;
+	while (i < size)
 	{
-		if (*str == '-')
-			minus *= -1;
-		str++;
+		min = 2147483647;
+		j = i;
+		while (j < size)
+		{
+			if (tab[j] < min)
+			{
+				min = tab[j];
+				idx = j;
+			}
+			j++;
+		}
+		swap(tab + i, tab + idx);
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
-	}
-	return (num);
 }

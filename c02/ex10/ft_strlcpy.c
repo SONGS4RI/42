@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/30 13:07:24 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/31 13:56:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include <unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
+unsigned int	str_length(char *str)
+{
+	unsigned int	cnt;
+
+	cnt = 0;
+	while (*str)
 	{
-		if (*str == '-')
-			minus *= -1;
+		cnt++;
 		str++;
 	}
-	while (*str >= '0' && *str <= '9')
+	return (cnt);
+}
+
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+{
+	unsigned int	i;
+
+	i = 0;
+	if (size == 0)
+		return (str_length(src));
+	while (i < (size - 1) && src[i])
 	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
+		dest[i] = src[i];
+		i++;
 	}
-	return (num);
+	dest[i] = '\0';
+	return (str_length(src));
 }

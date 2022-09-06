@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_str_is_uppercase.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/30 08:30:46 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/31 13:56:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include <unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
+int	ft_str_is_uppercase(char *str)
+{
+	while (*str)
 	{
-		if (*str == '-')
-			minus *= -1;
-		str++;
+		if (*str >= 65 && *str <= 90)
+			str++;
+		else
+			return (0);
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
-	}
-	return (num);
+	return (1);
 }

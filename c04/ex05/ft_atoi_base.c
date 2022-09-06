@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:47:58 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/05 15:28:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/06 15:09:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check1(char *str)
 		j = i + 1;
 		if (str[i] == '+' || str[i] == '-')
 			return (0);
-		if ((*str >= 9 && *str <= 13) || *str == ' ')
+		if ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 			return (0);
 		while (str[j])
 		{
@@ -51,18 +51,26 @@ int	check1(char *str)
 	return (1);
 }
 
+char	*is_white(char *s, int *minus)
+{
+	while ((*s >= 9 && *s <= 13) || *s == ' ')
+		s++;
+	while (*s == '-' || *s == '+')
+	{
+		if (*s == '-')
+			*minus *= -1;
+		s++;
+	}
+	return (s);
+}
+
 void	func(char *s, char *base, int *res, int base_len)
 {
 	int	minus;
 	int	i;
 
 	minus = 1;
-	while (*s == '-' || *s == '+' || (*s >= 9 && *s <= 13) || *s == ' ')
-	{
-		if (*s == '-')
-			minus *= -1;
-		s++;
-	}
+	s = is_white(s, &minus);
 	while (*s)
 	{
 		i = -1;

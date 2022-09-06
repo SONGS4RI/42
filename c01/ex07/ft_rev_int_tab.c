@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 17:45:45 by user              #+#    #+#             */
-/*   Updated: 2022/09/06 14:59:01 by jahlee           ###   ########.fr       */
+/*   Created: 2022/08/28 12:39:56 by jahlee            #+#    #+#             */
+/*   Updated: 2022/08/28 14:51:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
-{
-	int	num;
-	int	minus;
+#include<unistd.h>
 
-	num = 0;
-	minus = 1;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	while (*str == '-' || *str == '+')
+void	ft_rev_int_tab(int *tab, int size)
+{
+	int	i;
+	int	temp;
+
+	i = 0;
+	while (i < (size / 2))
 	{
-		if (*str == '-')
-			minus *= -1;
-		str++;
+		temp = tab[size - 1 - i];
+		tab[size - 1 - i] = tab[i];
+		tab[i] = temp;
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * 10 + minus * (*str - '0');
-		str++;
-	}
-	return (num);
 }

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 18:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/09/05 11:06:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/06 11:15:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,18 @@ void	ft_putnbr_base(int nbr, char *base)
 	long long	len;
 
 	num = (long long)nbr;
-	if (num < 0)
-	{
-		write(1, "-", 1);
-		num *= -1;
-	}
-	if (num == 0)
-		write(1, base, 1);
-	len = ft_strlen2(base);
 	if (check(base))
+	{
+		if (num < 0)
+		{
+			write(1, "-", 1);
+			num *= -1;
+		}
+		if (num == 0)
+			write(1, base, 1);
+		len = ft_strlen2(base);
 		func(num, base, len);
+	}
 	else
 		return ;
 }
