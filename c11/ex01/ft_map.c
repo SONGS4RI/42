@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/12 12:29:14 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/12 20:59:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdlib.h>
 
-void	ft_putstr(char *str)
+int	*ft_map(int *tab, int length, int (*f)(int))
 {
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}	
+	int	i;
+	int	*pt;
+
+	pt = (int *)malloc(sizeof(int) * length);
+	if (!pt)
+		return (0);
+	i = -1;
+	while (++i < length)
+		pt[i] = f(tab[i]);
+	return (pt);
 }

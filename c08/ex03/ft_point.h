@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/11 12:41:34 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/11 12:48:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_POINT_H
+# define FT_POINT_H
 
-void	ft_putstr(char *str)
+typedef struct s_point
 {
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}	
-}
+	int	x;
+	int	y;
+}t_point;
+
+#endif

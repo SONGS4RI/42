@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_boolean.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/11 09:15:06 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/12 10:20:58 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_BOOLEAN_H
+# define FT_BOOLEAN_H
+# include <unistd.h>
 
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}	
-}
+typedef int	t_bool;
+# define EVEN(NUM) (NUM % 2) == 0
+# define EVEN_MSG "I have an even number of arguments.\n"
+# define ODD_MSG "I have an odd number of arguments.\n"
+# define TRUE 1
+# define FALSE 0
+# define SUCCESS 0
+
+#endif

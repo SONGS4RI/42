@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 18:21:03 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 17:27:54 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/09/11 19:02:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	cnt_word(char *str, char *charset)
 		{
 			cnt++;
 			str++;
-			while (!ft_strcmp(*str, charset))
+			while (*str && !ft_strcmp(*str, charset))
 				str++;
 		}
 	}

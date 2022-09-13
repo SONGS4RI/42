@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/12 11:00:10 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/12 12:28:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}	
+	int	i;
+
+	i = -1;
+	while (++i < length)
+		f(tab[i]);
 }

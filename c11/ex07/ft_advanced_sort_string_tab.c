@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/12 20:12:47 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/13 09:52:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putstr(char *str)
+void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 {
-	while (*str)
+	int		i;
+	int		j;
+	char	*temp;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	while (--i > 0)
 	{
-		write(1, str, 1);
-		str++;
-	}	
+		j = -1;
+		while (++j < i)
+		{
+			if (cmp(tab[j], tab[j + 1]) > 0)
+			{
+				temp = tab[j];
+				tab[j] = tab[j + 1];
+				tab[j + 1] = temp;
+			}
+		}
+	}
 }

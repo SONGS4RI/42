@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 13:12:53 by jahlee            #+#    #+#             */
-/*   Updated: 2022/09/11 18:38:00 by jahlee           ###   ########.fr       */
+/*   Created: 2022/09/12 19:04:05 by jahlee            #+#    #+#             */
+/*   Updated: 2022/09/12 19:04:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#ifndef FT_H
+# define FT_H
 
-void	ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-	}	
-}
+# include <unistd.h>
+
+int		atoi(char *str);
+void	ft_putnbr(int nbr);
+void	myplus(int a, int b);
+void	myminus(int a, int b);
+void	mydev(int a, int b);
+void	mymul(int a, int b);
+void	mymod(int a, int b);
+int		op_idx(char *str);
+#endif
