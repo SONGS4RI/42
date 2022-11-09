@@ -1,16 +1,18 @@
 NAME		= libft.a
 
-CC			= gcc
+CC			= @gcc
 CFLAG		= -Wall -Wextra -Werror
 
-RM			= rm
+RM			= @rm
 RMFLAG		= -f
-AR			= ar
+AR			= @ar
 ARFLAGS		= crs
 
 INCLUDES	= ./libft.h 
 
 SRCS_1		= ft_isalpha.c		\
+			  ft_isdigit.c		\
+			  ft_isalnum.c		\
 			
 SRCS_2	=     
 
