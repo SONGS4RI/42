@@ -13,6 +13,8 @@ INCLUDES	= ./libft.h
 SRCS_1		= ft_isalpha.c		\
 			  ft_isdigit.c		\
 			  ft_isalnum.c		\
+			  ft_strlen.c		\
+			  ft_memset.c		\
 			
 SRCS_2	=     
 

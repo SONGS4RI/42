@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jahlee <jahlee@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:35:13 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/09 16:47:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/10 14:32:50 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 size_t strlen(const char *s) 
 {
-
+	size_t cnt;
+	
+	cnt = 0;
+	while (s[cnt])
+		cnt++;
+	return (cnt);
 }
