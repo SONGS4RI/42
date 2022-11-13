@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 14:37:44 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/13 17:35:42 by jahlee           ###   ########.fr       */
+/*   Created: 2022/11/13 15:46:34 by jahlee            #+#    #+#             */
+/*   Updated: 2022/11/13 16:52:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-int	main()
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	char	str1[10] = "abcde\0";
-	char	str2[4] = "123\0";
+	size_t	i;
+	size_t	dst_len;
+	size_t	src_len;
 
-	// printf("return value : %lu\n",strlcat(str1,str2,7));
-	printf("%c\n",toupper('1'));
-
+	i = 0;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	if (dstsize < dst_len + 1)
+		return (dstsize + src_len);
+	if (dstsize > dst_len + 1)
+	{
+		while (src[i] != '\0' && dst_len + 1 + i < dstsize)
+		{
+			dst[dst_len + i] = src[i];
+			i++;
+		}
+	}
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
 }

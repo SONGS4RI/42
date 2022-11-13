@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 14:37:44 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/13 17:35:42 by jahlee           ###   ########.fr       */
+/*   Created: 2022/11/13 17:36:41 by jahlee            #+#    #+#             */
+/*   Updated: 2022/11/13 17:40:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-int	main()
+int	ft_tolower(int c)
 {
-	char	str1[10] = "abcde\0";
-	char	str2[4] = "123\0";
-
-	// printf("return value : %lu\n",strlcat(str1,str2,7));
-	printf("%c\n",toupper('1'));
-
+	if ((c >= 65) && (c <= 90))
+		return (c + 32);
+	return (c);
 }

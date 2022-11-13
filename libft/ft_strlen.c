@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 15:35:13 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/13 15:12:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/13 17:37:07 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	cnt;
 
