@@ -6,14 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:14:40 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/10 14:33:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:10:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
 
-int ft_isalpha(int c)
+int	ft_isalpha(int c)
 {
-    return (ft_isalpha(c) || ft_isdigit(c));
+	return (((c >= 65) && (c <= 90)) || ((c >= 97) && (c <= 122)));
 }

@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 14:26:10 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/13 15:07:28 by jahlee           ###   ########.fr       */
+/*   Created: 2022/11/13 14:37:44 by jahlee            #+#    #+#             */
+/*   Updated: 2022/11/13 14:50:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int main()
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	char str2[8] = "abcdefg\0";
+	char str1[8] = "12345678";
+	
+	printf("%s\n",memmove(str1,str2,8));
 }

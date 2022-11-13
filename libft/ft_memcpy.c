@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 16:48:51 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/10 18:07:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:11:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	i = 0;
 	if (dst != src && n)
+	{
 		while (i < n)
 		{
 			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
 			i++;
 		}
+	}
 	return (dst);
 }

@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:26:19 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/10 14:32:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/13 15:10:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-    return ((c <= 48) && (c >= 57));
+	return ((c <= 48) && (c >= 57));
 }
