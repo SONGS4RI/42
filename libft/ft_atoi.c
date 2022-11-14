@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/13 14:37:44 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/14 16:52:47 by jahlee           ###   ########.fr       */
+/*   Created: 2022/11/14 11:22:21 by jahlee            #+#    #+#             */
+/*   Updated: 2022/11/14 16:12:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 int ft_isspace(char c)
@@ -43,15 +42,4 @@ int ft_atoi(const char *str)
 		i++;
 	}
 	return (nbr);
-}
-
-
-int	main()
-{
-	char	str1[100] = "-2147483649";
-	char	str2[100] = "0123";
-
-	printf("ft     : %d\n",ft_atoi(str1));
-	printf("origin : %d\n",atoi(str1));
-
 }
