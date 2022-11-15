@@ -34,6 +34,7 @@ SRCS_1		= ft_isalpha.c		\
 			  ft_calloc.c 		\
 
 SRCS_2	=     ft_substr.c 		\
+			  ft_strjoin.c 		\
 
 SRCS_BN =     
 
