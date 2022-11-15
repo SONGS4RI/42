@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 10:01:22 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/15 14:31:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/15 19:17:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		if (!ft_memcmp(haystack, needle, needle_len))
 			return ((char *)haystack);
 		haystack++;
-        i++;
+		i++;
 	}
 	return (0);
 }

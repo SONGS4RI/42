@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 14:37:44 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/15 15:41:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/15 19:59:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,119 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (mem);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	char	*tmp;
+
+	tmp = (char *)s;
+	while (*tmp)
+	{
+		if (*tmp == c)
+			return (tmp);
+		tmp++;
+	}
+	return (NULL);
+}
+
+char	*ft_strrchr(const char *s, int c)
+{
+	char	*last;
+	char	find;
+	int		i;
+
+	last = (char *)s;
+	find = (char)c;
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (last[i] == find)
+			return (last + i);
+		i--;
+	}
+	return (0);
+}
+
+size_t	ft_getstart(const char *s1, const char *set)
+{
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s1);
+	i = 0;
+	while (i < len)
+	{
+		if (!ft_strchr(set, s1[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+size_t	ft_getend(const char *s1, const char *set)
+{
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s1);
+	i = 0;
+	while (i < len)
+	{
+		if (!ft_strchr(set, s1[len - i - 1]))
+			break ;
+		i++;
+	}
+	return (len - i);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t		start;
+	size_t		end;
+	char		*mem;
+
+	if (s1 == NULL)
+		return (NULL);
+	if (set == NULL)
+		return (ft_strdup(s1));
+	start = ft_getstart(s1, set);
+	end = ft_getend(s1, set);
+	if (start >= end) // 12321 12
+		return (ft_strdup(""));
+	mem = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (mem == NULL)
+		return (NULL);
+	ft_strlcpy(mem, s1 + start, end - start + 1);
+	return (mem);
+}
+
+size_t	cnt_word(char const *s, char c)
+{
+	size_t	cnt;
+
+	cnt = 0;
+	while (*s)
+	{
+		if (*s == c)
+			s++;
+		else
+		{
+			cnt++;
+			s++;
+			while (*s && (*s != c))
+				s++;
+		}
+	}
+	return (cnt);
+}
+
+////////////////////////////////////////////////////////////////
 int	main()
 {
-	char	str1[100] = "111";
-	char	str2[100] = "";
+	char	str1[100] = "11 2 2 333   ";
+	char	str2[100] = "12";
 
-	printf("ft     : %s\n",ft_strjoin(NULL, NULL));
+	printf("ft     : %zu\n",cnt_word(str1, ' '));
+	// printf("ft     : %zu\n",ft_getend(str1, str2));
 	// printf("origin : %s\n",ft_strlen(str1));
 
 }
