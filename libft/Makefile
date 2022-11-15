@@ -30,7 +30,7 @@ SRCS_1		= ft_isalpha.c		\
 			  ft_memchr.c		\
 			  ft_memcmp.c		\
 
-SRCS_2	=     
+SRCS_2	=     ft_substr.c 		\
 
 SRCS_BN =     
 
