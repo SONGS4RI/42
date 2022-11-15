@@ -6,7 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:14:49 by jahlee            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/11/15 14:16:41 by jahlee           ###   ########.fr       */
+=======
+/*   Updated: 2022/11/14 16:57:10 by jahlee           ###   ########.fr       */
+>>>>>>> 6e7b1a23e635c0c55fb44b5c375ff194cb28ec76
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +41,12 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+<<<<<<< HEAD
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+=======
+char    *ft_strnstr(const char *haystack, const char *needle, size_t len);
+int     ft_atoi(const char *nptr);
+void    *calloc(size_t nmemb, size_t size);
+
+>>>>>>> 6e7b1a23e635c0c55fb44b5c375ff194cb28ec76
 #endif
