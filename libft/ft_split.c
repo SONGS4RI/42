@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/15 21:19:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/17 13:07:42 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	cnt_word(char const *s, char c)
+static size_t	cnt_word(char const *s, char c)
 {
 	size_t	cnt;
 
@@ -32,7 +32,7 @@ size_t	cnt_word(char const *s, char c)
 	return (cnt);
 }
 
-char	*ft_mycpy(char *s1, char *s2, size_t offset)
+static char	*ft_mycpy(char *s1, char *s2, size_t offset)
 {
 	size_t	i;
 
@@ -49,6 +49,21 @@ void leaks()
 {
 	system("leaks ft_split");
 }
+
+static char			**ft_malloc_error(char **tab)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	atexit(leaks);
@@ -71,7 +86,7 @@ char	**ft_split(char const *s, char c)
 				offset++;
 			res[i] = (char *)malloc(sizeof(char) * (offset + 1));
 			if (!res[i])
-				return (NULL);
+				return (ft_malloc_error(res));
 			s = ft_mycpy(res[i++], (char *)s, offset);
 		}
 	}
@@ -87,5 +102,4 @@ int main()
 	tmp = ft_split(str, ' ');
 	for (int i=0; i<5; i++)
 		printf("%d : %s\n",i, tmp[i]);
-	free(tmp);
 }
