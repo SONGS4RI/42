@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/17 13:07:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:56:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,8 @@ static char	*ft_mycpy(char *s1, char *s2, size_t offset)
 	s1[i] = '\0';
 	return (s2 + offset);
 }
-void leaks()
-{
-	system("leaks ft_split");
-}
 
-static char			**ft_malloc_error(char **tab)
+static char	**ft_malloc_error(char **tab)
 {
 	unsigned int	i;
 
@@ -58,6 +54,7 @@ static char			**ft_malloc_error(char **tab)
 	while (tab[i])
 	{
 		free(tab[i]);
+		tab[i] = 0;
 		i++;
 	}
 	free(tab);
@@ -66,7 +63,6 @@ static char			**ft_malloc_error(char **tab)
 
 char	**ft_split(char const *s, char c)
 {
-	atexit(leaks);
 	char	**res;
 	size_t	offset;
 	size_t	i;
@@ -92,14 +88,4 @@ char	**ft_split(char const *s, char c)
 	}
 	res[i] = 0;
 	return (res);
-}
-#include <stdio.h>
-int main()
-{
-	char str[100] = "1 2 3 4";
-	char **tmp;
-	
-	tmp = ft_split(str, ' ');
-	for (int i=0; i<5; i++)
-		printf("%d : %s\n",i, tmp[i]);
 }
