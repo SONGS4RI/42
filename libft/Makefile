@@ -13,7 +13,7 @@ INCLUDES	= ./libft.h
 SRCS_1		= ft_isalpha.c		\
 			  ft_isdigit.c		\
 			  ft_isalnum.c		\
-			  ft_isaascii.c		\
+			  ft_isascii.c		\
 			  ft_isprint.c		\
 			  ft_strlen.c		\
 			  ft_memset.c		\
@@ -33,7 +33,12 @@ SRCS_1		= ft_isalpha.c		\
 			  ft_atoi.c 		\
 			  ft_calloc.c 		\
 
-SRCS_2	=     
+SRCS_2	=     ft_substr.c 		\
+			  ft_strjoin.c 		\
+			  ft_strtrim.c 		\
+			  ft_split.c 		\
+			  ft_itoa.c 		\
+			  ft_strmapi.c 		\
 
 SRCS_BN =     
 

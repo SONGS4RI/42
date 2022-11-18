@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "files.associations": {
         "typeinfo": "c",
         "iostream": "cpp",
@@ -7,4 +8,9 @@
         "*.tcc": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
+=======
+	"files.associations": {
+		"stdio.h": "c"
+	}
+>>>>>>> 6e43ac2b32f1136b182ba60f95790360c765d4d7
 }
