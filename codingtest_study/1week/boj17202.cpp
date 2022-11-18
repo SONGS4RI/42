@@ -15,9 +15,7 @@ int main()
     for (int i = 1; i < 15; i++)
     {
         for(int j = 0; j < 16 - i; j++)
-        {
             board[i][j] = (board[i - 1][j] + board[i - 1][j+1]) % 10;
-        }
     }
     res = board[14][0]*10 + board[14][1];
     if (res > 9)
