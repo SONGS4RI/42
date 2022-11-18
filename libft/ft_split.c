@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/17 14:56:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/18 17:58:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	**ft_malloc_error(char **tab)
 	free(tab);
 	return (NULL);
 }
+
 
 char	**ft_split(char const *s, char c)
 {
