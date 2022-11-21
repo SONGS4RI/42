@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:03:38 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 11:13:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/21 13:19:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_len(long int nbr)
+static int	ft_len(long int nbr)
 {
 	int		len;
 
@@ -27,7 +27,7 @@ int	ft_len(long int nbr)
 	return (len);
 }
 
-long int	ft_abs(long int nbr)
+static long long	ft_abs(long long nbr)
 {
 	if (nbr < 0)
 		return (-nbr);
