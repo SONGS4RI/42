@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:18:07 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/21 14:50:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t		end;
 	char		*mem;
 
-	if (s1 == NULL)
+	if (!s1)
 		return (NULL);
-	if (set == NULL)
+	if (!set)
 		return (ft_strdup(s1));
 	start = ft_getstart(s1, set);
 	end = ft_getend(s1, set);

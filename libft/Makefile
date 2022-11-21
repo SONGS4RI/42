@@ -46,7 +46,9 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
-SRCS_BN =     
+SRCS_BN =     ft_lstnew.c 		\
+			  ft_lstadd_front.c \
+			  
 
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
