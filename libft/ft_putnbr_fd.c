@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 18:12:40 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:26 by jahlee           ###   ########.fr       */
+/*   Created: 2022/11/21 13:09:25 by jahlee            #+#    #+#             */
+/*   Updated: 2022/11/21 13:19:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t size)
+static long long	ft_abs(long long nbr)
 {
-	size_t	i;
-
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	if (dst < src)
-	{
-		i = 0;
-		while (i < size)
-		{
-			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
-			i++;
-		}
-	}
+	if (nbr < 0)
+		return (-nbr);
 	else
-	{
-		i = size;
-		while (i)
-		{
-			((unsigned char *)dst)[i - 1] = ((unsigned char *)src)[i - 1];
-			i--;
-		}
-	}
-	return (dst);
+		return (nbr);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	num;
+	char		c;
+
+	num = (long long)n;
+	if (num / 10)
+		ft_putnbr_fd(num / 10, fd);
+	c = '0' + num % 10;
+	write(fd, &c, 1);
 }
