@@ -46,21 +46,23 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
-SRCS_BN =     ft_lstnew.c 		\
-			  ft_lstadd_front.c \
-			  
+SRCS_BONUS =     ft_lstnew.c 		\
+
 
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
 
 OBJS	= $(SRCS:.c=.o)
 
-OBJS_BONUS = $(SRCS_BN:.c=.o)
-
-all : $(NAME)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 %.o : %.c
 	$(CC) $(CFLAG) -c $< -o $@
+
+$(NAME) : $(OBJS)
+	$(AR) $(ARFLAGS) $@ $^
+
+all : $(NAME)
 
 clean :
 	$(RM) $(RMFLAG) $(OBJS) $(OBJS_BONUS)
@@ -70,10 +72,7 @@ fclean : clean
 
 re : fclean all
 
-$(NAME) : $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
-
 bonus : $(OBJS) $(OBJS_BONUS)
 	$(AR) $(ARFLAGS) $(NAME) $^
 
- .PHONY : all clean fclean re
+ .PHONY : all clean fclean re bonus
