@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 18:14:02 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/21 15:44:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*tmp;
-	size_t	i;
+	int	i;
 
 	i = 0;
-	tmp = (char *)s;
-	while (tmp[i])
+	while (s[i])
 	{
-		if (tmp[i] == (unsigned char)c)
-			return (tmp + i);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
 		i++;
 	}
-	if (s[i] == c)
-		return ((char *)s + i);
+	if (s[i] == (char)c)
+		return ((char *)(s + i));
 	return (NULL);
 }
