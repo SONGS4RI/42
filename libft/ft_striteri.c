@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 10:57:40 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:34 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/21 14:54:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	size_t	size;
 	size_t	i;
 
+	if (!s || !f)
+		return ;
 	size = ft_strlen(s);
 	i = 0;
 	while (i < size)

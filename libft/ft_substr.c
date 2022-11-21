@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:16:23 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/21 14:49:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	new_len;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	if ((unsigned int)ft_strlen(s) < start)
 		return (ft_strdup(""));
