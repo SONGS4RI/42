@@ -4,20 +4,26 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    int n=0, k, arr[1001]={0,};
+    int n=0, cnt = 1, k, arr[1001]={0,};
 
     cin >> n >> k;
     for(int i=2;i<=n;i++)
         arr[i] = 1;
-    for(int i=2;i<=sqrt(n);i++)
+    for(int i=2;i<=n;i++)
     {
         if(!arr[i])
             continue;
-        k--;
+        if(cnt++ == k)
+        {
+            cout << i << '\n';
+            exit(0);
+        }
         for(int j=i*i;j<=n;j+=i)
         {
+            if(!arr[j])
+                continue;
             arr[j] = 0;
-            if(!--k)
+            if(cnt++ == k)
             {
                 cout << j << '\n';
                 exit(0);
