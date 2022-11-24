@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:31:27 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/24 14:42:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:33:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}	t_list;
+}t_list;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
