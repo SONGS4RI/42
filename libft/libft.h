@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:31:27 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/24 17:33:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/24 18:03:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <ctype.h>
 
 typedef struct s_list
 {
