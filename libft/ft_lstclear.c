@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:54:18 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/24 14:18:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:47:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*target;
-	t_list	*tmp;
+	t_list	*cur;
+	t_list	*next;
 
-	target = *lst;
+	cur = *lst;
 	if (!lst || !del)
 		return ;
-	while (target)
+	while (cur)
 	{
-		tmp = target->next;
-		ft_lstdelone(target, del);
-		target = tmp;
+		next = cur->next;
+		ft_lstdelone(cur, del);
+		cur = next;
 	}
 	*lst = NULL;
 }
