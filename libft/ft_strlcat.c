@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 15:46:34 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:36 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:49:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		return (dstsize + src_len);
 	if (dstsize > dst_len + 1)
 	{
-		while (src[i] != '\0' && dst_len + 1 + i < dstsize)
+		while (src[i] && dst_len + 1 + i < dstsize)
 		{
 			dst[dst_len + i] = src[i];
 			i++;

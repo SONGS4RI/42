@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 11:22:21 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 13:19:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/24 19:56:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int	ft_isspace(char c)
 
 int	ft_atoi(const char *str)
 {
-	long	sign;
-	long	nbr;
+	int		sign;
+	int		nbr;
 	size_t	i;
 
 	sign = 1;
