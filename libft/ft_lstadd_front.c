@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:19:27 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/24 13:14:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/25 13:01:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!new)
 		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
 	new->next = *lst;
 	*lst = new;
 }
