@@ -4,7 +4,7 @@ using namespace std;
 int n, res=0;
 string s[101];
 
-int is_strike(string target, string ex)
+char is_strike(string target, string ex) // 예측 숫자 스트라이크 갯수 세주기
 {
 	int strike = 0;
 	for(int i=0;i<3;i++)
@@ -12,10 +12,10 @@ int is_strike(string target, string ex)
 		if(ex[i] == target[i])
 			strike++;
 	}
-	return (strike);
+	return (strike + '0');
 }
 
-int is_ball(string target, string ex)
+char is_ball(string target, string ex) // 예측 숫자 볼 갯수 세주기
 {
 	int ball = 0;
 	for(int i=0;i<3;i++)
@@ -24,7 +24,7 @@ int is_ball(string target, string ex)
 			if(ex[i] == target[j] && i!=j)
 				ball++;
 	}
-	return (ball);
+	return (ball + '0');
 }
 
 void dfs(int cnt, string ex)
@@ -33,10 +33,7 @@ void dfs(int cnt, string ex)
 	{
 		for (int i=0;i<n;i++)
 		{
-			cout << ex << "\n";
-			cout << is_strike(s[i],ex) << " : " << s[i][3] <<"\n";
-			cout << is_ball(s[i],ex)   << " : " << s[i][4]<< "\n";
-			if ((is_strike(s[i],ex) != s[i][3]) || (is_ball(s[i],ex) != s[i][4]))
+			if ((is_strike(s[i],ex) != s[i][3]) || (is_ball(s[i],ex) != s[i][4])) // 입력받은 값이랑 스트라이크 볼이 다르면 종료
 				return ;
 		}
 		res++;
@@ -45,12 +42,12 @@ void dfs(int cnt, string ex)
 	for(int i=1;i<=9;i++)
 	{
 		int err = 0;
-		for(int j=0;j<cnt;j++)
+		for(int j=0;j<cnt;j++)// 숫자의 중복을 없애기 위해 
 		{
 			if(ex[j] == i + '0')
 				err = 1;
 		}
-		if(!err)		
+		if(!err)
 		{
 			ex[cnt] = i + '0';
 			dfs(cnt+1, ex);
@@ -66,7 +63,7 @@ int main()
 
 	string ex = "000";
 	cin >> n;
-	for(int i=0;i<n;i++)
+	for(int i=0;i<n;i++) // 입력 받기
 	{
 		cin >> s[i];
 		cin >> s[i][3];
