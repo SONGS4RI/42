@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
+#    Updated: 2022/11/25 15:03:37 by jahlee           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME		= libft.a
 
 CC			= @gcc
@@ -46,11 +58,15 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
-SRCS_BONUS =     ft_lstnew.c 		\
-				 ft_lstadd_front.c	\
-				 ft_lstsize.c 		\
-				 ft_lstlast.c 		\
-
+SRCS_BONUS =  ft_lstnew.c 		\
+			  ft_lstadd_front.c	\
+			  ft_lstsize.c 		\
+			  ft_lstlast.c 		\
+			  ft_lstadd_back.c 	\
+			  ft_lstdelone.c 	\
+			  ft_lstclear.c 	\
+			  ft_lstiter.c 		\
+			  ft_lstmap.c 		\
 
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
@@ -60,9 +76,15 @@ OBJS	= $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 %.o : %.c
-	$(CC) $(CFLAG) -c $< -o $@
+	$(CC) $(CFLAG) -c $< -o $@ -I $(INCLUDES)
 
-$(NAME) : $(OBJS)
+ifdef BONUS_ON
+    REALOBJS = $(OBJS) $(OBJS_BONUS)
+else
+    REALOBJS = $(OBJS)
+endif
+
+$(NAME) : $(REALOBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
 all : $(NAME)
@@ -75,7 +97,7 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(OBJS) $(OBJS_BONUS)
-	$(AR) $(ARFLAGS) $(NAME) $^
+bonus :
+	@make BONUS_ON=1
 
  .PHONY : all clean fclean re bonus
