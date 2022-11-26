@@ -6,14 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:31:27 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/24 18:03:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/26 13:18:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 
