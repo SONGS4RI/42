@@ -6,41 +6,43 @@ int main()
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	int n,res,x,y,num=0;
-	int xcor[4] = {1,0,-1,0}, ycor[4] = {0,-1,0,1}; //동서남북 방향용
+	int n,res,x,y,num = 2;
+	int xcor[4] = {0, 1, 0, -1}, ycor[4] = {1, 0, -1, 0}; //동서남북 방향용
 	pair<int,int> cor;//좌표 출력 저장용
 	cin >> n >> res;
 	int arr[n][n];
 
-	x = n/2; y = n/2;// 시작좌표는 항상 고정이다
-	for(int i=1;i<=n*n;i++)
+	x = n / 2; y = n / 2;// 시작좌표는 항상 고정이다
+	arr[x][y] = 1;
+	for(int i=2; i<=n*n;)
 	{
-		if(i == pow(num+1,2))//홀수의 제곱일때가 항상 달팽이 모양으로 돌았을때의 종료지점
+		x--;
+		for(int j=0;j<num-1;j++)// 동쪽일때 만 예외를 준다
+			arr[x][y++] = i++;
+		arr[x][y] = i++;
+		for(int j=1; j<4; j++)
 		{
-			num+=2;
-			arr[x][y] = i++;
-			y++;
-		}
-		for(int j=0;j<4;j++)
 			for(int k=0;k<num;k++)	
 			{
 				x += xcor[j];
 				y += ycor[j];
 				arr[x][y] = i++;
 			}
+		}
+		num+=2;// 중심에서 몇번째 원인지에 따라 변경해주어야 한다.
 	}
 	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<n;j++)
 		{
-			// if(arr[i][j] == res)
-			// {
-			// 	cor.first = i;
-			// 	cor.second = j;
-			// }
+			if(arr[i][j] == res)
+			{
+				cor.first = i + 1;
+				cor.second = j + 1;
+			}
 			cout << arr[i][j] << ' ';
 		}
 		cout << "\n";
 	}
-	// cout << cor.first << " " << cor.second;
+	cout << cor.first << " " << cor.second;
 }
