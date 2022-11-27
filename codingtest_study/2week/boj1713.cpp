@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>//틀렸음///
 using namespace std;
 
 int n,num,vote=0,vote_max,idx=1;
