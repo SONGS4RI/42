@@ -6,13 +6,13 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2022/11/25 15:03:37 by jahlee           ###   ########.fr        #
+#    Updated: 2022/11/29 15:04:57 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= libft.a
 
-CC			= @gcc
+CC			= @cc
 CFLAG		= -Wall -Wextra -Werror
 
 RM			= @rm
