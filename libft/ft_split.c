@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2022/11/21 14:55:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:09:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 
 	i = 0;
-	res = (char **)malloc(sizeof(char *) * (cnt_word(s, c) + 1));
+	res = (char **)ft_calloc(sizeof(char *), (cnt_word(s, c) + 1));
 	if (!res || !s)
 		return (NULL);
 	while (*s)
