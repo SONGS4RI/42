@@ -1,49 +1,19 @@
 #include <iostream>
-<<<<<<< HEAD
-=======
-#include <algorithm>
-#include <vector>
-#include <string>
->>>>>>> 996a9c1afdea52f105efdfd1ba000f72264539de
+#include <cmath>
 using namespace std;
-vector<int> v;
-int n;
-
-int find(int num) {
-	int s = 0, e = n - 1;
-	
-	while (s <= e) {
-		int mid = (s + e) / 2;
-		if (v[mid] == num) return 1;
-		
-		if (v[mid] < num) {
-			s = mid + 1;
-		}
-		else e = mid - 1;
-	}
-	return 0;
-}
 
 int main() {
-	ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	ios::sync_with_stdio(false); cin.tie(NULL);
+	long long n;
 	cin >> n;
-	for (int i = 0; i < n; i++) {
-		int a; cin >> a;
-		v.push_back(a);
+	
+	long long start = 0, end = sqrt(n), mid = 0;
+	while (start <= end) {
+		mid = (start + end) / 2;
+		if (mid > sqrt(n)) end = mid - 1;
+		else if(mid < sqrt(n))start = mid + 1;
+		else break;
 	}
-	//int m; cin >> m;
-	//for (int i = 0; i < m; i++) {
-	//	int a; cin >> a;
-	//	auto it = find(v.begin(), v.end(), a);
-	//	if (it == v.end()) cout << 0 << "\n";
-	//	else cout << 1 << "\n"; //it - v.begin()
-	//}
-	//시간초과
-
-	sort(v.begin(), v.end());
-	int m; cin >> m;
-	for (int i = 0; i < m; i++) {
-		int a; cin >> a;
-		cout << find(a) << "\n";
-	}
+	if (mid * mid == n) cout << mid;
+	else cout << mid + 1;
 }
