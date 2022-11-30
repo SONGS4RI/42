@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int compare(const void *a, const void *b)//qsort¸¦ »ç¿ëÇÏ±âÀ§ÇÑ compare ÇÔ¼ö
+int compare(const void *a, const void *b)
 {
 	const int *A = (int *)a;
 	const int *B = (int *)b;
@@ -24,7 +24,7 @@ int main()
 	for(int i=0;i<n;i++)
 	{
 		cin >> num;
-		int *ptr = (int *)bsearch(&num,arr,sizeof(arr)/sizeof(int),sizeof(int),compare);//bsearch´Â ÀÌÁøÅ½»ö ³»ÀåÇÔ¼öÀÌ´Ù.
+		int *ptr = (int *)bsearch(&num,arr,sizeof(arr)/sizeof(int),sizeof(int),compare);//bsearchï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ì´ï¿½.
 		if(ptr) cout << 1;
 		else cout << 0;
 		cout << " ";
