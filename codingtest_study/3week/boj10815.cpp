@@ -1,3 +1,5 @@
+/*숫자카드*/
+
 #include <bits/stdc++.h>
 using namespace std;
 

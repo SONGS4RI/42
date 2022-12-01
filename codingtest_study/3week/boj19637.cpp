@@ -1,3 +1,5 @@
+/*IF문 좀 대신 써줘*/
+
 #include<iostream>
 #include<algorithm>
 #include<map>
