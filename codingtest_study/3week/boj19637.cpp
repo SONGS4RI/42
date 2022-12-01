@@ -12,7 +12,7 @@ int main() {
 	string s;
 	cin >> n >> m;
 
-	map<int, string>arr;
+	map<int, string>arr;// map은 key, value로 저장하되 key의 오름차순으로 정렬한다. 중복x
 	for (int i = 0; i < n; i++)
 	{
 		cin >> s >> num;
