@@ -14,8 +14,7 @@ int main() {
 		if (mid >= (n / mid)) end = mid - 1;
 		else if(mid < (n / mid)) start = mid + 1;
 	}
-	if (mid * mid == n) cout << mid;
-	else cout << mid + 1;
-	cout.precision(15);
-	cout << "\nsqrt(n) : " << sqrt(n);
+	if (start * start < n && start * start > 0) cout << start + 1;
+	else if (end * end == n) cout << end;
+	else cout << end + 1;
 }
