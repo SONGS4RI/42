@@ -18,15 +18,14 @@ int main(){
 		v.push_back(sum);
 	}
     sort(v.begin(),v.end());
-
     start = 0;
     end = v[n - 1];
 
     while(start <= end){
         sum = 0;
         mid = (start + end) / 2;
-
-        for(int i = 0 ; i < n ; i++)
+		int idx = lower_bound(v.begin(),v.end(),mid)-v.begin();
+        for(int i = idx ; i < n ; i++)
             if(v[i] - mid > 0) sum += v[i] - mid; //자른 나무 길이
         if(sum >= m)
 		{
