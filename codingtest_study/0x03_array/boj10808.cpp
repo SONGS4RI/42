@@ -1,4 +1,4 @@
-/*알파벳 개수*/
+/* 알파벳 개수 */
 #include <iostream>
 using namespace std;
 int main()

@@ -1,4 +1,4 @@
-/* °³¼ö ¼¼±â */
+/* ê°œìˆ˜ ì„¸ê¸° */
 #include <iostream>
 using namespace std;
 int main()
