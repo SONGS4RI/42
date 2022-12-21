@@ -6,51 +6,46 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/20 21:23:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/21 22:57:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-static	void	what_conversion(char c, va_list *ap)
+int	parse_format(va_list ap, char *format)
 {
-	if (c == 'c')
-		ft_printf_c(c, ap);
-	// else if (c == 's')
-	// 	ft_printf_s();
-	// else if (c == 'p')
-	// 	ft_printf_p();
-	// else if (c == 'd')
-	// 	ft_printf_d();
-	// else if (c == 'i')
-	// 	ft_printf_i();
-	// else if (c == 'u')
-	// 	ft_printf_u();
-	// else if (c == 'x')
-	// 	ft_printf_x();
-	// else if (c == 'X')
-	// 	ft_printf_X();
-	// else if (c == '%')
-	// 	ft_printf_percent();
+	int		result;
+
+	result = 0;
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == 0)
+				break ;
+			/*
+            		서식 문자에 따라 맞는 값을 출력
+            		*/
+		}
+		else
+			result += ft_putchar(*format); // 일반 문자를 출력
+		format++;
+	}
+	return (result);
 }
 
-int	ft_printf(const	char *s, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list	ap;
-	int		i;
+	int			result;
+	va_list		ap;
 
-	i = 0;
-	va_start(ap, s);
-	while (s[i])
-	{
-		if (s[i] == '%')
-			what_conversion(s[++i], &ap);
-		else
-			write(1, s + i, 1);
-		i++;
-	}
-	return (0);
+	result = 0;
+	va_start(ap, format);
+	result = parse_format(ap, (char *)format);
+	va_end(ap);
+	return (result);
 }
 
 int main()
