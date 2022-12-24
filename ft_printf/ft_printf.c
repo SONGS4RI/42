@@ -6,52 +6,55 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/22 18:29:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/24 18:39:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	check_type(const char c, va_list *list)
+int	check_type(const char c, va_list *ap)
 {
 	if (c == 'c')
-		return (ft_printf_c(va_arg(*list, int)));
+		return (ft_printf_c(va_arg(*ap, int)));
 	else if (c == 's')
-		return (ft_printf_s(va_arg(*list, char *)));
+		return (ft_printf_s(va_arg(*ap, char *)));
 	else if (c == 'd' || c == 'i')
-		return (ft_printf_nbr(va_arg(*list, int)));
+		return (ft_printf_nbr(va_arg(*ap, int)));
 	else if (c == 'u')
-		return (ft_printf_u(va_arg(*list, unsigned int)));
+		return (ft_printf_u(va_arg(*ap, unsigned int)));
 	else if (c == 'x' || c == 'X')
-		return (ft_printf_hex(va_arg(*list, unsigned int), c));
+		return (ft_printf_hex(va_arg(*ap, unsigned int), c));
 	else if (c == 'p')
-		return (ft_printf_ptr(va_arg(*list, unsigned long long)));
+		return (ft_printf_ptr(va_arg(*ap, unsigned long long)));
 	else if (c == '%')
 		return (ft_printf_c('%'));
-	return (0);
+	return (-1);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int			len;
+	int			cnt;
 	int			idx;
+	int			err;
 	va_list		ap;
 
 	va_start(ap, format);
-	len = 0;
+	cnt = 0;
 	idx = 0;
+	err = 0;
 	while (format[idx])
 	{
 		if (format[idx] == '%')
 		{
-			len += check_type(format[idx + 1], &ap);
-			idx++;
+			err = check_type(format[++idx], &ap);
+			if (err == -1) return (-1);
+			cnt += err;
 		}
 		else
-			len += ft_printf_char(format[idx]);
+			cnt += ft_printf_char(format[idx]);
 		idx++;
 	}
 	va_end(ap);
-	return (len);
+	return (cnt);
 }
