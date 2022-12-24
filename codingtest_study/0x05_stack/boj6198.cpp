@@ -21,6 +21,6 @@ int main()
 		}
 		st.push(num);
 	}
-	if(st.size()) ans += ((st.size()-1)*st.size())/2;// 1~n-1까지의 합
+	if(st.size()) ans += ((st.size()-1)*st.size())/2;// 1~n-1까지의 합(내림차순으로 남기때문에)
 	cout << ans << "\n";
 }
