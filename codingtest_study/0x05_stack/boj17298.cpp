@@ -18,7 +18,7 @@ int main()
 		cin >> num;
 		while(st.size() && st.top().first < num)
 		{
-			ans[st.top().second] = num;
+			ans[st.top().second] = num;// top().second는 인덱스를 의미
 			st.pop();
 		}
 		st.push({num,i});
