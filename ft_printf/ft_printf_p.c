@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_ptr.c                                    :+:      :+:    :+:   */
+/*   ft_printf_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:30:23 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/22 18:30:24 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/25 20:43:29 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static void	ft_putptr(unsigned long long ptr, size_t *len)
+#include "libft/libft.h"
+
+static void	ft_putptr(size_t ptr, size_t *len)
 {
+	char	c;
+
 	if (ptr >= 16)
 	{
 		ft_putptr(ptr / 16, len);
@@ -20,18 +24,24 @@ static void	ft_putptr(unsigned long long ptr, size_t *len)
 	else
 	{
 		if (ptr < 10)
-			*len += ft_putchar_fd('0' + ptr, 1);
+		{
+			c = '0' + ptr;
+			*len += write(1, &c, 1);
+		}
 		else
-			*len += ft_putchar_fd(ptr - 10 + 'a', 1);
+		{
+			c = ptr - 10 + 'a';
+			*len += write(1, &c, 1);
+		}
 	}
 }
 
-int	ft_printf_ptr(unsigned long long ptr)
+int	ft_printf_p(void *ptr)
 {
 	size_t	len;
 
 	len = 0;
-	len += ft_putstr_fd("0x", 1);
-	ft_putptr(ptr, &len);
+	len += write(1, "0x", 2);
+	ft_putptr((size_t)ptr, &len);
 	return (len);
 }
