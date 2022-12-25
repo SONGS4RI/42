@@ -6,9 +6,35 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:28:35 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/22 18:28:36 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:14:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft/libft.h"
+
+static void	ft_putnbr_base(unsigned int nbr, char *s, size_t *len)
+{
+	char	c;
+
+	if (nbr >= 16)
+	{
+		ft_putnbr_base(nbr / 16, s, len);
+		ft_putnbr_base(nbr % 16, s, len);
+	}
+	else
+	{
+		if (nbr < 10)
+		{
+			c = '0' + nbr;
+			*len += write(1, &c, 1);
+		}
+		else
+		{
+			c = nbr - 10 + s[10];
+			*len += write(1, &c, 1);
+		}
+	}
+}
 
 int	ft_printf_hex(unsigned int nbr, const char type)
 {
@@ -16,8 +42,8 @@ int	ft_printf_hex(unsigned int nbr, const char type)
 
 	len = 0;
 	if (type == 'X')
-		len = ft_putnbr_base(nbr, "0123456789ABCDEF");
+		ft_putnbr_base(nbr, "0123456789ABCDEF", &len);
 	else
-		len = ft_putnbr_base(nbr, "0123456789abcdef");
+		ft_putnbr_base(nbr, "0123456789abcdef", &len);
 	return (len);
 }

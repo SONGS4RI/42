@@ -6,14 +6,33 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:27:18 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/22 18:27:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:22:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_printf_unsigned(unsigned int nbr)
+#include "libft/libft.h"
+
+static void	ft_putnbr_base(unsigned int nbr, char *s, size_t *len)
+{
+	char	c;
+
+	if (nbr >= 16)
+	{
+		ft_putnbr_base(nbr / 10, s, len);
+		ft_putnbr_base(nbr % 10, s, len);
+	}
+	else
+	{
+			c = '0' + nbr;
+			*len += write(1, &c, 1);
+	}
+}
+
+int	ft_printf_u(unsigned int nbr)
 {
 	size_t	len;
 
-	len = ft_putnbr_base(nbr, "0123456789");
+	len = 0;
+	ft_putnbr_base(nbr, "0123456789", &len);
 	return (len);
 }

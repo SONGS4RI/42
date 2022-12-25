@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/24 18:39:34 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:43:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_type(const char c, va_list *ap)
 	else if (c == 'x' || c == 'X')
 		return (ft_printf_hex(va_arg(*ap, unsigned int), c));
 	else if (c == 'p')
-		return (ft_printf_ptr(va_arg(*ap, unsigned long long)));
+		return (ft_printf_p(va_arg(*ap, void *)));
 	else if (c == '%')
 		return (ft_printf_c('%'));
 	return (-1);
@@ -36,20 +36,20 @@ int	ft_printf(const char *format, ...)
 {
 	int			cnt;
 	int			idx;
-	int			err;
+	int			len;
 	va_list		ap;
 
 	va_start(ap, format);
 	cnt = 0;
 	idx = 0;
-	err = 0;
 	while (format[idx])
 	{
 		if (format[idx] == '%')
 		{
-			err = check_type(format[++idx], &ap);
-			if (err == -1) return (-1);
-			cnt += err;
+			len = check_type(format[++idx], &ap);
+			if (len == -1)
+				return (-1);
+			cnt += len;
 		}
 		else
 			cnt += ft_printf_char(format[idx]);
