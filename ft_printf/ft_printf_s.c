@@ -6,16 +6,14 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:26:04 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/25 17:58:10 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/28 15:28:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	ft_printf_s(char *str)
 {
-	int	len;
-
 	if (!str)
 		return (write(1, "(null)", 6));
 	return (write(1, str, ft_strlen(str)));
