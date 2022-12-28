@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2022/12/28 16:19:11 by jahlee           ###   ########.fr        #
+#    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
+#    Updated: 2022/12/28 16:54:45 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ft_printf.a
+NAME		= libftprintf.a
 LIBFTDIR	= ./libft
 LIBFTFILE	= libft.a
 
