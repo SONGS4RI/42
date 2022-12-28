@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:25:29 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/25 17:56:38 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/28 15:01:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 int	ft_printf_char(int c)
 {

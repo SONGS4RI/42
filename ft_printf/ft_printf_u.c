@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:27:18 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/25 21:22:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/28 15:02:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "ft_printf.h"
 
 static void	ft_putnbr_base(unsigned int nbr, char *s, size_t *len)
 {

@@ -6,12 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/25 21:43:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2022/12/28 15:09:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 int	check_type(const char c, va_list *ap)
 {
@@ -20,7 +19,7 @@ int	check_type(const char c, va_list *ap)
 	else if (c == 's')
 		return (ft_printf_s(va_arg(*ap, char *)));
 	else if (c == 'd' || c == 'i')
-		return (ft_printf_nbr(va_arg(*ap, int)));
+		return (ft_printf_di(va_arg(*ap, int)));
 	else if (c == 'u')
 		return (ft_printf_u(va_arg(*ap, unsigned int)));
 	else if (c == 'x' || c == 'X')
@@ -52,7 +51,7 @@ int	ft_printf(const char *format, ...)
 			cnt += len;
 		}
 		else
-			cnt += ft_printf_char(format[idx]);
+			cnt += ft_printf_c(format[idx]);
 		idx++;
 	}
 	va_end(ap);
