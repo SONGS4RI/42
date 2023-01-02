@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/02 19:30:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/02 19:50:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ int	ft_printf(const char *format, ...)
 			cnt += len;
 		}
 		else
-			cnt += ft_printf_c(format[idx]);
+		{
+			len = ft_printf_c(format[idx]);
+			if (len < 0)
+				return (-1);
+			else
+				cnt += len;
+		}
 		idx++;
 	}
 	va_end(ap);
