@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:30:45 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/02 18:49:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/02 19:30:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	check_type(const char c, va_list *ap)
+static int	check_type(const char c, va_list *ap)
 {
 	if (c == 'c')
 		return (ft_printf_c(va_arg(*ap, int)));
