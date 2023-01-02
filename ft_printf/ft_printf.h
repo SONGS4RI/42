@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:31:27 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/28 16:55:07 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/02 19:31:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
+int	ft_printf(const char *format, ...);
 int	ft_printf_c(int c);
 int	ft_printf_s(char *str);
 int	ft_printf_di(int nbr);
 int	ft_printf_u(unsigned int nbr);
 int	ft_printf_p(void *ptr);
 int	ft_printf_hex(unsigned int nbr, const char type);
-int	ft_printf_u(unsigned int nbr);
 #endif
