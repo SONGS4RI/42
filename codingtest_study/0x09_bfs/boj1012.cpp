@@ -1,5 +1,5 @@
 /* 유기농 배추 */
-/* 13:55 ~ 14: */
+/* 13:55 ~ 14: 40 */
 #include <iostream>
 #include <queue>
 #include <string.h>
@@ -10,17 +10,18 @@ int main()
 
 	int t,m,n,k,nx,ny;
 	int dx[4] = {-1,0,1,0}, dy[4] = {0,1,0,-1};
+	int board[51][51];
 	cin >> t;
 	while(t--)
 	{
 		cin >> m >> n >> k;
 		int ans = 0;
-		int board[n][m]; memset(board,0,sizeof(board));
+		memset(board,0,sizeof(board));
 		queue<pair<int,int> > q;
 		for(int i=0;i<k;i++)
 		{
 			cin >> nx >> ny;
-			board[nx][ny] = 1;
+			board[ny][nx] = 1;
 		}
 		for(int i=0;i<n;i++)
 		{
