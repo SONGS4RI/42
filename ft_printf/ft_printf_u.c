@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:27:18 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/28 15:02:20 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/02 17:32:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	ft_putnbr_base(unsigned int nbr, char *s, size_t *len)
 {
 	char	c;
 
-	if (nbr >= 16)
+	if (nbr >= 10)
 	{
 		ft_putnbr_base(nbr / 10, s, len);
 		ft_putnbr_base(nbr % 10, s, len);
