@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 18:26:41 by jahlee            #+#    #+#             */
-/*   Updated: 2022/12/28 15:28:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/03 15:51:07 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_printf_di(int nbr)
 	char	*str;
 
 	str = ft_itoa(nbr);
+	if (!str)
+		return (-1);
 	len = write(1, str, ft_strlen(str));
 	free(str);
 	return (len);
