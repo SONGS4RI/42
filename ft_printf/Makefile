@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2022/12/28 16:54:45 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/04 17:49:43 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,13 @@ SRCS		= ft_printf.c		\
 
 OBJS	= $(SRCS:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -I $(INCLUDES)
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 $(NAME) : $(OBJS)
 	@make -C $(LIBFTDIR)
 	@cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $(ARFLAGS) $@ $?
+	$(AR) $(ARFLAGS) $@ $^ $?
 
 all : $(NAME)
 
