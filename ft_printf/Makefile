@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/04 17:49:43 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/04 18:40:45 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ OBJS	= $(SRCS:.c=.o)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFTDIR)
 	@cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $(ARFLAGS) $@ $^ $?
+	$(AR) $(ARFLAGS) $@ $^
 
 all : $(NAME)
 

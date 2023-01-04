@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:16:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/04 15:57:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/04 19:32:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,9 @@ typedef struct s_gnl_list
 }t_gnl_list;
 
 char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_strdup(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
 #endif
