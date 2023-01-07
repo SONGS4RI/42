@@ -1,5 +1,5 @@
 /* 단지번호 붙이기 */
-/* 17:58 ~  */
+/* 17:58 ~ 18:20 */
 #include <iostream>
 #include <queue>
 #include <string.h>
