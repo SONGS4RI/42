@@ -23,13 +23,13 @@ int main()
 		cin >> cur.first >> cur.second;
 		cin >> nx >> ny;
 		for(int j=cur.second;j<ny;j++)
-			for(int k=cur.first;k<nx;k++) board[j][k] = 1;
+			for(int k=cur.first;k<nx;k++) board[j][k] = 1; // 겹치는 부분 상관없이 전부 1로 표기
 	}
 	for(int i=0;i<n;i++)
 	{
 		for(int j=0;j<m;j++)
 		{
-			if(!board[i][j] && !visited[i][j])
+			if(!board[i][j] && !visited[i][j]) // board가 0이고 방문한적 없다면
 			{
 				int w=1;
 				q.push({i,j});
@@ -46,15 +46,15 @@ int main()
 						if(board[nx][ny]|| visited[nx][ny]) continue;
 						visited[nx][ny] = true;
 						q.push({nx,ny});
-						w++;
+						w++; // 영역++
 					}
 				}
-				v.push_back(w);
+				v.push_back(w); // 벡터에 넣어주어서 나중에 답으로 출력
 				ans++;
 			}
 		}
 	}
-	sort(v.begin(),v.end());
+	sort(v.begin(),v.end()); // 오름차순 정렬
 	cout << ans << "\n";
 	for(auto c : v) cout << c << " ";
 }
