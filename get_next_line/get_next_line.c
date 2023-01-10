@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/09 20:33:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/10 13:40:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*is_backup(int len_s, char *s, int len_buf, t_gnl_list *buf)
 	len = len_s + len_buf;
 	tmp = (char *)malloc(len + 1);
 	if (!tmp)
-		return (NULL);
+		return (NULL);//백업 다  널처리
 	if (buf->backup)
 	{
 		ft_strlcat(tmp, buf->backup, len + 1);
@@ -61,13 +61,12 @@ char	*is_backup(int len_s, char *s, int len_buf, t_gnl_list *buf)
 		idx++;
 	if (idx == len)//개행이 없다는 뜻
 	{
-		if (len_s != BUFFER_SIZE)//마지막 읽기이면
+		if (len_s != len)//마지막 읽기이면
 		{
-			free(buf->backup);
 			free(buf);
 			return (NULL);
 		}
-		buf->backup = ft_substr(tmp, 0, idx + 1);;
+		buf->backup = ft_substr(tmp, 0, len + 1);
 	}
 	else
 		buf->backup = ft_substr(tmp, idx + 1, len);
@@ -91,7 +90,7 @@ char	*get_next_line(int fd)
 		head = find_fd(head, fd);
 	buf = find_fd(head, fd);
 	cnt = read(fd, next_line, BUFFER_SIZE);
-	if (!cnt && !buf->backup)//eof고 버퍼에 값들어있으면
+	if (cnt != BUFFER_SIZE && !buf->backup)//eof고 버퍼에 값들어있으면 ㅂㅓ퍼개행봐줘야함
 	{
 		free(buf->backup);
 		free(buf);
