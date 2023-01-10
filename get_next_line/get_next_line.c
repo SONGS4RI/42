@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/10 17:47:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/10 18:22:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 	return (NULL);
 }
 
-char	*is_backup(int len_s, char *s, int idx, t_gnl_list *buf)
+char	*combine_buf_read(int len_s, char *s, int idx, t_gnl_list *buf)
 {
 	int		len;
 	char	*tmp;
-	char	*res;
 
 	len = len_s + idx;
 	tmp = (char *)malloc(len + 1);
@@ -70,6 +69,14 @@ char	*is_backup(int len_s, char *s, int idx, t_gnl_list *buf)
 		free(buf->backup);
 	}
 	ft_strlcat(tmp, s, len + 1);
+	return (what_line(len_s, len, tmp, buf));
+}
+
+char	*what_line(int len_s, int len, char *tmp, t_gnl_list *buf)
+{
+	int		idx;
+	char	*res;
+
 	idx = 0;
 	while (tmp[idx] != '\n' && tmp[idx])
 		idx++;
@@ -114,5 +121,5 @@ char	*get_next_line(int fd)
 	}
 	if (buf->backup)
 		buf_size = ft_strlen(buf->backup);
-	return (is_backup(cnt, next_line, buf_size, buf));
+	return (combine_buf_read(cnt, next_line, buf_size, buf));
 }
