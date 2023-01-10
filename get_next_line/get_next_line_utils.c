@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/09 20:00:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/10 13:30:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	}
 	return (substr);
-}
-
-char	*ft_strdup(const char *s)
-{
-	size_t	size;
-	char	*mem;
-
-	size = ft_strlen(s);
-	mem = (char *)malloc(sizeof(char) * (size + 1));
-	if (!mem)
-		return (NULL);
-	ft_strlcpy(mem, s, size + 1);
-	return (mem);
 }
