@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/10 16:30:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/10 16:42:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,33 @@ char	*is_backup(int len_s, char *s, int len_buf, t_gnl_list *buf)//eof && 버퍼
 	tmp[0] = '\0';
 	if (!tmp)
 		return (NULL);//백업 다  널처리
-	printf("tmp_begin : |%s|\n",tmp);/////////////////////
 	if (buf->backup)// 버퍼가 존재하면
 	{
 		ft_strlcat(tmp, buf->backup, len_buf + 1);
-		printf("tmp(backup++) : |%s|\n",tmp);/////////////////////
 		free(buf->backup);
 	}
 	ft_strlcat(tmp, s, len + 1);
 	printf("tmp(readall) : |%s|\n",tmp);/////////////////////
 	while (tmp[idx] != '\n' && tmp[idx])
 		idx++;
-	if (idx == len)//개행이 없다는 뜻
+	if (idx == len)
 	{
 		if (len_s != len)//eof
 		{
 			free(buf);
 			free(tmp);
+			printf("buf_new(no\\n&&eof)\n");/////////////
 			return (NULL);
 		}
-		buf->backup = ft_substr(tmp, 0, len);//not eof
+		buf->backup = ft_substr(tmp, 0, len);
 		free(tmp);
+		printf("buf_new(no\\n&&noteof) :start|%s|end\n",buf->backup);/////////////
 		return (NULL);
 	}
 	else
 		buf->backup = ft_substr(tmp, idx + 1, len);
 	res = ft_substr(tmp, 0, idx + 1);
-	printf("buf:start|%s|end\n",buf->backup);/////////////
+	printf("buf_new:start|%s|end\n",buf->backup);/////////////
 	free(tmp);
 	return (res);
 }
@@ -97,18 +97,22 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	cnt = read(fd, next_line, BUFFER_SIZE);
-	printf("cnt : %d\n",cnt);////////////////////
+	printf("-------------------------------------------\n");///////////////////
+	write(1,"read : |",8);
+	write(1,next_line,cnt);
+	write(1,"|\n",2);
 	if (!head)
 		head = find_fd(head, fd, cnt);
 	buf = find_fd(head, fd, cnt);
 	if (!cnt && !buf->backup)//eof && 버퍼에 아무것도 없으면
 	{
 		free(buf);
+		printf("eof && nobuf\n");
 		return (NULL);
 	}
 	if (buf->backup)
 	{
-		printf("buf->backup: |%s|\n",buf->backup);/////////////
+		printf("buf->backup_present: |%s|\n",buf->backup);/////////////
 		buf_size = ft_strlen(buf->backup);
 	}
 	return (is_backup(cnt, next_line, buf_size, buf));
