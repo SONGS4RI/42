@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/10 17:03:34 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/10 17:47:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
+
+t_gnl_list	*del_gnl_list(t_gnl_list *tmp)
+{
+	t_gnl_list	*previous;
+
+	previous = tmp->previous;
+	previous->next = tmp->next;
+	if (tmp->backup)
+		free(tmp->backup);
+	free(tmp);
+	return (NULL);
+}
 
 t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 {
@@ -31,6 +43,7 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 		tmp = (t_gnl_list *)malloc(sizeof(t_gnl_list));
 		if (!tmp)
 			return (NULL);
+		tmp->previous = new;
 		tmp->fd_idx = fd;
 		tmp->next = NULL;
 		if (new)
@@ -40,25 +53,24 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 	return (NULL);
 }
 
-char	*is_backup(int len_s, char *s, int len_buf, t_gnl_list *buf)
+char	*is_backup(int len_s, char *s, int idx, t_gnl_list *buf)
 {
 	int		len;
 	char	*tmp;
 	char	*res;
-	int		idx;
 
-	idx = 0;
-	len = len_s + len_buf;
+	len = len_s + idx;
 	tmp = (char *)malloc(len + 1);
 	tmp[0] = '\0';
 	if (!tmp)
 		return (NULL);
 	if (buf->backup)
 	{
-		ft_strlcat(tmp, buf->backup, len_buf + 1);
+		ft_strlcat(tmp, buf->backup, idx + 1);
 		free(buf->backup);
 	}
 	ft_strlcat(tmp, s, len + 1);
+	idx = 0;
 	while (tmp[idx] != '\n' && tmp[idx])
 		idx++;
 	if (idx == len)
@@ -97,7 +109,7 @@ char	*get_next_line(int fd)
 	buf = find_fd(head, fd, cnt);
 	if (!cnt && !buf->backup)
 	{
-		free(buf);
+		del_gnl_list(buf);
 		return (NULL);
 	}
 	if (buf->backup)
