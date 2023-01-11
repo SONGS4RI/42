@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/10 18:22:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/11 19:14:29 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!substr)
 		return (NULL);
 	ft_strlcpy(substr, s + start, len + 1);
-	if (*substr == '\0')
+	if (substr[0] == '\0')
 	{
 		free(substr);
 		return (NULL);

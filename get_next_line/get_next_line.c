@@ -6,22 +6,33 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/10 19:23:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/11 20:49:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <stdio.h>//////////////////
-t_gnl_list	*del_gnl_list(t_gnl_list *tmp)
+#include <stdio.h>//////////////////
+char	*del_gnl_list(t_gnl_list **tmp_address, t_gnl_list *tmp)
 {
 	t_gnl_list	*previous;
 
+	printf("del list!!!!!!!!!!!\n");/////////////////////////////////
 	if (tmp->previous)
 	{
 		previous = tmp->previous;
 		previous->next = tmp->next;
 	}
-	free(tmp);
+	if (tmp->backup)
+	{
+		free(tmp->backup);
+		tmp->backup = NULL;
+	}
+	if (tmp)
+	{
+		free(*tmp_address);
+		*tmp_address = NULL;
+	}
+	// if(!tmp_address) printf("good\n");////////////////////////////////////
 	return (NULL);
 }
 
@@ -35,7 +46,7 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 	}
 	if (tmp)
 		return (tmp);
-	else if (cnt > 0)
+	else if (cnt > 0)//////////wrong??////////////
 	{
 		tmp = (t_gnl_list *)malloc(sizeof(t_gnl_list));
 		if (!tmp)
@@ -49,26 +60,28 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int cnt)
 	return (NULL);
 }
 
-char	*combine_buf_read(int len_s, char *s, int idx, t_gnl_list *buf)
+char	*combine_buf_read(int len_read, char *s, int len_buf, t_gnl_list *buf)
 {
 	int		len;
 	char	*tmp;
 
-	len = len_s + idx;
-	tmp = (char *)malloc(len + 1);
+	len = len_read + len_buf;
+	tmp = (char *)malloc(len + 1);//malloc!!!!!!!!!!!!!!
 	if (!tmp)
 		return (NULL);
 	tmp[0] = '\0';
 	if (buf->backup)
 	{
-		ft_strlcat(tmp, buf->backup, idx + 1);
+		ft_strlcat(tmp, buf->backup, len_buf + 1);
 		free(buf->backup);
+		buf->backup = NULL;
 	}
 	ft_strlcat(tmp, s, len + 1);
-	return (what_line(len_s, len, tmp, buf));
+	printf("tmp string :|%s|\n",tmp);/////////////////////////////////////////////////
+	return (what_line(len_read, len, tmp, buf));
 }
 
-char	*what_line(int len_s, int len, char *tmp, t_gnl_list *buf)
+char	*what_line(int len_read, int len, char *tmp, t_gnl_list *buf)
 {
 	int		idx;
 	char	*res;
@@ -78,11 +91,12 @@ char	*what_line(int len_s, int len, char *tmp, t_gnl_list *buf)
 		idx++;
 	if (idx == len)
 	{
-		if (len_s != len)
+		if (len_read < BUFFER_SIZE)
 		{
-			free(buf);
+			res = ft_substr(tmp, 0, len);//malloc!!!!!!!!!!!!!!
 			free(tmp);
-			return (NULL);
+			del_gnl_list(&buf, buf);
+			return (res);
 		}
 		buf->backup = ft_substr(tmp, 0, len);
 		free(tmp);
@@ -98,47 +112,44 @@ char	*what_line(int len_s, int len, char *tmp, t_gnl_list *buf)
 char	*get_next_line(int fd)
 {
 	static t_gnl_list	*head;
-	t_gnl_list			*buf;
 	char				next_line[BUFFER_SIZE];
 	int					buf_size;
 	int					cnt;
 
+	printf("--------------------\n");///////////////////////////////////////////////////
 	buf_size = 0;
 	if (fd < 0)
 		return (NULL);
 	cnt = read(fd, next_line, BUFFER_SIZE);
-	if (!head)
-		head = find_fd(head, fd, cnt);
-	buf = find_fd(head, fd, cnt);
-	if (!buf)
-		return (NULL);
-	if (!cnt && !buf->backup)
-	{
-		del_gnl_list(buf);
-		return (NULL);
-	}
-	if (buf->backup)
-		buf_size = ft_strlen(buf->backup);
-	return (combine_buf_read(cnt, next_line, buf_size, buf));
+	write(1,"read :|",7); write(1,next_line,cnt);write(1,"|\n",2);/////////////////////////////
+	if (!head) printf("head NULL\n");///////////////////////////////////////////
+		// return (NULL);
+	head = find_fd(head, fd, cnt);
+	// if (head->backup) printf("buf->backup now:|%s|\n",head->backup);/////////////////////////
+	if (head->backup)
+		buf_size = ft_strlen(head->backup);
+	printf("cnt: %d, buf_siuze: %d\n", cnt, buf_size);//////////////////////./////////////////
+	return (combine_buf_read(cnt, next_line, buf_size, head));
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
+#include <fcntl.h>
+#include <stdio.h>
 
-// int main()
-// {
-// 	int fd;
-// 	fd = open("files/nl",O_RDONLY);
-// 	printf("--------------------\n");
-// 	printf("%s",get_next_line(fd));
-// 	printf("%s",get_next_line(fd));
-// 	// printf("|%s|\n",get_next_line(fd));
-// 	// printf("|%s|\n",get_next_line(fd));
-// 	// printf("%s",get_next_line(fd));
-// 	// get_next_line(fd);
-// 	// fd = open("./txt2.txt",O_RDONLY);
-// 	// get_next_line(fd);
-// 	// fd = open("./txt3.txt",O_RDONLY);
-// 	// get_next_line(fd);
+int main()
+{
+	int fd;
+	int num = 3;
+	fd = open("files/nl",O_RDONLY);
+	for(int i=1;i<=num;i++)
+		printf("num:%d ---->|%s|\n",i,get_next_line(fd));
+	// printf("%s",get_next_line(fd));
+	// printf("|%s|\n",get_next_line(fd));
+	// printf("|%s|\n",get_next_line(fd));
+	// printf("%s",get_next_line(fd));
+	// get_next_line(fd);
+	// fd = open("./txt2.txt",O_RDONLY);
+	// get_next_line(fd);
+	// fd = open("./txt3.txt",O_RDONLY);
+	// get_next_line(fd);
 
-// }
+}
