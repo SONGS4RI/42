@@ -6,44 +6,40 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/12 17:04:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:07:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// #include <stdio.h>//////////////////
+#include <stdio.h>//////////////////
 char	*del_gnl_list(t_gnl_list *tmp)
 {
 	t_gnl_list	*previous;
 
-	if (tmp && tmp->previous)
+	if (tmp->previous)
 	{
 		// printf("connect list!!!\n");///////////////////////////////
 		previous = tmp->previous;
 		previous->next = tmp->next;
 	}
-	if (tmp && tmp->backup)
+	if (tmp->backup)
 	{
 		// printf("#free tmp->backup at %p\n",tmp->backup);///////////////////////////////
 		free(tmp->backup);
-		tmp->backup = NULL;
 	}
-	if (tmp)
-	{
-		tmp->next = NULL;
-		tmp->previous = NULL;
-		free(tmp);
-		// printf("#free list(*tmp_address) at %p\n",tmp);///////////////////////////////
-	}
+	tmp->backup = NULL;
+	tmp->next = NULL;
+	tmp->previous = NULL;
+	free(tmp);
+	// printf("#free list(*tmp) at %p\n",tmp);///////////////////////////////
+	tmp = NULL;
 	return (NULL);
 }
 
-t_gnl_list	*find_fd(t_gnl_list *tmp, int fd)
+t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int read_cnt)
 {
 	t_gnl_list	*head;
 
-	if (tmp && tmp->eof)
-		return (NULL);
 	while (tmp)
 	{
 		if (tmp->fd_idx == fd)
@@ -53,7 +49,7 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd)
 	head = tmp;
 	if (tmp)
 		return (tmp);
-	else
+	else if (read_cnt > 0)
 	{
 		tmp = (t_gnl_list *)malloc(sizeof(t_gnl_list));
 		// printf("#malloced list at %p\n",tmp);////////////////////////////////////////
@@ -61,11 +57,13 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd)
 			return (NULL);
 		if (head)
 			tmp->previous->next = tmp;
+		tmp->previous = NULL;
+		tmp->backup = NULL;
 		tmp->eof = 0;
 		tmp->fd_idx = fd;
 		tmp->next = NULL;
-		return (tmp);
 	}
+	return (tmp);
 }
 
 char	*buf_read(int len_read, char *s, int len_buf, t_gnl_list *buf)
@@ -74,6 +72,8 @@ char	*buf_read(int len_read, char *s, int len_buf, t_gnl_list *buf)
 	char	*tmp;
 
 	len = len_read + len_buf;
+	if (len <= 0)//추가함
+		return (NULL);
 	tmp = (char *)malloc(len + 1);
 	// printf("#malloced tmp(read+buf) at %p\n",tmp);///////////////////////////////////
 	if (!tmp)
@@ -103,23 +103,21 @@ char	*what_line(int len_read, int len, char *tmp, t_gnl_list *buf)
 	{
 		if (len_read < BUFFER_SIZE)
 		{
-			res = ft_substr(tmp, 0, len);//malloc!!!!!!!!!!!!!!
+			res = ft_substr(tmp, 0, idx);
 			free(tmp);
 			// printf("#freed tmp(read+buf) at %p\n",tmp);///////////////////////////////////
 			buf->eof = 1;
 			return (res);
 		}
-		buf->backup = ft_substr(tmp, 0, len);
+		buf->backup = ft_substr(tmp, 0, idx);
+		// printf("#malloced buf->backup at %p\n",buf->backup);///////////////////////////////////
 		free(tmp);
 		// printf("#freed tmp(read+buf) at %p\n",tmp);///////////////////////////////////
-		return (NULL);
-	}
-	else
-	{
-		buf->backup = ft_substr(tmp, idx + 1, len);
-		// printf("#malloced buf->backup at %p\n",buf->backup);///////////////////////////////////
+		return ("");
 	}
 	res = ft_substr(tmp, 0, idx + 1);
+	buf->backup = ft_substr(tmp, idx + 1, len);
+	// printf("#malloced buf->backup at %p\n",buf->backup);///////////////////////////////////
 	free(tmp);
 	// printf("#freed tmp(read+buf) at %p\n",tmp);/////////////////////////////////////////////////
 	return (res);
@@ -133,20 +131,22 @@ char	*get_next_line(int fd)
 	int					buf_size;
 	int					cnt;
 
-	// printf("--------------------\n");///////////////////////////////////////////////////
+	// printf("-----------------------\n");///////////////////////////////////////////////////
 	// printf("head pointing at %p\n",head);/////////////////////////////////////////////////
 	buf_size = 0;
 	if (fd < 0)
 		return (NULL);
 	cnt = read(fd, next_line, BUFFER_SIZE);
 	// write(1,"read :|",7); write(1,next_line,cnt);write(1,"|\n",2);/////////////////////////////
-	head = find_fd(head, fd);
+	head = find_fd(head, fd, cnt);
+	if (!head)
+		return (NULL);
 	// printf("head pointing after find_fd at %p\n",head);//////////////////////////////
-	// if (head->backup) printf("buf->backup now:|%s|\n",head->backup);/////////////////////////
+	// if (head->backup) printf("buf->backup :|%s|\n",head->backup);/////////////////////////
 	if (head->backup)
 		buf_size = ft_strlen(head->backup);
 	res = buf_read(cnt, next_line, buf_size, head);
-	if (head->eof)
+	if (head->eof || !res)
 		head = (t_gnl_list *)del_gnl_list(head);
 	return (res);
 }
@@ -157,8 +157,11 @@ char	*get_next_line(int fd)
 // int main()
 // {
 // 	int fd;
-// 	int num = 2;
-// 	fd = open("files/empty",O_RDONLY);
+// 	int num = 3;
+// 	fd = open("files/42_no_nl",O_RDONLY);
 // 	for(int i=1;i<=num;i++)
-// 		printf("num:%d ---->|%s|\n",i,get_next_line(1000));
+// 		printf("num:%d ---->|%s|\n",i,get_next_line(fd));
 // }
+/*
+아마 substr하면서 말록 하지 않는 부분이 생겨서 free 할 때 겹치는 듯?????
+*/
