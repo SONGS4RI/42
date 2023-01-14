@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/14 20:58:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/14 19:33:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	}
 	return (substr);
-}
-
-int	is_nl(char *next_line, int read_cnt, t_gnl_list *head)
-{
-	int	idx;
-
-	idx = 0;
-	while (next_line[idx])
-	{
-		if (next_line[idx] == '\n')
-			return (idx);
-		idx++;
-	}
-	if (read_cnt <= 0)
-		return (idx);
-	head->backup = (char *)malloc(sizeof(char) * idx);
-	head->backup[0] = '\0';
-	ft_strlcpy(head->backup, next_line, idx + 1);
-	return (0);
 }
