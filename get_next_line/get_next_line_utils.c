@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/14 20:58:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/15 20:14:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		i++;
 	}
 	dst[i] = '\0';
-	while (src[i])
-		i++;
 	return (i);
 }
 
@@ -66,7 +64,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 	size_t	new_len;
 
-	if (!s)
+	if (!s || s[0] == '\0')
 		return (NULL);
 	if ((unsigned int)ft_strlen(s) < start)
 		return (NULL);
@@ -78,29 +76,32 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	substr[0] = '\0';
 	ft_strlcpy(substr, s + start, len + 1);
-	if (substr[0] == '\0')
-	{
-		free(substr);
-		return (NULL);
-	}
 	return (substr);
 }
 
-int	is_nl(char *next_line, int read_cnt, t_gnl_list *head)
+int	is_nl(char *tmp, int read_cnt, t_gnl_list *head)
 {
 	int	idx;
 
 	idx = 0;
-	while (next_line[idx])
+	if (!head || read_cnt == -1)
+		return (-1);
+	while (tmp[idx])
 	{
-		if (next_line[idx] == '\n')
-			return (idx);
+		if (tmp[idx] == '\n')
+			return (idx + 1);
 		idx++;
 	}
-	if (read_cnt <= 0)
-		return (idx);
-	head->backup = (char *)malloc(sizeof(char) * idx);
+	if (read_cnt < BUFFER_SIZE)
+	{
+		head->eof = 1;
+		return (idx + 1);
+	}
+	head->backup = (char *)malloc(sizeof(char) * (idx + 1));
+	if (!head->backup)
+		return (-1);
 	head->backup[0] = '\0';
-	ft_strlcpy(head->backup, next_line, idx + 1);
+	ft_strlcpy(head->backup, tmp, idx + 1);
+	free(tmp);
 	return (0);
 }

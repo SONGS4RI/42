@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:16:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/14 19:32:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/15 20:37:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ typedef struct s_gnl_list
 {
 	int					fd_idx;
 	int					eof;
-	char				*backup;
 	struct s_gnl_list	*next;
 	struct s_gnl_list	*previous;
+	char				*backup;
 }t_gnl_list;
 
 size_t		ft_strlen(const char *s);
 size_t		ft_strlcat(char *dst, const char *s, size_t s_len, size_t dstsize);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
-char		*del_gnl_list(t_gnl_list *tmp);
+int			is_nl(char *tmp, int read_cnt, t_gnl_list *head);
+t_gnl_list	*del_gnl_list(t_gnl_list *tmp, int read_cnt);
 t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, int read_cnt);
-char		*buf_read(int len_read, char *s, int len_buf, t_gnl_list *buf);
-char		*what_line(int len_s, int len, char *tmp, t_gnl_list *buf);
+char		*combine_all(t_gnl_list	*tmp, char *next_line, int read_cnt);
+char		*res_line(t_gnl_list	*head, char *tmp, int idx);
 char		*get_next_line(int fd);
 #endif

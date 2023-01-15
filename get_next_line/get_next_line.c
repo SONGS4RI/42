@@ -6,28 +6,32 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/14 21:41:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/15 20:39:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*del_gnl_list(t_gnl_list *tmp)
+t_gnl_list	*del_gnl_list(t_gnl_list *tmp, int read_cnt)
 {
 	t_gnl_list	*previous;
 
-	if (tmp->previous)
+	if (tmp)
 	{
-		previous = tmp->previous;
-		previous->next = tmp->next;
+		if (tmp->previous)
+		{
+			previous = tmp->previous;
+			previous->next = tmp->next;
+		}
+		if (tmp->backup)
+			free(tmp->backup);
+		tmp->backup = NULL;
+		tmp->next = NULL;
+		tmp->previous = NULL;
+		if (read_cnt != -1)
+			free(tmp);
+		tmp = NULL;
 	}
-	if (tmp->backup)
-		free(tmp->backup);
-	tmp->backup = NULL;
-	tmp->next = NULL;
-	tmp->previous = NULL;
-	free(tmp);
-	tmp = NULL;
 	return (NULL);
 }
 
@@ -66,6 +70,8 @@ char	*combine_all(t_gnl_list	*tmp, char *next_line, int read_cnt)
 	int		back_up_size;
 
 	back_up_size = 0;
+	if (!tmp || read_cnt == -1)
+		return (NULL);
 	if (tmp->backup)
 		back_up_size = ft_strlen(tmp->backup);
 	res = (char *)malloc(sizeof(char *) * (back_up_size + read_cnt + 1));
@@ -88,10 +94,11 @@ char	*res_line(t_gnl_list	*head, char *tmp, int idx)
 	int		len;
 
 	len = ft_strlen(tmp);
-	res = ft_substr(tmp, 0, idx);
-	if (len > idx)
+	res = ft_substr(tmp, 0, idx + 1);
+	if (len > idx + 1)
 		head->backup = ft_substr(tmp, idx + 1, len);
 	free(tmp);
+	tmp = NULL;
 	return (res);
 }
 
@@ -105,28 +112,21 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	head = find_fd(head, fd, read_cnt);
-	if (!head)
-		return (NULL);
 	while (1)
 	{
 		read_cnt = read(fd, next_line, BUFFER_SIZE);
-		tmp = combine_all(head, next_line, read_cnt);//버퍼 + next_line, 버퍼 프리
-		idx = is_nl(tmp, read_cnt, head->backup); // 없으면 버퍼에 세이브;
-		if (idx)
-			return (res_line(head, tmp, idx));// 개행 존재하면 인덱스 까지 출력 해주고 버퍼에 세이브해주는 함수 && idx 부터 버퍼에 저장
+		head = find_fd(head, fd, read_cnt);
+		if (head)
+			tmp = combine_all(head, next_line, read_cnt);
+		idx = is_nl(tmp, read_cnt, head);
+		if (idx == -1 || !head)
+			return ((char *)del_gnl_list(head, read_cnt));
+		if (idx > 0)
+		{
+			tmp = res_line(head, tmp, idx - 1);
+			if (head->eof)
+				head = del_gnl_list(head, read_cnt);
+			return (tmp);
+		}
 	}
-	return (NULL);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main()
-// {
-// 	int fd;
-// 	int num = 3;
-// 	fd = open("files/1char",O_RDONLY);
-// 	for(int i=1;i<=num;i++)
-// 		printf("num:%d ---->|%s|\n",i,get_next_line(fd));
-// }
