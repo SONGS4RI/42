@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/15 20:39:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/17 20:20:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_gnl_list	*del_gnl_list(t_gnl_list *tmp, int read_cnt)
+t_gnl_list	*del_gnl_list(t_gnl_list *tmp)
 {
 	t_gnl_list	*previous;
 
@@ -28,8 +28,7 @@ t_gnl_list	*del_gnl_list(t_gnl_list *tmp, int read_cnt)
 		tmp->backup = NULL;
 		tmp->next = NULL;
 		tmp->previous = NULL;
-		if (read_cnt != -1)
-			free(tmp);
+		free(tmp);
 		tmp = NULL;
 	}
 	return (NULL);
@@ -93,6 +92,8 @@ char	*res_line(t_gnl_list	*head, char *tmp, int idx)
 	char	*res;
 	int		len;
 
+	if (!head)
+		return (NULL);
 	len = ft_strlen(tmp);
 	res = ft_substr(tmp, 0, idx + 1);
 	if (len > idx + 1)
@@ -116,17 +117,15 @@ char	*get_next_line(int fd)
 	{
 		read_cnt = read(fd, next_line, BUFFER_SIZE);
 		head = find_fd(head, fd, read_cnt);
-		if (head)
-			tmp = combine_all(head, next_line, read_cnt);
+		tmp = combine_all(head, next_line, read_cnt);
 		idx = is_nl(tmp, read_cnt, head);
 		if (idx == -1 || !head)
-			return ((char *)del_gnl_list(head, read_cnt));
-		if (idx > 0)
-		{
-			tmp = res_line(head, tmp, idx - 1);
-			if (head->eof)
-				head = del_gnl_list(head, read_cnt);
-			return (tmp);
-		}
+			head = del_gnl_list(head);
+		if (idx == 0)
+			continue ;
+		tmp = res_line(head, tmp, idx - 1);
+		if (!tmp || head->eof)
+			head = del_gnl_list(head);
+		return (tmp);
 	}
 }
