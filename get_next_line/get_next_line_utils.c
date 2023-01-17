@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/15 20:14:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/17 20:20:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	is_nl(char *tmp, int read_cnt, t_gnl_list *head)
 	int	idx;
 
 	idx = 0;
-	if (!head || read_cnt == -1)
+	if (!head || read_cnt == -1 || !tmp)
 		return (-1);
 	while (tmp[idx])
 	{
@@ -97,11 +97,9 @@ int	is_nl(char *tmp, int read_cnt, t_gnl_list *head)
 		head->eof = 1;
 		return (idx + 1);
 	}
-	head->backup = (char *)malloc(sizeof(char) * (idx + 1));
+	head->backup = ft_substr(tmp, 0, idx + 1);
+	free(tmp);
 	if (!head->backup)
 		return (-1);
-	head->backup[0] = '\0';
-	ft_strlcpy(head->backup, tmp, idx + 1);
-	free(tmp);
 	return (0);
 }
