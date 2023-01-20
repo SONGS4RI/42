@@ -6,57 +6,39 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/19 17:46:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/20 16:44:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
+#include <stdio.h>////////////////////
 size_t	ft_strlen(const char *s)
 {
 	size_t	cnt;
 
 	cnt = 0;
+	if (!s)
+		return (0);
 	while (s[cnt])
 		cnt++;
 	return (cnt);
 }
 
-size_t	ft_strlcat(char *dst, const char *s, size_t s_len, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize, size_t idx)
 {
-	size_t	i;
-	size_t	dst_len;
-
-	i = 0;
-	dst_len = ft_strlen(dst);
-	if (dstsize < dst_len + 1)
-		return (dstsize + s_len);
-	if (dstsize > dst_len + 1)
-	{
-		while (dstsize > dst_len + 1 + i && i < s_len)
-		{
-			dst[dst_len + i] = s[i];
-			i++;
-		}
-	}
-	dst[dst_len + i] = '\0';
-	return (dst_len + s_len);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (dstsize == 0)
-		return (ft_strlen(src));
-	while (i + 1 < dstsize && src[i])
+		return (0);
+	while (idx + 1 < dstsize && src[i])
 	{
-		dst[i] = src[i];
+		dst[idx] = src[i];
+		idx++;
 		i++;
 	}
-	dst[i] = '\0';
-	return (i);
+	dst[idx] = '\0';
+	return (idx);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -75,11 +57,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!substr)
 		return (NULL);
 	substr[0] = '\0';
-	ft_strlcpy(substr, s + start, len + 1);
+	ft_strlcpy(substr, s + start, len + 1, 0);
 	return (substr);
 }
 
-char	*is_nl(char **str, int len, t_gnl_list *tmp)
+char	*is_nl_backup(char **str, int len, t_gnl_list *tmp)
 {
 	int		idx;
 	char	*res;
@@ -87,16 +69,43 @@ char	*is_nl(char **str, int len, t_gnl_list *tmp)
 
 	res = NULL;
 	idx = 0;
-	while (*str[idx])
+	while ((*str)[idx])
 	{
-		if (*str[idx] == '\n')
+		if ((*str)[idx] == '\n')
 			break ;
 		idx++;
 	}
-	if (idx < len)//개행존재
+	if (idx < len)
 	{
-		res = ft_substr(*str, )
+		res = ft_substr(*str, 0, idx + 1);
+		backup = ft_substr(*str, idx + 1, len);
+		free(tmp->backup);
+		tmp->backup = backup;
 	}
-	//버퍼에 붙인다.
+	return (res);
+}
+
+char	*is_nl_line(char **str, int len, t_gnl_list *tmp)
+{
+	int		idx;
+	char	*res;
+	char	*backup;
+
+	res = NULL;
+	idx = 0;
+	while ((*str)[idx])
+	{
+		if ((*str)[idx] == '\n')
+			break ;
+		idx++;
+	}
+	if (idx < len)
+	{
+		res = combine_all(tmp->backup, ft_substr(*str, 0, idx + 1));
+		backup = ft_substr(*str, idx + 1, len);
+	}
+	else
+		backup = combine_all(tmp->backup, ft_substr(*str, 0, len));
+	tmp->backup = backup;
 	return (res);
 }
