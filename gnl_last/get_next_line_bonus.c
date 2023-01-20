@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/20 17:31:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/20 17:36:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ char	*read_line(t_gnl_list *tmp, t_gnl_list **pt, int fd)
 	if (!line)
 		return (NULL);
 	read_cnt = read(fd, line, BUFFER_SIZE);
-	if (read_cnt <=0 && !tmp)
+	if ((read_cnt <=0 && !tmp) || read_cnt == -1)
 	{
 		free(line);
+		if (read_cnt == -1)// read err 처리
+			del_gnl_list(tmp);//
 		return (NULL);
 	}
 	line[read_cnt] = '\0';
