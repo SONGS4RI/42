@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/20 17:26:22 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/20 17:31:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ t_gnl_list	*del_gnl_list(t_gnl_list *tmp)
 		tmp->next->previous = NULL;
 		head = tmp->next;
 	}
-	if (tmp->backup)
-		free(tmp->backup);
+	free(tmp->backup);
 	free(tmp);
 	// printf("list freed at %p\n",tmp);////////////////////////
 	return (head);
