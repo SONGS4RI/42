@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:16:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/21 21:24:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 21:31:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_gnl_list
 {
 	int					fd_idx;
 	int					eof;
+	int					no_nl_idx;
 	struct s_gnl_list	*next;
 	struct s_gnl_list	*previous;
 	char				*backup;

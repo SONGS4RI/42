@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/21 21:29:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 21:39:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, t_gnl_list *head)
 		tmp->next = NULL;
 		tmp->backup = NULL;
 		tmp->fd_idx = fd;
+		tmp->no_nl_idx = 0;/////////////////
 		tmp->eof = 0;
 		if (head)
 		{
