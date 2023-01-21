@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/20 17:36:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 13:23:54 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <stdio.h>/////////////////////
 
 t_gnl_list	*del_gnl_list(t_gnl_list *tmp)
