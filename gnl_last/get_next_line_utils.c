@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/21 21:24:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 21:28:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*ft_substr(char *s, int start, size_t len, t_gnl_list **tmp)
 	substr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substr)//NULL check
 	{
-		free(s);
 		(*tmp)->eof = 1;///
 		return (NULL);
 	}
