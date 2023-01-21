@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/21 21:29:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 21:51:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,19 @@ char	*is_nl_backup(char **str, int len, t_gnl_list *tmp)
 	char	*backup;
 
 	res = NULL;
-	idx = 0;
+	idx = tmp->no_nl_idx;/////////////
 	while ((*str)[idx])
 	{
 		if ((*str)[idx] == '\n')
 			break ;
 		idx++;
 	}
+	tmp->no_nl_idx = idx;/////////
 	if (idx < len)
 	{
 		res = ft_substr(*str, 0, idx + 1, &tmp);
 		backup = ft_substr(*str, idx + 1, len, &tmp);
-		if (tmp->eof)
-			return (NULL);
+		tmp->no_nl_idx = 0;///////////////
 		free(tmp->backup);
 		tmp->backup = backup;
 	}
@@ -102,7 +102,6 @@ char	*is_nl_line(char **str, int len, t_gnl_list **tmp)
 	char	*backup;
 
 	res = NULL;
-	backup = NULL;
 	idx = 0;
 	while ((*str)[idx])
 	{
@@ -110,17 +109,17 @@ char	*is_nl_line(char **str, int len, t_gnl_list **tmp)
 			break ;
 		idx++;
 	}
+	(*tmp)->no_nl_idx += idx;///////////
 	if (idx < len)
 	{
 		res = ft_substr(*str, 0, idx + 1, tmp);
 		res = combine_all(&(*tmp)->backup, &res, tmp);
 		backup = ft_substr(*str, idx + 1, len, tmp);
+		(*tmp)->no_nl_idx = 0;///////////
 		free(*str);
 	}
 	else
 		backup = combine_all(&(*tmp)->backup, str, tmp);
-	if ((*tmp)->eof)
-		return (NULL);
 	(*tmp)->backup = backup;
 	return (res);
 }
