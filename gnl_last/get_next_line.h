@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:16:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/21 13:24:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/21 21:24:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ typedef struct s_gnl_list
 	char				*backup;
 }t_gnl_list;
 
-t_gnl_list	*del_gnl_list(t_gnl_list *tmp);
+t_gnl_list	*del_gnl_list(t_gnl_list **tmp);
 t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, t_gnl_list	*head);
-char		*combine_all(char *str1, char *str2);
-char		*read_line(t_gnl_list *tmp, t_gnl_list **p, int fd);
+char		*combine_all(char **str1, char **str2, t_gnl_list **tmp);
+char		*read_line(t_gnl_list **tmp, int fd);
 char		*get_next_line(int fd);
 size_t		ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize, size_t idx);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize, size_t idx);
+char		*ft_substr(char *s, int start, size_t len, t_gnl_list **tmp);
 char		*is_nl_backup(char **str, int len, t_gnl_list *tmp);
-char		*is_nl_line(char **str, int len, t_gnl_list *tmp);
+char		*is_nl_line(char **str, int len, t_gnl_list **tmp);
 
 #endif
