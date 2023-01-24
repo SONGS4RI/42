@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/24 16:35:24 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/24 17:03:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_gnl_list	*del_gnl_list(t_gnl_list **tmp)
 		if ((*tmp)->next)
 			(*tmp)->next->previous = (*tmp)->previous;
 		head = (*tmp);
-		while (head)
+		while (head->previous)
 			head = head->previous;
 	}
 	else if ((*tmp)->next)
