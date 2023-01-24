@@ -6,100 +6,127 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 19:14:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/17 20:23:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/24 17:26:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_len_free(const char *s, char **free_s)
 {
 	size_t	cnt;
 
+	if (free_s && *free_s)
+	{
+		free(*free_s);
+		*free_s = NULL;
+		return (0);
+	}
 	cnt = 0;
+	if (!s)
+		return (0);
 	while (s[cnt])
 		cnt++;
 	return (cnt);
 }
 
-size_t	ft_strlcat(char *dst, const char *s, size_t s_len, size_t dstsize)
+size_t	ft_gnlcpy(char *dst, char *src, size_t dstsize, size_t idx)
 {
-	size_t	i;
-	size_t	dst_len;
-
-	i = 0;
-	dst_len = ft_strlen(dst);
-	if (dstsize < dst_len + 1)
-		return (dstsize + s_len);
-	if (dstsize > dst_len + 1)
-	{
-		while (dstsize > dst_len + 1 + i && i < s_len)
-		{
-			dst[dst_len + i] = s[i];
-			i++;
-		}
-	}
-	dst[dst_len + i] = '\0';
-	return (dst_len + s_len);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (dstsize == 0)
-		return (ft_strlen(src));
-	while (i + 1 < dstsize && src[i])
+		return (0);
+	while (idx + 1 < dstsize && src[i])
 	{
-		dst[i] = src[i];
+		dst[idx] = src[i];
+		idx++;
 		i++;
 	}
-	dst[i] = '\0';
-	return (i);
+	dst[idx] = '\0';
+	return (idx);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_gnlstr(char *s, int start, size_t len, t_gnl_list **tmp)
 {
 	char	*substr;
 	size_t	new_len;
 
 	if (!s || s[0] == '\0')
 		return (NULL);
-	if ((unsigned int)ft_strlen(s) < start)
+	if ((int)ft_len_free(s, NULL) < start)
 		return (NULL);
-	new_len = ft_strlen(s + start);
+	new_len = ft_len_free(s + start, NULL);
 	if (new_len < len)
 		len = new_len;
 	substr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substr)
+	{
+		(*tmp)->eof = 1;
 		return (NULL);
+	}
 	substr[0] = '\0';
-	ft_strlcpy(substr, s + start, len + 1);
+	ft_gnlcpy(substr, s + start, len + 1, 0);
+	if (substr[0] == '\0')
+	{
+		free(substr);
+		return (NULL);
+	}
 	return (substr);
 }
 
-int	is_nl(char *tmp, int read_cnt, t_gnl_list *head)
+char	*is_nl_backup(char **str, int len, t_gnl_list *tmp)
 {
-	int	idx;
+	int		idx;
+	char	*res;
+	char	*backup;
 
-	idx = 0;
-	if (!head || read_cnt == -1 || !tmp)
-		return (-1);
-	while (tmp[idx])
+	res = NULL;
+	idx = tmp->no_nl_idx;
+	while ((*str)[idx])
 	{
-		if (tmp[idx] == '\n')
-			return (idx + 1);
+		if ((*str)[idx] == '\n')
+			break ;
 		idx++;
 	}
-	if (read_cnt < BUFFER_SIZE)
+	tmp->no_nl_idx = idx;
+	if (idx < len)
 	{
-		head->eof = 1;
-		return (idx + 1);
+		res = ft_gnlstr(*str, 0, idx + 1, &tmp);
+		backup = ft_gnlstr(*str, idx + 1, len, &tmp);
+		tmp->no_nl_idx = 0;
+		free(tmp->backup);
+		tmp->backup = backup;
 	}
-	head->backup = ft_substr(tmp, 0, idx + 1);
-	free(tmp);
-	if (!head->backup)
-		return (-1);
-	return (0);
+	if (tmp->eof)
+		return ((char *)ft_len_free(NULL, &res));
+	return (res);
+}
+
+char	*is_nl_line(char **str, int len, t_gnl_list **tmp, int idx)
+{
+	char	*res;
+	char	*backup;
+
+	res = NULL;
+	while ((*str)[++idx])
+	{
+		if ((*str)[idx] == '\n')
+			break ;
+	}
+	(*tmp)->no_nl_idx += idx;
+	if (idx < len)
+	{
+		res = ft_gnlstr(*str, 0, idx + 1, tmp);
+		res = combine_all(&(*tmp)->backup, &res, tmp);
+		backup = ft_gnlstr(*str, idx + 1, len, tmp);
+		(*tmp)->no_nl_idx = 0;
+		free(*str);
+	}
+	else
+		backup = combine_all(&(*tmp)->backup, str, tmp);
+	(*tmp)->backup = backup;
+	if ((*tmp)->eof)
+		return ((char *)ft_len_free(NULL, &res));
+	return (res);
 }
