@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 15:35:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/26 19:06:41 by jahlee           ###   ########.fr       */
+/*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
+/*   Updated: 2023/01/26 20:05:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-size_t	ft_strlen(const char *s)
+# include "./libft/libft.h"
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
+typedef struct s_game
 {
-	size_t	cnt;
+	char	**map;
+}t_game;
 
-	cnt = 0;
-	if (!s)
-		return (0);
-	while (s[cnt])
-		cnt++;
-	return (cnt);
-}
+
+#endif

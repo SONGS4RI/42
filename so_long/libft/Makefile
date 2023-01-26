@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/26 15:35:01 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/26 19:38:00 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,6 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
-SRCS_3	=	  get_next_line.c	 	 \
-			  get_next_line_utils.c  \
-
 SRCS_BONUS =  ft_lstnew.c 		\
 			  ft_lstadd_front.c	\
 			  ft_lstsize.c 		\
@@ -73,7 +70,6 @@ SRCS_BONUS =  ft_lstnew.c 		\
 
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
-		  $(SRCS_3)			\
 
 OBJS	= $(SRCS:.c=.o)
 
