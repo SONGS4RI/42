@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:07:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/26 20:05:58 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:44:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ void	free_map(char **map)
 	int	i;
 
 	i = -1;
-	while (map[++i])
-		free(map[i]);
-	free(map);
+	if (map)
+	{
+		while (map[++i])
+			free(map[i]);
+		free(map);
+	}
 }
 
 char	*ft_strjoin_free(char **s1, char **s2)
@@ -57,15 +60,24 @@ void	parse_map(int fd, t_game *game)
 	{
 		tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		read_byte = read(fd, tmp, BUFFER_SIZE);
-		if (read_byte == -1)
+		if (read_byte == -1)//read err 났을때
+		{
 			print_err();
+			break;
+		}
 		tmp[read_byte] = '\0';
 		res = ft_strjoin_free(&res, &tmp);
 		if (read_byte < BUFFER_SIZE)
 			break ;
 	}
 	game->map = ft_split(res, '\n');
-	free(res);
+	if (res)
+		free(res);
+}
+
+void leaks()/////////
+{
+	system("leaks a.out");
 }
 
 int	main(int argc, char **argv)
@@ -73,6 +85,7 @@ int	main(int argc, char **argv)
 	int		fd;
 	t_game	*game;
 
+	atexit(leaks);///////////
 	if (argc != 2)
 		print_err();
 	game = (t_game *)malloc(sizeof(t_game));
