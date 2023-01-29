@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/26 19:38:00 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/29 16:28:26 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ RMFLAG		= -f
 AR			= @ar
 ARFLAGS		= crs
 
-INCLUDES	= ./libft.h
+INCLUDES	= ../libft.h
+# INCLUDES	= ./libft.h
 
 SRCS_1		= ft_isalpha.c		\
 			  ft_isdigit.c		\

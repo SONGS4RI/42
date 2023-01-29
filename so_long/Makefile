@@ -6,12 +6,13 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/26 16:17:53 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/29 16:28:31 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= so_long.a
-LIBFTDIR	= ./libft
+# LIBFTDIR	= ./libft
+LIBFTDIR	= libft
 LIBFTFILE	= libft.a
 
 CC			= @cc
@@ -22,7 +23,8 @@ RMFLAGS		= -f
 AR			= @ar
 ARFLAGS		= -crs
 
-INCLUDES	= ./so_long.h
+INCLUDES	= ../so_long.h
+# INCLUDES	= ./so_long.h
 
 SRCS		= main.c		\
 
