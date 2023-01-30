@@ -18,6 +18,7 @@ int main()
 		return (0);
 	}
 	dp[2] = max(arr[0] + arr[2], arr[1] + arr[2]);
-	for(int i=3;i<n;i++) dp[i] = max(dp[i-2] + arr[i], dp[i-3]+arr[i-1]+arr[i]);
+	for(int i=3;i<n;i++) dp[i] = max(dp[i-2] + arr[i], dp[i-3]+arr[i-1]+arr[i]); // 핵심 점화식
+	/* i번째의 계단에서 최대값은 i-2번째까지의 최대값 + i계단값, i-3번째까지의 최대값 + i-1번 계단값 + i계단값 중 큰값이다.*/
 	cout << dp[n-1] << "\n";
 }
