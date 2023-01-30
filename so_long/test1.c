@@ -24,7 +24,7 @@ int main()
 	map = calloc(sizeof(char *), 6);
 	for(int i=0;i<5;i++) map[i] = calloc(sizeof(char), 6);
 	for(int i=0;i<5;i++)
-		for(int j=0;j<5;j++) map[i][j] = '0';
+		for(int j=0;j<5;j++) map[i][j] = '0';// 신기하게 map[i] = "00000\0"이런게하면 나중에 접근이 안됨
 	map[0][0] = '1';
 	for(int i=0;i<5;i++) printf("%s\n",map[i]);
 	dfs(0,0,map);
