@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/30 16:13:02 by jahlee           ###   ########.fr        #
+#    Updated: 2023/01/31 16:17:45 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ INCLUDES	= ../so_long.h
 
 SRCS		= main.c		\
 			  parse_map.c	\
-			  
+			  free_func.c	\
+			  check_map.c	\
 
 OBJS	= $(SRCS:.c=.o)
 
