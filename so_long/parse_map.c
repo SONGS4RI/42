@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/31 17:14:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 15:23:54 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 int	check_double_nl(char *res)
 {
 	int	idx;
-	int flag;
+	int	flag;
 
 	flag = 0;
 	idx = -1;
-	while(res[++idx])
+	while (res[++idx])
 	{
 		if (res[idx] == '\n')
 		{
@@ -62,7 +62,7 @@ void	parse_map(int fd, t_game *game)
 	{
 		tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		read_byte = read(fd, tmp, BUFFER_SIZE);
-		if (read_byte == -1)//read err 났을때
+		if (read_byte == -1)
 		{
 			free(tmp);
 			print_err_free(&game, &res);

@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/31 17:41:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 15:38:33 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	is_wallaround(t_game *game)
-{
-	int i;
-
-	i = -1;
-	while (++i < game->map_width)
-	{
-		if(game->map[0][i] != '1') print_err_free(&game, 0);
-		if(game->map[game->map_height - 1][i] != '1') print_err_free(&game, 0);
-	}
-	i = -1;
-	while (++i < game->map_height)
-	{
-		if(game->map[i][0] != '1') print_err_free(&game, 0);
-		if(game->map[i][game->map_width - 1] != '1') print_err_free(&game, 0);
-	}
-}
-
 void	is_mapsquare(t_game *game)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	game->map_width = ft_strlen(game->map[0]);
@@ -44,31 +26,39 @@ void	is_mapsquare(t_game *game)
 	game->map_height = idx;
 }
 
-void save_ep(t_game *game, char c, int x, int y)
+void	is_wallaround(t_game *game)
 {
-	if (c == 'E')
+	int	i;
+
+	i = -1;
+	while (++i < game->map_width)
 	{
-		game->E_xy[0] = x;
-		game->E_xy[1] = y;
+		if (game->map[0][i] != '1')
+			print_err_free(&game, 0);
+		if (game->map[game->map_height - 1][i] != '1')
+			print_err_free(&game, 0);
 	}
-	else
+	i = -1;
+	while (++i < game->map_height)
 	{
-		game->P_xy[0] = x;
-		game->P_xy[1] = y;
+		if (game->map[i][0] != '1')
+			print_err_free(&game, 0);
+		if (game->map[i][game->map_width - 1] != '1')
+			print_err_free(&game, 0);
 	}
 }
 
-int invalid_alpha(char c)
+int	invalid_alpha(char c)
 {
-	if (c == '1' || c == '0'|| c == 'C'|| c == 'E'|| c == 'P')
+	if (c == '1' || c == '0' || c == 'C' || c == 'E' || c == 'P')
 		return (0);
 	return (1);
 }
 
 void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = -1;
 	while (++x < game->map_height)
@@ -78,16 +68,16 @@ void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
 		{
 			if (invalid_alpha(game->map[x][y]))
 				print_err_free(&game, 0);
-			if (game->map[x][y] == 'E' || game->map[x][y] == 'P')
+			if (game->map[x][y] == 'P')
 			{
-				save_ep(game, game->map[x][y], x, y);
-				if (game->map[x][y] == 'E')
-					e_cnt++;
-				else
-					p_cnt++;
+				game->p_xy[0] = x;
+				game->p_xy[1] = y;
+				p_cnt++;
 			}
 			else if (game->map[x][y] == 'C')
 				c_cnt++;
+			else if (game->map[x][y] == 'E')
+				e_cnt++;
 		}
 	}
 	if (e_cnt != 1 || p_cnt != 1 || c_cnt == 0)
@@ -106,4 +96,6 @@ void	check_map(char *res, t_game *game)
 	printf("good wall!!\n");//////////////////////////////
 	check_cep(game, 0, 0, 0);
 	printf("cep good!!\n");//////////////////////////////
+	can_escape(game);
+	printf("can escape!!\n");//////////////////////////////
 }

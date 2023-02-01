@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:07:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/31 17:41:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 15:40:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	main(int argc, char **argv)
 		print_err_free(&game, NULL);
 	parse_map(fd, game);
 	for(int i=0;game->map[i];i++) printf("%s\n",game->map[i]);///////////////
-	free(game->map);
+	free_map(game->map);
+	free_map(game->vis);
+	free(game);
 	close(fd);
 	return (0);
 }
