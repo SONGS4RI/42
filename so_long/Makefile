@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/01/31 16:17:45 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/01 12:59:03 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ RMFLAGS		= -f
 AR			= @ar
 ARFLAGS		= -crs
 
-INCLUDES	= ../so_long.h
-# INCLUDES	= ./so_long.h
+INCLUDES	= ./so_long.h
 
 SRCS		= main.c		\
 			  parse_map.c	\
