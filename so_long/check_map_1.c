@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:32:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:09:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	is_mapsquare(t_game *game)
 	while (game->map[++idx])
 	{
 		if (ft_strlen(game->map[idx]) != game->map_width)
-			err_free(&game, 0);
+			err_free(&game, 0, "Invalid Map : Not a Square");
 	}
 	game->map_height = idx;
 }
@@ -34,17 +34,17 @@ static void	is_wallaround(t_game *game)
 	while (++i < game->map_width)
 	{
 		if (game->map[0][i] != '1')
-			err_free(&game, 0);
+			err_free(&game, 0, "Invalid Map : No Wall Around");
 		if (game->map[game->map_height - 1][i] != '1')
-			err_free(&game, 0);
+			err_free(&game, 0, "Invalid Map : No Wall Around");
 	}
 	i = -1;
 	while (++i < game->map_height)
 	{
 		if (game->map[i][0] != '1')
-			err_free(&game, 0);
+			err_free(&game, 0, "Invalid Map : No Wall Around");
 		if (game->map[i][game->map_width - 1] != '1')
-			err_free(&game, 0);
+			err_free(&game, 0, "Invalid Map : No Wall Around");
 	}
 }
 
@@ -67,7 +67,7 @@ static void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
 		while (++y < game->map_width)
 		{
 			if (invalid_alpha(game->map[x][y]))
-				err_free(&game, 0);
+				err_free(&game, 0, "Invalid Map : Invalid Alphabet");
 			if (game->map[x][y] == 'P')
 			{
 				game->p_xy[0] = x;
@@ -81,21 +81,17 @@ static void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
 		}
 	}
 	if (e_cnt != 1 || p_cnt != 1 || c_cnt == 0)
-		err_free(&game, 0);
+		err_free(&game, 0, "Invalid Map : Objects Not Satisfied");
 }
 
 void	check_map(char *res, t_game *game)
 {
 	if (res[0] == '\0')
-		err_free(&game, &res);
+		err_free(&game, &res, "Invalid Map : Empty Map");
 	if (res)
 		free(res);
 	is_mapsquare(game);
-	printf("map square!!\n");//////////////////////////
 	is_wallaround(game);
-	printf("good wall!!\n");//////////////////////////////
 	check_cep(game, 0, 0, 0);
-	printf("cep good!!\n");//////////////////////////////
 	can_escape(game);
-	printf("can escape!!\n");//////////////////////////////
 }

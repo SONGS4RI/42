@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:00:26 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:23:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 18:02:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	check_vis(t_game *game)
 		while (++y < game->map_width)
 		{
 			if (game->map[x][y] == 'C' && game->vis[x][y] != '1')
-				err_free(&game, NULL);
+				err_free(&game, NULL, "Invalid Map : Can't Collect");
 			else if (game->map[x][y] == 'E')
 			{
 				idx = -1;
@@ -64,7 +64,7 @@ static void	check_vis(t_game *game)
 						break ;
 				}
 				if (idx == 4)
-					err_free(&game, NULL);
+					err_free(&game, NULL, "Invalid Map : Can't Escape");
 			}
 		}
 	}

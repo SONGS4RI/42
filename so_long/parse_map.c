@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:23:57 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	check_double_nl(char *res)
 	return (0);
 }
 
-void	parse_map(int fd, t_game *game)
+void	parse_map(t_game *game)
 {
 	int		read_byte;
 	char	*res;
@@ -61,11 +61,11 @@ void	parse_map(int fd, t_game *game)
 	while (1)
 	{
 		tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-		read_byte = read(fd, tmp, BUFFER_SIZE);
+		read_byte = read(game->fd, tmp, BUFFER_SIZE);
 		if (read_byte == -1)
 		{
 			free(tmp);
-			err_free(&game, &res);
+			err_free(&game, &res, "Read Error");
 		}
 		tmp[read_byte] = '\0';
 		res = ft_strjoin_free(&res, &tmp);
@@ -73,7 +73,7 @@ void	parse_map(int fd, t_game *game)
 			break ;
 	}
 	if (check_double_nl(res))
-		err_free(&game, &res);
+		err_free(&game, &res, "Invalid Map : nl");
 	game->map = ft_split(res, '\n');
 	check_map(res, game);
 }

@@ -6,17 +6,18 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/01 14:46:08 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/01 17:45:03 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= so_long.a
-# LIBFTDIR	= ./libft
-LIBFTDIR	= libft
+NAME		= so_long
+LIBFTDIR	= ./libft
 LIBFTFILE	= libft.a
+LIBFTFILE2	= libft_so_long.a
 
 CC			= @cc
 CFLAG		= -Wall -Wextra -Werror
+MLXFLAG		= -lmlx -framework OpenGL -framework AppKit
 
 RM			= @rm
 RMFLAGS		= -f
@@ -38,8 +39,8 @@ OBJS	= $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
 	@make -C $(LIBFTDIR)
-	@cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-	$(AR) $(ARFLAGS) $@ $^
+	@cp $(LIBFTDIR)/$(LIBFTFILE) $(LIBFTFILE2)
+	$(CC) $(MLXFLAG) $(CFLAGS) $^ $(LIBFTFILE2) -o $@
 
 all : $(NAME)
 
@@ -49,7 +50,7 @@ clean :
 
 fclean : clean
 	@make -C $(LIBFTDIR) fclean
-	$(RM) $(RMFLAGS) $(NAME)
+	$(RM) $(RMFLAGS) $(LIBFTFILE2) $(NAME)
 
 re : clean all
 
