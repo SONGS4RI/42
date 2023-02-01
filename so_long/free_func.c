@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:12:09 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:26:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:32:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	err_free(t_game **game, char **str)
 			free_map((*game)->map);
 		if ((*game)->vis)
 			free_map((*game)->vis);
+		if ((*game)->fd >= 0)
+			close((*game)->fd);
 		free(*game);
 		(*game)->map = NULL;
 		(*game)->vis = NULL;
 		(*game) = NULL;
-		if ((*game)->fd >= 0)
-			close((*game)->fd);
 	}
 	printf("Error\n");
 	exit(1);
