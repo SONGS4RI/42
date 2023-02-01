@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:02:38 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:23:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_strjoin_free(char **s1, char **s2)
 	return (res);
 }
 
-int	check_double_nl(char *res)
+static int	check_double_nl(char *res)
 {
 	int	idx;
 	int	flag;
@@ -65,7 +65,7 @@ void	parse_map(int fd, t_game *game)
 		if (read_byte == -1)
 		{
 			free(tmp);
-			print_err_free(&game, &res);
+			err_free(&game, &res);
 		}
 		tmp[read_byte] = '\0';
 		res = ft_strjoin_free(&res, &tmp);
@@ -73,7 +73,7 @@ void	parse_map(int fd, t_game *game)
 			break ;
 	}
 	if (check_double_nl(res))
-		print_err_free(&game, &res);
+		err_free(&game, &res);
 	game->map = ft_split(res, '\n');
 	check_map(res, game);
 }
