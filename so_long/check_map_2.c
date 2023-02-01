@@ -6,13 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:00:26 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 15:44:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:06:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
 
 int	ewsn(int idx)
 {
@@ -89,8 +87,5 @@ void	can_escape(t_game *game)
 	}
 	game->vis[game->p_xy[0]][game->p_xy[1]] = '1';
 	dfs_vis(game->p_xy[0], game->p_xy[1], game);
-	printf("--------vis_start--------\n");////////////////////////////
-	for(int i=0;game->vis[i];i++) printf("%s\n",game->vis[i]);////////////
-	printf("--------vis_end--------\n");//////////////////////////
 	check_vis(game);
 }
