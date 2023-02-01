@@ -6,20 +6,20 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:00:26 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 16:06:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:23:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ewsn(int idx)
+static int	ewsn(int idx)
 {
 	if (idx % 4 == 3)
 		return (0);
 	return (idx % 4 - 1);
 }
 
-void	dfs_vis(int x, int y, t_game *game)
+static void	dfs_vis(int x, int y, t_game *game)
 {
 	int	nx;
 	int	ny;
@@ -41,7 +41,7 @@ void	dfs_vis(int x, int y, t_game *game)
 	}
 }
 
-void	check_vis(t_game *game)
+static void	check_vis(t_game *game)
 {
 	int	x;
 	int	y;
@@ -54,7 +54,7 @@ void	check_vis(t_game *game)
 		while (++y < game->map_width)
 		{
 			if (game->map[x][y] == 'C' && game->vis[x][y] != '1')
-				print_err_free(&game, NULL);
+				err_free(&game, NULL);
 			else if (game->map[x][y] == 'E')
 			{
 				idx = -1;
@@ -64,7 +64,7 @@ void	check_vis(t_game *game)
 						break ;
 				}
 				if (idx == 4)
-					print_err_free(&game, NULL);
+					err_free(&game, NULL);
 			}
 		}
 	}
