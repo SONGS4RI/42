@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:55:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 21:03:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	dfs_vis(int x, int y, t_game *game);
 static void	check_vis(t_game *game);
 void		can_escape(t_game *game);
 
-static void	player_move(t_game *game, char c);
+static void	player_move(t_game *game, char c, char dir);
 static	int	key_move(int *cor, char c, t_game *game);
 static int	is_moveable(t_game *game, int nx, int ny);
 int			key_press(int keycode, t_game *game);
