@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:12:09 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 18:09:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 16:25:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void	free_map(char **map)
 	if (map)
 	{
 		while (map[++i])
+		{
 			free(map[i]);
+			map[i] = NULL;
+		}
 		free(map);
+		map = NULL;
 	}
 }
 

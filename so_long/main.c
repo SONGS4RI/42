@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:07:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 15:59:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:21:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	main(int argc, char **argv)
 	if (game->fd < 0)
 		err_free(&game, NULL, "Wrong File");
 	parse_map(game);
-	map_to_window(&img, game);
-	// free_map(game->map);
-	// free_map(game->vis);
-	// close(game->fd);
-	// free(game);
+	game->img = &img;
+	map_to_window(game->img, game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 16:21:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:27:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static void	game_init(t_game *game)
 {
 	game->map = NULL;
 	game->vis = NULL;
+	game->img = NULL;
+	game->escape = 0;
+	game->c_cnt = 0;
 }
 
 void	parse_map(t_game *game)
