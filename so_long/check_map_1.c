@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 17:21:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:35:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	check_map(char *res, t_game *game)
 		err_free(&game, &res, "Invalid Map : Empty Map");
 	if (res)
 		free(res);
+	if (!game->map)
+		err_free(&game, NULL, "Invalid Map : ft_split Error");
 	is_mapsquare(game);
 	is_wallaround(game);
 	check_cep(game, 0, 0);

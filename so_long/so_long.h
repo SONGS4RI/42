@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:18:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:36:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
-
 
 typedef struct s_img
 {
