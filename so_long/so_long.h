@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 18:12:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 14:43:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@
 # define KEY_S			1
 # define KEY_D			2
 
-typedef struct s_param{
-	int		x;
-	int		y;
-}t_param;
-
 typedef struct s_game
 {
 	char	**map;
@@ -46,6 +41,17 @@ typedef struct s_game
 	int		map_width;
 	int		p_xy[2];
 }t_game;
+
+typedef struct s_img
+{
+	void	*p;
+	void	*e;
+	void	*c;
+	void	*t;
+	void	*w;
+	int		img_w;
+	int		img_h;
+}t_img;
 
 void		leaks();
 
