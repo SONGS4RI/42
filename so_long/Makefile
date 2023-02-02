@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/02 16:00:56 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/02 20:43:44 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS		= main.c			\
 			  check_map_1.c		\
 			  check_map_2.c		\
 			  map_to_window.c	\
+			  key_press.c		\
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:36:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:43:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ void		can_escape(t_game *game);
 
 static	int	key_move(int *cor, char c, t_game *game);
 static int	is_moveable(t_game *game, int nx, int ny);
-static int	key_press(int keycode, t_game *game);
+int			key_press(int keycode, t_game *game);
+
 static void	set_img(t_img *img, t_game *game);
 void		map_to_window(t_img *img, t_game *game);
 
