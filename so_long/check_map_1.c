@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 18:09:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:21:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	invalid_alpha(char c)
 	return (1);
 }
 
-static void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
+static void	check_cep(t_game *game, int e_cnt, int p_cnt)
 {
 	int	x;
 	int	y;
@@ -75,12 +75,12 @@ static void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt)
 				p_cnt++;
 			}
 			else if (game->map[x][y] == 'C')
-				c_cnt++;
+				game->c_cnt++;
 			else if (game->map[x][y] == 'E')
 				e_cnt++;
 		}
 	}
-	if (e_cnt != 1 || p_cnt != 1 || c_cnt == 0)
+	if (e_cnt != 1 || p_cnt != 1 || game->c_cnt == 0)
 		err_free(&game, 0, "Invalid Map : Objects Not Satisfied");
 }
 
@@ -92,6 +92,6 @@ void	check_map(char *res, t_game *game)
 		free(res);
 	is_mapsquare(game);
 	is_wallaround(game);
-	check_cep(game, 0, 0, 0);
+	check_cep(game, 0, 0);
 	can_escape(game);
 }

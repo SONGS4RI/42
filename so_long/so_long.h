@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 16:21:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 17:31:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@
 # define KEY_S			1
 # define KEY_D			2
 
-typedef struct s_game
-{
-	char	**map;
-	char	**vis;
-	int		fd;
-	int		map_height;
-	int		map_width;
-	int		p_xy[2];
-}t_game;
 
 typedef struct s_img
 {
@@ -55,6 +46,19 @@ typedef struct s_img
 	int		img_h;
 }t_img;
 
+typedef struct s_game
+{
+	char	**map;
+	char	**vis;
+	int		fd;
+	int		map_height;
+	int		map_width;
+	int		c_cnt;
+	int		escape;
+	int		p_xy[2];
+	t_img	*img;
+}t_game;
+
 void		leaks();
 
 void		free_map(char **map);
@@ -68,7 +72,7 @@ void		parse_map(t_game *game);
 static void	is_mapsquare(t_game *game);
 static void	is_wallaround(t_game *game);
 static int	invalid_alpha(char c);
-static void	check_cep(t_game *game, int e_cnt, int c_cnt, int p_cnt);
+static void	check_cep(t_game *game, int e_cnt, int p_cnt);
 void		check_map(char *res, t_game *game);
 
 static int	ewsn(int idx);
@@ -76,8 +80,10 @@ static void	dfs_vis(int x, int y, t_game *game);
 static void	check_vis(t_game *game);
 void		can_escape(t_game *game);
 
-void		map_to_window(t_img *img, t_game *game);
+static	int	key_move(int *cor, char c, t_game *game);
+static int	is_moveable(t_game *game, int nx, int ny);
 static int	key_press(int keycode, t_game *game);
 static void	set_img(t_img *img, t_game *game);
+void		map_to_window(t_img *img, t_game *game);
 
 #endif
