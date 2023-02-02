@@ -6,11 +6,20 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:41:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:46:11 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:54:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static	void	player_move(t_game *game, char c)
+{
+	if (c == 'C')
+		mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->t, \
+		game->p_xy[1] * 32, game->p_xy[0] * 32);
+	mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->p, \
+	game->p_xy[1] * 32, game->p_xy[0] * 32);
+}
 
 static	int	key_move(int *cor, char c, t_game *game)
 {
@@ -23,20 +32,15 @@ static	int	key_move(int *cor, char c, t_game *game)
 	if (game->map[game->p_xy[0]][game->p_xy[1]] == 'C')
 	{
 		game->map[game->p_xy[0]][game->p_xy[1]] = '0';
-		mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->t, \
-		game->p_xy[1] * 32, game->p_xy[0] * 32);
-		mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->p, \
-		game->p_xy[1] * 32, game->p_xy[0] * 32);
+		player_move(game, 'C');
 		game->c_cnt--;
 	}
 	else if (game->map[game->p_xy[0]][game->p_xy[1]] == '0')
-		mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->p, \
-		game->p_xy[1] * 32, game->p_xy[0] * 32);
+		player_move(game, '0');
 	else if (game->map[game->p_xy[0]][game->p_xy[1]] == 'E')
 	{
 		game->escape = 1;
-		mlx_put_image_to_window(game->img->mlx, game->img->win, game->img->p, \
-		game->p_xy[1] * 32, game->p_xy[0] * 32);
+		player_move(game, 'E');
 	}
 	return (1);
 }
