@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:51:56 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 18:45:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:18:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,8 @@ static int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_D && is_moveable(game, 0, 1))
 		cnt += key_move(&game->p_xy[1], '+', game);
 	else if (keycode == KEY_ESC)
-	{
-		free_map(game->map);
-		free_map(game->vis);
-		close(game->fd);
-		free(game);
-		exit(0);
-	}
-	printf("moved : %d, x: %d, y: %d\n", cnt, game->p_xy[0], game->p_xy[1]);
+		normal_exit(game);
+	printf("moved : %d\n", cnt);
 	return (0);
 }
 
@@ -124,6 +118,7 @@ void	map_to_window(t_img *img, t_game *game)
 	&img->img_w, &img->img_h);
 	set_img(img, game);
 	game->map[game->p_xy[0]][game->p_xy[1]] = '0';
+	mlx_hook(img->win, 17, 0, &normal_exit, game);
 	mlx_hook(img->win, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(img->mlx);
 }
