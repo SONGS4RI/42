@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 17:31:39 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 20:18:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ typedef struct s_game
 	t_img	*img;
 }t_game;
 
-void		leaks();
-
 void		free_map(char **map);
 void		err_free(t_game **game, char **str, char *err_str);
+int			normal_exit(t_game *game);
 
 static char	*ft_strjoin_free(char **s1, char **s2);
 static int	check_double_nl(char *res);
