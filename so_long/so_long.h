@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 14:43:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 16:21:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_game
 
 typedef struct s_img
 {
+	void	*mlx;
+	void	*win;
 	void	*p;
 	void	*e;
 	void	*c;
@@ -60,6 +62,7 @@ void		err_free(t_game **game, char **str, char *err_str);
 
 static char	*ft_strjoin_free(char **s1, char **s2);
 static int	check_double_nl(char *res);
+static void	game_init(t_game *game);
 void		parse_map(t_game *game);
 
 static void	is_mapsquare(t_game *game);
@@ -73,5 +76,8 @@ static void	dfs_vis(int x, int y, t_game *game);
 static void	check_vis(t_game *game);
 void		can_escape(t_game *game);
 
+void		map_to_window(t_img *img, t_game *game);
+static int	key_press(int keycode, t_game *game);
+static void	set_img(t_img *img, t_game *game);
 
 #endif

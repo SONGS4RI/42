@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/01 17:45:03 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/02 16:00:56 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,12 @@ ARFLAGS		= -crs
 
 INCLUDES	= ./so_long.h
 
-SRCS		= main.c		\
-			  parse_map.c	\
-			  free_func.c	\
-			  check_map_1.c	\
-			  check_map_2.c	\
+SRCS		= main.c			\
+			  parse_map.c		\
+			  free_func.c		\
+			  check_map_1.c		\
+			  check_map_2.c		\
+			  map_to_window.c	\
 
 OBJS	= $(SRCS:.c=.o)
 

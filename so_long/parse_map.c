@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 17:57:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 16:21:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static int	check_double_nl(char *res)
 	return (0);
 }
 
+static void	game_init(t_game *game)
+{
+	game->map = NULL;
+	game->vis = NULL;
+}
+
 void	parse_map(t_game *game)
 {
 	int		read_byte;
@@ -58,6 +64,7 @@ void	parse_map(t_game *game)
 	char	*tmp;
 
 	res = NULL;
+	game_init(game);
 	while (1)
 	{
 		tmp = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
