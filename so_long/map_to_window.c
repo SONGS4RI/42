@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:51:56 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 18:41:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/02 18:45:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	key_press(int keycode, t_game *game)
 	return (0);
 }
 
-static void	set_img(t_img *img, t_game *game)//실제맵이랑 위아래 바뀜
+static void	set_img(t_img *img, t_game *game)
 {
 	int	x;
 	int	y;
