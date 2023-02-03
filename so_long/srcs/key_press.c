@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:41:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:16:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:18:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == KEY_D && is_moveable(game, 0, 1))
 		cnt += key_move(&game->p_xy[1], 'd', game);
 	else if (keycode == KEY_ESC || game->escape)
-		normal_exit(&game);
+		normal_exit(game);
 	printf("moved : %d\n", cnt);
 	return (0);
 }

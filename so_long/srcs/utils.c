@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:12:09 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:14:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:20:48 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ void	free_map(char **map)
 	}
 }
 
-int	normal_exit(t_game **game)
+int	normal_exit(t_game *game)
 {
-	free_map((*game)->map);
-	free_map((*game)->vis);
-	close((*game)->fd);
-	(*game)->map = NULL;
-	(*game)->vis = NULL;
+	free_map(game->map);
+	free_map(game->vis);
+	close(game->fd);
 	free(game);
-	*game = NULL;
 	exit(0);
 }
 
@@ -48,7 +45,6 @@ void	err_free(t_game **game, char **str, char *err_str)
 		free(*str);
 		*str = NULL;
 	}
-	printf("111\n");
 	if (*game)
 	{
 		if ((*game)->map)

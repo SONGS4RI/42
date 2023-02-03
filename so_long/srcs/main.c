@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:07:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:12:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:24:12 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,19 @@ int	is_ber(char *s1, char *ber)
 		idx_s++;
 	while (--idx >= 0)
 	{
-		printf("%c, %c\n",s1[idx_s-1] ,ber[idx]);
 		if (s1[--idx_s] != ber[idx])
 			return (0);
 	}
 	return (1);
+}
+
+static void	game_init(t_game *game)
+{
+	game->map = NULL;
+	game->vis = NULL;
+	game->img = NULL;
+	game->escape = 0;
+	game->c_cnt = 0;
 }
 
 int	main(int argc, char **argv)
@@ -40,6 +48,7 @@ int	main(int argc, char **argv)
 	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		err_free(NULL, NULL, "Malloc Error");
+	game_init(game);
 	game->fd = open(argv[1], O_RDONLY);
 	if (game->fd < 0 || !is_ber(argv[1], ".ber"))
 		err_free(&game, NULL, "Wrong File");
