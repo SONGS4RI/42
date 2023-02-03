@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:51:56 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:43:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 17:46:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	set_img(t_img *img, t_game *game)
+static void	init_img(t_img *img, t_game *game)
 {
 	int	x;
 	int	y;
@@ -56,7 +56,7 @@ void	map_to_window(t_img *img, t_game *game)
 	&img->img_w, &img->img_h);
 	img->w = mlx_xpm_file_to_image(img->mlx, "./textures/wall.xpm", \
 	&img->img_w, &img->img_h);
-	set_img(img, game);
+	init_img(img, game);
 	game->map[game->p_xy[0]][game->p_xy[1]] = '0';
 	mlx_hook(img->win, 17, 0, &normal_exit, game);
 	mlx_hook(img->win, X_EVENT_KEY_PRESS, 0, &key_press, game);
