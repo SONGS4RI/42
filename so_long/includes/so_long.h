@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:19:50 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:27:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int			is_ber(char *s1, char *ber);
 static void	game_init(t_game *game);
 
 void		free_map(char **map);
-void		err_free(t_game **game, char **str, char *err_str);
 int			normal_exit(t_game *game);
+void		err_free(t_game **game, char **str, char *err_str);
 
 static char	*ft_strjoin_free(char **s1, char **s2);
 static int	check_double_nl(char *res);
@@ -80,12 +80,12 @@ static void	dfs_vis(int x, int y, t_game *game);
 static void	check_vis(t_game *game);
 void		can_escape(t_game *game);
 
+static void	init_img(t_img *img, t_game *game);
+void		map_to_window(t_img *img, t_game *game);
+
 static void	set_img(t_game *game, char c);
 static	int	key_move(int *cor, char c, t_game *game);
 static int	is_moveable(t_game *game, int nx, int ny);
 int			key_press(int keycode, t_game *game);
-
-static void	init_img(t_img *img, t_game *game);
-void		map_to_window(t_img *img, t_game *game);
 
 #endif
