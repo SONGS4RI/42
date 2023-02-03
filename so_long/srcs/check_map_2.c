@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:00:26 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/01 18:02:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 18:08:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 static int	ewsn(int idx)
 {

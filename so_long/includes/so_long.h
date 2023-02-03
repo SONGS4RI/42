@@ -6,31 +6,31 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 17:50:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:14:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
 # include <mlx.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 				1024
 # endif
 
 # define X_EVENT_KEY_PRESS			2
 # define X_EVENT_KEY_RELEASE		3
 
-# define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
+# define KEY_ESC					53
+# define KEY_W						13
+# define KEY_A						0
+# define KEY_S						1
+# define KEY_D						2
 
 typedef struct s_img
 {
@@ -58,9 +58,11 @@ typedef struct s_game
 	t_img	*img;
 }t_game;
 
+int			is_ber(char *s1, char *ber);
+
 void		free_map(char **map);
 void		err_free(t_game **game, char **str, char *err_str);
-int			normal_exit(t_game *game);
+int			normal_exit(t_game **game);
 
 static char	*ft_strjoin_free(char **s1, char **s2);
 static int	check_double_nl(char *res);

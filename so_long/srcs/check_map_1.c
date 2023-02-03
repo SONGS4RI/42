@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:42:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 20:35:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 18:08:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 static void	is_mapsquare(t_game *game)
 {
