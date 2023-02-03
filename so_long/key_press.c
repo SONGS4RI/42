@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 20:41:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 21:03:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 14:33:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static	int	key_move(int *cor, char c, t_game *game)
 		player_move(game, '0', c);
 	else if (game->map[game->p_xy[0]][game->p_xy[1]] == 'E')
 	{
-		game->escape = 1;
 		player_move(game, 'E', c);
+		normal_exit(game);
 	}
 	return (1);
 }
@@ -51,7 +51,7 @@ static int	is_moveable(t_game *game, int nx, int ny)
 	ny += game->p_xy[1];
 	if (nx < 0 || ny < 0 || nx >= game->map_height || ny >= game->map_width)
 		return (0);
-	if (game->map[nx][ny] == '1' || game->escape)
+	if (game->map[nx][ny] == '1')
 		return (0);
 	if (game->map[nx][ny] == 'E' && game->c_cnt)
 		return (0);

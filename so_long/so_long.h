@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/02 21:03:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 14:33:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_game
 	int		map_height;
 	int		map_width;
 	int		c_cnt;
-	int		escape;
 	int		p_xy[2];
 	t_img	*img;
 }t_game;
