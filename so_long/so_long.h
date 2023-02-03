@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:08:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 14:33:30 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 17:50:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_game
 	int		map_height;
 	int		map_width;
 	int		c_cnt;
+	int		escape;
 	int		p_xy[2];
 	t_img	*img;
 }t_game;
@@ -77,12 +78,12 @@ static void	dfs_vis(int x, int y, t_game *game);
 static void	check_vis(t_game *game);
 void		can_escape(t_game *game);
 
-static void	player_move(t_game *game, char c, char dir);
+static void	set_img(t_game *game, char c);
 static	int	key_move(int *cor, char c, t_game *game);
 static int	is_moveable(t_game *game, int nx, int ny);
 int			key_press(int keycode, t_game *game);
 
-static void	set_img(t_img *img, t_game *game);
+static void	init_img(t_img *img, t_game *game);
 void		map_to_window(t_img *img, t_game *game);
 
 #endif

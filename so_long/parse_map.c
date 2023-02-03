@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 14:36:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 17:51:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	game_init(t_game *game)
 	game->map = NULL;
 	game->vis = NULL;
 	game->img = NULL;
+	game->escape = 0;
 	game->c_cnt = 0;
 }
 
