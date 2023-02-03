@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/03 18:07:45 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/03 21:23:02 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ INCLUDES	= ./includes/so_long.h
 
 SRCS		= srcs/main.c			\
 			  srcs/parse_map.c		\
-			  srcs/free_func.c		\
+			  srcs/utils.c			\
 			  srcs/check_map_1.c	\
 			  srcs/check_map_2.c	\
 			  srcs/map_to_window.c	\

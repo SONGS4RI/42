@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 15:51:56 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:16:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/03 21:18:36 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	map_to_window(t_img *img, t_game *game)
 	&img->img_w, &img->img_h);
 	init_img(img, game);
 	game->map[game->p_xy[0]][game->p_xy[1]] = '0';
-	mlx_hook(img->win, 17, 0, &normal_exit, &game);
+	mlx_hook(img->win, 17, 0, normal_exit, game);
 	mlx_hook(img->win, X_EVENT_KEY_PRESS, 0, &key_press, game);
 	mlx_loop(img->mlx);
 }
