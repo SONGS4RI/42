@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:07:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:24:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/04 13:39:12 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	t_img	img;
 
 	if (argc != 2)
-		err_free(NULL, NULL, "Wrong Usage");
+		err_free(NULL, NULL, "Wrong usage : Type ./so_long [(path)/filename]");
 	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		err_free(NULL, NULL, "Malloc Error");
