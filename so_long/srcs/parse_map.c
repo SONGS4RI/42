@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:33:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/03 21:19:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/04 13:54:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	check_double_nl(char *res)
 	}
 	return (0);
 }
-
 
 void	parse_map(t_game *game)
 {
