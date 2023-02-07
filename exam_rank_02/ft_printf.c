@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:57:22 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/06 19:57:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/07 15:25:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void	parse(char *s, va_list *ap, int *cnt)
 				print_d(va_arg(*ap, int), cnt);
 			else if (*s == 'x')
 				print_x(va_arg(*ap, unsigned int), cnt);
-			else if (*s == '%')
-				*cnt += write(1, "%", 1);
 		}
 		else
 			*cnt += write(1, s, 1);
