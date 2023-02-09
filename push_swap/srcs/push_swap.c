@@ -6,24 +6,17 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/07 21:06:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:18:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include <stdio.h>
 
-int	*split_to_int(char *s)
-{
-	
-}
-
-int	*init_a(char **argv)
+void	init_a(char **argv, t_stack *st)
 {
 	static int	idx;
 	static int	len;
 	char		*line;
-	int			*res;
 
 	while (argv[++idx])
 		len += ft_strlen(argv[idx]) + 1;
@@ -39,11 +32,12 @@ int	*init_a(char **argv)
 		line[++len] = ' ';
 	}
 	line[len] = '\0';
-	res = split_to_int(line);
-	return (res);
+	split_to_stack(line, st);
 }
 
 int	main(int argc, char **argv)
 {
-	init_a(argv);
+	t_stack	*st;
+
+	init_a(argv, &st);
 }
