@@ -12,10 +12,10 @@ int main()
 	{
 		for(int i=n-1;i>=0;i--)
 		{
-			if(arr[i]<=k)
+			if(arr[i]<=k) // 가장 큰수부터 확인해서 목표값보다 작은값을 찾으면
 			{
-				res += k/arr[i];
-				k %= arr[i];
+				res += k/arr[i]; // 나눈값 더하기
+				k %= arr[i]; // 나머지를 목표값으로 바꿔주기
 				break;
 			}
 		}
