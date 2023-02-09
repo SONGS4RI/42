@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/09 19:26:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:30:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ t_stack	add_to_stack(int n, t_stack *st)
 	cur_stack.bottom = &cur_stack;
 }
 
-char	**split_to_stack(char const *s, t_stack *st)
+void	split_to_stack(char *s, t_stack *st)
 {
-	char	**res;
 	size_t	offset;
 	size_t	i;
 
@@ -76,6 +75,5 @@ char	**split_to_stack(char const *s, t_stack *st)
 			st = add_to_stack(ps_atoi(s,offset), st);
 		}
 	}
-	res[i] = 0;
-	return (res);
+	free(s);
 }
