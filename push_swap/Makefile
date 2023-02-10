@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/07 20:50:51 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/10 13:02:58 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ ARFLAGS		= -crs
 INCLUDES	= ./includes/push_swap.h
 
 SRCS		= srcs/push_swap.c			\
+			  srcs/split_to_stack.c		\
+			  
 
 OBJS	= $(SRCS:.c=.o)
 

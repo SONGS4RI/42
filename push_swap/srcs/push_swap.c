@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/09 19:18:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/10 13:10:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	init_a(char **argv, t_stack *st)
+t_stack	*init_a(char **argv, t_stack *st)
 {
 	static int	idx;
 	static int	len;
@@ -32,12 +32,13 @@ void	init_a(char **argv, t_stack *st)
 		line[++len] = ' ';
 	}
 	line[len] = '\0';
-	split_to_stack(line, st);
+	return (split_to_stack(line, st));
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*st;
 
-	init_a(argv, &st);
+	st = NULL;
+	st = init_a(argv, st);
 }
