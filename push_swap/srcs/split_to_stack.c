@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/09 19:30:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/10 13:23:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_whitespace(char c)
 	return (0);
 }
 
-int	ps_atoi(char *str, int offset)
+static int	ps_atoi(char *str, int offset)
 {
 	int		sign;
 	int		nbr;
@@ -40,24 +40,28 @@ int	ps_atoi(char *str, int offset)
 	return (nbr);
 }
 
-t_stack	add_to_stack(int n, t_stack *st)
+static t_stack	*add_to_stack(int n, char *s, t_stack *st)
 {
-	t_stack	cur_stack;
+	t_stack	*cur_stack;
 
-	cur_stack.prevoius = st;
-	cur_stack.next = NULL;
-	cur_stack.num = n;
+	cur_stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!cur_stack)
+		err_exit(st->top, s,"malloc err : add_to_stack\n");
+	cur_stack->prevoius = st;
+	cur_stack->next = NULL;
+	cur_stack->num = n;
 	if (st)
 	{
-		st->next = &cur_stack;
-		cur_stack.top = st->top;
+		st->next = cur_stack;
+		cur_stack->top = st->top;
 	}
 	else
-		cur_stack.top = &cur_stack;
-	cur_stack.bottom = &cur_stack;
+		cur_stack->top = cur_stack;
+	cur_stack->bottom = cur_stack;
+	return (cur_stack);
 }
 
-void	split_to_stack(char *s, t_stack *st)
+t_stack	*split_to_stack(char *s, t_stack *st)
 {
 	size_t	offset;
 	size_t	i;
@@ -72,8 +76,9 @@ void	split_to_stack(char *s, t_stack *st)
 		{
 			while (!is_whitespace(*(s + offset)) && *(s + offset)) // s ~ s+offset까지 단어
 				offset++;
-			st = add_to_stack(ps_atoi(s,offset), st);
+			st = add_to_stack(ps_atoi(s,offset), s, st);
 		}
 	}
 	free(s);
+	return (st->top);
 }
