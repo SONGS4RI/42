@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 19:24:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 20:15:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static void	add_to_stack(int n, char *s, t_stack **st)
 	{
 		(*st)->top = cur_node;
 		(*st)->bottom = cur_node;
-		cur_node->prevoius = NULL;
+		cur_node->previous = NULL;
 	}
 	else
 	{
 		(*st)->bottom->next = cur_node;
-		cur_node->prevoius = (*st)->bottom;
+		cur_node->previous = (*st)->bottom;
 		(*st)->bottom = cur_node;
 	}
 	(*st)->size++;
