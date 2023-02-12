@@ -1,43 +1,42 @@
 /* 공주님의 정원 */
-/* 14:19 ~  14:37 + 15:30 ~ 16:30(x)*/
+/* 12:52 ~ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <tuple>
 using namespace std;
-
-#define X first
-#define Y second
-
-int main(void)
+int main()
 {
-	ios::sync_with_stdio(0); cin.tie(0);
-	int n;
-	cin >> n;
-	vector<pair<int, int>> flower;
-	for (int i = 0; i < n; i++)
+	ios_base::sync_with_stdio(false); cin.tie(NULL);
+
+	int n; cin >> n;
+	vector<pair<int,int> > v;
+	for(int i=0;i<n;i++)
 	{
-		int sm, sd, em, ed;
-		cin >> sm >> sd >> em >> ed;
-		flower.push_back({sm * 100 + sd, em * 100 + ed}); // 날짜는 대충 파싱해도 됨
+		int ms,ds,me,de;
+		cin >> ms >> ds >> me >> de;
+		v.push_back(make_pair(ms*100+ds,me*100+de));
 	}
-	int t = 301; // 현재 시간
-	int ans = 0; // 선택한 꽃의 개수
-	while (t < 1201)
+	sort(v.begin(), v.end());
+	int t = 301,res=0,idx=0;
+	while (t<1201)
 	{
-		int nxt_t = t; // 이번에 추가할 꽃으로 인해 변경된 시간
-		for(int i = 0; i < n; i++)
+		int nxt_t = t;
+		for(int i=idx;i<n;i++)
 		{
-			if(flower[i].X <= t && flower[i].Y > nxt_t)
-				nxt_t = flower[i].Y;
+			if(v[i].first <= t && v[i].second > nxt_t) // 꽃이 피는 시간이 기준시간(이전에 피었던꽃 지는시간 t)보다 작거나 같고,
+			{										   // 꽃이 지는 시간이 기준시간 또는 바꾸려는 시간(nxt_t) 보다 클때
+				nxt_t = v[i].second;
+				idx = i;
+			}
+			else if(v[i].first > t) break; // 꽃이 피는 시간이 지는 시간보다 늦게있을때
 		}
-		if(nxt_t == t)
-		{ // 시간 t에서 더 전진이 불가능
-			cout << 0;
+		if (nxt_t == t) // 연결되지않는다면
+		{
+			cout << 0 << "\n";
 			return 0;
 		}
-		ans++;
 		t = nxt_t;
+		res++;
 	}
-	cout << ans << "\n";
+	cout << res << "\n";
 }
