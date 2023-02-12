@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:18:47 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/10 13:30:55 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:01:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 void	free_ps_stack(t_stack *st)
 {
-	t_stack *tmp;
+	t_stack_node	*node;
+	t_stack_node	*tmp;
 
-	while(st)
+	node = st->top;
+	while (node)
 	{
-		tmp = st->next;
-		free(st);
-		st = tmp;
+		tmp = node->next;
+		free(node);
+		node = tmp;
 	}
+	free(st);
+	st = NULL;
 }
 
 void	err_exit(t_stack *st, char *line, char *err_msg)
@@ -30,6 +34,7 @@ void	err_exit(t_stack *st, char *line, char *err_msg)
 	write(2, err_msg, ft_strlen(err_msg));
 	if (line)
 		free(line);
-	free_ps_stack(st);
+	if (st)
+		free_ps_stack(st);
 	exit(1);
 }
