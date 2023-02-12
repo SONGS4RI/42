@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 18:01:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:01:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	argv_to_line(char **argv, t_stack **st)
 		line[++len] = ' ';
 	}
 	line[len] = '\0';
-	printf("line : |%s|\n",line);////////////////
 	split_to_stack(line, st);
 }
 
@@ -52,11 +51,19 @@ void	init_stack(t_stack **st_a, t_stack **st_b)
 	(*st_b)->size = 0;
 }
 
+void	leaks(void)////////////////////
+{
+	system("leaks push_swap");
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*st_a;
 	t_stack	*st_b;
 
+	atexit(leaks);////////////////////
+	if (argc == 1)
+		err_exit(NULL, NULL, "Wrong Usage\n");
 	init_stack(&st_a, &st_b);
 	argv_to_line(argv, &st_a);
 	while (st_a->top)
