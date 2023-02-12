@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 18:58:22 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:24:12 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static int	is_whitespace(char c)
 
 static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 {
-	int		sign;
-	int		nbr;
-	size_t	i;
+	int				sign;
+	long long		nbr;
+	size_t			i;
 
 	sign = 1;
 	nbr = 0;
@@ -40,6 +40,8 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 			err_exit(*st, s, "not a integer\n");
 		i++;
 	}
+	if (nbr > INT32_MAX || nbr < INT32_MIN)
+		err_exit(*st, s, "integer out of ragne\n");
 	return (nbr);
 }
 
@@ -62,6 +64,7 @@ static void	add_to_stack(int n, char *s, t_stack **st)
 		cur_node->prevoius = (*st)->bottom;
 		(*st)->bottom = cur_node;
 	}
+	(*st)->size++;
 	cur_node->next = NULL;
 	cur_node->num = n;
 }

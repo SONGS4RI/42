@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 19:01:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:07:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_stack
 
 void			leaks(void);/////////////
 
-void			argv_to_line(char **argv, t_stack **st);
+void			argv_to_stack(char **argv, t_stack **st);
 void			init_stack(t_stack **st_a, t_stack **st_b);
 
 void			free_ps_stack(t_stack *st);
