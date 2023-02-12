@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/10 13:23:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 17:58:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_whitespace(char c)
 {
-	if ((c>=9 && c<= 13) || c == ' ')
+	if ((c >= 9 && c <= 13) || c == ' ')
 		return (1);
 	return (0);
 }
@@ -40,45 +40,49 @@ static int	ps_atoi(char *str, int offset)
 	return (nbr);
 }
 
-static t_stack	*add_to_stack(int n, char *s, t_stack *st)
+static void	add_to_stack(int n, char *s, t_stack **st)
 {
-	t_stack	*cur_stack;
+	t_stack_node	*cur_node;
 
-	cur_stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!cur_stack)
-		err_exit(st->top, s,"malloc err : add_to_stack\n");
-	cur_stack->prevoius = st;
-	cur_stack->next = NULL;
-	cur_stack->num = n;
-	if (st)
+	cur_node = (t_stack_node *)malloc(sizeof(t_stack_node));
+	if (!cur_node)
+		err_exit(*st, s, "malloc err : add_to_stack\n");
+	if (!(*st)->top)
 	{
-		st->next = cur_stack;
-		cur_stack->top = st->top;
+		(*st)->top = cur_node;
+		(*st)->bottom = cur_node;
+		cur_node->prevoius = NULL;
 	}
 	else
-		cur_stack->top = cur_stack;
-	cur_stack->bottom = cur_stack;
-	return (cur_stack);
+	{
+		(*st)->bottom->next = cur_node;
+		cur_node->prevoius = (*st)->bottom;
+		(*st)->bottom = cur_node;
+	}
+	cur_node->next = NULL;
+	cur_node->num = n;
 }
 
-t_stack	*split_to_stack(char *s, t_stack *st)
+void	split_to_stack(char *s, t_stack **st)
 {
 	size_t	offset;
 	size_t	i;
+	char	*tmp;
 
+	tmp = s;
 	i = 0;
-	while (*s)
+	while (*tmp)
 	{
 		offset = 0;
-		if (is_whitespace(*s))
-			s++;
+		if (is_whitespace(*tmp))
+			tmp++;
 		else
 		{
-			while (!is_whitespace(*(s + offset)) && *(s + offset)) // s ~ s+offset까지 단어
+			while (!is_whitespace(*(tmp + offset)) && *(tmp + offset))
 				offset++;
-			st = add_to_stack(ps_atoi(s,offset), s, st);
+			add_to_stack(ps_atoi(tmp, offset), s, st);
+			tmp += offset;
 		}
 	}
 	free(s);
-	return (st->top);
 }

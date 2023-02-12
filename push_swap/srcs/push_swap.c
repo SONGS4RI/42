@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/10 13:10:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:01:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_a(char **argv, t_stack *st)
+void	argv_to_line(char **argv, t_stack **st)
 {
 	static int	idx;
 	static int	len;
@@ -22,7 +22,7 @@ t_stack	*init_a(char **argv, t_stack *st)
 		len += ft_strlen(argv[idx]) + 1;
 	line = (char *)malloc(sizeof(char) * len);
 	if (!line)
-		return (NULL);
+		return ;
 	idx = 0;
 	len = -1;
 	while (argv[++idx])
@@ -32,13 +32,37 @@ t_stack	*init_a(char **argv, t_stack *st)
 		line[++len] = ' ';
 	}
 	line[len] = '\0';
-	return (split_to_stack(line, st));
+	printf("line : |%s|\n",line);////////////////
+	split_to_stack(line, st);
+}
+
+void	init_stack(t_stack **st_a, t_stack **st_b)
+{
+	*st_a = (t_stack *)malloc(sizeof(t_stack));
+	if (!st_a)
+		err_exit(NULL, NULL, "malloc err : st_a\n");
+	(*st_a)->top = NULL;
+	(*st_a)->bottom = NULL;
+	(*st_a)->size = 0;
+	*st_b = (t_stack *)malloc(sizeof(t_stack));
+	if (!st_b)
+		err_exit(*st_a, NULL, "malloc err : st_b\n");
+	(*st_b)->top = NULL;
+	(*st_b)->bottom = NULL;
+	(*st_b)->size = 0;
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*st;
+	t_stack	*st_a;
+	t_stack	*st_b;
 
-	st = NULL;
-	st = init_a(argv, st);
+	init_stack(&st_a, &st_b);
+	argv_to_line(argv, &st_a);
+	while (st_a->top)
+	{
+		printf("|%d|\n", st_a->top->num);
+		st_a->top = st_a->top->next;
+	}
+	return (0);
 }
