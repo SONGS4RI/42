@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 17:58:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:58:22 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_whitespace(char c)
 	return (0);
 }
 
-static int	ps_atoi(char *str, int offset)
+static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 {
 	int		sign;
 	int		nbr;
@@ -32,9 +32,12 @@ static int	ps_atoi(char *str, int offset)
 		sign = -1;
 	if ((str[i] == '-') || (str[i] == '+'))
 		i++;
-	while (i < offset && str[i] && (str[i] >= '0') && (str[i] <= '9'))
+	while (i < offset && str[i])
 	{
-		nbr = (nbr * 10) + sign * (str[i] - '0');
+		if ((str[i] >= '0') && (str[i] <= '9'))
+			nbr = (nbr * 10) + sign * (str[i] - '0');
+		else
+			err_exit(*st, s, "not a integer\n");
 		i++;
 	}
 	return (nbr);
@@ -80,7 +83,7 @@ void	split_to_stack(char *s, t_stack **st)
 		{
 			while (!is_whitespace(*(tmp + offset)) && *(tmp + offset))
 				offset++;
-			add_to_stack(ps_atoi(tmp, offset), s, st);
+			add_to_stack(ps_atoi(tmp, offset, s, st), s, st);
 			tmp += offset;
 		}
 	}
