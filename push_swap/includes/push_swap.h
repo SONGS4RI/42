@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 20:52:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/13 14:58:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static int		ps_atoi(char *str, int offset, char *s, t_stack **st);
 static void		add_to_stack(int n, char *s, t_stack **st);
 void			split_to_stack(char *s, t_stack **st);
 
-t_stack_node	*popfront(t_stack **st);
-t_stack_node	*popback(t_stack **st);
-void			pushfront(t_stack_node *node, t_stack **to);
-void			pushback(t_stack_node *node, t_stack **to);
+t_stack_node	*popfront(t_stack *st);
+t_stack_node	*popback(t_stack *st);
+void			pushfront(t_stack_node *node, t_stack *to);
+void			pushback(t_stack_node *node, t_stack *to);
 
-void			command_s(char c, t_stack **st_a, t_stack **st_b);
-void			command_p(char c, t_stack **st_a, t_stack **st_b);
-void			command_r(char c, t_stack **st_a, t_stack **st_b);
-void			command_rr(char c, t_stack **st_a, t_stack **st_b);
+void			command_s(char c, t_stack *st_a, t_stack *st_b);
+void			command_p(char c, t_stack *st_a, t_stack *st_b);
+void			command_r(char c, t_stack *st_a, t_stack *st_b);
+void			command_rr(char c, t_stack *st_a, t_stack *st_b);
 
 #endif
