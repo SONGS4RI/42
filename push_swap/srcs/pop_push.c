@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:39:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/13 15:20:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/13 17:01:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack_node	*popfront(t_stack *st)
 	if (st->size)
 	{
 		node = st->top;
-		st->top = st->top->next; //err!!!!
+		st->top = st->top->next;
 		st->top->previous = NULL;
 		st->size--;
 	}
@@ -48,7 +48,10 @@ void	pushfront(t_stack_node *node, t_stack *to)
 	{
 		node->next = to->top;
 		node->previous = NULL;
-		to->top->previous = node;
+		if (!to->size)
+			to->bottom = node;
+		else
+			to->top->previous = node;
 		to->top = node;
 		to->size++;
 	}
@@ -60,7 +63,10 @@ void	pushback(t_stack_node *node, t_stack *to)
 	{
 		node->next = NULL;
 		node->previous = to->bottom;
-		to->bottom->next = node;
+		if (!to->size)
+			to->top = node;
+		else
+			to->bottom->next = node;
 		to->bottom = node;
 		to->size++;
 	}
