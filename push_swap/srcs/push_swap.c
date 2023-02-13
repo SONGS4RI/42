@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 19:32:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:22:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int argc, char **argv)
 {
 	t_stack	*st_a;
 	t_stack	*st_b;
+	t_stack_node *tmp;//////////////
 
 	atexit(leaks);////////////////////
 	if (argc == 1)
@@ -91,10 +92,19 @@ int	main(int argc, char **argv)
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a);
+	tmp = st_a->top;//////////////////////////////////
 	printf("stack size : %d\n",st_a->size);//////////////////
+	while (tmp)//////////////////////////////////////
+	{
+		printf("%d\n", tmp->num);
+		tmp = tmp->next;
+	}
+	printf("-------------------------\n");//////////
+	command_s('a',st_a,st_b);
+	tmp = st_a->top;//////////////////////////////////
 	while (st_a->top)//////////////////////////////////////
 	{
-		printf("|%d|\n", st_a->top->num);
+		printf("%d\n", st_a->top->num);
 		st_a->top = st_a->top->next;
 	}
 	return (0);

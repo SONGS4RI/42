@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:03:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 20:52:11 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/13 15:20:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	command_s(char c, t_stack **st_a, t_stack **st_b)
+void	command_s(char c, t_stack *st_a, t_stack *st_b)
 {
 	t_stack_node	*tmp1;
 	t_stack_node	*tmp2;
@@ -36,7 +36,7 @@ void	command_s(char c, t_stack **st_a, t_stack **st_b)
 	write(1, "\n", 1);
 }
 
-void	command_p(char c, t_stack **st_a, t_stack **st_b)
+void	command_p(char c, t_stack *st_a, t_stack *st_b)
 {
 	if (c == 'a')
 		pushfront(popfront(st_b), st_a);
@@ -47,7 +47,7 @@ void	command_p(char c, t_stack **st_a, t_stack **st_b)
 	write(1, "\n", 1);
 }
 
-void	command_r(char c, t_stack **st_a, t_stack **st_b)
+void	command_r(char c, t_stack *st_a, t_stack *st_b)
 {
 	if (c == 'a' || c == 'r')
 		pushback(popfront(st_a), st_a);
@@ -58,7 +58,7 @@ void	command_r(char c, t_stack **st_a, t_stack **st_b)
 	write(1, "\n", 1);
 }
 
-void	command_rr(char c, t_stack **st_a, t_stack **st_b)
+void	command_rr(char c, t_stack *st_a, t_stack *st_b)
 {
 	if (c == 'a' || c == 'r')
 		pushfront(popback(st_a), st_a);
