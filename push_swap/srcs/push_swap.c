@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/13 16:09:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/14 15:24:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	invalid_check(t_stack *st)
 {
 	t_stack_node	*node;
 	t_stack_node	*tmp;
-	static int		err = 1;
+	static int		sort = 1;
 
 	node = st->top;
 	while (node)
@@ -68,11 +68,14 @@ void	invalid_check(t_stack *st)
 			tmp = tmp->next;
 		}
 		if (st->size != 1 && node->next && node->num > node->next->num)
-			err = 0;
+			sort = 0;
 		node = node->next;
 	}
-	if (err)
-		err_exit(st, NULL, "already sorted\n");
+	if (sort)
+	{
+		free_ps_stack(st);
+		exit(0);
+	}
 }
 
 void	leaks(void)////////////////////
@@ -80,10 +83,10 @@ void	leaks(void)////////////////////
 	system("leaks push_swap");
 }
 
-void	test(t_stack *a, t_stack *b)/////////////////////////
+void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 {
-	t_stack_node *a_tmp;//////////////
-	t_stack_node *b_tmp;//////////////
+	t_stack_node	*a_tmp;//////////////
+	t_stack_node	*b_tmp;//////////////
 
 	a_tmp = a->top;
 	b_tmp = b->top;
@@ -91,17 +94,18 @@ void	test(t_stack *a, t_stack *b)/////////////////////////
 	{
 		if (a_tmp)
 		{
-			printf("%d	",a_tmp->num);
+			printf("%d	", a_tmp->num);
 			a_tmp = a_tmp->next;
 		}
 		if (b_tmp)
 		{
-			printf("%d",b_tmp->num);
+			printf("%d", b_tmp->num);
 			b_tmp = b_tmp->next;
 		}
 		printf("\n");
 	}
-	printf("a%d	b%d\n",a->size,b->size);
+	printf("-	-\n");
+	printf("a%d	b%d\n", a->size, b->size);
 }
 
 int	main(int argc, char **argv)
@@ -115,12 +119,35 @@ int	main(int argc, char **argv)
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a);
-	test(st_a, st_b);
-	printf("-------------------------\n");//////////
-	command_s('a',st_a,st_b);
-	test(st_a, st_b);
+	print_cur(st_a, st_b);
 	printf("-------------------------\n");//////////
 	command_p('b',st_a,st_b);
-	test(st_a, st_b);
+	command_p('b',st_a,st_b);
+	command_p('b',st_a,st_b);
+	command_p('b',st_a,st_b);
+	command_p('a',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_s('a',st_a,st_b);
+	command_s('b',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_s('s',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_r('a',st_a,st_b);
+	command_r('b',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_r('r',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_rr('a',st_a,st_b);
+	command_rr('b',st_a,st_b);
+	print_cur(st_a, st_b);
+	printf("-------------------------\n");//////////
+	command_rr('r',st_a,st_b);
+	print_cur(st_a, st_b);
+
 	return (0);
 }
