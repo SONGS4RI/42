@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/14 15:24:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/14 20:57:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ void	leaks(void)////////////////////
 
 void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 {
-	t_stack_node	*a_tmp;//////////////
-	t_stack_node	*b_tmp;//////////////
+	t_stack_node	*a_tmp;
+	t_stack_node	*b_tmp;
 
 	a_tmp = a->top;
 	b_tmp = b->top;
-	while (a_tmp || b_tmp)//////////////////////////////////////
+	while (a_tmp || b_tmp)
 	{
 		if (a_tmp)
 		{
