@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:39:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/13 17:01:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/14 15:15:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_stack_node	*popfront(t_stack *st)
 	{
 		node = st->top;
 		st->top = st->top->next;
-		st->top->previous = NULL;
+		if (!st->top)
+			st->bottom = NULL;
+		else
+			st->top->previous = NULL;
 		st->size--;
 	}
 	return (node);
@@ -36,7 +39,10 @@ t_stack_node	*popback(t_stack *st)
 	{
 		node = st->bottom;
 		st->bottom = st->bottom->previous;
-		st->bottom->next = NULL;
+		if (!st->bottom)
+			st->top = NULL;
+		else
+			st->bottom->next = NULL;
 		st->size--;
 	}
 	return (node);
