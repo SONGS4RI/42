@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/15 18:37:57 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/15 20:46:53 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ARFLAGS		= -crs
 
 INCLUDES	= ./includes/push_swap.h
 
-SRCS		= srcs/push_swap.c			\
+SRCS		= srcs/ps_main.c			\
 			  srcs/ps_utils.c			\
 			  srcs/split_to_stack.c		\
 			  srcs/pop_push.c			\
