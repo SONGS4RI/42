@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ps_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/15 20:34:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/15 20:54:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,12 @@ int	main(int argc, char **argv)
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a);
 	print_cur(st_a,st_b);////////////
-	if (is_sorted(st_a) == -1)
+	if (is_sorted(st_a, 1) == -1)
 	{
 		command_rr('a', st_a, st_b);
 		command_s('a', st_a, st_b);
 		command_r('a', st_a, st_b);
 	}
-	printf("--------------\n");
-	print_cur(st_a,st_b);////////////
-
+	push_swap(st_a, st_b);
 	return (0);
 }
