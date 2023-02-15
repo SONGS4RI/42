@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/12 20:54:48 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/15 18:37:57 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ INCLUDES	= ./includes/push_swap.h
 SRCS		= srcs/push_swap.c			\
 			  srcs/ps_utils.c			\
 			  srcs/split_to_stack.c		\
-			  srcs/pop_push.c		\
-			  srcs/command.c		\
+			  srcs/pop_push.c			\
+			  srcs/command.c			\
+			  srcs/ps_algorithm.c		\
 
 OBJS	= $(SRCS:.c=.o)
 
