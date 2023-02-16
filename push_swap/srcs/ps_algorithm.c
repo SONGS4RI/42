@@ -6,18 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/15 21:02:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/16 22:57:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int	compare_num(int a, int b)
-{
-	if (a < b)
-		return (1);
-	return (-1);
-}
 
 int	is_sorted(t_stack *st, int sorted)
 {
@@ -45,32 +38,57 @@ t_stack	*choose_pivot_stack(t_stack *st_a, t_stack *st_b)
 	int	flag_a;
 	int	flag_b;
 
-	flag_a = is_sorted(st_a, 1);
-	flag_b = is_sorted(st_b, -1);
+	flag_a = is_sorted(st_a, st_a->sort);
+	flag_b = is_sorted(st_b, st_b->sort);
 	if (!flag_a && !flag_b)
 		return (st_a);
-	else if (!flag_a && flag_b == -1)
+	else if (!flag_a && flag_b)
 		return (st_a);
-	return (st_b);
+	else if (flag_a && !flag_b)
+		return (st_b);
+	return (NULL);
 }
 
-void	check_switch_st_top(t_stack *st_a, t_stack *st_b, int pivot)
+void	check_switch_st_top(t_stack *st_a, t_stack *st_b, t_stack_node *pivot)
 {
-	static int	flag_a = 0;
-	static int	flag_b = 0;
+	int	flag_a;
+	int	flag_b;
 
-	if (st_a->size > 1 && st_a->top->next->num != pivot)
+	flag_a = 0;
+	flag_b = 0;
+	if (st_a->size > 1 && st_a->top->next != pivot)
 		if (st_a->top->num > st_a->top->next->num)
 			flag_a = 1;
-	if (st_b->size > 1 && st_b->top->next->num != pivot)
+	if (st_b->size > 1 && st_b->top->next != pivot)
 		if (st_b->top->num < st_b->top->next->num)
 			flag_b = 1;
 	if (flag_a && flag_b)
-		command_s("s", st_a, st_b);
+		command_s('s', st_a, st_b);
 	else if(flag_a)
-		command_s("a", st_a, st_b);
+		command_s('a', st_a, st_b);
 	else if(flag_b)
-		command_s("b", st_a, st_b);
+		command_s('b', st_a, st_b);
+}
+
+void	check_pivot_st(t_stack *st_a, t_stack *st_b, t_stack *pivot_st)
+{
+	check_switch_st_top(st_a, st_b, pivot_st->pivot);
+	if (is_sorted(st_a, st_a->sort) && is_sorted(st_b, st_b->sort))
+		return ;
+	if (pivot_st == st_a)
+	{
+		if (pivot_st->top->num < pivot_st->pivot->num)
+			command_p('b', st_a, st_b);
+		else
+			command_r('a', st_a, st_b);
+	}
+	else
+	{
+		if (pivot_st->top->num > pivot_st->pivot->num)
+			command_p('a', st_a, st_b);
+		else
+			command_r('b', st_a, st_b);
+	}
 }
 
 void	push_swap(t_stack *st_a, t_stack *st_b)
@@ -80,16 +98,20 @@ void	push_swap(t_stack *st_a, t_stack *st_b)
 	while (1)
 	{
 		pivot_st = choose_pivot_stack(st_a, st_b);
-		while (1)
+		if (pivot_st)
+			pivot_st->pivot = pivot_st->bottom;
+		while (pivot_st && pivot_st->top != pivot_st->pivot)
 		{
-			
+			check_pivot_st(st_a, st_b, pivot_st);
+			if (is_sorted(pivot_st, pivot_st->sort))
+				break ;
 		}
 		if (st_a->sort == 1 && st_b->sort == -1)
 		{
 			while (st_b->size)
 			{
 				command_p('a', st_a, st_b);
-				check_switch_st_top(st_a, st_b, st_a->bottom->num);
+				check_switch_st_top(st_a, st_b, NULL);
 			}
 			break ;
 		}

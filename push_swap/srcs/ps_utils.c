@@ -6,11 +6,18 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:18:47 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 20:15:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/16 22:31:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int	compare_num(int a, int b)
+{
+	if (a < b)
+		return (1);
+	return (-1);
+}
 
 void	free_ps_stack(t_stack *st)
 {
