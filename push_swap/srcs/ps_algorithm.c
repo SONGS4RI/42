@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/16 22:57:30 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/16 23:04:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	push_swap(t_stack *st_a, t_stack *st_b)
 			if (is_sorted(pivot_st, pivot_st->sort))
 				break ;
 		}
-		if (st_a->sort == 1 && st_b->sort == -1)
+		if (is_sorted(st_a, st_a->sort) && is_sorted(st_b, st_b->sort))
 		{
 			while (st_b->size)
 			{
@@ -117,3 +117,7 @@ void	push_swap(t_stack *st_a, t_stack *st_b)
 		}
 	}
 }
+/*
+4 5 3 2 1 => 13개
+
+*/
