@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/12 20:15:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/16 22:30:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 			err_exit(*st, s, "not a integer\n");
 		i++;
 	}
-	if (nbr > INT32_MAX || nbr < INT32_MIN)
+	if (nbr > INT32_MAX || nbr < INT32_MIN)///////
 		err_exit(*st, s, "integer out of ragne\n");
 	return (nbr);
 }

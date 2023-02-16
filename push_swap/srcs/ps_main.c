@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/15 20:54:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/16 22:58:07 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_stack(t_stack **st_a, t_stack **st_b)
 		err_exit(NULL, NULL, "malloc err : st_a\n");
 	(*st_a)->top = NULL;
 	(*st_a)->bottom = NULL;
+	(*st_a)->pivot = NULL;
 	(*st_a)->size = 0;
 	(*st_a)->sort = 1;
 	*st_b = (t_stack *)malloc(sizeof(t_stack));
@@ -49,16 +50,15 @@ void	init_stack(t_stack **st_a, t_stack **st_b)
 		err_exit(*st_a, NULL, "malloc err : st_b\n");
 	(*st_b)->top = NULL;
 	(*st_b)->bottom = NULL;
+	(*st_b)->pivot = NULL;
 	(*st_b)->size = 0;
-	(*st_b)->sort = 0;
+	(*st_b)->sort = -1;
 }
 
-void	invalid_check(t_stack *st)
+void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 {
-	t_stack_node	*node;
 	t_stack_node	*tmp;
 
-	node = st->top;
 	while (node)
 	{
 		tmp = node->next;
@@ -68,11 +68,11 @@ void	invalid_check(t_stack *st)
 				err_exit(st, NULL, "duplicated\n");
 			tmp = tmp->next;
 		}
-		if (st->size != 1 && node->next && node->num > node->next->num)
-			st->sort = 0;
+		if (node->next && node->num > node->next->num)
+			sorted = 0;
 		node = node->next;
 	}
-	if (st->sort)
+	if (sorted)
 	{
 		free_ps_stack(st);
 		exit(0);
@@ -119,14 +119,19 @@ int	main(int argc, char **argv)
 		err_exit(NULL, NULL, "Wrong Usage\n");
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
-	invalid_check(st_a);
+	invalid_check(st_a, st_a->top, 1);
 	print_cur(st_a,st_b);////////////
-	if (is_sorted(st_a, 1) == -1)
+	if (is_sorted(st_a, -1) && st_a->size > 3)
 	{
 		command_rr('a', st_a, st_b);
 		command_s('a', st_a, st_b);
 		command_r('a', st_a, st_b);
 	}
 	push_swap(st_a, st_b);
+	print_cur(st_a,st_b);////////////
 	return (0);
 }
+/*
+pa
+sa
+*/
