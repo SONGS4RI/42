@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/16 23:46:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/17 22:22:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ int	main(int argc, char **argv)
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a, st_a->top, 1);
-	print_cur(st_a,st_b);////////////
 	if (is_sorted(st_a, -1) && st_a->size > 3)
 	{
 		command_rr('a', st_a, st_b);
@@ -128,7 +127,6 @@ int	main(int argc, char **argv)
 		command_r('a', st_a, st_b);
 	}
 	push_swap(st_a, st_b);
-	print_cur(st_a,st_b);////////////
 	return (0);
 }
 /*
