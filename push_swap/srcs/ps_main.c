@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/17 22:22:56 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/19 19:25:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,21 @@ void	init_stack(t_stack **st_a, t_stack **st_b)
 		err_exit(NULL, NULL, "malloc err : st_a\n");
 	(*st_a)->top = NULL;
 	(*st_a)->bottom = NULL;
-	(*st_a)->pivot = NULL;
 	(*st_a)->size = 0;
-	(*st_a)->sort = 1;
 	*st_b = (t_stack *)malloc(sizeof(t_stack));
 	if (!st_b)
 		err_exit(*st_a, NULL, "malloc err : st_b\n");
 	(*st_b)->top = NULL;
 	(*st_b)->bottom = NULL;
-	(*st_b)->pivot = NULL;
 	(*st_b)->size = 0;
-	(*st_b)->sort = -1;
 }
 
 void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 {
 	t_stack_node	*tmp;
 
+	if (!st->size)
+		err_exit(st, NULL, "no parameter\n");
 	while (node)
 	{
 		tmp = node->next;
@@ -95,9 +93,10 @@ void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 	{
 		if (a_tmp)
 		{
-			printf("%d	", a_tmp->num);
+			printf("%d", a_tmp->num);
 			a_tmp = a_tmp->next;
 		}
+		printf("	");
 		if (b_tmp)
 		{
 			printf("%d", b_tmp->num);
@@ -115,20 +114,12 @@ int	main(int argc, char **argv)
 	t_stack	*st_b;
 
 	// atexit(leaks);////////////////////
-	if (argc == 1)
-		err_exit(NULL, NULL, "Wrong Usage\n");
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a, st_a->top, 1);
-	if (is_sorted(st_a, -1) && st_a->size > 3)
-	{
-		command_rr('a', st_a, st_b);
-		command_s('a', st_a, st_b);
-		command_r('a', st_a, st_b);
-	}
-	push_swap(st_a, st_b);
+	print_cur(st_a, st_b);
+	printf("=========================\n");/////////
+	a_to_b(st_a, st_b, st_a->size);
+	print_cur(st_a, st_b);
 	return (0);
 }
-/*
-4 5 3 2 1 => 13개
-*/
