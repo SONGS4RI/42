@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/19 14:48:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/19 14:47:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	check_switch_st_top(t_stack *st_a, t_stack *st_b, t_stack_node *pivot)
 			flag_b = 1;
 	if (flag_a && flag_b)
 		command_s('s', st_a, st_b);
-	else if (flag_a)
+	else if(flag_a)
 		command_s('a', st_a, st_b);
-	else if (flag_b)
+	else if(flag_b)
 		command_s('b', st_a, st_b);
 }
 
