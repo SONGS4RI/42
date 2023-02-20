@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:03:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 17:21:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:29:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,15 @@ void	command_p(char c, t_stack *st_a, t_stack *st_b)
 	write(1, "\n", 1);
 }
 
-void	command_r(char c, t_stack *st_a, t_stack *st_b, int *r_cnt)
+void	command_r(char c, t_stack *st_a, t_stack *st_b)
 {
 	if ((c == 'a' && st_a->size > 1) || (c == 'b' && st_b->size > 1) || \
 	(c == 'r' && (st_a->size > 1 || st_b->size > 1)))
 	{
 		if (c == 'a' || c == 'r')
-		{
 			pushback(popfront(st_a), st_a);
-			if (r_cnt)
-				(*r_cnt)++;
-		}
 		if (c == 'b' || c == 'r')
-		{
 			pushback(popfront(st_b), st_b);
-			if (r_cnt)
-				(*r_cnt)++;
-		}
 		write(1, "r", 1);
 		write(1, &c, 1);
 		write(1, "\n", 1);
