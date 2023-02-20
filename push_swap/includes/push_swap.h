@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/19 19:19:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:24:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ typedef struct s_stack
 
 void			print_cur(t_stack *a, t_stack *b);/////////////////////////
 
+int				compare_num(int a, int b);
+int				is_sorted(t_stack *st, int size, int sorted);
 void			free_ps_stack(t_stack *st);
 void			err_exit(t_stack *st, char *line, char *err_msg);
-
 
 void			argv_to_stack(char **argv, t_stack **st);
 void			init_stack(t_stack **st_a, t_stack **st_b);
@@ -56,6 +57,16 @@ void			pushfront(t_stack_node *node, t_stack *to);
 void			pushback(t_stack_node *node, t_stack *to);
 
 int				choose_pivot(t_stack_node *node, int size, int point, int i);
+int				a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra);
 void			a_to_b(t_stack *st_a, t_stack *st_b, int size);
+int				b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb);
+void			b_to_a(t_stack *st_a, t_stack *st_b, int size);
+
+void			sort_three_ascending(t_stack *st_a, t_stack *st_b, \
+														int b, int c);
+void			sort_three_descending(t_stack *st_a, t_stack *st_b, \
+														int b, int c);
+void			st_under_three(t_stack *st_a, t_stack *st_b, \
+											t_stack *tmp, int size);
 
 #endif

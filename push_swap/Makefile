@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/19 14:51:42 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/20 16:16:10 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS		= srcs/ps_main.c				\
 			  srcs/ps_split_to_stack.c		\
 			  srcs/ps_pop_push.c			\
 			  srcs/ps_command.c				\
-			  srcs/ps_algorithm.c			\
+			  srcs/ps_algorithm_1.c			\
+			  srcs/ps_algorithm_2.c			\
 
 OBJS	= $(SRCS:.c=.o)
 

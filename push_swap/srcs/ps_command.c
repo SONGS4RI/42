@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:03:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/19 19:34:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:21:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ void	command_p(char c, t_stack *st_a, t_stack *st_b)
 		pushfront(popfront(st_b), st_a);
 	else if (c == 'b')
 		pushfront(popfront(st_a), st_b);
-	printf("========================\n");///////////
 	write(1, "p", 1);
 	write(1, &c, 1);
 	write(1, "\n", 1);
-	print_cur(st_a, st_b);///////////////
 }
 
 void	command_r(char c, t_stack *st_a, t_stack *st_b, int *r_cnt)
@@ -70,11 +68,9 @@ void	command_r(char c, t_stack *st_a, t_stack *st_b, int *r_cnt)
 			if (r_cnt)
 				(*r_cnt)++;
 		}
-		printf("========================\n");///////////
 		write(1, "r", 1);
 		write(1, &c, 1);
 		write(1, "\n", 1);
-		print_cur(st_a, st_b);///////////////
 	}
 }
 
