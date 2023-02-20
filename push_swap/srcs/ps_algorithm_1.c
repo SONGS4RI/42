@@ -1,41 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_algorithm.c                                     :+:      :+:    :+:   */
+/*   ps_algorithm_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/19 20:56:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:16:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int	compare_num(int a, int b)
-{
-	if (a < b)
-		return (1);
-	return (-1);
-}
-
-int	is_sorted(t_stack *st, int size, int sorted)
-{
-	t_stack_node	*tmp;
-	int				compare;
-
-	if (size > 1)
-	{
-		tmp = st->top;
-		while (tmp->next && --size)
-		{
-			if (sorted != compare_num(tmp->num, tmp->next->num))
-				return (0);
-			tmp = tmp->next;
-		}
-	}
-	return (sorted);
-}
 
 int	choose_pivot(t_stack_node *node, int size, int point, int i)
 {
@@ -65,19 +40,6 @@ int	choose_pivot(t_stack_node *node, int size, int point, int i)
 	return (tmp->num);
 }
 
-void	st_under_three(t_stack *st_a, t_stack *st_b, t_stack *tmp, int size)
-{
-	if (tmp == st_a)
-	{
-		if (size == 2)
-		else if (size == 3)
-	}
-	else
-	{
-
-	}
-}
-
 int	a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra)
 {
 	int	pivot[2];
@@ -93,7 +55,7 @@ int	a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra)
 			command_r('a', st_a, st_b, NULL);
 			ra++;
 		}
-		else if (st_a->top->num >= pivot[1])
+		else if (st_a->top->num > pivot[1])
 		{
 			command_p('b', st_a, st_b);
 			command_r('b', st_a, st_b, &rb);
@@ -129,7 +91,7 @@ int	b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb)
 	{
 		if (st_a->top->num >= pivot[0])
 			command_p('a', st_a, st_b);
-		else if (st_a->top->num >= pivot[1])
+		else if (st_a->top->num > pivot[1])
 		{
 			command_p('a', st_a, st_b);
 			command_r('a', st_a, st_b, &ra);
