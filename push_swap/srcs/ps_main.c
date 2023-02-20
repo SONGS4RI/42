@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/19 19:25:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 20:18:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 		printf("\n");
 	}
 	printf("-	-\n");
-	printf("a%d	b%d\n", a->size, b->size);
+	printf("a	b\n");
 }
 
 int	main(int argc, char **argv)
@@ -117,9 +117,6 @@ int	main(int argc, char **argv)
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a, st_a->top, 1);
-	print_cur(st_a, st_b);
-	printf("=========================\n");/////////
 	a_to_b(st_a, st_b, st_a->size);
-	print_cur(st_a, st_b);
 	return (0);
 }

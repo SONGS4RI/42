@@ -6,38 +6,39 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 17:16:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 20:17:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	choose_pivot(t_stack_node *node, int size, int point, int i)
+void	a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
 {
-	int				j;
-	int				cnt;
-	t_stack_node	*tmp;
-	t_stack_node	*cmp;
-
-	while (++i < size)
+	if (st_a->size == ra)
+		while (rb--)
+			command_rr('b', st_a, st_b);
+	else
 	{
-		tmp = node;
-		cmp = node;
-		cnt = 0;
-		j = -1;
-		while (++j < i)
-			tmp = tmp->next;
-		j = -1;
-		while (++j < size)
+		while (ra || rb)
 		{
-			if (tmp->num < cmp->num)
-				cnt++;
-			cmp = cmp->next;
+			if (ra && rb)
+			{
+				command_rr('r', st_a, st_b);
+				ra--;
+				rb--;
+			}
+			else if (ra)
+			{
+				command_rr('a', st_a, st_b);
+				ra--;
+			}
+			else if (rb)
+			{
+				command_rr('b', st_a, st_b);
+				rb--;
+			}
 		}
-		if (cnt == point)
-			break ;
 	}
-	return (tmp->num);
 }
 
 int	a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra)
@@ -52,19 +53,19 @@ int	a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra)
 	{
 		if (st_a->top->num >= pivot[0])
 		{
-			command_r('a', st_a, st_b, NULL);
+			command_r('a', st_a, st_b);
 			ra++;
 		}
 		else if (st_a->top->num > pivot[1])
 		{
 			command_p('b', st_a, st_b);
-			command_r('b', st_a, st_b, &rb);
+			command_r('b', st_a, st_b);
+			rb++;
 		}
 		else
 			command_p('b', st_a, st_b);
 	}
-	while (rb--)
-		command_rr('b', st_a, st_b);
+	a_to_b_reverse(st_a, st_b, ra, rb);
 	return (ra);
 }
 
@@ -73,6 +74,11 @@ void	a_to_b(t_stack *st_a, t_stack *st_b, int size)
 	int	num;
 
 	if (size <= 3)
+	{
+		st_under_three(st_a, st_b, st_a, size);
+		return ;
+	}
+	if (is_sorted(st_a, size, 1))
 		return ;
 	num = a_to_b_func(st_a, st_b, size, 0);
 	a_to_b(st_a, st_b, num);
@@ -89,16 +95,17 @@ int	b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb)
 	pivot[1] = choose_pivot(st_b->top, size, (size * 2) / 3, -1);
 	while (size--)
 	{
-		if (st_a->top->num >= pivot[0])
+		if (st_b->top->num >= pivot[0])
 			command_p('a', st_a, st_b);
-		else if (st_a->top->num > pivot[1])
+		else if (st_b->top->num > pivot[1])
 		{
 			command_p('a', st_a, st_b);
-			command_r('a', st_a, st_b, &ra);
+			command_r('a', st_a, st_b);
+			ra++;
 		}
 		else
 		{
-			command_r('b', st_a, st_b, NULL);
+			command_r('b', st_a, st_b);
 			rb++;
 		}
 	}
@@ -112,7 +119,10 @@ void	b_to_a(t_stack *st_a, t_stack *st_b, int size)
 	int	num;
 
 	if (size <= 3)
+	{
+		st_under_three(st_a, st_b, st_b, size);
 		return ;
+	}
 	num = b_to_a_func(st_a, st_b, size, 0);
 	a_to_b(st_a, st_b, size - num);
 	b_to_a(st_a, st_b, num);

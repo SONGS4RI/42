@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 17:24:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/20 20:16:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			split_to_stack(char *s, t_stack **st);
 
 void			command_s(char c, t_stack *st_a, t_stack *st_b);
 void			command_p(char c, t_stack *st_a, t_stack *st_b);
-void			command_r(char c, t_stack *st_a, t_stack *st_b, int *r_cnt);
+void			command_r(char c, t_stack *st_a, t_stack *st_b);
 void			command_rr(char c, t_stack *st_a, t_stack *st_b);
 
 t_stack_node	*popfront(t_stack *st);
@@ -56,12 +56,13 @@ t_stack_node	*popback(t_stack *st);
 void			pushfront(t_stack_node *node, t_stack *to);
 void			pushback(t_stack_node *node, t_stack *to);
 
-int				choose_pivot(t_stack_node *node, int size, int point, int i);
+void			a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
 int				a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra);
 void			a_to_b(t_stack *st_a, t_stack *st_b, int size);
 int				b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb);
 void			b_to_a(t_stack *st_a, t_stack *st_b, int size);
 
+int				choose_pivot(t_stack_node *node, int size, int point, int i);
 void			sort_three_ascending(t_stack *st_a, t_stack *st_b, \
 														int b, int c);
 void			sort_three_descending(t_stack *st_a, t_stack *st_b, \
