@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 20:16:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 16:14:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void			pushback(t_stack_node *node, t_stack *to);
 void			a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
 int				a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int ra);
 void			a_to_b(t_stack *st_a, t_stack *st_b, int size);
+
+void			b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
 int				b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb);
 void			b_to_a(t_stack *st_a, t_stack *st_b, int size);
 
