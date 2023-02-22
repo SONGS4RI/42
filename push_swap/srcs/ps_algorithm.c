@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_algorithm_2.c                                   :+:      :+:    :+:   */
+/*   ps_algorithm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 15:50:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 17:39:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	st_under_three(t_stack *st_a, t_stack *st_b, t_stack *tmp, int size)
 	if (tmp == st_a)
 	{
 		if (size == 2 && !is_sorted(st_a, 2, 1))
-			command_r('a', st_a, st_b);
+			command_s('a', st_a, st_b);
 		else if (size == 3 && !is_sorted(st_a, 3, 1))
 			sort_three_ascending(st_a, st_b, st_a->top->next->num, \
 			st_a->top->next->next->num);
