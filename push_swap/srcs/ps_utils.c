@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:18:47 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:31:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:52:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	free_ps_stack(t_stack *st)
 	{
 		tmp = node->next;
 		node->previous = NULL;
+		node->next = NULL;
 		free(node);
 		node = tmp;
 	}

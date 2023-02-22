@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:44:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:56:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	argv_to_stack(char **argv, t_stack *st)
+static void	argv_to_stack(char **argv, t_stack *st)
 {
 	static int	idx;
 	static int	len;
@@ -39,7 +39,7 @@ void	argv_to_stack(char **argv, t_stack *st)
 	split_to_stack(line, st);
 }
 
-void	init_stack(t_stack **st_a, t_stack **st_b)
+static void	init_stack(t_stack **st_a, t_stack **st_b)
 {
 	*st_a = (t_stack *)malloc(sizeof(t_stack));
 	if (!st_a)
@@ -55,7 +55,7 @@ void	init_stack(t_stack **st_a, t_stack **st_b)
 	(*st_b)->size = 0;
 }
 
-void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
+static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 {
 	t_stack_node	*tmp;
 
@@ -70,11 +70,9 @@ void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 				err_exit(st, NULL);
 			tmp = tmp->next;
 		}
-		if (node->next && node->num > node->next->num)
-			sorted = 0;
 		node = node->next;
 	}
-	if (sorted)
+	if (is_sorted(st, st->size, 1))
 	{
 		free_ps_stack(st);
 		exit(0);
