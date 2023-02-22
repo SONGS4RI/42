@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 17:23:20 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:29:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_stack
 	struct s_stack_node	*top;
 	struct s_stack_node	*bottom;
 }t_stack;
-
-void			print_cur(t_stack *a, t_stack *b);/////////////////////////
 
 int				compare_num(int a, int b);
 int				is_sorted(t_stack *st, int size, int sorted);
