@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:46:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 20:59:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack *st)
 		sign = -1;
 	if ((str[i] == '-') || (str[i] == '+'))
 		i++;
+	if (str[i] == '\0' || !((str[i] >= '0') && (str[i] <= '9')))
+		err_exit(st, s);
 	while (i < offset && str[i])
 	{
 		if ((str[i] >= '0') && (str[i] <= '9'))

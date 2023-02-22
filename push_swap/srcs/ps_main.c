@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:56:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 20:59:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 {
 	t_stack_node	*tmp;
 
-	if (!st->size)
-		err_exit(st, NULL);
+	if (is_sorted(st, st->size, 1) || !st->size)
+	{
+		free_ps_stack(st);
+		exit(0);
+	}
 	while (node)
 	{
 		tmp = node->next;
@@ -72,11 +75,6 @@ static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 		}
 		node = node->next;
 	}
-	if (is_sorted(st, st->size, 1))
-	{
-		free_ps_stack(st);
-		exit(0);
-	}
 }
 
 int	main(int argc, char **argv)
@@ -84,6 +82,8 @@ int	main(int argc, char **argv)
 	t_stack	*st_a;
 	t_stack	*st_b;
 
+	if (argc == 1)
+		return (0);
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, st_a);
 	invalid_check(st_a, st_a->top, 1);
