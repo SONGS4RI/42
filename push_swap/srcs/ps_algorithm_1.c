@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 20:37:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 16:02:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,35 @@ void	a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
 	if (st_a->size == ra)
 		while (rb--)
 			command_rr('b', st_a, st_b);
+	else
+	{
+		while (ra || rb)
+		{
+			if (ra && rb)
+			{
+				command_rr('r', st_a, st_b);
+				ra--;
+				rb--;
+			}
+			else if (ra)
+			{
+				command_rr('a', st_a, st_b);
+				ra--;
+			}
+			else if (rb)
+			{
+				command_rr('b', st_a, st_b);
+				rb--;
+			}
+		}
+	}
+}
+
+void	b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
+{
+	if (st_b->size == rb)
+		while (ra--)
+			command_rr('a', st_a, st_b);
 	else
 	{
 		while (ra || rb)
@@ -73,6 +102,9 @@ void	a_to_b(t_stack *st_a, t_stack *st_b, int size)
 {
 	int	num;
 
+	printf("====================a_to_b(%d)===================\n",size);///////////////////
+	print_cur(st_a, st_b);///////////////////////////////////////////////////////
+
 	if (size <= 3)
 	{
 		st_under_three(st_a, st_b, st_a, size);
@@ -109,8 +141,7 @@ int	b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int rb)
 			rb++;
 		}
 	}
-	while (ra--)
-		command_rr('a', st_a, st_b);
+	b_to_a_reverse(st_a, st_b, ra, rb);
 	return (rb);
 }
 
@@ -118,6 +149,8 @@ void	b_to_a(t_stack *st_a, t_stack *st_b, int size)
 {
 	int	num;
 
+	printf("====================b_to_a(%d)===================\n",size);///////////////////
+	print_cur(st_a, st_b);///////////////////////////////////////////////////////
 	if (size <= 3)
 	{
 		st_under_three(st_a, st_b, st_b, size);
