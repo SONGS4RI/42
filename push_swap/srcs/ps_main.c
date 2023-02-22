@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 20:59:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 21:13:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char **argv)
 	t_stack	*st_a;
 	t_stack	*st_b;
 
-	if (argc == 1)
+	if (argc == 1)//3개 하드코딩해야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		return (0);
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, st_a);
