@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/20 20:37:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 15:50:32 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	st_under_three(t_stack *st_a, t_stack *st_b, t_stack *tmp, int size)
 		else if (size == 2)
 		{
 			if (!is_sorted(st_b, 2, -1))
-				command_r('b', st_a, st_b);
+				command_s('b', st_a, st_b);
 			command_p('a', st_a, st_b);
 			command_p('a', st_a, st_b);
 		}
