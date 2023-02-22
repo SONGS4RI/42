@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:36:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:46:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_whitespace(char c)
 	return (0);
 }
 
-static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
+static int	ps_atoi(char *str, int offset, char *s, t_stack *st)
 {
 	int				sign;
 	long long		nbr;
@@ -37,39 +37,39 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 		if ((str[i] >= '0') && (str[i] <= '9'))
 			nbr = (nbr * 10) + sign * (str[i] - '0');
 		else
-			err_exit(*st, s);
+			err_exit(st, s);
 		i++;
 	}
 	if (nbr > 2147483647 || nbr < -2147483648)
-		err_exit(*st, s);
+		err_exit(st, s);
 	return (nbr);
 }
 
-static void	add_to_stack(int n, char *s, t_stack **st)
+static void	add_to_stack(int n, char *s, t_stack *st)
 {
 	t_stack_node	*cur_node;
 
 	cur_node = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (!cur_node)
-		err_exit(*st, s);
-	if (!(*st)->top)
+		err_exit(st, s);
+	if (!st->top)
 	{
-		(*st)->top = cur_node;
-		(*st)->bottom = cur_node;
+		st->top = cur_node;
+		st->bottom = cur_node;
 		cur_node->previous = NULL;
 	}
 	else
 	{
-		(*st)->bottom->next = cur_node;
-		cur_node->previous = (*st)->bottom;
-		(*st)->bottom = cur_node;
+		st->bottom->next = cur_node;
+		cur_node->previous = st->bottom;
+		st->bottom = cur_node;
 	}
-	(*st)->size++;
+	st->size++;
 	cur_node->next = NULL;
 	cur_node->num = n;
 }
 
-void	split_to_stack(char *s, t_stack **st)
+void	split_to_stack(char *s, t_stack *st)
 {
 	size_t	offset;
 	size_t	i;
