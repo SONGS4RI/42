@@ -6,20 +6,24 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:32:05 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:44:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	argv_to_stack(char **argv, t_stack **st)
+void	argv_to_stack(char **argv, t_stack *st)
 {
 	static int	idx;
 	static int	len;
 	char		*line;
 
 	while (argv[++idx])
+	{
+		if (argv[idx][0] == '\0')
+			err_exit(st, NULL);
 		len += ft_strlen(argv[idx]) + 1;
+	}
 	line = (char *)malloc(sizeof(char) * len);
 	if (!line)
 		return ;
@@ -83,7 +87,7 @@ int	main(int argc, char **argv)
 	t_stack	*st_b;
 
 	init_stack(&st_a, &st_b);
-	argv_to_stack(argv, &st_a);
+	argv_to_stack(argv, st_a);
 	invalid_check(st_a, st_a->top, 1);
 	a_to_b(st_a, st_b, st_a->size);
 	free_ps_stack(st_a);
