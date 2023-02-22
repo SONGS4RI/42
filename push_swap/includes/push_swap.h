@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:29:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:34:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-# include <stdio.h>//////////제출할때 지워라///////
 
 typedef struct s_stack_node
 {
@@ -33,7 +32,7 @@ typedef struct s_stack
 int				compare_num(int a, int b);
 int				is_sorted(t_stack *st, int size, int sorted);
 void			free_ps_stack(t_stack *st);
-void			err_exit(t_stack *st, char *line, char *err_msg);
+void			err_exit(t_stack *st, char *line);
 
 void			argv_to_stack(char **argv, t_stack **st);
 void			init_stack(t_stack **st_a, t_stack **st_b);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_to_stack.c                                   :+:      :+:    :+:   */
+/*   ps_split_to_stack.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/16 22:30:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:36:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack **st)
 		if ((str[i] >= '0') && (str[i] <= '9'))
 			nbr = (nbr * 10) + sign * (str[i] - '0');
 		else
-			err_exit(*st, s, "not a integer\n");
+			err_exit(*st, s);
 		i++;
 	}
-	if (nbr > INT32_MAX || nbr < INT32_MIN)///////
-		err_exit(*st, s, "integer out of ragne\n");
+	if (nbr > 2147483647 || nbr < -2147483648)
+		err_exit(*st, s);
 	return (nbr);
 }
 
@@ -51,7 +51,7 @@ static void	add_to_stack(int n, char *s, t_stack **st)
 
 	cur_node = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (!cur_node)
-		err_exit(*st, s, "malloc err : add_to_stack\n");
+		err_exit(*st, s);
 	if (!(*st)->top)
 	{
 		(*st)->top = cur_node;

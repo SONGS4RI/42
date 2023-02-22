@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 13:18:47 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:29:11 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:31:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	free_ps_stack(t_stack *st)
 	st = NULL;
 }
 
-void	err_exit(t_stack *st, char *line, char *err_msg)
+void	err_exit(t_stack *st, char *line)
 {
 	write(2, "Error\n", 6);
-	write(2, err_msg, ft_strlen(err_msg));
 	if (line)
 		free(line);
 	if (st)
