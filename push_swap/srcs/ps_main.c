@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 17:41:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:22:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,10 @@ int	main(int argc, char **argv)
 	t_stack	*st_a;
 	t_stack	*st_b;
 
-	// atexit(leaks);////////////////////
+	atexit(leaks);////////////////////
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, &st_a);
 	invalid_check(st_a, st_a->top, 1);
 	a_to_b(st_a, st_b, st_a->size);
-	// printf("========result==========\n");//////////////////
-	// print_cur(st_a, st_b);///////////////////
 	return (0);
 }

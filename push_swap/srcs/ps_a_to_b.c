@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:11:22 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 17:40:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/22 19:22:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int arr[])
 
 	pivot[0] = choose_pivot(st_a->top, size, size / 3, -1);
 	pivot[1] = choose_pivot(st_a->top, size, (size * 2) / 3, -1);
-	// printf("pivot: %d %d\n",pivot[1],pivot[0]);///////////////////////////////////////
 	while (size--)
 	{
 		if (st_a->top->num >= pivot[0])
@@ -77,8 +76,6 @@ void	a_to_b(t_stack *st_a, t_stack *st_b, int size)
 	arr[0] = 0;
 	arr[1] = 0;
 	arr[2] = 0;
-	// printf("====================a_to_b(%d)===================\n",size);///////////////////
-	// print_cur(st_a, st_b);///////////////////////////////////////////////////////
 	if (size <= 3)
 	{
 		st_under_three(st_a, st_b, st_a, size);
