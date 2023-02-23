@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 18:06:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 18:20:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,31 @@ static void	is_ok(t_stack *st_a, t_stack *st_b)
 		write(1, "KO\n", 3);
 }
 
+void	print_cur(t_stack *a, t_stack *b)/////////////////////////
+{
+	t_stack_node	*a_tmp;
+	t_stack_node	*b_tmp;
+
+	a_tmp = a->top;
+	b_tmp = b->top;
+	while (a_tmp || b_tmp)
+	{
+		if (a_tmp)
+		{
+			printf("%d	", a_tmp->num);
+			a_tmp = a_tmp->next;
+		}
+		if (b_tmp)
+		{
+			printf("%d", b_tmp->num);
+			b_tmp = b_tmp->next;
+		}
+		printf("\n");
+	}
+	printf("-	-\n");
+	printf("a%d	b%d\n", a->size, b->size);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*st_a;
@@ -103,6 +128,7 @@ int	main(int argc, char **argv)
 			break ;
 		do_command(st_a, st_b, str);
 		free(str);
+		print_cur(st_a, st_b);//////////
 	}
 	is_ok(st_a, st_b);
 	free_ps_stack(st_a);
