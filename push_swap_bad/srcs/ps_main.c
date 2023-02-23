@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/17 22:22:56 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 19:26:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 			printf("%d	", a_tmp->num);
 			a_tmp = a_tmp->next;
 		}
+		else
+			printf("	");
 		if (b_tmp)
 		{
 			printf("%d", b_tmp->num);
