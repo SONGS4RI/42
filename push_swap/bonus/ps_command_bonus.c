@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:03:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 15:26:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 17:44:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	command_s(char c, t_stack *st_a, t_stack *st_b)
 			pushfront(tmp1, st_b);
 			pushfront(tmp2, st_b);
 		}
-		write(1, "s", 1);
-		write(1, &c, 1);
-		write(1, "\n", 1);
 	}
 }
 
@@ -48,9 +45,6 @@ void	command_p(char c, t_stack *st_a, t_stack *st_b)
 			pushfront(popfront(st_b), st_a);
 		else if (c == 'b')
 			pushfront(popfront(st_a), st_b);
-		write(1, "p", 1);
-		write(1, &c, 1);
-		write(1, "\n", 1);
 	}
 }
 
@@ -63,9 +57,6 @@ void	command_r(char c, t_stack *st_a, t_stack *st_b)
 			pushback(popfront(st_a), st_a);
 		if (c == 'b' || c == 'r')
 			pushback(popfront(st_b), st_b);
-		write(1, "r", 1);
-		write(1, &c, 1);
-		write(1, "\n", 1);
 	}
 }
 
@@ -78,8 +69,5 @@ void	command_rr(char c, t_stack *st_a, t_stack *st_b)
 			pushfront(popback(st_a), st_a);
 		if (c == 'b' || c == 'r')
 			pushfront(popback(st_b), st_b);
-		write(1, "rr", 2);
-		write(1, &c, 1);
-		write(1, "\n", 1);
 	}
 }
