@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/22 16:13:16 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/23 15:24:10 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,4 +56,4 @@ fclean : clean
 
 re : clean all
 
-.PHONY : all clean fclean re
+.PHONY : all bonus clean fclean re
