@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_command.c                                       :+:      :+:    :+:   */
+/*   ps_command_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:03:29 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 20:20:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:26:32 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/push_swap_bonus.h"
 
 void	command_s(char c, t_stack *st_a, t_stack *st_b)
 {
