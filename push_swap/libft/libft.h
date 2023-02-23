@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:31:27 by jahlee            #+#    #+#             */
-/*   Updated: 2023/01/26 20:03:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:43:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }t_list;
-
-typedef struct s_gnl_list
-{
-	int					fd_idx;
-	int					eof;
-	int					no_nl_idx;
-	struct s_gnl_list	*next;
-	struct s_gnl_list	*previous;
-	char				*backup;
-}t_gnl_list;
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -77,16 +67,5 @@ void		ft_lstdelone(t_list *lst, void (*del)(void *));
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-t_gnl_list	*del_gnl_list(t_gnl_list **tmp);
-t_gnl_list	*find_fd(t_gnl_list *tmp, int fd, t_gnl_list	*head);
-char		*combine_all(char **str1, char **str2, t_gnl_list **tmp);
-char		*read_line(t_gnl_list **tmp, int fd);
-char		*get_next_line(int fd);
-size_t		ft_len_free(const char *s, char **free_s);
-size_t		ft_gnlcpy(char *dst, char *src, size_t dstsize, size_t idx);
-char		*ft_gnlstr(char *s, int start, size_t len, t_gnl_list **tmp);
-char		*is_nl_backup(char **str, int len, t_gnl_list *tmp);
-char		*is_nl_line(char **str, int len, t_gnl_list **tmp, int idx);
 
 #endif
