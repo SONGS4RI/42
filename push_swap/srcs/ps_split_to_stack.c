@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 20:59:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 20:41:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack *st)
 			err_exit(st, s);
 		i++;
 	}
-	if (nbr > 2147483647 || nbr < -2147483648)
+	if (i > 11 || nbr > 2147483647 || nbr < -2147483648)
 		err_exit(st, s);
 	return (nbr);
 }
