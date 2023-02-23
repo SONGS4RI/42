@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_split_to_stack.c                                :+:      :+:    :+:   */
+/*   ps_split_to_stack_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 20:59:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:26:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/push_swap_bonus.h"
 
 static int	is_whitespace(char c)
 {

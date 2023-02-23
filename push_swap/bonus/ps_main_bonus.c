@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 15:25:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:00:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/push_swap_bonus.h"
 
 static void	argv_to_stack(char **argv, t_stack *st)
 {
@@ -77,15 +77,34 @@ static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 	}
 }
 
+static void	is_ok(t_stack *st_a, t_stack *st_b)
+{
+	if (st_b->size)
+		write(1, "KO\n", 3);
+	else if (is_sorted(st_a, st_a->size, 1))
+		write(1, "OK\n", 3);
+	else
+		write(1, "KO\n", 3);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*st_a;
 	t_stack	*st_b;
+	char	*str;
 
 	init_stack(&st_a, &st_b);
 	argv_to_stack(argv, st_a);
 	invalid_check(st_a, st_a->top, 1);
-
+	while (1)
+	{
+		str = get_next_line(0);
+		if (!str)
+			break ;
+		do_command(st_a, st_b, str);
+		free(str);
+	}
+	is_ok(st_a, st_b);
 	free_ps_stack(st_a);
 	free_ps_stack(st_b);
 	return (0);
