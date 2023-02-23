@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/10 13:37:33 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/23 17:28:46 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,46 +58,25 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
-SRCS_BONUS =  ft_lstnew.c 		\
-			  ft_lstadd_front.c	\
-			  ft_lstsize.c 		\
-			  ft_lstlast.c 		\
-			  ft_lstadd_back.c 	\
-			  ft_lstdelone.c 	\
-			  ft_lstclear.c 	\
-			  ft_lstiter.c 		\
-			  ft_lstmap.c 		\
-
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
 
 OBJS	= $(SRCS:.c=.o)
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
 %.o : %.c
 	$(CC) $(CFLAG) -c $< -o $@ -I $(INCLUDES)
 
-ifdef BONUS_ON
-    REALOBJS = $(OBJS) $(OBJS_BONUS)
-else
-    REALOBJS = $(OBJS)
-endif
-
-$(NAME) : $(REALOBJS)
+$(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
 all : $(NAME)
 
 clean :
-	$(RM) $(RMFLAG) $(OBJS) $(OBJS_BONUS)
+	$(RM) $(RMFLAG) $(OBJS)
 
 fclean : clean
 	$(RM) $(RMFLAG) $(NAME)
 
 re : fclean all
 
-bonus :
-	@make BONUS_ON=1
-
- .PHONY : all clean fclean re bonus
+ .PHONY : all clean fclean re
