@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 19:26:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 15:26:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 19:17:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ static int	ps_atoi(char *str, int offset, char *s, t_stack *st)
 	if ((str[i] == '-') || (str[i] == '+'))
 		i++;
 	if (str[i] == '\0' || !((str[i] >= '0') && (str[i] <= '9')))
-		err_exit(st, s);
+		err_exit(st, NULL, s);
 	while (i < offset && str[i])
 	{
 		if ((str[i] >= '0') && (str[i] <= '9'))
 			nbr = (nbr * 10) + sign * (str[i] - '0');
 		else
-			err_exit(st, s);
+			err_exit(st, NULL, s);
 		i++;
 	}
 	if (nbr > 2147483647 || nbr < -2147483648)
-		err_exit(st, s);
+		err_exit(st, NULL, s);
 	return (nbr);
 }
 
@@ -53,7 +53,7 @@ static void	add_to_stack(int n, char *s, t_stack *st)
 
 	cur_node = (t_stack_node *)malloc(sizeof(t_stack_node));
 	if (!cur_node)
-		err_exit(st, s);
+		err_exit(st, NULL, s);
 	if (!st->top)
 	{
 		st->top = cur_node;
