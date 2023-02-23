@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/23 17:30:02 by jahlee           ###   ########.fr        #
+#    Updated: 2023/02/23 19:15:31 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS		= srcs/ps_main.c					\
 SRCS_BONUS	= bonus/get_next_line.c				\
 			  bonus/get_next_line_utils.c		\
 			  bonus/ps_command_bonus.c			\
-			  bonus/ps_do_command.c				\
 			  bonus/ps_main_bonus.c				\
 			  bonus/ps_pop_push_bonus.c			\
 			  bonus/ps_split_to_stack_bonus.c	\

@@ -6,11 +6,12 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 18:20:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 19:17:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap_bonus.h"
+#include <stdio.h>///////////////
 
 static void	argv_to_stack(char **argv, t_stack *st)
 {
@@ -21,7 +22,7 @@ static void	argv_to_stack(char **argv, t_stack *st)
 	while (argv[++idx])
 	{
 		if (argv[idx][0] == '\0')
-			err_exit(st, NULL);
+			err_exit(st, NULL, NULL);
 		len += ft_strlen(argv[idx]) + 1;
 	}
 	line = (char *)malloc(sizeof(char) * len);
@@ -43,13 +44,13 @@ static void	init_stack(t_stack **st_a, t_stack **st_b)
 {
 	*st_a = (t_stack *)malloc(sizeof(t_stack));
 	if (!st_a)
-		err_exit(NULL, NULL);
+		err_exit(NULL, NULL, NULL);
 	(*st_a)->top = NULL;
 	(*st_a)->bottom = NULL;
 	(*st_a)->size = 0;
 	*st_b = (t_stack *)malloc(sizeof(t_stack));
 	if (!st_b)
-		err_exit(*st_a, NULL);
+		err_exit(*st_a, NULL, NULL);
 	(*st_b)->top = NULL;
 	(*st_b)->bottom = NULL;
 	(*st_b)->size = 0;
@@ -70,7 +71,7 @@ static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 		while (tmp)
 		{
 			if (node->num == tmp->num)
-				err_exit(st, NULL);
+				err_exit(st, NULL, NULL);
 			tmp = tmp->next;
 		}
 		node = node->next;
@@ -101,6 +102,8 @@ void	print_cur(t_stack *a, t_stack *b)/////////////////////////
 			printf("%d	", a_tmp->num);
 			a_tmp = a_tmp->next;
 		}
+		else
+			printf("	");
 		if (b_tmp)
 		{
 			printf("%d", b_tmp->num);
