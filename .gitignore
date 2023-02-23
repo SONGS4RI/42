@@ -8,3 +8,4 @@ test
 test.c
 test.cpp
 *.a
+push_swap/push_swap_tester
