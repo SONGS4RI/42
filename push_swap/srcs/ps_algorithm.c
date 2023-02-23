@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 15:48:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:29:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 12:51:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,40 @@ void	sort_three_descending(t_stack *st_a, t_stack *st_b, int b, int c)
 	}
 }
 
+void	size_three_ascending(t_stack *st_a, t_stack *st_b, int b, int c)
+{
+	int	a;
+
+	a = st_b->top->num;
+	if ((a < b && a < c && b > c))//132
+	{
+		command_rr('a', st_a, st_b);
+		command_s('a', st_a, st_b);
+	}
+	else if((a < b && a > c && b > c))//231
+		command_rr('a', st_a, st_b);
+	else if((a > b && a > c && b < c))//312
+		command_r('a', st_a, st_b);
+	else if((a > b && a > c && b > c))//321
+	{
+		command_s('a', st_a, st_b);
+		command_rr('a', st_a, st_b);
+	}
+	else if((a > b && a < c && b < c))//213
+		command_s('a', st_a, st_b);
+}
+
 void	st_under_three(t_stack *st_a, t_stack *st_b, t_stack *tmp, int size)
 {
 	if (tmp == st_a)
 	{
 		if (size == 2 && !is_sorted(st_a, 2, 1))
 			command_s('a', st_a, st_b);
-		else if (size == 3 && !is_sorted(st_a, 3, 1))
+		else if (size == 3 && !is_sorted(st_a, 3, 1) && st_a->size != 3)
 			sort_three_ascending(st_a, st_b, st_a->top->next->num, \
+			st_a->top->next->next->num);
+		else if (size == 3 && !is_sorted(st_a, 3, 1) && st_a->size == 3)
+			size_three_ascending(st_a, st_b, st_a->top->next->num, \
 			st_a->top->next->next->num);
 	}
 	else
