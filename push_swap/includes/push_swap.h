@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 20:37:55 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:07:48 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int				choose_pivot(t_stack_node *node, int size, int point, int i);
 void			sort_three_ascending(t_stack *st_a, t_stack *st_b, \
 														int b, int c);
 void			sort_three_descending(t_stack *st_a, t_stack *st_b, \
+														int b, int c);
+void			size_three_ascending(t_stack *st_a, t_stack *st_b, \
 														int b, int c);
 void			st_under_three(t_stack *st_a, t_stack *st_b, \
 											t_stack *tmp, int size);
