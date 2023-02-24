@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:12:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/22 19:22:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/24 15:22:50 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
+static void	b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
 {
 	if (st_b->size == rb)
 		while (ra--)
@@ -41,7 +41,7 @@ void	b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb)
 	}
 }
 
-void	b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int arr[])
+static void	b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int arr[])
 {
 	int	pivot[2];
 

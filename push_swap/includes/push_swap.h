@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:50:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 15:07:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/24 15:23:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ t_stack_node	*popback(t_stack *st);
 void			pushfront(t_stack_node *node, t_stack *to);
 void			pushback(t_stack_node *node, t_stack *to);
 
-void			a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
-void			a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int arr[]);
+static void		a_to_b_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
+static void		a_to_b_func(t_stack *st_a, t_stack *st_b, int size, int arr[]);
 void			a_to_b(t_stack *st_a, t_stack *st_b, int size);
 
-void			b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
-void			b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int arr[]);
+static void		b_to_a_reverse(t_stack *st_a, t_stack *st_b, int ra, int rb);
+static void		b_to_a_func(t_stack *st_a, t_stack *st_b, int size, int arr[]);
 void			b_to_a(t_stack *st_a, t_stack *st_b, int size);
 
 int				choose_pivot(t_stack_node *node, int size, int point, int i);
