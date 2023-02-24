@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 19:47:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/02/23 19:26:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/02/24 15:23:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	invalid_check(t_stack *st, t_stack_node	*node, int sorted)
 {
 	t_stack_node	*tmp;
 
-	if (is_sorted(st, st->size, 1) || !st->size)
+	if (!st->size)
 	{
 		free_ps_stack(st);
 		exit(0);
