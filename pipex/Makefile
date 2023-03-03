@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/01 14:45:13 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/03 20:13:03 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,10 @@ ARFLAGS		= -crs
 
 INCLUDES	= ./includes/pipex.h
 
-SRCS		= srcs/.c					\
-			  
+SRCS		= srcs/px_main.c					\
 
-SRCS_BONUS	= bonus/.c				\
-			 
+
+SRCS_BONUS	=
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -59,7 +58,7 @@ clean :
 
 fclean : clean
 	@make -C $(LIBFTDIR) fclean
-	$(RM) $(RMFLAGS) $(LIBFTFILE2) checker push_swap
+	$(RM) $(RMFLAGS) $(LIBFTFILE2) pipex pipex_bonus
 
 re : clean all
 
