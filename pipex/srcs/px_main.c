@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   px_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/03 19:58:01 by jahlee           ###   ########.fr       */
+/*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
+/*   Updated: 2023/03/03 19:59:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex.h"
 
-# include "../libft/libft.h" // unistd.h stdlib.h
-# include <fcntl.h>//open, close
-# include <string.h>//perror, strerror
-# include <string.h>//strerror
-# include <stdio.h>//perror
-# include <sys/wait.h>// wait, waitpid
+void	exit_err(char *str)
+{
+	write(2, str, );
+	exit(1);
+}
 
-#endif
+int	main(int argc, char **envp)
+{
+	if (argc != 5)
+		return (exit_err("Wrong Usage: ./pipex file1 cmd1 cmd2 file2\n"));
+	return (0);
+}
