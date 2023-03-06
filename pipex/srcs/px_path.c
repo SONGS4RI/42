@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   px_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/06 17:07:18 by jahlee           ###   ########.fr       */
+/*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
+/*   Updated: 2023/03/06 17:13:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/pipex.h"
 
-# include "../libft/libft.h"
-# include <fcntl.h>//open, close
-# include <string.h>//perror, strerror
-# include <string.h>//strerror
-# include <stdio.h>//perror
-# include <sys/wait.h>// wait, waitpid
-
-typedef struct s_arg
+char	**get_path_envp(char **envp)
 {
-	int	infile;
-	int outfile;
-	char **path;
-} t_arg;
+	char	*path;
 
-
-void	exit_err(char *str);
-char	**get_path_envp(char **envp);
-
-#endif
+	while (ft_strncmp(*envp, "PATH", 4))
+		envp++;
+	path = *envp + 5;
+	return (ft_split(path, ':'));
+}
