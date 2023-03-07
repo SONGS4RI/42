@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/06 17:40:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/07 18:40:32 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_arg(char **s)
 
 	i = 0;
 	if (!s)
-		return;
+		return ;
 	while (s[i])
 	{
 		free(s[i]);
@@ -31,17 +31,51 @@ void	free_arg(char **s)
 void	exit_err(t_arg *arg, char *str)
 {
 	write(2, str, ft_strlen(str));
-	free_arg(arg->cmd1);
-	free_arg(arg->cmd2);
 	free_arg(arg->path);
+	free_arg(arg->cmd_arg1);
+	free_arg(arg->cmd_arg2);
+	if (arg->cmd1)
+		free(arg->cmd1);
+	if (arg->cmd2)
+		free(arg->cmd2);
 	exit(1);
 }
 
 void	init_arg(t_arg *arg)
 {
 	arg->path = NULL;
+	arg->cmd_arg1 = NULL;
+	arg->cmd_arg2 = NULL;
 	arg->cmd1 = NULL;
 	arg->cmd2 = NULL;
+}
+
+void	pipex(t_arg *arg)
+{
+	char	buf[1024];
+
+	if (pipe(arg->pipe_fd) < 0)
+		exit_err(arg, "pipe error\n");
+	arg->pid = fork();
+	if (arg->pid < 0)
+		exit_err(arg, "fork error\n");
+	if (arg->pid > 0)//parent process
+	{
+		close(arg->pipe_fd[1]);
+		dup2(arg->outfile, STDOUT_FILENO);
+		dup2(arg->pipe_fd[0], STDIN_FILENO);
+		close(arg->pipe_fd[0]);
+		execve(arg->cmd2, arg->cmd_arg2, arg->envp);
+	}
+	else//child process
+	{
+		close(arg->pipe_fd[0]);
+		dup2(arg->infile, STDIN_FILENO);
+		dup2(arg->pipe_fd[1], STDOUT_FILENO);
+		close(arg->pipe_fd[1]);
+		execve(arg->cmd2, arg->cmd_arg2, arg->envp);
+	}
+	exit(0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -49,20 +83,14 @@ int	main(int argc, char **argv, char **envp)
 	t_arg	arg;
 
 	init_arg(&arg);
+	arg.envp = envp;
 	if (argc != 5)
-		exit_err(NULL, "Wrong Usage: ./pipex file1 cmd1 cmd2 file2\n");
+		exit_err(&arg, "Wrong Usage: ./pipex file1 cmd1 cmd2 file2\n");
 	arg.infile = open(argv[1], O_RDONLY);
-	if (arg.infile == -1)
-		exit_err(NULL, "infile open error\n");
 	arg.outfile = open(argv[4], O_WRONLY);
-	if (arg.outfile == -1)
-		exit_err(NULL, "outfile open error\n");
-	arg.path = get_path_envp(envp);// 환경변수에서 PATH 를 찾아서 PATH= 이후의 글자를 :로 나눠서 저장
-	arg.cmd1 = ft_split(argv[2], ' ');
-	arg.cmd2 = ft_split(argv[3], ' ');
-	if (!arg.outfile || !arg.cmd1 || !arg.cmd2)
-		exit_err(&arg, "argv split error\n");
-	close(arg.infile);
-	close(arg.infile);
+	if (arg.infile == -1 || arg.outfile == -1)
+		exit_err(&arg, "file open error\n");
+	parse_to_arg(&arg, argv, envp);
+	pipex(&arg);
 	return (0);
 }
