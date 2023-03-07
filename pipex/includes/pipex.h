@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/06 17:24:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/07 18:37:58 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@
 
 typedef struct s_arg
 {
-	int	infile;
-	int outfile;
-	char **path;
-	char **cmd1;
-	char **cmd2;
-} t_arg;
+	int		infile;
+	int		outfile;
+	char	**envp;
+	char	**path;
+	char	**cmd_arg1;
+	char	**cmd_arg2;
+	char	*cmd1;
+	char	*cmd2;
+	int		pipe_fd[2];
+	pid_t	pid;
+}	t_arg;
 
 void	exit_err(t_arg *arg, char *str);
 char	**get_path_envp(char **envp);
+char	*get_cmd_argv(char **path, char *cmd);
+void	parse_to_arg(t_arg *arg, char **argv, char **envp);
 
 #endif
