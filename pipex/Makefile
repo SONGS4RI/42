@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/06 17:08:01 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/06 17:14:13 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ ARFLAGS		= -crs
 INCLUDES	= ./includes/pipex.h
 
 SRCS		= srcs/px_main.c					\
-			  srcs/px_path.c	\
+			  srcs/px_util.c	\
 
 
 SRCS_BONUS	=
