@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/07 18:40:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:04:33 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,26 @@ void	pipex(t_arg *arg)
 	arg->pid = fork();
 	if (arg->pid < 0)
 		exit_err(arg, "fork error\n");
-	if (arg->pid > 0)//parent process
-	{
-		close(arg->pipe_fd[1]);
-		dup2(arg->outfile, STDOUT_FILENO);
-		dup2(arg->pipe_fd[0], STDIN_FILENO);
-		close(arg->pipe_fd[0]);
-		execve(arg->cmd2, arg->cmd_arg2, arg->envp);
-	}
-	else//child process
+	if (arg->pid == 0)
 	{
 		close(arg->pipe_fd[0]);
 		dup2(arg->infile, STDIN_FILENO);
 		dup2(arg->pipe_fd[1], STDOUT_FILENO);
 		close(arg->pipe_fd[1]);
 		execve(arg->cmd2, arg->cmd_arg2, arg->envp);
+	}
+	else
+	{
+		arg->pid_child = wait(&arg->status);
+		if (WIFEXITED(arg->status))
+		{
+			printf("부모 시작\n");
+			close(arg->pipe_fd[1]);
+			dup2(arg->pipe_fd[0], STDIN_FILENO);
+			dup2(arg->outfile, STDOUT_FILENO);
+			close(arg->pipe_fd[0]);
+			execve(arg->cmd2, arg->cmd_arg2, arg->envp);
+		}
 	}
 	exit(0);
 }
