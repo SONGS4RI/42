@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/08 15:55:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/08 17:41:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ typedef struct s_arg
 	char	*cmd2;
 	int		pipe_fd[2];
 	pid_t	pid;
-	pid_t	pid_child;
-	int		status;
 }	t_arg;
 
 void	exit_err(t_arg *arg, char *str);
