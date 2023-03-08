@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/08 17:41:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:01:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include <fcntl.h>//open, close
-# include <string.h>//perror, strerror
 # include <string.h>//strerror
 # include <stdio.h>//perror
 # include <sys/wait.h>// wait, waitpid

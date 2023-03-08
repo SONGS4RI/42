@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/08 17:59:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:06:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	pipex(t_arg *arg)
 		dup2(arg->outfile, STDOUT_FILENO);
 		close(arg->pipe_fd[0]);
 		close(arg->outfile);
-		waitpid(arg->pid, NULL, 0);
+		waitpid(arg->pid, NULL, WNOHANG);
 		execve(arg->cmd2, arg->cmd_arg2, arg->envp);
 	}
 }
