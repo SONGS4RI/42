@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/08 15:45:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:15:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,13 @@ char	*get_cmd_argv(char **path, char *cmd)
 	return (NULL);
 }
 
-void	parse_to_arg(t_arg *arg, char **argv, char **envp)
+void	parse_to_arg(t_arg *arg)
 {
-	arg->path = get_path_envp(envp);
-	arg->cmd_arg1 = ft_split(argv[2], ' ');
-	arg->cmd_arg2 = ft_split(argv[3], ' ');
+	arg->path = get_path_envp(arg->envp);
+	arg->cmd_arg1 = ft_split(arg->argv[2], ' ');//sed awk 예외
+	arg->cmd_arg2 = ft_split(arg->argv[3], ' ');
 	if (!arg->path || !arg->cmd_arg1 || !arg->cmd_arg2)
-		exit_err(arg, "argv split error\n");
+		exit_err(arg, "arg->argv split error\n", 1);
 	arg->cmd1 = get_cmd_argv(arg->path, arg->cmd_arg1[0]);
 	arg->cmd2 = get_cmd_argv(arg->path, arg->cmd_arg2[0]);
-	if (arg->cmd1 == NULL || arg->cmd2 == NULL)
-		exit_err(arg, "cmd or path error\n");
 }

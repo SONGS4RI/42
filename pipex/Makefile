@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/07 17:40:35 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/09 19:46:38 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,12 @@ ARFLAGS		= -crs
 
 INCLUDES	= ./includes/pipex.h
 
-SRCS		= srcs/px_main.c					\
-			  srcs/px_parse.c	\
+SRCS		= srcs/px_main.c			\
+			  srcs/px_parse.c			\
+			  srcs/px_util.c			\
 
 
-SRCS_BONUS	=
+SRCS_BONUS	= 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -50,8 +51,8 @@ $(NAME) : $(REALOBJS)
 
 all : $(NAME)
 
-bonus :
-	@make BONUS_ON=1
+# bonus :
+#	@make BONUS_ON=1
 
 clean :
 	@make -C $(LIBFTDIR) clean
