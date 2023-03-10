@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 20:06:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:39:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child_work(t_arg *arg)
 	if (arg->infile == -1)
 		exit_err(arg, arg->argv[1], NULL, 1);
 	if (arg->cmd1 == NULL)
-		exit_err(arg, NULL, "command not found\n", 127);
+		exit_err(arg, arg->cmd_arg1[0], "command not found", 127);
 	close(arg->pipe_fd[0]);
 	if (dup2(arg->infile, STDIN_FILENO) == -1)
 		exit_err(arg, "child dup2 error", NULL, 1);
@@ -32,12 +32,12 @@ void	child_work(t_arg *arg)
 
 void	parent_work(t_arg *arg)
 {
-	waitpid(arg->pid, NULL, WNOHANG);
+	waitpid(arg->pid, NULL, 0);
 	arg->outfile = open(arg->argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (arg->outfile == -1)
 		exit_err(arg, arg->argv[4], NULL, 1);
 	if (arg->cmd2 == NULL)
-		exit_err(arg, NULL, "command not found\n", 127);
+		exit_err(arg, arg->cmd_arg2[0], "command not found", 127);
 	close(arg->pipe_fd[1]);
 	if (dup2(arg->pipe_fd[0], STDIN_FILENO) == -1)
 		exit_err(arg, "parent dup2 error", NULL, 1);

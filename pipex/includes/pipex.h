@@ -6,14 +6,14 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 19:54:54 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:30:07 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <fcntl.h>//open, close
 # include <string.h>//strerror
 # include <stdio.h>//perror
