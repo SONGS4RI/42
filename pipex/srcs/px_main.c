@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/09 20:19:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 18:01:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	if (arg.pid < 0)
 		exit_err(&arg, "fork error\n", 1);
 	if (arg.pid == 0)
-	{
 		child_work(&arg);
-	}
 	else
-	{
 		parent_work(&arg);
-	}
 }
