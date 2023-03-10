@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:21:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/09 18:24:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:09:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,17 @@ void	free_arg(char **s)
 	free(s);
 }
 
-void	exit_err(t_arg *arg, char *str, int status)
+void	exit_err(t_arg *arg, char *str, char *err_msg, int status)
 {
-	write(2, str, ft_strlen(str));
+	write(2, arg->argv[0] + 2, ft_strlen(arg->argv[0]) - 2);
+	write(2, ": ", 2);
+	if (status == 127)
+	{
+		write(2, str, ft_strlen(str));
+		write(2, ": ", 2);
+	}
+	else
+		perror(str);
 	free_arg(arg->path);
 	free_arg(arg->cmd_arg1);
 	free_arg(arg->cmd_arg2);
