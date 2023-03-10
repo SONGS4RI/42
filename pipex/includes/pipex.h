@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/09 19:56:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 19:54:54 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>//strerror
 # include <stdio.h>//perror
 # include <sys/wait.h>// wait, waitpid
+# include <errno.h>//errno
 
 typedef struct s_arg
 {
@@ -42,7 +43,7 @@ char	*get_cmd_argv(char **path, char *cmd);
 void	parse_to_arg(t_arg *arg);
 
 void	free_arg(char **s);
-void	exit_err(t_arg *arg, char *str, int status);
+void	exit_err(t_arg *arg, char *str, char *err_msg, int status);
 void	init_arg(t_arg *arg);
 
 #endif
