@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 14:08:23 by jahlee            #+#    #+#              #
-#    Updated: 2023/02/23 17:28:46 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/10 15:52:28 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,11 @@ SRCS_2	=     ft_substr.c 		\
 			  ft_putendl_fd.c	\
 			  ft_putnbr_fd.c 	\
 
+SRCS_3	=     ft_pipex_split.c 	\
+
 SRCS	= $(SRCS_1)			\
 	 	  $(SRCS_2)			\
+		  $(SRCS_3)			\
 
 OBJS	= $(SRCS:.c=.o)
 

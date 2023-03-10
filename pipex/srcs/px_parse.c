@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/09 20:15:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 17:07:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*get_cmd_argv(char **path, char *cmd)
 void	parse_to_arg(t_arg *arg)
 {
 	arg->path = get_path_envp(arg->envp);
-	arg->cmd_arg1 = ft_split(arg->argv[2], ' ');//sed awk 예외
-	arg->cmd_arg2 = ft_split(arg->argv[3], ' ');
+	arg->cmd_arg1 = ft_pipex_split(arg->argv[2], ' ', 0);//sed awk 예외
+	arg->cmd_arg2 = ft_pipex_split(arg->argv[3], ' ', 0);
 	if (!arg->path || !arg->cmd_arg1 || !arg->cmd_arg2)
 		exit_err(arg, "arg->argv split error\n", 1);
 	arg->cmd1 = get_cmd_argv(arg->path, arg->cmd_arg1[0]);
