@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 20:39:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:42:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	child_work(t_arg *arg)
 
 void	parent_work(t_arg *arg)
 {
-	waitpid(arg->pid, NULL, 0);
+	waitpid(arg->pid, NULL, WNOHANG);
 	arg->outfile = open(arg->argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (arg->outfile == -1)
 		exit_err(arg, arg->argv[4], NULL, 1);
