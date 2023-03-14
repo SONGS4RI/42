@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/14 18:59:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/14 19:25:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,27 @@ void	set_cmd(t_arg *arg, int j)
 
 void	parse_to_arg(t_arg *arg)
 {
-	int	i;
+	int		i;
+	char	*s;
+	char	*tmp;
 
 	i = -1;
 	arg->path = get_path_envp(arg->envp);
 	if (!arg->path)
 		exit_err(arg, "split error", NULL, 1);
 	if (!ft_strncmp(arg->argv[1], "here_doc", 8))
+	{
 		arg->here_doc = 1;
+		while (1)
+		{
+			s = get_next_line(1);
+			if (!s || !ft_strncmp(s, arg->argv[2], ft_strlen(arg->argv[2])))
+				break ;
+			tmp = ft_strjoin(arg->input, s);
+			if (arg->input)
+				free(arg->input);
+			arg->input = tmp;
+		}
+	}
 	set_cmd(arg, arg->here_doc + 1);
 }
