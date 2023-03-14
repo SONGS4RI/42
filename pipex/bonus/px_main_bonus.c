@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/14 19:57:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/14 20:13:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ void	child_work(t_arg *arg, int i)
 
 	if (i % 2 == 0)
 	{
-		if (arg->here_doc == 1 && i == 0)
-		{
+		if (arg->here_doc && i == 0)
 			if (dup2(arg->infile, STDIN_FILENO) == -1)
 				exit_err(arg, "dup error", NULL, 1);
-			arg->here_doc = 2;
-		}
 		else if (dup2(arg->pipe_fd2[0], STDIN_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
 		if (dup2(arg->pipe_fd1[1], STDOUT_FILENO) == -1)
@@ -30,6 +27,9 @@ void	child_work(t_arg *arg, int i)
 	}
 	else
 	{
+		if (arg->here_doc && i == arg->cmd_cnt * 2 - 1)
+			if (dup2(arg->outfile, STDOUT_FILENO) == -1)
+				exit_err(arg, "dup error", NULL, 1);
 		if (dup2(arg->pipe_fd1[0], STDIN_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
 		if (dup2(arg->pipe_fd2[1], STDOUT_FILENO) == -1)
