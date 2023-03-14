@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 20:42:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/14 15:57:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parent_work(t_arg *arg)
 	if (dup2(arg->pipe_fd[0], STDIN_FILENO) == -1)
 		exit_err(arg, "parent dup2 error", NULL, 1);
 	if (dup2(arg->outfile, STDOUT_FILENO) == -1)
-		exit_err(arg, "parent dup2 child error", NULL, 1);
+		exit_err(arg, "parent dup2 error", NULL, 1);
 	close(arg->pipe_fd[0]);
 	close(arg->outfile);
 	if (execve(arg->cmd2, arg->cmd_arg2, arg->envp) == -1)
