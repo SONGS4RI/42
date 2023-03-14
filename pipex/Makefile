@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/09 19:46:38 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/14 17:46:41 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRCS		= srcs/px_main.c			\
 			  srcs/px_util.c			\
 
 
-SRCS_BONUS	= 
+SRCS_BONUS	= bonus/px_main_bonus.c			\
+			  bonus/px_parse_bonus.c		\
+			  bonus/px_util_bonus.c			\
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -38,6 +40,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 ifdef BONUS_ON
     REALOBJS = $(OBJS_BONUS)
 	INCLUDES = ./includes/pipex_bonus.h
+	NAME = pipex_bonus
 else
     REALOBJS = $(OBJS)
 endif
@@ -51,8 +54,8 @@ $(NAME) : $(REALOBJS)
 
 all : $(NAME)
 
-# bonus :
-#	@make BONUS_ON=1
+bonus :
+	@make BONUS_ON=1
 
 clean :
 	@make -C $(LIBFTDIR) clean
