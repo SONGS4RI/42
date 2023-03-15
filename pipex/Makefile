@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/14 17:46:41 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/15 20:03:39 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS		= srcs/px_main.c			\
 SRCS_BONUS	= bonus/px_main_bonus.c			\
 			  bonus/px_parse_bonus.c		\
 			  bonus/px_util_bonus.c			\
+			  bonus/px_setfd_bonus.c		\
 
 OBJS	= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 19:26:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:05:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ void	parse_to_arg(t_arg *arg);
 void	free_arg(char **s);
 void	exit_err(t_arg *arg, char *str, char *err_msg, int status);
 void	init_arg(t_arg *arg, int argc, char **argv, char **envp);
+
+void	heredoc(t_arg *arg, char *s, char *tag);
+void	set_infile_fd(t_arg *arg);
+void	set_outfile_fd(t_arg *arg);
 
 #endif

@@ -6,11 +6,19 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 19:56:55 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:12:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
+
+void	execute_cmd(t_arg *arg, int idx)
+{
+	if (!arg->cmd[idx])
+		exit_err(arg, arg->cmd_arg[idx][0], "command not found", 127);
+	execve(arg->cmd[idx], arg->cmd_arg[idx], arg->envp);
+	exit_err(arg, "execve error", NULL, 1);
+}
 
 void	child_work(t_arg *arg, int i)
 {
@@ -62,18 +70,11 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		exit_err(&arg, NULL, "Wrong Usage\n", 1);
 	parse_to_arg(&arg);
-	if (pipe(arg.pipe_even) < 0)
-		exit_err(&arg, "pipe error", NULL, 1);
-	if (pipe(arg.pipe_odd) < 0)
-		exit_err(&arg, "pipe error", NULL, 1);
-	while (++i < arg.cmd_cnt * 2)
+	set_infile_fd(&arg);
+	while (++i < arg.cmd_cnt)
 	{
-		arg.pid = fork();
-		if (arg.pid < 0)
-			exit_err(&arg, "fork error", NULL, 1);
-		if (arg.pid == 0)
-			child_work(&arg, i);
-		else
-			waitpid(arg.pid, NULL, 0);
 	}
+	set_outfile_fd(&arg);
+	execute_cmd(&arg, argc - 2);
+	return (0);
 }
