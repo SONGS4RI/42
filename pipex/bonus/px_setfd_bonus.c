@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:48:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 20:01:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:04:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	heredoc(t_arg *arg, char *s, char *tag)
 	close(arg->infile);
 }
 
-void	ft_set_infile_fd(t_arg *arg)
+void	set_infile_fd(t_arg *arg)
 {
 	if (arg->here_doc)
 		heredoc(arg, NULL, ft_strjoin(arg->argv[2], "\n"));
@@ -46,7 +46,7 @@ void	ft_set_infile_fd(t_arg *arg)
 	dup2(arg->infile, STDIN_FILENO);
 }
 
-void	ft_set_outfile_fd(t_arg *arg)
+void	set_outfile_fd(t_arg *arg)
 {
 	int	idx;
 
