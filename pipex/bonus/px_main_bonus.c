@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 19:00:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 19:56:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	child_work(t_arg *arg, int i)
 					exit_err(arg, arg->argv[1], NULL, 1);
 			}
 		}
-		else if (dup2(arg->pipe_fd2[0], STDIN_FILENO) == -1)
+		else if (dup2(arg->pipe_odd[0], STDIN_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
-		if (dup2(arg->pipe_fd1[1], STDOUT_FILENO) == -1)
+		if (dup2(arg->pipe_even[1], STDOUT_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
 	}
 	else
@@ -45,9 +45,9 @@ void	child_work(t_arg *arg, int i)
 			if (dup2(arg->outfile, STDOUT_FILENO) == -1)
 				exit_err(arg, "dup error", NULL, 1);
 		}
-		if (dup2(arg->pipe_fd1[0], STDIN_FILENO) == -1)
+		if (dup2(arg->pipe_even[0], STDIN_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
-		if (dup2(arg->pipe_fd2[1], STDOUT_FILENO) == -1)
+		if (dup2(arg->pipe_odd[1], STDOUT_FILENO) == -1)
 			exit_err(arg, "dup error", NULL, 1);
 	}
 }
@@ -62,9 +62,9 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		exit_err(&arg, NULL, "Wrong Usage\n", 1);
 	parse_to_arg(&arg);
-	if (pipe(arg.pipe_fd1) < 0)
+	if (pipe(arg.pipe_even) < 0)
 		exit_err(&arg, "pipe error", NULL, 1);
-	if (pipe(arg.pipe_fd2) < 0)
+	if (pipe(arg.pipe_odd) < 0)
 		exit_err(&arg, "pipe error", NULL, 1);
 	while (++i < arg.cmd_cnt * 2)
 	{
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 			exit_err(&arg, "fork error", NULL, 1);
 		if (arg.pid == 0)
 			child_work(&arg, i);
+		else
+			waitpid(arg.pid, NULL, 0);
 	}
-	unlink(".heredoc_tmp");
 }

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 18:39:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:01:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,6 @@ void	set_cmd(t_arg *arg, int j)
 	arg->cmd[i] = NULL;
 }
 
-void	heredoc(t_arg *arg, char *s, char *tag)
-{
-	arg->here_doc = 1;
-	unlink(".heredoc_tmp");
-	arg->infile = open(".heredoc_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (arg->infile < 0)
-	{
-		arg->here_doc = -1;
-		return ;
-	}
-	while (1)
-	{
-		s = get_next_line(0);
-		if (!s || !ft_strncmp(s, tag, ft_strlen(s)))
-		{
-			free(s);
-			free(tag);
-			break ;
-		}
-		write(arg->infile, s, ft_strlen(s));
-		free(s);
-	}
-	close(arg->infile);
-}
-
 void	parse_to_arg(t_arg *arg)
 {
 	int		i;
@@ -106,6 +81,6 @@ void	parse_to_arg(t_arg *arg)
 	if (!arg->path)
 		exit_err(arg, "split error", NULL, 1);
 	if (!ft_strncmp(arg->argv[1], "here_doc", ft_strlen(arg->argv[1])))
-		heredoc(arg, NULL, ft_strjoin(arg->argv[2], "\n"));
+		arg->here_doc = 1;
 	set_cmd(arg, arg->here_doc + 1);
 }
