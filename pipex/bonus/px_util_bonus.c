@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:21:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/14 19:24:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/15 17:54:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	exit_err(t_arg *arg, char *str, char *err_msg, int status)
 
 void	init_arg(t_arg *arg, int argc, char **argv, char **envp)
 {
-	arg->input = NULL;
 	arg->path = NULL;
 	arg->cmd_arg = NULL;
 	arg->cmd = NULL;
