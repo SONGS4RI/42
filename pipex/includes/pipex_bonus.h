@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 19:27:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:46:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_arg
 	int		argc;
 	int		cmd_cnt;
 	int		here_doc;
+	int		init_err;
 	int		pipe_even[2];
 	int		pipe_odd[2];
 	char	**argv;
@@ -44,7 +45,7 @@ void	pipe_work(t_arg *arg, int idx);
 
 char	**get_path_envp(char **envp);
 char	*get_cmd_argv(char **path, char *cmd);
-void	set_cmd(t_arg *arg, int j);
+int		set_cmd(t_arg *arg, int j);
 void	parse_to_arg(t_arg *arg);
 
 void	heredoc(t_arg *arg, char *s, char *tag);
