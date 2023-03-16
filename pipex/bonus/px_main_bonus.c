@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 20:12:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:21:47 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,84 @@
 void	execute_cmd(t_arg *arg, int idx)
 {
 	if (!arg->cmd[idx])
-		exit_err(arg, arg->cmd_arg[idx][0], "command not found", 127);
+		exit_err(arg, "command not found", 127);
 	execve(arg->cmd[idx], arg->cmd_arg[idx], arg->envp);
-	exit_err(arg, "execve error", NULL, 1);
+	exit_err(arg, "execve error", 1);
 }
 
-void	child_work(t_arg *arg, int i)
+void	child_work(t_arg *arg, int idx)
 {
-	if (i % 2 == 0)
+	if (idx % 2 == 0)
 	{
-		if (i == 0)
-		{
-			if (arg->here_doc)
-			{
-				if (dup2(arg->infile, STDIN_FILENO) == -1)
-					exit_err(arg, "dup error", NULL, 1);
-			}
-			else
-			{
-				arg->infile = open(arg->argv[1], O_RDONLY);
-				if (arg->infile == -1)
-					exit_err(arg, arg->argv[1], NULL, 1);
-			}
-		}
-		else if (dup2(arg->pipe_odd[0], STDIN_FILENO) == -1)
-			exit_err(arg, "dup error", NULL, 1);
+		close(arg->pipe_even[0]);
 		if (dup2(arg->pipe_even[1], STDOUT_FILENO) == -1)
-			exit_err(arg, "dup error", NULL, 1);
+			exit_err(arg, "dup2 error", 1);
+		close(arg->pipe_even[1]);
 	}
 	else
 	{
-		if (arg->here_doc && i == arg->cmd_cnt * 2 - 1)
-		{
-			arg->outfile = open(arg->argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
-			if (arg->outfile == -1)
-				exit_err(arg, arg->argv[4], NULL, 1);
-			if (dup2(arg->outfile, STDOUT_FILENO) == -1)
-				exit_err(arg, "dup error", NULL, 1);
-		}
-		if (dup2(arg->pipe_even[0], STDIN_FILENO) == -1)
-			exit_err(arg, "dup error", NULL, 1);
+		close(arg->pipe_odd[0]);
 		if (dup2(arg->pipe_odd[1], STDOUT_FILENO) == -1)
-			exit_err(arg, "dup error", NULL, 1);
+			exit_err(arg, "dup2 error", 1);
+		close(arg->pipe_odd[1]);
 	}
+	execute_cmd(arg, idx);
+}
+
+void	parent_work(t_arg *arg, int idx)
+{
+	waitpid(arg->pid, NULL, 0);
+	if (idx % 2 == 0)
+	{
+		close(arg->pipe_even[1]);
+		if (dup2(arg->pipe_even[0], STDIN_FILENO) == -1)
+			exit_err(arg, "dup2 error", 1);
+		close(arg->pipe_even[0]);
+	}
+	else
+	{
+		close(arg->pipe_odd[1]);
+		if (dup2(arg->pipe_odd[0], STDIN_FILENO) == -1)
+			exit_err(arg, "dup2 error", 1);
+		close(arg->pipe_odd[0]);
+	}
+}
+
+void	pipe_work(t_arg *arg, int idx)
+{
+	if (idx % 2 == 0)
+	{
+		if (pipe(arg->pipe_even) < 0)
+			exit_err(arg, "pipe error", 1);
+	}
+	else
+	{
+		if (pipe(arg->pipe_odd) < 0)
+			exit_err(arg, "pipe error", 1);
+	}
+	arg->pid = fork();
+	if (arg->pid < 0)
+		exit_err(arg, "fork error", 1);
+	if (arg->pid == 0)
+		child_work(arg, idx);
+	else
+		parent_work(arg, idx);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_arg	arg;
-	int		i;
+	int		idx;
 
-	i = -1;
+	idx = -1;
 	init_arg(&arg, argc, argv, envp);
 	if (argc < 5)
-		exit_err(&arg, NULL, "Wrong Usage\n", 1);
+		exit_err(&arg, "Wrong Usage", 1);
 	parse_to_arg(&arg);
 	set_infile_fd(&arg);
-	while (++i < arg.cmd_cnt)
-	{
-	}
+	while (++idx < arg.cmd_cnt - 1)
+		pipe_work(&arg, idx);
 	set_outfile_fd(&arg);
-	execute_cmd(&arg, argc - 2);
+	execute_cmd(&arg, idx);
 	return (0);
 }

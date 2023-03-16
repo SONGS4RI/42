@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:21:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 20:12:58 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:27:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,11 @@ void	free_arg(char **s)
 	free(s);
 }
 
-void	exit_err(t_arg *arg, char *str, char *err_msg, int status)
+void	exit_err(t_arg *arg, char *str, int status)
 {
 	static int	i = -1;
 
-	ft_printf("%s: ", arg->argv[0] + 2);
-	if (status == 127)
-		ft_printf("%s: %s\n", str, err_msg);
-	else
-		perror(str);
+	perror(str);
 	free_arg(arg->path);
 	free_arg(arg->cmd);
 	while (arg->cmd_arg[++i])
@@ -53,4 +49,8 @@ void	init_arg(t_arg *arg, int argc, char **argv, char **envp)
 	arg->envp = envp;
 	arg->argc = argc;
 	arg->here_doc = 0;
+	arg->pipe_even[0] = 0;
+	arg->pipe_even[1] = 0;
+	arg->pipe_odd[0] = 0;
+	arg->pipe_odd[1] = 0;
 }
