@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/15 20:01:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 17:18:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	set_cmd(t_arg *arg, int j)
 	i = -1;
 	arg->cmd_arg = (char ***)malloc(sizeof(char **) * size);
 	if (!arg->cmd_arg)
-		exit_err(arg, "malloc error", NULL, 1);
+		exit_err(arg, "malloc error", 1);
 	arg->cmd = (char **)malloc(sizeof(char *) * size);
 	if (!arg->cmd)
-		exit_err(arg, "malloc error", NULL, 1);
+		exit_err(arg, "malloc error", 1);
 	while (++j < arg->argc - 1)
 		arg->cmd_arg[++i] = ft_pipex_split(arg->argv[j], ' ', 0);
 	arg->cmd_arg[++i] = NULL;
@@ -66,7 +66,7 @@ void	set_cmd(t_arg *arg, int j)
 	while (++i < size - 1)
 	{
 		if (!arg->cmd_arg[i])
-			exit_err(arg, "split error", NULL, 1);
+			exit_err(arg, "split error", 1);
 		arg->cmd[i] = get_cmd_argv(arg->path, arg->cmd_arg[i][0]);
 	}
 	arg->cmd[i] = NULL;
@@ -79,7 +79,7 @@ void	parse_to_arg(t_arg *arg)
 	i = -1;
 	arg->path = get_path_envp(arg->envp);
 	if (!arg->path)
-		exit_err(arg, "split error", NULL, 1);
+		exit_err(arg, "split error", 1);
 	if (!ft_strncmp(arg->argv[1], "here_doc", ft_strlen(arg->argv[1])))
 		arg->here_doc = 1;
 	set_cmd(arg, arg->here_doc + 1);
