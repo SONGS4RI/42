@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:21:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 19:27:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:17:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ void	exit_err(t_arg *arg, char *str, int status)
 	perror(str);
 	free_arg(arg->path);
 	free_arg(arg->cmd);
-	while (arg->cmd_arg[++i])
-		free_arg(arg->cmd_arg[i]);
+	if (arg->cmd_arg)
+	{
+		while (arg->cmd_arg[++i])
+			free_arg(arg->cmd_arg[i]);
+		free(arg->cmd_arg);
+	}
 	exit(status);
 }
 

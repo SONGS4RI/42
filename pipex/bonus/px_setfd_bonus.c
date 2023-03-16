@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 19:48:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 19:38:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:31:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	set_infile_fd(t_arg *arg)
 		heredoc(arg, NULL, ft_strjoin(arg->argv[2], "\n"));
 	arg->infile = open(arg->argv[1], O_RDONLY);
 	if (arg->infile < 0)
-	{
-		// perror(arg->argv[1]);
-		arg->infile = open("no_infile", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	}
+		exit_err(arg, arg->argv[1], 1);
 	if (dup2(arg->infile, STDIN_FILENO) == -1)
 		exit_err(arg, "dup2 error", 1);
 }

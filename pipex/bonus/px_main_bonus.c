@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 17:21:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:45:58 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	execute_cmd(t_arg *arg, int idx)
 {
+	if (!arg->cmd)
+		exit_err(arg, "init err", 1);
 	if (!arg->cmd[idx])
 		exit_err(arg, "command not found", 127);
 	execve(arg->cmd[idx], arg->cmd_arg[idx], arg->envp);
