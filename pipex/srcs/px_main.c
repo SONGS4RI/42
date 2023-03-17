@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/14 15:57:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 17:07:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	child_work(t_arg *arg)
+static void	child_work(t_arg *arg)
 {
 	arg->infile = open(arg->argv[1], O_RDONLY);
 	if (arg->infile == -1)
@@ -30,7 +30,7 @@ void	child_work(t_arg *arg)
 		exit_err(arg, "child execve error", NULL, 1);
 }
 
-void	parent_work(t_arg *arg)
+static void	parent_work(t_arg *arg)
 {
 	waitpid(arg->pid, NULL, WNOHANG);
 	arg->outfile = open(arg->argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
