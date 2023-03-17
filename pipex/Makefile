@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/28 16:28:17 by jahlee            #+#    #+#              #
-#    Updated: 2023/03/15 20:03:39 by jahlee           ###   ########.fr        #
+#    Updated: 2023/03/17 16:01:43 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 ifdef BONUS_ON
     REALOBJS = $(OBJS_BONUS)
 	INCLUDES = ./includes/pipex_bonus.h
-	NAME = pipex_bonus
 else
     REALOBJS = $(OBJS)
 endif
@@ -64,7 +63,7 @@ clean :
 
 fclean : clean
 	@make -C $(LIBFTDIR) fclean
-	$(RM) $(RMFLAGS) $(LIBFTFILE2) pipex pipex_bonus
+	$(RM) $(RMFLAGS) $(LIBFTFILE2) pipex
 
 re : clean all
 

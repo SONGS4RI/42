@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 20:46:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:55:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define PIPEX_BONUS_H
 
 # include "../libft/includes/libft.h"
-# include <fcntl.h>//open, close
-# include <string.h>//strerror
-# include <stdio.h>//perror
-# include <sys/wait.h>// wait, waitpid
-# include <errno.h>//errno
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
 
 typedef struct s_arg
 {
@@ -38,22 +36,12 @@ typedef struct s_arg
 	pid_t	pid;
 }	t_arg;
 
-void	execute_cmd(t_arg *arg, int idx);
-void	child_work(t_arg *arg, int idx);
-void	parent_work(t_arg *arg, int idx);
-void	pipe_work(t_arg *arg, int idx);
-
-char	**get_path_envp(char **envp);
-char	*get_cmd_argv(char **path, char *cmd);
-int		set_cmd(t_arg *arg, int j);
 void	parse_to_arg(t_arg *arg);
 
-void	heredoc(t_arg *arg, char *s, char *tag);
 void	set_infile_fd(t_arg *arg);
 void	set_outfile_fd(t_arg *arg);
 
 void	free_arg(char **s);
 void	exit_err(t_arg *arg, char *str, int status);
 void	init_arg(t_arg *arg, int argc, char **argv, char **envp);
-
 #endif
