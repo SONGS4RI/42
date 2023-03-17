@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 19:56:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 17:07:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-char	**get_path_envp(char **envp)
+static char	**get_path_envp(char **envp)
 {
 	char	*path;
 
@@ -22,7 +22,7 @@ char	**get_path_envp(char **envp)
 	return (ft_split(path, ':'));
 }
 
-char	*get_cmd_argv(char **path, char *cmd)
+static char	*get_cmd_argv(char **path, char *cmd)
 {
 	char			*tmp_path;
 	char			*tmp_cmd;
