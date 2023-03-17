@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:02:41 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 20:42:45 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:46:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-char	**get_path_envp(char **envp)
+static char	**get_path_envp(char **envp)
 {
 	char	*path;
 
@@ -22,7 +22,7 @@ char	**get_path_envp(char **envp)
 	return (ft_split(path, ':'));
 }
 
-char	*get_cmd_argv(char **path, char *cmd)
+static char	*get_cmd_argv(char **path, char *cmd)
 {
 	char			*tmp_path;
 	char			*tmp_cmd;
@@ -45,7 +45,7 @@ char	*get_cmd_argv(char **path, char *cmd)
 	return (NULL);
 }
 
-int	set_cmd(t_arg *arg, int j)
+static int	set_cmd(t_arg *arg, int j)
 {
 	int	i;
 	int	size;
@@ -80,8 +80,12 @@ void	parse_to_arg(t_arg *arg)
 	i = -1;
 	arg->path = get_path_envp(arg->envp);
 	if (!arg->path)
-		return ;
+		exit_err(arg, "envp error", 1);
 	if (!ft_strncmp(arg->argv[1], "here_doc", ft_strlen(arg->argv[1])))
+	{
 		arg->here_doc = 1;
+		if (arg->argc < 6)
+			exit_err(arg, "Wrong Usage", 1);
+	}
 	arg->init_err = set_cmd(arg, arg->here_doc + 1);
 }

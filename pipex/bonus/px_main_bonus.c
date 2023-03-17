@@ -6,13 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/16 20:45:58 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:46:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex_bonus.h"
 
-void	execute_cmd(t_arg *arg, int idx)
+static void	execute_cmd(t_arg *arg, int idx)
 {
 	if (!arg->cmd)
 		exit_err(arg, "init err", 1);
@@ -22,7 +22,7 @@ void	execute_cmd(t_arg *arg, int idx)
 	exit_err(arg, "execve error", 1);
 }
 
-void	child_work(t_arg *arg, int idx)
+static void	child_work(t_arg *arg, int idx)
 {
 	if (idx % 2 == 0)
 	{
@@ -41,7 +41,7 @@ void	child_work(t_arg *arg, int idx)
 	execute_cmd(arg, idx);
 }
 
-void	parent_work(t_arg *arg, int idx)
+static void	parent_work(t_arg *arg, int idx)
 {
 	waitpid(arg->pid, NULL, 0);
 	if (idx % 2 == 0)
@@ -60,7 +60,7 @@ void	parent_work(t_arg *arg, int idx)
 	}
 }
 
-void	pipe_work(t_arg *arg, int idx)
+static void	pipe_work(t_arg *arg, int idx)
 {
 	if (idx % 2 == 0)
 	{
@@ -96,5 +96,4 @@ int	main(int argc, char **argv, char **envp)
 		pipe_work(&arg, idx);
 	set_outfile_fd(&arg);
 	execute_cmd(&arg, idx);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/10 20:30:07 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/17 16:55:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 # define PIPEX_H
 
 # include "../libft/includes/libft.h"
-# include <fcntl.h>//open, close
-# include <string.h>//strerror
-# include <stdio.h>//perror
-# include <sys/wait.h>// wait, waitpid
-# include <errno.h>//errno
+# include <fcntl.h>
+# include <stdio.h>
+# include <sys/wait.h>
 
 typedef struct s_arg
 {
