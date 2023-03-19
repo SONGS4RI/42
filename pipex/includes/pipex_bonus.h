@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/17 16:55:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:29:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ typedef struct s_arg
 	int		cmd_cnt;
 	int		here_doc;
 	int		init_err;
-	int		pipe_even[2];
-	int		pipe_odd[2];
+	int		pipe[2];
 	char	**argv;
 	char	**envp;
 	char	**path;

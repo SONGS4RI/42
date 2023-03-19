@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/17 16:46:30 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:30:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,54 +24,28 @@ static void	execute_cmd(t_arg *arg, int idx)
 
 static void	child_work(t_arg *arg, int idx)
 {
-	if (idx % 2 == 0)
-	{
-		close(arg->pipe_even[0]);
-		if (dup2(arg->pipe_even[1], STDOUT_FILENO) == -1)
-			exit_err(arg, "dup2 error", 1);
-		close(arg->pipe_even[1]);
-	}
-	else
-	{
-		close(arg->pipe_odd[0]);
-		if (dup2(arg->pipe_odd[1], STDOUT_FILENO) == -1)
-			exit_err(arg, "dup2 error", 1);
-		close(arg->pipe_odd[1]);
-	}
+	close(arg->pipe[0]);
+	if (dup2(arg->pipe[1], STDOUT_FILENO) == -1)
+		exit_err(arg, "dup2 error", 1);
+	close(arg->pipe[1]);
 	execute_cmd(arg, idx);
 }
 
 static void	parent_work(t_arg *arg, int idx)
 {
 	waitpid(arg->pid, NULL, 0);
-	if (idx % 2 == 0)
-	{
-		close(arg->pipe_even[1]);
-		if (dup2(arg->pipe_even[0], STDIN_FILENO) == -1)
-			exit_err(arg, "dup2 error", 1);
-		close(arg->pipe_even[0]);
-	}
-	else
-	{
-		close(arg->pipe_odd[1]);
-		if (dup2(arg->pipe_odd[0], STDIN_FILENO) == -1)
-			exit_err(arg, "dup2 error", 1);
-		close(arg->pipe_odd[0]);
-	}
+	close(arg->pipe[1]);
+	if (dup2(arg->pipe[0], STDIN_FILENO) == -1)
+		exit_err(arg, "dup2 error", 1);
+	close(arg->pipe[0]);
+
 }
 
 static void	pipe_work(t_arg *arg, int idx)
 {
-	if (idx % 2 == 0)
-	{
-		if (pipe(arg->pipe_even) < 0)
-			exit_err(arg, "pipe error", 1);
-	}
-	else
-	{
-		if (pipe(arg->pipe_odd) < 0)
-			exit_err(arg, "pipe error", 1);
-	}
+
+	if (pipe(arg->pipe) < 0)
+		exit_err(arg, "pipe error", 1);
 	arg->pid = fork();
 	if (arg->pid < 0)
 		exit_err(arg, "fork error", 1);
