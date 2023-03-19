@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 18:21:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/17 16:46:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/19 13:29:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	init_arg(t_arg *arg, int argc, char **argv, char **envp)
 	arg->envp = envp;
 	arg->argc = argc;
 	arg->here_doc = 0;
-	arg->pipe_even[0] = 0;
-	arg->pipe_even[1] = 0;
-	arg->pipe_odd[0] = 0;
-	arg->pipe_odd[1] = 0;
+	arg->pipe[0] = 0;
+	arg->pipe[1] = 0;
 }
