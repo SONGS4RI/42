@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:47:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/19 13:29:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/19 20:08:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_arg
 	char	**cmd;
 	char	***cmd_arg;
 	pid_t	pid;
+	int		tmp;
 }	t_arg;
 
 void	parse_to_arg(t_arg *arg);
