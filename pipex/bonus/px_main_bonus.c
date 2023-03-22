@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/22 14:37:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/22 16:11:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	child_work(t_arg *arg, int idx)
 
 static void	parent_work(t_arg *arg, int idx)
 {
-	// waitpid(arg->pid, NULL, 0);
 	close(arg->pipe[1]);
 	if (dup2(arg->pipe[0], STDIN_FILENO) == -1)
 		exit_err(arg, "dup2 error", 1);
@@ -57,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_arg	arg;
 	int		idx;
+	int		status;
 
 	idx = -1;
 	init_arg(&arg, argc, argv, envp);
@@ -64,8 +64,9 @@ int	main(int argc, char **argv, char **envp)
 		exit_err(&arg, "Wrong Usage", 1);
 	parse_to_arg(&arg);
 	set_infile_fd(&arg);
-	while (++idx < arg.cmd_cnt - 1)
+	while (++idx < arg.cmd_cnt)
 		pipe_work(&arg, idx);
+	while (idx--)
+		wait(&status);
 	set_outfile_fd(&arg);
-	execute_cmd(&arg, idx);
 }
