@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:38:16 by jahlee            #+#    #+#             */
-/*   Updated: 2023/03/19 20:32:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/03/22 14:37:47 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ static void	pipe_work(t_arg *arg, int idx)
 	if (pipe(arg->pipe) < 0)
 		exit_err(arg, "pipe error", 1);
 	arg->pid = fork();
-	ft_putstr_fd("idx :", arg->tmp);
-	ft_putnbr_fd(idx, arg->tmp);
-	ft_putstr_fd(" pid :", arg->tmp);
-	ft_putnbr_fd(arg->pid, arg->tmp);
-	ft_putstr_fd("\n", arg->tmp);
 	if (arg->pid < 0)
 		exit_err(arg, "fork error", 1);
 	if (arg->pid == 0)
@@ -63,7 +58,6 @@ int	main(int argc, char **argv, char **envp)
 	t_arg	arg;
 	int		idx;
 
-	arg.tmp = open("tmp", O_WRONLY);//////////////
 	idx = -1;
 	init_arg(&arg, argc, argv, envp);
 	if (argc < 5)
