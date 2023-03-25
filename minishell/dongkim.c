@@ -117,7 +117,6 @@ int	main(void)
 	char	*input;
 	t_data	*data;
 
-
 	input = readline("🥨 minishell$ ");
 	data = (t_data*)malloc(sizeof(t_data));
 	data->original_str = input;
