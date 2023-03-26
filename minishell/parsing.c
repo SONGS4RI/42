@@ -91,6 +91,7 @@ echo "aaa $a" => echo aaa 123 => "echo", " ", "aaa", " ", "123"
 
 echo '$a' => echo $a => echo, $a
 */
+
 typedef struct s_token
 {
 	char			*token;
