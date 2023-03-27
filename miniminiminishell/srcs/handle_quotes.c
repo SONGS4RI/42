@@ -33,13 +33,10 @@ static char	*multiple_join(char *str1, char *str2, char *str3)
 	while (*str3)
 		str[i++] = *str3++;
 	str[size] = '\0';
-	// free(str1 - ft_strlen(str1));
-	// free(str2 - ft_strlen(str2));
-	// free(str3 - ft_strlen(str3));
 	return (str);
 }
 
-static char	*ft_interpret_env_from_d_quotes(char *str)
+static char	*interpret_env_from_d_quotes(char *str)
 {
 	char	*str1;
 	char	*str2;
@@ -71,7 +68,7 @@ static char	**seperate_double_quotes(char *str, int start_idx, int end_idx)
 		return (NULL);
 	strs[0] = ft_substr(str, 0, start_idx);
 	strs[1] = ft_substr(str, start_idx + 1, end_idx - start_idx - 1);
-	strs[1] = ft_interpret_env_from_d_quotes(strs[1]); // 환경변수 해석
+	strs[1] = interpret_env_from_d_quotes(strs[1]); // 환경변수 해석
 	strs[2] = ft_substr(str, end_idx + 1, ft_strlen(str) - end_idx - 1);
 	strs[3] = 0;
 	return (strs);

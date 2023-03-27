@@ -4,8 +4,11 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM			= rm -f
 LIBFT		= -Llibft -lft
-LDFLAGS		= -lreadline -L/Users/jikoo/.brew/opt/readline/lib
-CPPFLAGS	= -I/Users/jikoo/.brew/opt/readline/include
+# LDFLAGS		= -lreadline -L/Users/jikoo/.brew/opt/readline/lib
+# CPPFLAGS	= -I/Users/jikoo/.brew/opt/readline/include
+LDFLAGS		= -lreadline -L/opt/homebrew/opt/readline/lib
+CPPFLAGS	= -I/opt/homebrew/opt/readline/include
+
 
 # source files
 MS_DIR		= srcs/
