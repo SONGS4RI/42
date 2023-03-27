@@ -1,4 +1,4 @@
-#include "../includes/miniminiminishell.h"
+#include "../../includes/miniminiminishell.h"
 
 static char	*multiple_join(char *str1, char *str2, char *str3)
 {
@@ -21,12 +21,7 @@ static char	*multiple_join(char *str1, char *str2, char *str3)
 	return (str);
 }
 
-// echo "hello $USER 42" -n
-// {hello $USER 42} => {hello jikoo 42}
-
-// echo "hello" -n
-// {hello}
-static char	*interpret_env_from_d_quotes(char *str)
+static char	*interpret_env_from_d_quotes(t_env_node *env_list, char *str)
 {
 	char	*str1;
 	char	*str2;
@@ -43,7 +38,8 @@ static char	*interpret_env_from_d_quotes(char *str)
 	while (str[next_idx] && str[next_idx] != ' ' && str[next_idx] != '\'')
 		next_idx++;
 	str1 = ft_substr(str, 0, dollar_idx);
-	str2 = free_and_getenv(ft_substr(str, dollar_idx + 1, next_idx - dollar_idx - 1));
+	str2 = ft_substr(str, dollar_idx + 1, next_idx - dollar_idx - 1);
+	str2 = free_env_key_and_get_env_value(env_list, str2);
 	str3 = ft_substr(str, next_idx, ft_strlen(str) - next_idx);
 	free(str);
 	str = multiple_join(str1, str2, str3);
@@ -70,7 +66,7 @@ static void	set_quotes_idxs(char *str, int *start_idx, int *end_idx)
 	}
 }
 
-static char	**seperate_quotes(char *str)
+static char	**seperate_quotes(t_env_node *env_list, char *str)
 {
 	char	**strs;
 	int		start_idx;
@@ -79,7 +75,7 @@ static char	**seperate_quotes(char *str)
 	start_idx = -1;
 	end_idx = -1;
 	set_quotes_idxs(str, &start_idx, &end_idx);
-	if (start_idx >= end_idx)
+	if (start_idx > end_idx)
 		return (NULL);
 	strs = malloc(sizeof(char *) * 4);
 	if (!strs)
@@ -87,13 +83,13 @@ static char	**seperate_quotes(char *str)
 	strs[0] = ft_substr(str, 0, start_idx);
 	strs[1] = ft_substr(str, start_idx + 1, end_idx - start_idx - 1);
 	if (str[start_idx] == '\"')
-		strs[1] = interpret_env_from_d_quotes(strs[1]); // 환경변수 해석
+		strs[1] = interpret_env_from_d_quotes(env_list, strs[1]); // 환경변수 해석
 	strs[2] = ft_substr(str, end_idx + 1, ft_strlen(str) - end_idx - 1);
 	strs[3] = 0;
 	return (strs);
 }
 
-void	handle_quotes(t_token *token_list)
+void	handle_quotes(t_env_node *env_list, t_token *token_list)
 {
 	char	**strs;
 
@@ -102,7 +98,7 @@ void	handle_quotes(t_token *token_list)
 		// CHUNK => CHUNK, ARGV, CHUNK
 		if (token_list->type == TOKEN_TYPE_CHUNK)
 		{
-			strs = seperate_quotes(token_list->string);
+			strs = seperate_quotes(env_list, token_list->string);
 			if (strs)
 			{
 				free(token_list->string);

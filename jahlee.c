@@ -1,21 +1,21 @@
-#include "../includes/miniminiminishell.h"
+#include "./includes/miniminiminishell.h"
 
-int	cmp_env_key(char *string, char *envp_string)
+int	cmp_env_key(char *string, char *env_string)
 {
 	int i;
 
 	i = -1;
 	while (string[++i])
 	{
-		if (string[i] != envp_string[i])
+		if (string[i] != env_string[i])
 			return (0);
 	}
-	if (envp_string[i] != '=')
+	if (env_string[i] != '=')
 		return (0);
 	return (1);
 }
 
-char *my_getenv(char *name, t_envp_node *node)
+char *my_getenv(char *name, t_env_node *node)
 {
 	while (node)
 	{
@@ -28,9 +28,9 @@ char *my_getenv(char *name, t_envp_node *node)
 
 // int main()
 // {
-// 	t_envp_node node1;
-// 	t_envp_node node2;
-// 	t_envp_node node3;
+// 	t_env_node node1;
+// 	t_env_node node2;
+// 	t_env_node node3;
 	
 // 	node1.next = &node2;
 // 	node2.next = &node3;
