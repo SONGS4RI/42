@@ -7,7 +7,7 @@ static void	init_info(t_info *info_ptr, char **envp)
 	(&info_ptr->ms_termios)->c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(info_ptr->ms_termios));
 	// 환경변수 리스트, PATH 리스트 저장
-	info_ptr->env_list = envp;
+	// info_ptr->env_list = envp; // 나중에 envp는 리스트로 들고있어야 함
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	info_ptr->path_list = ft_split(*envp + 5, ':');
@@ -66,7 +66,7 @@ int	main(int argc, char **argv, char **envp)
 	set_signal();
 	while (1)
 	{
-		input = readline("🍄 minishell$ ");
+		input = readline("🍄 minishell$ ");//
 		if (!input) // ctrl + D
 		{
 			printf("\033[1A");
@@ -84,5 +84,6 @@ int	main(int argc, char **argv, char **envp)
 		free(input);
 	}
 	free_2d_arr(info.path_list);
+	//free_2d_arr(info.env_list);/////// 리스트환경변수프리
 	return (0);
 }

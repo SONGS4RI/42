@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 00:01:24 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:24:09 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:53:57 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * If insufficient memory is available, NULL is returned and errno is set to
  * ENOMEM.
  */
-char    *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	char	*str;
 	size_t	len;

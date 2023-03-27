@@ -20,6 +20,8 @@ t_token	*create_token(char *string, t_token_type type)
 	t_token	*token;
 
 	token = malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
 	token->origin_string = string;
 	token->string = ft_strdup(string);
 	token->type = type;
@@ -27,15 +29,15 @@ t_token	*create_token(char *string, t_token_type type)
 	return (token);
 }
 
-void    free_token_list(t_token *token_list)
+void	free_token_list(t_token *token_list)
 {
-    t_token *temp;
+	t_token	*temp;
 
-    while (token_list)
-    {
-        temp = token_list;
-        token_list = token_list->next;
-        free(temp->string);
-        free(temp);
-    }
+	while (token_list)
+	{
+		temp = token_list;
+		token_list = token_list->next;
+		free(temp->string);
+		free(temp);
+	}
 }

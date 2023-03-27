@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 23:49:13 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 01:23:33 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/27 16:54:18 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_atoi(const char *str)
 {
 	int	num;
 	int	sign;
-	
+
 	num = 0;
 	sign = 1;
 	while (ft_isspace(*str))

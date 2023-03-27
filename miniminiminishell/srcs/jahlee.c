@@ -26,15 +26,19 @@ char *my_getenv(char *name, t_envp_node *node)
 	return (NULL);
 }
 
-char	*free_and_getenv(char *name)
-{
-	char	*env_var;
-
-	env_var = getenv(name);
-	free(name);
-	if (env_var)
-		return (ft_strdup(env_var));
-	else
-		return (ft_strdup(""));
-}
-
+// int main()
+// {
+// 	t_envp_node node1;
+// 	t_envp_node node2;
+// 	t_envp_node node3;
+	
+// 	node1.next = &node2;
+// 	node2.next = &node3;
+// 	node3.next = NULL;
+	
+// 	node1.string = "abc=123";
+// 	node2.string = "abcc=123123";
+// 	node3.string = "aabc=123123123";
+	
+// 	printf("res: |%s|\n",my_getenv("aa bc",&node1));
+// }

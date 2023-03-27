@@ -36,10 +36,16 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_envp_node
+{
+	char				*string;
+	struct s_envp_node	*next;
+}	t_envp_node;
+
 typedef struct s_info
 {
     struct termios  ms_termios;
-    char            **env_list;
+    t_envp_node		*env_list;
     char            **path_list;
 }   t_info;
 
@@ -55,7 +61,7 @@ t_token	*lexcial_analysis(char *input);
 void	handle_quotes(t_token *token_list);
 
 /* handle_environment_variables.c  */
-char	*get_env(char *name);
+char	*free_and_getenv(char *name);
 
 /* utils.c */
 void	ms_error(char *message);
