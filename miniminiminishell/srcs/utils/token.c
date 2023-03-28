@@ -30,27 +30,37 @@ t_token	*add_token(t_token **token_list, t_token *new_token)
 	return (new_token);
 }
 
-void	delete_token(t_token *prev_token, t_token **del_token_ptr)
+t_token	*delete_token(t_token *del_token, t_token *token_list)
 {
-	t_token	*next_token;
+	t_token *prev;
 
-	next_token = (*del_token_ptr)->next;
-	free((*del_token_ptr)->string);
-	(*del_token_ptr)->next = NULL;
-	free(del_token_ptr);
-	prev_token->next = next_token;
+	if (del_token == token_list)
+	{
+		free(token_list->string);
+		free(token_list);
+		return (del_token->next);
+	}
+	prev = NULL;
+	while (token_list != del_token)
+	{
+		prev = token_list;
+		token_list=token_list->next;
+	}
+	prev->next = token_list->next;
+	free(token_list->string);
+	free(token_list);
+	return (prev->next);
 }
 
-void	free_token_list(t_token **token_list_ptr)
+void	free_token_list(t_token *token_list_ptr)
 {
 	t_token	*temp;
 
-	while (*token_list_ptr)
+	while (token_list_ptr)
 	{
-		temp = (*token_list_ptr)->next;
-		free((*token_list_ptr)->string);
-		(*token_list_ptr)->next = NULL;
-		free(*token_list_ptr);
-		*token_list_ptr = temp;
+		temp = token_list_ptr->next;
+		free(token_list_ptr->string);
+		free(token_list_ptr);
+		token_list_ptr = temp;
 	}
 }

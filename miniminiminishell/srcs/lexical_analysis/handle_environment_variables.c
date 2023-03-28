@@ -7,11 +7,6 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 		*dollar_idx += 1;
 	if (str[*dollar_idx] == '\0')
 		return (1);
-	if (str[*dollar_idx + 1] == '?')
-	{
-		*next_idx = *dollar_idx + 2;
-		return (0);
-	}
 	*next_idx = *dollar_idx + 1;
 	while (str[*next_idx] && str[*next_idx] != ' ' && str[*next_idx] != '$')
 		*next_idx += 1;

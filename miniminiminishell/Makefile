@@ -17,6 +17,7 @@ MS_SRCS		= main.c \
 			  ./lexical_analysis/handle_quotes.c \
 			  ./lexical_analysis/handle_environment_variables.c \
 			  ./lexical_analysis/seperate_token_by_arg.c \
+			  ./lexical_analysis/handle_chunk.c \
 			  ./utils/environment_variables.c \
 			  ./utils/token.c \
 			  ./utils/utils.c

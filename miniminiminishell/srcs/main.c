@@ -15,7 +15,6 @@ static void	initialize(t_info *info_ptr, char **envp)
 
 void	print_token_list(t_token *token_list) ///////////////
 {
-	printf("\n");
 	while (token_list)
 	{
 		if (token_list->type == TOKEN_TYPE_CHUNK)
@@ -30,7 +29,7 @@ void	print_token_list(t_token *token_list) ///////////////
 			printf(RED"[%s]"RESET, token_list->string);
 		token_list = token_list->next;
 	}
-	printf("\n\n");
+	printf("\n");
 }
 
 void	run_minishell(t_info *info)
@@ -51,9 +50,10 @@ void	run_minishell(t_info *info)
 		else if (*input != '\0')
 		{
 			token_list = lexical_analysis(info, input);
-			print_token_list(token_list); /////////////////////////////////////
+			printf("\n");
+			// print_token_list(token_list); /////////////////////////////////////
 			// syntax_analysis();
-			free_token_list(&token_list);
+			free_token_list(token_list);
 		}
 		free(input);
 	}

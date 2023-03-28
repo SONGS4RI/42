@@ -27,10 +27,13 @@ typedef struct s_info
 	char            **path_list;
 }   t_info;
 
+void	print_token_list(t_token *token_list);////////
+
 t_token	*lexical_analysis(t_info *info, char *input);
 void	handle_environment_variables(t_info *info, t_token *token_list);
 void	handle_quotes(t_env_node *env_list, t_token *token_list);
 void	seperate_token_by_arg(t_token *token_list, char *arg);
+void    handle_chunk(t_token *token_list);
 
 void	set_signal(void);
 void	free_2d_arr(char **arr);
