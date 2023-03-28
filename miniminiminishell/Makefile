@@ -4,18 +4,22 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM			= rm -f
 LIBFT		= -Llibft -lft
-# LDFLAGS		= -lreadline -L/Users/jikoo/.brew/opt/readline/lib
-# CPPFLAGS	= -I/Users/jikoo/.brew/opt/readline/include
-LDFLAGS		= -lreadline -L/opt/homebrew/opt/readline/lib
-CPPFLAGS	= -I/opt/homebrew/opt/readline/include
+LDFLAGS		= -lreadline -L/${HOME}/.brew/opt/readline/lib
+CPPFLAGS	= -I/${HOME}/.brew/opt/readline/include
+# LDFLAGS		= -lreadline -L/opt/homebrew/opt/readline/lib
+# CPPFLAGS	= -I/opt/homebrew/opt/readline/include
 
 
 # source files
 MS_DIR		= srcs/
 MS_SRCS		= main.c \
-			  lexical_analysis/lexical_analysis.c lexical_analysis/handle_quotes.c \
-			  lexical_analysis/handle_environment_variables.c \
-			  utils/environment_variables.c utils/token.c utils/utils.c
+			  ./lexical_analysis/lexical_analysis.c \
+			  ./lexical_analysis/handle_quotes.c \
+			  ./lexical_analysis/handle_environment_variables.c \
+			  ./lexical_analysis/seperate_token_by_arg.c \
+			  ./utils/environment_variables.c \
+			  ./utils/token.c \
+			  ./utils/utils.c
 MS_PATH		= $(addprefix $(MS_DIR), $(MS_SRCS))
 MS_OBJS		= $(MS_PATH:c=o)
 

@@ -1,15 +1,37 @@
 #include "../../includes/miniminiminishell.h"
 
-static void	set_env_idx(char *str, int *dollar_idx, int *next_idx)
+static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 {
 	*dollar_idx = 0;
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
 	if (str[*dollar_idx] == '\0')
-		return ;
+		return (1);
+	if (str[*dollar_idx + 1] == '?')
+	{
+		*next_idx = *dollar_idx + 2;
+		return (0);
+	}
 	*next_idx = *dollar_idx + 1;
-	while (str[*next_idx] && str[*next_idx] != ' ')
+	while (str[*next_idx] && str[*next_idx] != ' ' && str[*next_idx] != '$')
 		*next_idx += 1;
+	if (*dollar_idx > *next_idx)
+		return (1);
+	return (0);
+}
+
+static char	**get_exit_status_and_split(t_info *info)
+{
+	char	**strs;
+
+	strs = malloc(sizeof(char *) * 4);
+	if (!strs)
+		return (NULL);
+	strs[0] = ft_itoa(info->exit_status);
+	strs[1] = ft_strdup(" ");
+	strs[2] = ft_strdup("");
+	strs[3] = 0;
+	return (strs);
 }
 
 static char	**interpret_and_split_env(t_env_node *env_list, char *str, int dollar_idx, int next_idx)
@@ -19,6 +41,8 @@ static char	**interpret_and_split_env(t_env_node *env_list, char *str, int dolla
 	int		space_idx;
 
 	strs = malloc(sizeof(char *) * 4);
+	if (!strs)
+		return (NULL);
 	env_value = ft_substr(str, dollar_idx + 1, next_idx - dollar_idx - 1);
 	env_value = free_env_key_and_get_env_value(env_list, env_value);
 	space_idx = 0;
@@ -32,7 +56,7 @@ static char	**interpret_and_split_env(t_env_node *env_list, char *str, int dolla
 	return (strs);
 }
 
-static char	**seperate_environment_variables(t_env_node *env_list, char *str)
+static char	**seperate_environment_variables(t_info *info, char *str)
 {
 	char	**strs;
 	char	**env_value;
@@ -41,14 +65,16 @@ static char	**seperate_environment_variables(t_env_node *env_list, char *str)
 
 	dollar_idx = -1;
 	next_idx = -1;
-	set_env_idx(str, &dollar_idx, &next_idx);
-	if (dollar_idx > next_idx)
+	if (set_env_idx(str, &dollar_idx, &next_idx)) // 환경변수가 없을때
 		return (NULL);
 	strs = malloc(sizeof(char *) * 6);
 	if (!strs)
 		return (NULL);
 	strs[0] = ft_substr(str, 0, dollar_idx);
-	env_value = interpret_and_split_env(env_list, str, dollar_idx, next_idx);
+	if (str[dollar_idx + 1] == '?')
+		env_value = get_exit_status_and_split(info);
+	else
+		env_value = interpret_and_split_env(info->env_list, str, dollar_idx, next_idx);
 	strs[1] = ft_strdup(env_value[0]);
 	strs[2] = ft_strdup(env_value[1]);
 	strs[3] = ft_strdup(env_value[2]);
@@ -58,7 +84,7 @@ static char	**seperate_environment_variables(t_env_node *env_list, char *str)
 	return (strs);
 }
 
-static void	aa(t_token *token_list, char **strs)
+static void	convert_result_to_token(t_token *token_list, char **strs)
 {
 	t_token	*temp;
 
@@ -69,16 +95,12 @@ static void	aa(t_token *token_list, char **strs)
 	add_token(&token_list, create_token(strs[1], TOKEN_TYPE_ARGV));
 	add_token(&token_list, create_token(strs[2], TOKEN_TYPE_SPACE));
 	add_token(&token_list, create_token(strs[3], TOKEN_TYPE_ARGV));
-	add_token(&token_list, create_token(strs[4], TOKEN_TYPE_CHUNK));
+	token_list = add_token(&token_list, create_token(strs[4], TOKEN_TYPE_CHUNK));
 	free_2d_arr(strs);
-	token_list = token_list->next;
-	token_list = token_list->next;
-	token_list = token_list->next;
-	token_list = token_list->next;
 	token_list->next = temp;
 }
 
-void	handle_environment_variables(t_env_node *env_list, t_token *token_list)
+void	handle_environment_variables(t_info *info, t_token *token_list)
 {
 	char	**strs;
 
@@ -87,9 +109,9 @@ void	handle_environment_variables(t_env_node *env_list, t_token *token_list)
 		// CHUNK => CHUNK, ARGV, SPACE, ARGV, CHUNK
 		if (token_list->type == TOKEN_TYPE_CHUNK)
 		{
-			strs = seperate_environment_variables(env_list, token_list->string);
+			strs = seperate_environment_variables(info, token_list->string);
 			if (strs)
-				aa(token_list, strs);
+				convert_result_to_token(token_list, strs);
 		}
 		token_list = token_list->next;
 	}

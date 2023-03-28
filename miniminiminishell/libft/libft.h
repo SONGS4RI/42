@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:18:20 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 02:03:12 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/28 16:57:19 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	ft_putstr_fd(char *s, int fd);
 int     ft_abs(int n);
 int     ft_max(int n1, int n2);
 int     ft_min(int n1, int n2);
+
+char	*ft_itoa(int n);
 
 #endif

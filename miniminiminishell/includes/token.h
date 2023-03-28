@@ -22,7 +22,7 @@ typedef struct s_token
 }	t_token;
 
 t_token	*create_token(char *string, t_token_type type);
-void	add_token(t_token **token_list, t_token *new_token);
-void    free_token_list(t_token *token_list);
+t_token	*add_token(t_token **token_list, t_token *new_token);
+void    free_token_list(t_token **token_list);
 
 #endif
