@@ -22,7 +22,8 @@ typedef struct s_token
 }	t_token;
 
 t_token	*create_token(char *string, t_token_type type);
-void	add_token(t_token **token_list, t_token *new_token);
+t_token	*add_token(t_token **token_list, t_token *new_token);
+t_token	*delete_token(t_token *del_token, t_token **token_list);
 void    free_token_list(t_token *token_list);
 
 #endif

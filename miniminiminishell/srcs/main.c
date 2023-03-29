@@ -2,6 +2,7 @@
 
 static void	initialize(t_info *info_ptr, char **envp)
 {
+	info_ptr->exit_status = 0;
 	tcgetattr(STDIN_FILENO, &(info_ptr->ms_termios));
 	(&info_ptr->ms_termios)->c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(info_ptr->ms_termios));
@@ -14,7 +15,6 @@ static void	initialize(t_info *info_ptr, char **envp)
 
 void	print_token_list(t_token *token_list) ///////////////////////
 {
-	printf("\n");
 	while (token_list)
 	{
 		if (token_list->type == TOKEN_TYPE_CHUNK)
@@ -29,7 +29,7 @@ void	print_token_list(t_token *token_list) ///////////////////////
 			printf(RED"[%s]"RESET, token_list->string);
 		token_list = token_list->next;
 	}
-	printf("\n\n");
+	printf("\n");
 }
 
 void	run_minishell(t_info *info)
@@ -49,8 +49,8 @@ void	run_minishell(t_info *info)
 		}
 		else if (*input != '\0')
 		{
-			token_list = lexical_analysis(info->env_list, input);
-			print_token_list(token_list); /////////////////////////////////////
+			token_list = lexical_analysis(info, input);
+			// print_token_list(token_list); /////////////////////////////////////
 			// syntax_analysis();
 			free_token_list(token_list);
 		}

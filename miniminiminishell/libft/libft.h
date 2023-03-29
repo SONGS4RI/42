@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:18:20 by jikoo             #+#    #+#             */
-/*   Updated: 2023/03/07 02:03:12 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/03/29 23:24:35 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	    ft_isprint(int c);
 int	    ft_atoi(const char *str);
 
 /* string.h */
+char    *ft_itoa(int n);
 void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 char	**ft_split(char const *s, char c);
