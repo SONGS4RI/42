@@ -13,7 +13,7 @@ static void	initialize(t_info *info_ptr, char **envp)
 	set_signal();
 }
 
-void	print_token_list(t_token *token_list) ///////////////////////
+void	print_token_list(t_token *token_list) ///////////////
 {
 	while (token_list)
 	{

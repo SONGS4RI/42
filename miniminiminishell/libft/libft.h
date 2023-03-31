@@ -52,4 +52,6 @@ int     ft_abs(int n);
 int     ft_max(int n1, int n2);
 int     ft_min(int n1, int n2);
 
+char	*ft_itoa(int n);
+
 #endif
