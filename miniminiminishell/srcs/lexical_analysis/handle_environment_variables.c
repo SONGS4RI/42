@@ -6,13 +6,11 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
 	if (str[*dollar_idx] == '\0')
-		return (1);
+		return (0);
 	*next_idx = *dollar_idx + 1;
-	while (str[*next_idx] && str[*next_idx] != ' ' && str[*next_idx] != '$')
+	while (!is_tokenable_sep(str[*next_idx]) && str[*next_idx] != '$')
 		*next_idx += 1;
-	if (*dollar_idx > *next_idx)
-		return (1);
-	return (0);
+	return (1);
 }
 
 static char	**get_exit_status_and_split(t_info *info)
@@ -58,9 +56,7 @@ static char	**seperate_environment_variables(t_info *info, char *str)
 	int		dollar_idx;
 	int		next_idx;
 
-	dollar_idx = -1;
-	next_idx = -1;
-	if (set_env_idx(str, &dollar_idx, &next_idx)) // 환경변수가 없을때
+	if (!set_env_idx(str, &dollar_idx, &next_idx)) // 환경변수가 없을때
 		return (NULL);
 	strs = malloc(sizeof(char *) * 6);
 	if (!strs)

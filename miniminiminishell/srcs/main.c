@@ -49,17 +49,18 @@ void	run_minishell(t_info *info)
 		}
 		else if (*input != '\0')
 		{
+			info->syntax_error = 0;
 			token_list = lexical_analysis(info, input);
-			printf("\n");
 			// print_token_list(token_list); /////////////////////////////////////
-			// syntax_analysis();
+			if (!info->syntax_error)
+				info->syntax_error = syntax_analysis(token_list);
+			printf("syntax_error = %d\n", info->syntax_error);
 			free_token_list(token_list);
 		}
 		free(input);
 	}
 }
 
-#include <stdlib.h>
 void	check_leak(void)
 {
 	system("leaks miniminiminishell");

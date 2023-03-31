@@ -12,15 +12,27 @@ CPPFLAGS	= -I/${HOME}/.brew/opt/readline/include
 
 # source files
 MS_DIR		= srcs/
-MS_SRCS		= main.c \
-			  ./lexical_analysis/lexical_analysis.c \
-			  ./lexical_analysis/handle_quotes.c \
-			  ./lexical_analysis/handle_environment_variables.c \
-			  ./lexical_analysis/seperate_token_by_arg.c \
-			  ./lexical_analysis/handle_chunk.c \
-			  ./utils/environment_variables.c \
-			  ./utils/token.c \
-			  ./utils/utils.c
+
+UTILS		= utils/environment_variables.c \
+			  utils/token.c \
+			  utils/utils.c	
+
+LEXICAL		= lexical_analysis/lexical_analysis.c	\
+			  lexical_analysis/handle_heredoc_limiter.c	\
+			  lexical_analysis/handle_quotes.c \
+			  lexical_analysis/handle_environment_variables.c \
+			  lexical_analysis/seperate_token_by_arg.c \
+			  lexical_analysis/handle_chunk.c \
+			  lexical_analysis/merge_continuous_argv_token.c \
+			  lexical_analysis/remove_space_token.c
+
+SYNTAX		= syntax_analysis/syntax_analysis.c \
+
+MS_SRCS		= main.c		\
+			  $(UTILS)		\
+			  $(LEXICAL)	\
+			  $(SYNTAX)
+
 MS_PATH		= $(addprefix $(MS_DIR), $(MS_SRCS))
 MS_OBJS		= $(MS_PATH:c=o)
 

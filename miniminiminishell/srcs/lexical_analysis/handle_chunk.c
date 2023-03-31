@@ -1,23 +1,25 @@
 #include "../../includes/miniminiminishell.h"
 
-void	handle_chunk(t_token *token_list)
+void	handle_chunk(t_token **token_list)
 {
-	t_token *head;
+	t_token **head;
+	t_token	*cur;
 
 	head = token_list;
-	while(token_list)
+	cur = *token_list;
+	while(cur)
 	{
-		if (token_list->type == TOKEN_TYPE_CHUNK)
+		if (cur->type == TOKEN_TYPE_CHUNK)
 		{
-			if (token_list->string[0] != '\0')
+			if (cur->string[0] != '\0')
 			{
-				token_list->type = TOKEN_TYPE_ARGV;
-				token_list = token_list->next;
+				cur->type = TOKEN_TYPE_ARGV;
+				cur = cur->next;
 			}
 			else
-				token_list = delete_token(token_list, head);
+				cur = delete_token(cur, head);
 		}
 		else
-			token_list = token_list->next;
+			cur = cur->next;
 	}
 }
