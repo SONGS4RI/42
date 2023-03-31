@@ -15,6 +15,11 @@ void	set_signal(void)
 	signal(SIGQUIT, SIG_IGN);		// ctrl + "\"
 }
 
+int	is_tokenable_sep(char c)
+{
+	return (c == ' ' || c == '|' || c == '<' || c == '>' || c == '\0');
+}
+
 void	free_2d_arr(char **arr)
 {
 	int	i;
@@ -48,12 +53,15 @@ char	*join_strs(char *str1, char *str2, char *str3)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (*str1)
-		str[i++] = *str1++;
-	while (*str2)
-		str[i++] = *str2++;
-	while (*str3)
-		str[i++] = *str3++;
+	if (str1)
+		while (*str1)
+			str[i++] = *str1++;
+	if (str2)
+		while (*str2)
+			str[i++] = *str2++;
+	if (str3)
+		while (*str3)
+			str[i++] = *str3++;
 	str[size] = '\0';
 	return (str);
 }

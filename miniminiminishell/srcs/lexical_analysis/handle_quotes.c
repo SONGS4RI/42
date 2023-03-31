@@ -8,8 +8,8 @@ static int  set_env_in_quotes_idx(char *str, int *dollar_idx, int *next_idx)
 	if (str[*dollar_idx] == '\0')
 		return (0);
 	*next_idx = *dollar_idx + 1;
-	while (str[*next_idx] && str[*next_idx] != ' ' &&
-		str[*next_idx] != '\'' && str[*next_idx] != '$')
+	while (!is_tokenable_sep(str[*next_idx]) && str[*next_idx] != '\'' 
+		&& str[*next_idx] != '$')
 		*next_idx += 1;
 	return (1);
 }
@@ -41,21 +41,23 @@ static char	*interpret_env_from_d_quotes(t_info *info, char *str)
 	return (str);
 }
 
-static void	set_quotes_idxs(char *str, int *start_idx, int *end_idx)
+static int	set_quotes_idxs(t_info *info, char *str, int *start_idx, int *end_idx)
 {
 	*start_idx = 0;
 	while (str[*start_idx] && str[*start_idx] != '\'' && str[*start_idx] != '\"')
 		*start_idx += 1;
 	if (str[*start_idx] == '\0')
-		return ;
+		return (0);
 	*end_idx = *start_idx + 1;
 	while (str[*end_idx] && str[*end_idx] != str[*start_idx])
 		*end_idx += 1;
 	if (str[*end_idx] == '\0')
 	{
 		perror("quotes error");
-		// 여기 처리해줘야 함
+		info->syntax_error = 1;
+		return (0);
 	}
+	return (1);
 }
 
 static char	**seperate_quotes(t_info *info, char *str)
@@ -64,9 +66,7 @@ static char	**seperate_quotes(t_info *info, char *str)
 	int		start_idx;
 	int		end_idx;
 
-	end_idx = -1;
-	set_quotes_idxs(str, &start_idx, &end_idx);
-	if (start_idx > end_idx)
+	if (!set_quotes_idxs(info, str, &start_idx, &end_idx))
 		return (NULL);
 	strs = malloc(sizeof(char *) * 4);
 	if (!strs)

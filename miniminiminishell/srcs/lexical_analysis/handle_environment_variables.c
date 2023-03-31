@@ -8,7 +8,7 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	if (str[*dollar_idx] == '\0')
 		return (0);
 	*next_idx = *dollar_idx + 1;
-	while (str[*next_idx] && str[*next_idx] != ' ' && str[*next_idx] != '$')
+	while (!is_tokenable_sep(str[*next_idx]) && str[*next_idx] != '$')
 		*next_idx += 1;
 	return (1);
 }
