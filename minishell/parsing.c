@@ -35,7 +35,7 @@ int	check_quote(char *input)
 char *func(int start_idx,char *s)// 무조건 ' or " idx == 문자열에서 시작 idx
 {//토큰화하고 , 토큰타입
 	int i = start_idx;
-	
+
 	while (s[++i])
 		if (s[i] == s[start_idx]) return ft_substr(s, start_idx, i - start_idx);
 	return	NULL;
@@ -86,7 +86,7 @@ echo "aaa 123" | cat -e
 
 /*
 echo '$a' => echo ,$a
-			    D,  S,  
+			    D,  S,
 echo "aaa $a" => echo aaa 123 => "echo", " ", "aaa", " ", "123"
 
 echo '$a' => echo $a => echo, $a

@@ -21,7 +21,7 @@ expot A="echo 123"
 				 	   => {echo }[$a]{ }[echo][ ][123]{ }[echo 123]{ -n}
 					   => {echo}[ ]{}[$a]{}[ ]{}[echo][ ][123]{}[ ]{}[echo 123]{}[ ]{-n}
 					   => [echo][ ][$a][ ][echo][ ][123][ ][echo 123][ ][-n]
-					   => [echo][$a][echo][123][echo 123][-n]			
+					   => [echo][$a][echo][123][echo 123][-n]
 */
 
 /*
