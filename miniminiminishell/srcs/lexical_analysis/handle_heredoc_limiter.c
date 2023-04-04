@@ -10,7 +10,7 @@ static int		handle_quotes_in_limiter(t_info *info, t_token *list, char *s, int s
 		offset++;
 	if (s[start_idx + offset] == '\0')
 	{
-		perror("quotes");
+		printf("miniminiminishell: quotes error\n");
 		info->syntax_error = 1;
 	}
 	string = ft_substr(s, start_idx + 1, offset - 1);

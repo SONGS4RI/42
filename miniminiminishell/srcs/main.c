@@ -32,9 +32,35 @@ void	print_token_list(t_token *token_list) ///////////////
 	printf("\n");
 }
 
+void	print_cmd_list(t_cmd *cmd_list)
+{
+	int	i;
+	t_redirection	*cur;
+
+	while (cmd_list)
+	{
+		if (cmd_list->argv)
+		{
+			printf("argv = ");
+			i = -1;
+			while (cmd_list->argv[++i])
+				printf("[%s] ", cmd_list->argv[i]);
+			printf("\n");
+		}
+		cur = cmd_list->redirection;
+		while (cur)
+		{
+			printf("redirection = t: %s, f: %s\n", cur->type, cur->file);
+			cur = cur->next;
+		}
+		cmd_list = cmd_list->next;
+	}
+}
+
 void	run_minishell(t_info *info)
 {
 	t_token	*token_list;
+	t_cmd	*cmd_list;
 	char	*input;
 
 	while (1)
@@ -51,10 +77,13 @@ void	run_minishell(t_info *info)
 		{
 			info->syntax_error = 0;
 			token_list = lexical_analysis(info, input);
-			// print_token_list(token_list); /////////////////////////////////////
 			if (!info->syntax_error)
 				info->syntax_error = syntax_analysis(token_list);
-			printf("syntax_error = %d\n", info->syntax_error);
+			if (!info->syntax_error)
+			{
+				cmd_list = create_cmd_list(token_list);
+				print_cmd_list(cmd_list);
+			}
 			free_token_list(token_list);
 		}
 		free(input);

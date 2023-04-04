@@ -53,7 +53,7 @@ static int	set_quotes_idxs(t_info *info, char *str, int *start_idx, int *end_idx
 		*end_idx += 1;
 	if (str[*end_idx] == '\0')
 	{
-		perror("quotes error");
+		printf("miniminiminishell: quotes error\n");
 		info->syntax_error = 1;
 		return (0);
 	}

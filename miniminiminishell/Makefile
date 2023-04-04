@@ -24,7 +24,8 @@ LEXICAL		= lexical_analysis/lexical_analysis.c	\
 			  lexical_analysis/seperate_token_by_arg.c \
 			  lexical_analysis/handle_chunk.c \
 			  lexical_analysis/merge_continuous_argv_token.c \
-			  lexical_analysis/remove_space_token.c
+			  lexical_analysis/remove_space_token.c \
+			  cmd_list/create_cmd_list.c
 
 SYNTAX		= syntax_analysis/syntax_analysis.c \
 

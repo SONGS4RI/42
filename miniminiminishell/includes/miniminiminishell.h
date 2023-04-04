@@ -29,6 +29,22 @@ typedef struct s_info
 	char			**path_list;
 }	t_info;
 
+typedef struct s_redirection
+{
+	char	*type;
+	char	*file;//////////////
+	struct 	s_redirection *next;
+}	t_redirection;
+
+typedef struct s_cmd
+{
+	char			**argv;
+	t_redirection	*redirection;
+	int				pipe[2];
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}	t_cmd;
+
 void	print_token_list(t_token *token_list);
 
 t_token	*lexical_analysis(t_info *info, char *input);
@@ -41,6 +57,8 @@ void	merge_continuous_argv_token(t_token **token_list);
 void	remove_space_token(t_token **token_list);
 
 int		syntax_analysis(t_token *token_list);
+
+t_cmd	*create_cmd_list(t_token *token_list);
 
 void	set_signal(void);
 int		is_tokenable_sep(char c);

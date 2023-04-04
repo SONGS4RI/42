@@ -5,10 +5,15 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	*dollar_idx = 0;
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
-	if (str[*dollar_idx] == '\0')
+	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0')
 		return (0);
 	*next_idx = *dollar_idx + 1;
-	while (!is_tokenable_sep(str[*next_idx]) && str[*next_idx] != '$')
+	if (str[*next_idx] == '?')
+	{
+		*next_idx += 1;
+		return (1);
+	}
+	while (str[*next_idx] && (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
 		*next_idx += 1;
 	return (1);
 }
@@ -94,7 +99,9 @@ static void	convert_result_to_token(t_token *token_list, char **strs)
 void	handle_environment_variables(t_info *info, t_token *token_list)
 {
 	char	**strs;
+	t_token	**head;
 
+	head = &token_list;
 	while (token_list)
 	{
 		// CHUNK => CHUNK, ARGV, SPACE, ARGV, CHUNK

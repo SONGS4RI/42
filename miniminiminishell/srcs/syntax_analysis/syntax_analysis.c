@@ -9,7 +9,10 @@ static int	check_pipeline_syntax(t_token *token_list)
 	{
 		if (token_list->type == TOKEN_TYPE_PIPELINE)
 			if (prev == NULL || token_list->next == NULL || token_list->next->type == TOKEN_TYPE_PIPELINE)
-					return (1);
+			{
+				printf("miniminiminishell: syntax error near unexpected token \'|\'\n");
+				return (1);
+			}
 		prev = token_list;
 		token_list = token_list->next;
 	}
@@ -21,8 +24,13 @@ static int check_redirection_syntax(t_token *token_list)
 	while (token_list)
 	{
 		if (token_list->type == TOKEN_TYPE_REDIRECTION)
+		{
 			if (token_list->next == NULL || token_list->next->type != TOKEN_TYPE_ARGV)
-					return (1);
+			{
+				printf("miniminiminishell: syntax error near unexpected token \'newline\'\n");
+				return (1);
+			}
+		}
 		token_list = token_list->next;
 	}
 	return (0);
