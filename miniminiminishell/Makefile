@@ -15,7 +15,7 @@ MS_DIR		= srcs/
 
 UTILS		= utils/environment_variables.c \
 			  utils/token.c \
-			  utils/utils.c	
+			  utils/utils.c	\
 
 LEXICAL		= lexical_analysis/lexical_analysis.c	\
 			  lexical_analysis/handle_heredoc_limiter.c	\
@@ -25,14 +25,28 @@ LEXICAL		= lexical_analysis/lexical_analysis.c	\
 			  lexical_analysis/handle_chunk.c \
 			  lexical_analysis/merge_continuous_argv_token.c \
 			  lexical_analysis/remove_space_token.c \
-			  cmd_list/create_cmd_list.c
+
 
 SYNTAX		= syntax_analysis/syntax_analysis.c \
+
+CMD_LIST	= cmd_list/create_cmd_list.c \
+			  cmd_list/cmd_utils.c 		\
+			  cmd_list/free_cmd_list.c \
+
+BUILT_IN	= built_in/exit.c	\
+ 			#   built_in/cd.c		\
+			#   built_in/echo.c	\
+			#   built_in/env.c	\
+			#   built_in/export.c \
+			#   built_in/pwd.c	\
+			#   built_in/unset.c
 
 MS_SRCS		= main.c		\
 			  $(UTILS)		\
 			  $(LEXICAL)	\
-			  $(SYNTAX)
+			  $(SYNTAX)		\
+			  $(CMD_LIST)	\
+			  $(BUILT_IN)
 
 MS_PATH		= $(addprefix $(MS_DIR), $(MS_SRCS))
 MS_OBJS		= $(MS_PATH:c=o)

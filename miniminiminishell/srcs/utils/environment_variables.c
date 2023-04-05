@@ -3,11 +3,17 @@
 t_env_node	*create_env_node(char *str)
 {
 	t_env_node	*env_node;
+	int			equal_idx;
 
 	env_node = malloc(sizeof(t_env_node));
 	if (!env_node)
 		return (NULL);
-	env_node->string = ft_strdup(str);
+	equal_idx = 0;
+	while (str[equal_idx] && str[equal_idx] != '=')
+		equal_idx++;
+	env_node->key = ft_substr(str, 0, equal_idx);
+	if (str[equal_idx] != '\0')
+		env_node->value = ft_substr(str, equal_idx + 1, ft_strlen(str) - equal_idx - 1);
 	env_node->next = NULL;
 	return (env_node);
 }
@@ -41,17 +47,14 @@ char	*free_env_key_and_get_env_value(t_env_node *env_list, char *env_key)
 {
 	char	*env_value;
 
-	while (env_list && ft_strncmp(env_list->string, env_key, ft_strlen(env_key)))
+	while (env_list && ft_strncmp(env_list->key, env_key, ft_strlen(env_key)))
 		env_list = env_list->next;
-	if (env_list && *(env_list->string + ft_strlen(env_key)) == '=')
-		env_value = env_list->string + ft_strlen(env_key) + 1;
+	if (env_list)
+		env_value = ft_strdup(env_list->value);
 	else
-		env_value = NULL;
+		env_value = ft_strdup("");
 	free(env_key);
-	if (env_value)
-		return (ft_strdup(env_value));
-	else
-		return (ft_strdup(""));
+	return (env_value);
 }
 
 void	free_env_list(t_env_node *env_list)
@@ -62,7 +65,9 @@ void	free_env_list(t_env_node *env_list)
 	{
 		temp = env_list;
 		env_list = env_list->next;
-		free(temp->string);
+		free(temp->key);
+		if (temp->value)
+			free(temp->value);
 		free(temp);
 	}
 }

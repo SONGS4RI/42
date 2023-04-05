@@ -26,7 +26,7 @@ typedef struct s_info
 	int				exit_status; // 시그널 받을 때도 바뀌어야 함
 	struct termios  ms_termios;
 	t_env_node		*env_list;
-	char			**path_list;
+	char			**path_list;//execve(명령어, 인자, 환경변수)
 }	t_info;
 
 typedef struct s_redirection
@@ -45,25 +45,31 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
-void	print_token_list(t_token *token_list);
+void			print_token_list(t_token *token_list);
 
-t_token	*lexical_analysis(t_info *info, char *input);
-void	handle_heredoc_limiter(t_info *info, t_token *token_list);
-void	handle_quotes(t_info *info, t_token *token_list);
-void	handle_environment_variables(t_info *info, t_token *token_list);
-void	seperate_token_by_arg(t_token *token_list, char *arg);
-void	handle_chunk(t_token **token_list);
-void	merge_continuous_argv_token(t_token **token_list);
-void	remove_space_token(t_token **token_list);
+t_token			*lexical_analysis(t_info *info, char *input);
+void			handle_heredoc_limiter(t_info *info, t_token *token_list);
+void			handle_quotes(t_info *info, t_token *token_list);
+void			handle_environment_variables(t_info *info, t_token *token_list);
+void			seperate_token_by_arg(t_token *token_list, char *arg);
+void			handle_chunk(t_token **token_list);
+void			merge_continuous_argv_token(t_token **token_list);
+void			remove_space_token(t_token **token_list);
 
-int		syntax_analysis(t_token *token_list);
+int				syntax_analysis(t_token *token_list);
 
-t_cmd	*create_cmd_list(t_token *token_list);
+t_cmd			*make_cmd_node(void);
+t_redirection	*make_redirection_node(t_token *token_list);
+int				get_argv_cnt(t_token *token_list);
+t_cmd			*create_cmd_list(t_token *token_list);
+void			free_cmd_list(t_cmd *cmd_list);
 
-void	set_signal(void);
-int		is_tokenable_sep(char c);
-void	free_2d_arr(char **arr);
-void	free_strs(char *str1, char *str2, char *str3, char *str4);
-char	*join_strs(char *str1, char *str2, char *str3);
+void			ms_exit(t_info *info, t_cmd *cmd_list);
+
+void			set_signal(void);
+int				is_tokenable_sep(char c);
+void			free_2d_arr(char **arr);
+void			free_strs(char *str1, char *str2, char *str3, char *str4);
+char			*join_strs(char *str1, char *str2, char *str3);
 
 #endif

@@ -6,7 +6,8 @@
 
 typedef struct s_env_node
 {
-	char				*string;
+	char				*key;
+	char				*value;
 	struct s_env_node	*next;
 }	t_env_node;
 

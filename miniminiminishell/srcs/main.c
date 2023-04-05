@@ -70,11 +70,11 @@ void	run_minishell(t_info *info)
 		{
 			printf("\033[1A");
 			printf("\033[14C");
-			printf("exit\n");
-			break ;
+			ms_exit(info, NULL);
 		}
 		else if (*input != '\0')
 		{
+			add_history(input);
 			info->syntax_error = 0;
 			token_list = lexical_analysis(info, input);
 			if (!info->syntax_error)
@@ -85,6 +85,8 @@ void	run_minishell(t_info *info)
 				print_cmd_list(cmd_list);
 			}
 			free_token_list(token_list);
+			// 실행
+			free_cmd_list(cmd_list);
 		}
 		free(input);
 	}
@@ -104,7 +106,5 @@ int	main(int argc, char **argv, char **envp)
 	atexit(check_leak);
 	initialize(&info, envp);
 	run_minishell(&info);
-	free_2d_arr(info.path_list);
-	free_env_list(info.env_list);
 	return (0);
 }
