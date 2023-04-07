@@ -10,6 +10,7 @@ static void	initialize(t_info *info_ptr, char **envp)
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	info_ptr->path_list = ft_split(*envp + 5, ':');
+	info_ptr->home_path = free_env_key_and_get_env_value(info_ptr->env_list, ft_strdup("HOME"));
 	set_signal();
 }
 
@@ -62,7 +63,7 @@ void	run_minishell(t_info *info)
 	t_token	*token_list;
 	t_cmd	*cmd_list;
 	char	*input;
-
+	printf("헬로웅\n");
 	while (1)
 	{
 		input = readline("🍄 minishell$ ");
@@ -70,23 +71,20 @@ void	run_minishell(t_info *info)
 		{
 			printf("\033[1A");
 			printf("\033[14C");
-			ms_exit(info, NULL);
+			ms_exit(info, cmd_list);
 		}
 		else if (*input != '\0')
 		{
-			add_history(input);
+			add_history(input); //$?바꾸기
 			info->syntax_error = 0;
 			token_list = lexical_analysis(info, input);
 			if (!info->syntax_error)
 				info->syntax_error = syntax_analysis(token_list);
 			if (!info->syntax_error)
-			{
 				cmd_list = create_cmd_list(token_list);
-				print_cmd_list(cmd_list);
-			}
 			free_token_list(token_list);
-			// 실행
-			free_cmd_list(cmd_list);
+			ms_execute(info, cmd_list);
+			free_cmd_list(&cmd_list);
 		}
 		free(input);
 	}

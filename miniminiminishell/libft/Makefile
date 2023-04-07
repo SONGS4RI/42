@@ -6,7 +6,7 @@
 #    By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 01:53:44 by jikoo             #+#    #+#              #
-#    Updated: 2023/03/29 23:24:46 by jikoo            ###   ########.fr        #
+#    Updated: 2023/04/07 19:16:45 by jikoo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS		= ft_atoi.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 			  ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
 			  ft_strcat.c ft_strchr.c ft_strcpy.c ft_strdup.c ft_strjoin.c \
 			  ft_strlen.c ft_strncmp.c ft_strndup.c ft_strrepl.c ft_substr.c \
-			  ft_abs.c ft_max.c ft_min.c ft_itoa.c
+			  ft_abs.c ft_max.c ft_min.c ft_itoa.c \
+			  gnl/get_next_line.c gnl/get_next_line_utils.c
 OBJS		= $(SRCS:c=o)
 
 all: $(NAME)

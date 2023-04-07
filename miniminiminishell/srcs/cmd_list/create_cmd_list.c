@@ -55,6 +55,7 @@ t_cmd	*create_cmd_list(t_token *token_list)
 		else if (token_list->type == TOKEN_TYPE_PIPELINE)
 		{
 			cmd_list->next = make_cmd_node();
+			cmd_list->next->prev = cmd_list;
 			cmd_list = cmd_list->next;
 		}
 		token_list = token_list->next;

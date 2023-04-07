@@ -1,5 +1,13 @@
 #include "../../includes/miniminiminishell.h"
 
+void	ms_error(char *blame)
+{
+	ft_putstr_fd("minishell :", 2);
+	ft_putstr_fd(blame, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+}
+
 static void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
@@ -25,9 +33,12 @@ void	free_2d_arr(char **arr)
 	int	i;
 
 	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
+	if (arr)
+	{
+		while (arr[++i])
+			free(arr[i]);
+		free(arr);
+	}
 }
 
 void    free_strs(char *str1, char *str2, char *str3, char *str4)

@@ -29,22 +29,26 @@ LEXICAL		= lexical_analysis/lexical_analysis.c	\
 
 SYNTAX		= syntax_analysis/syntax_analysis.c \
 
+EXCUTE		= excute/ms_excute.c \
+			  excute/set_redirection_fd.c \
+
 CMD_LIST	= cmd_list/create_cmd_list.c \
 			  cmd_list/cmd_utils.c 		\
 			  cmd_list/free_cmd_list.c \
 
-BUILT_IN	= built_in/exit.c	\
- 			#   built_in/cd.c		\
-			#   built_in/echo.c	\
-			#   built_in/env.c	\
-			#   built_in/export.c \
-			#   built_in/pwd.c	\
-			#   built_in/unset.c
+BUILT_IN	= built_in/cd.c		\
+			  built_in/echo.c	\
+			  built_in/env.c	\
+			  built_in/exit.c	\
+			  built_in/export.c \
+			  built_in/pwd.c	\
+			  built_in/unset.c  \
 
 MS_SRCS		= main.c		\
 			  $(UTILS)		\
 			  $(LEXICAL)	\
 			  $(SYNTAX)		\
+			  $(EXCUTE)		\
 			  $(CMD_LIST)	\
 			  $(BUILT_IN)
 

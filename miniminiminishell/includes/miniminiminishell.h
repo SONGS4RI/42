@@ -1,6 +1,8 @@
 #ifndef MINIMINIMINISHELL_H
 # define MINIMINIMINISHELL_H
 
+# include <errno.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <termios.h>
@@ -27,6 +29,7 @@ typedef struct s_info
 	struct termios  ms_termios;
 	t_env_node		*env_list;
 	char			**path_list;//execve(명령어, 인자, 환경변수)
+	char			*home_path;
 }	t_info;
 
 typedef struct s_redirection
@@ -58,14 +61,24 @@ void			remove_space_token(t_token **token_list);
 
 int				syntax_analysis(t_token *token_list);
 
+void			ms_execute(t_info *info, t_cmd *cmd_list);
+int				set_redirection_fd(t_cmd *cmd_list);
+
 t_cmd			*make_cmd_node(void);
 t_redirection	*make_redirection_node(t_token *token_list);
 int				get_argv_cnt(t_token *token_list);
 t_cmd			*create_cmd_list(t_token *token_list);
-void			free_cmd_list(t_cmd *cmd_list);
+void			free_cmd_list(t_cmd **cmd_list);
 
-void			ms_exit(t_info *info, t_cmd *cmd_list);
+int				ms_cd(t_info *info, char **argv);
+int				ms_echo(char **argv);
+int				ms_env(t_env_node *env_list);
+int				ms_exit(t_info *info, t_cmd *cmd_list);
+int				ms_export(t_info *info, char **argv);
+int				ms_pwd(void);
+int				ms_unset(t_info *info, char **argv);
 
+void			ms_error(char *blame);
 void			set_signal(void);
 int				is_tokenable_sep(char c);
 void			free_2d_arr(char **arr);

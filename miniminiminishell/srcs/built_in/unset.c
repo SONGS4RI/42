@@ -11,7 +11,7 @@ static t_env_node	*delete_env_list(t_env_node *env_list)
 	return (next);
 }
 
-void	ms_unset(t_info *info, char **argv)
+int	ms_unset(t_info *info, char **argv)
 {
 	t_env_node *cur;
 	t_env_node *prev;
@@ -26,6 +26,8 @@ void	ms_unset(t_info *info, char **argv)
 		{
 			if (ft_strncmp(cur->key, argv[idx], ft_strlen(argv[idx])) == 0)
 			{
+				if (ft_strncmp(cur->key, "PATH", 4) == 0)
+					free_2d_arr(info->path_list);
 				if (prev == NULL)
 					info->env_list = delete_env_list(cur);
 				else
@@ -36,4 +38,5 @@ void	ms_unset(t_info *info, char **argv)
 			cur = cur->next;
 		}
 	}
+	return (0);
 }
