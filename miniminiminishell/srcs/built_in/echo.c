@@ -28,7 +28,6 @@ int	ms_echo(char **argv)
 	}
 	if (newline)
 		printf("\n");
-	g_exit_status = 0;
 	return (0);
 }
 /*

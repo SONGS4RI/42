@@ -38,21 +38,33 @@ static void	print_env_list(t_env_node *env_list)
 	}
 }
 
+static int	set_error_flag(char *str, int *error_flag)
+{
+	if (ft_isdigit(str[0]))
+	{
+		ft_putstr_fd("minishell: export: \'", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+		free_env_list(env_node);
+		*error_flag = 1;
+		return (1);
+	}
+	return (0);
+}
+
 int	ms_export(t_info *info, char **argv)
 {
 	int			idx;
 	t_env_node	*env_node;
+	int			error_flag;
 	
 	idx = 0;
+	error_flag = 0;
 	while (argv[++idx])
 	{
 		env_node = create_env_node(argv[idx]);
-		if (ft_isdigit(env_node->key[0]))
-		{
-			ms_error("export", env_node->key);
-			g_exit_status = errno;
-			free_env_list(env_node);
-		}
+		if (set_error_flag(argv[idx], &error_flag))
+			continue ;
 		else if (change_value_if_key_exist(info, env_node->key, env_node->value))
 			free_env_list(env_node);
 		else // 기존에 없던 환경변수면 추가
@@ -64,5 +76,5 @@ int	ms_export(t_info *info, char **argv)
 	}
 	if (idx == 1)
 		print_env_list(info->env_list);
-	return (0);
+	return (error_flag);
 }

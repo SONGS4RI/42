@@ -9,8 +9,7 @@ int	ms_cd(t_info *info, char **argv)
 	else if (argv[1] && (access(argv[1], F_OK) || chdir(argv[1])))
 	{
 		ms_error("cd", argv[1]);
-		g_exit_status = errno;
-		return (-1);
+		return (1);
 	}
 	if (argv[1] == NULL)
 	{
@@ -19,20 +18,10 @@ int	ms_cd(t_info *info, char **argv)
 		{
 			free(path);
 			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
-			g_exit_status = errno;
-			return (-1);
+			return (1);
 		}
 		chdir(path);
 		free(path);
 	}
 	return (0);
 }
-/*
-
-unset
-
-cd ::  error
-
-cd ~ 
-
-*/

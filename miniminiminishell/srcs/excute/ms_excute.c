@@ -73,24 +73,24 @@ int	execute_builtin(t_info *info, t_cmd *cmd_list)
 {
 	if (set_redirection_fd(cmd_list) == -1)
 	{
-		g_exit_status = errno;
+		g_exit_status = 1;
 		return (0);
 	}
 	dup2(info->stdin, STDIN_FILENO);
 	if (ft_strncmp(cmd_list->argv[0], "cd", 2) == 0)
-		ms_cd(info, cmd_list->argv);
+		g_exit_status = ms_cd(info, cmd_list->argv);
 	if (ft_strncmp(cmd_list->argv[0], "echo", 4) == 0)
-		ms_echo(cmd_list->argv);
+		g_exit_status = ms_echo(cmd_list->argv);
 	if (ft_strncmp(cmd_list->argv[0], "env", 3) == 0)
-		ms_env(info->env_list);
+		g_exit_status = ms_env(info->env_list);
 	if (ft_strncmp(cmd_list->argv[0], "exit", 4) == 0)
-		ms_exit(info, cmd_list);
+		g_exit_status = ms_exit(info, cmd_list);
 	if (ft_strncmp(cmd_list->argv[0], "export", 6) == 0)
-		ms_export(info, cmd_list->argv);
+		g_exit_status = ms_export(info, cmd_list->argv);
 	if (ft_strncmp(cmd_list->argv[0], "pwd", 3) == 0)
-		ms_pwd();
+		g_exit_status = ms_pwd();
 	if (ft_strncmp(cmd_list->argv[0], "unset", 5) == 0)
-		ms_unset(info, cmd_list->argv);
+		g_exit_status = ms_unset(info, cmd_list->argv);
 	dup2(info->stdout, STDOUT_FILENO); ///////// 메인으로 옮겨야 할수동 ...ㅇㅋㅇㅋ췍췍
 	return (1);
 }
@@ -132,7 +132,7 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 			// signal(SIGINT, child_handler);
 			if (set_redirection_fd(cmd_list) == -1)
 			{
-				g_exit_status = errno;
+				g_exit_status = 1;
 				exit(g_exit_status);
 			}
 			if (cmd_list->argv == NULL)
@@ -148,7 +148,7 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 			}
 			execve(file, cmd_list->argv, env_list_to_envp(info->env_list));
 			ms_error("execve", NULL);
-			g_exit_status = errno;
+			g_exit_status = 1;
 			exit(g_exit_status);
 		}
 		else
