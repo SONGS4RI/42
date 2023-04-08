@@ -24,6 +24,8 @@
 
 typedef struct s_info
 {
+	int				stdin;
+	int				stdout;
 	int				syntax_error;
 	int				exit_status; // 시그널 받을 때도 바뀌어야 함
 	struct termios  ms_termios;
@@ -44,8 +46,6 @@ typedef struct s_cmd
 	char			**argv;
 	t_redirection	*redirection;
 	int				pipe[2];
-	// int				in;
-	// int				out;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
