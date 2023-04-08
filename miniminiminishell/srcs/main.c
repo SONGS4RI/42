@@ -83,8 +83,11 @@ void	run_minishell(t_info *info)
 			if (!info->syntax_error)
 				cmd_list = create_cmd_list(token_list);
 			free_token_list(token_list);
-			ms_execute(info, cmd_list);
-			free_cmd_list(&cmd_list);
+			if (cmd_list)///////
+			{
+				ms_execute(info, cmd_list);
+				free_cmd_list(&cmd_list);
+			}
 		}
 		free(input);
 	}

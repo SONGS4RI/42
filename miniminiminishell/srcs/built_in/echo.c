@@ -20,6 +20,8 @@ int	ms_echo(char **argv)
 	}
 	while (argv[++idx])
 	{
+		if (argv[idx][0] == '\0')
+			continue ;
 		printf("%s", argv[idx]);
 		if (argv[idx + 1])
 			printf(" ");

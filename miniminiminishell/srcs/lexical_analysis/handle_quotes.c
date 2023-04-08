@@ -5,7 +5,7 @@ static int  set_env_in_quotes_idx(char *str, int *dollar_idx, int *next_idx)
     *dollar_idx = 0;
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
-	if (str[*dollar_idx] == '\0')
+	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0')
 		return (0);
 	*next_idx = *dollar_idx + 1;
 	while (!is_tokenable_sep(str[*next_idx]) && str[*next_idx] != '\'' 
@@ -53,7 +53,7 @@ static int	set_quotes_idxs(t_info *info, char *str, int *start_idx, int *end_idx
 		*end_idx += 1;
 	if (str[*end_idx] == '\0')
 	{
-		printf("miniminiminishell: quotes error\n");
+		printf("minishell: quotes error\n");
 		info->syntax_error = 1;
 		return (0);
 	}
@@ -71,13 +71,17 @@ static char	**seperate_quotes(t_info *info, char *str)
 	strs = malloc(sizeof(char *) * 4);
 	if (!strs)
 		return (NULL);
-	strs[0] = ft_substr(str, 0, start_idx);
+	if (start_idx > 0 && str[start_idx - 1] == '$')//////$'HOME' 예외처리
+		strs[0] = ft_substr(str, 0, start_idx - 1);
+	else
+		strs[0] = ft_substr(str, 0, start_idx);
 	strs[1] = ft_substr(str, start_idx + 1, end_idx - start_idx - 1);
 	if (str[start_idx] == '\"')
 		strs[1] = interpret_env_from_d_quotes(info, strs[1]); // 환경변수 해석
 	strs[2] = ft_substr(str, end_idx + 1, ft_strlen(str) - end_idx - 1);
 	strs[3] = 0;
 	return (strs);
+	
 }
 
 static void	convert_result_to_token(t_token *token_list, char **strs)

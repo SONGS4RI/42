@@ -47,7 +47,12 @@ int	ms_export(t_info *info, char **argv)
 	while (argv[++idx])
 	{
 		env_node = create_env_node(argv[idx]);
-		if (change_value_if_key_exist(info, env_node->key, env_node->value))
+		if (ft_isdigit(env_node->key[0]))
+		{
+			printf("minishell: export: \'%s\': not a valid identifier\n", env_node->key); //printf한것들 표준출력으로 출력해주는걸로 바꿔야함
+			free_env_list(env_node);
+		}
+		else if (change_value_if_key_exist(info, env_node->key, env_node->value))
 			free_env_list(env_node);
 		else // 기존에 없던 환경변수면 추가
 		{
