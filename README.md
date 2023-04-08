@@ -19,4 +19,5 @@ As beautiful as a shell 🐚
 - test : 테스트 코드, 리펙토링 테스트 코드 추가
 - chore : 기타 등등
 
+### 우리 모두 화이팅
   (예시: "docs: update Makefile", "style: norminette", "refactor: seperate XXX function")
