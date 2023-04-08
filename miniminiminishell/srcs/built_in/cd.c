@@ -8,7 +8,8 @@ int	ms_cd(t_info *info, char **argv)
 		chdir(info->home_path);
 	else if (argv[1] && (access(argv[1], F_OK) || chdir(argv[1])))
 	{
-		printf("minishell: cd: %s: No such file or directory\n", argv[1]);
+		ms_error("cd", argv[1]);
+		g_exit_status = errno;
 		return (-1);
 	}
 	if (argv[1] == NULL)
@@ -17,7 +18,8 @@ int	ms_cd(t_info *info, char **argv)
 		if (path[0] == '\0')
 		{
 			free(path);
-			printf("minishell: cd: HOME not set\n");
+			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+			g_exit_status = errno;
 			return (-1);
 		}
 		chdir(path);

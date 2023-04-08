@@ -4,7 +4,6 @@ static void	initialize(t_info *info_ptr, char **envp)
 {
 	info_ptr->stdin = dup(STDIN_FILENO);
 	info_ptr->stdout = dup(STDOUT_FILENO);
-	info_ptr->exit_status = 0;
 	tcgetattr(STDIN_FILENO, &(info_ptr->ms_termios));
 	(&info_ptr->ms_termios)->c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(info_ptr->ms_termios));
@@ -13,10 +12,9 @@ static void	initialize(t_info *info_ptr, char **envp)
 		envp++;
 	info_ptr->path_list = ft_split(*envp + 5, ':');
 	info_ptr->home_path = free_env_key_and_get_env_value(info_ptr->env_list, ft_strdup("HOME"));
-	set_signal();
 }
 
-void	print_token_list(t_token *token_list) ///////////////
+void	print_token_list(t_token *token_list)///////////////
 {
 	while (token_list)
 	{
@@ -65,9 +63,10 @@ void	run_minishell(t_info *info)
 	t_token	*token_list;
 	t_cmd	*cmd_list;
 	char	*input;
-	printf("헬로웅\n");
+	printf("엿같은 미치광이 쉘이 시작됐어용\n");
 	while (1)
 	{
+		set_signal();
 		input = readline("🍄 minishell$ ");
 		if (!input) // ctrl + D
 		{
@@ -77,7 +76,7 @@ void	run_minishell(t_info *info)
 		}
 		else if (*input != '\0')
 		{
-			add_history(input); //$?바꾸기
+			add_history(input);
 			info->syntax_error = 0;
 			token_list = lexical_analysis(info, input);
 			if (!info->syntax_error)
@@ -87,7 +86,7 @@ void	run_minishell(t_info *info)
 			free_token_list(token_list);
 			if (cmd_list)
 			{
-				ms_execute(info, cmd_list);// echo > a
+				ms_execute(info, cmd_list);
 				free_cmd_list(&cmd_list);
 			}
 		}
