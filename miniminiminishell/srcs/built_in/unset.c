@@ -6,7 +6,8 @@ static t_env_node	*delete_env_list(t_env_node *env_list)
 
 	next = env_list->next;
 	free(env_list->key);
-	free(env_list->value);
+	if (env_list->value)
+		free(env_list->value);
 	free(env_list);
 	return (next);
 }
