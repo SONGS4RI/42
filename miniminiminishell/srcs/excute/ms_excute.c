@@ -77,7 +77,6 @@ int	execute_builtin(t_info *info, t_cmd *cmd_list)
 		return (0);
 	}
 	dup2(info->stdin, STDIN_FILENO);
-	dup2(info->stdout, STDOUT_FILENO);
 	if (ft_strncmp(cmd_list->argv[0], "cd", 2) == 0)
 		ms_cd(info, cmd_list->argv);
 	if (ft_strncmp(cmd_list->argv[0], "echo", 4) == 0)
@@ -92,6 +91,7 @@ int	execute_builtin(t_info *info, t_cmd *cmd_list)
 		ms_pwd();
 	if (ft_strncmp(cmd_list->argv[0], "unset", 5) == 0)
 		ms_unset(info, cmd_list->argv);
+	dup2(info->stdout, STDOUT_FILENO); ///////// 메인으로 옮겨야 할수동 ...ㅇㅋㅇㅋ췍췍
 	return (1);
 }
 

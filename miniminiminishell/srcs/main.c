@@ -87,7 +87,7 @@ void	run_minishell(t_info *info)
 			free_token_list(token_list);
 			if (cmd_list)
 			{
-				ms_execute(info, cmd_list);
+				ms_execute(info, cmd_list);// echo > a
 				free_cmd_list(&cmd_list);
 			}
 		}
