@@ -2,6 +2,8 @@
 
 static void	initialize(t_info *info_ptr, char **envp)
 {
+	info_ptr->stdin = dup(STDIN_FILENO);
+	info_ptr->stdout = dup(STDOUT_FILENO);
 	info_ptr->exit_status = 0;
 	tcgetattr(STDIN_FILENO, &(info_ptr->ms_termios));
 	(&info_ptr->ms_termios)->c_lflag &= ~(ECHOCTL);
@@ -83,7 +85,7 @@ void	run_minishell(t_info *info)
 			if (!info->syntax_error)
 				cmd_list = create_cmd_list(token_list);
 			free_token_list(token_list);
-			if (cmd_list)///////
+			if (cmd_list)
 			{
 				ms_execute(info, cmd_list);
 				free_cmd_list(&cmd_list);
@@ -104,7 +106,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	atexit(check_leak);
+	// atexit(check_leak);
 	initialize(&info, envp);
 	run_minishell(&info);
 	return (0);
