@@ -7,7 +7,7 @@ void	handle_chunk(t_token **token_list)
 
 	head = token_list;
 	cur = *token_list;
-	while(cur)
+	while (cur)
 	{
 		if (cur->type == TOKEN_TYPE_CHUNK)
 		{

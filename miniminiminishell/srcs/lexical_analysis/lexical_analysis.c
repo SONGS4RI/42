@@ -46,7 +46,7 @@ t_token	*lexical_analysis(t_info *info, char *input)
 	handle_chunk(&token_list);
 	// printf("=== 8 CHUNK 처리 ================================\n");
 	// print_token_list(token_list);
-
+	
 	// 9. merge continuous argv token
 	merge_continuous_argv_token(&token_list);
 	// printf("=== 9 연속된 argv 병합 ==========================\n");

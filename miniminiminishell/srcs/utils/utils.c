@@ -10,14 +10,13 @@ void	ms_error(char *blame, char *blame2)
 		ft_putstr_fd(blame2, STDERR_FILENO);
 	}
 	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putstr_fd(strerror(errno), STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putendl_fd(strerror(errno), STDERR_FILENO);
 }
 
 static void	signal_handler(int signum)
 {
 	(void)signum;
-	printf("🍄 minishell-1.0$ \n");
+	ft_putendl_fd(CYAN"💎 minishell-1.0$ "RESET, STDOUT_FILENO);
 	g_exit_status = 1;
 	rl_on_new_line();
 	rl_replace_line("", 1);
@@ -27,7 +26,7 @@ static void	signal_handler(int signum)
 void	parent_handler(int signum)
 {
 	(void)signum;
-	printf("\n");
+	ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
 ///////오ㅐ냐면 우리 히어독 핸들러만들었더니 쓸모 없어졌어! 에이씨 퉤

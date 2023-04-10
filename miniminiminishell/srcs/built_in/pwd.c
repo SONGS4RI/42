@@ -9,6 +9,6 @@ int ms_pwd(void)
 		ms_error("pwd", NULL);
 		return (1);
 	}
-	printf("%s\n", current_working_dir);
+	ft_putendl_fd(current_working_dir, STDOUT_FILENO);
 	return (0);
 }

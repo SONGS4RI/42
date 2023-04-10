@@ -32,7 +32,7 @@ int	ms_cd(t_info *info, char **argv)
 		if (path[0] == '\0')
 		{
 			free(path);
-			ft_putstr_fd("minishell: cd: HOME not set\n", STDERR_FILENO);
+			ft_putendl_fd("minishell: cd: HOME not set", STDERR_FILENO);
 			return (1);
 		}
 		chdir(path);

@@ -6,9 +6,9 @@ static void	do_echo(char **argv, int idx)
 	{
 		if (argv[idx][0] == '\0')
 			continue ;
-		printf("%s", argv[idx]);
+		ft_putstr_fd(argv[idx], STDOUT_FILENO);
 		if (argv[idx + 1])
-			printf(" ");
+			ft_putstr_fd(" ", STDOUT_FILENO);
 	}
 }
 
@@ -32,6 +32,6 @@ int	ms_echo(char **argv)
 	}
 	do_echo(argv, idx);
 	if (newline)
-		printf("\n");
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }

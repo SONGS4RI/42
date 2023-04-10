@@ -29,6 +29,7 @@ static int	ms_heredoc(char *limiter)
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		return (-1);
+	printf("들어왔!\n");
 	while (1)
 	{
 		signal(SIGINT, heredoc_handler);
@@ -47,9 +48,11 @@ static int	ms_heredoc(char *limiter)
 	return (open("heredoc.tmp", O_RDONLY));
 }
 
-static int	get_heredoc_fd(char *limiter)
+static int	get_heredoc_fd(t_info *info, char *limiter)
 {
 	int	fd;
+
+	dup2(info->stdin, STDIN_FILENO);
 	fd = ms_heredoc(limiter);
 	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)
 	{
@@ -91,7 +94,7 @@ static int	get_append_fd(char *outfile)
 	return (0);
 }
 
-int	set_redirection_fd(t_cmd *cmd_list)
+int	set_redirection_fd(t_info *info, t_cmd *cmd_list)
 {
 	int				result;
 	t_redirection	*cur;
@@ -100,7 +103,7 @@ int	set_redirection_fd(t_cmd *cmd_list)
 	while (cur)
 	{
 		if (ft_strncmp(cur->type, "<<", 2) == 0)
-			result = get_heredoc_fd(cur->file);
+			result = get_heredoc_fd(info, cur->file);
 		else if (ft_strncmp(cur->type, "<", 1) == 0)
 			result = get_infile_fd(cur->file);
 		else if (ft_strncmp(cur->type, ">>", 2) == 0)
@@ -111,5 +114,6 @@ int	set_redirection_fd(t_cmd *cmd_list)
 			return (-1);
 		cur = cur->next;
 	}
+
 	return (0);
 }

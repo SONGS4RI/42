@@ -6,7 +6,7 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
 	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0' \
-	|| str[*dollar_idx + 1] == '=')
+	|| !ft_isalnum(str[*dollar_idx + 1])) //////////// 예외 : $=, $% 
 		return (0);
 	*next_idx = *dollar_idx + 1;
 	if (str[*next_idx] == '?')

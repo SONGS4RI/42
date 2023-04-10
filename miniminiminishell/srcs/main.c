@@ -1,5 +1,20 @@
 #include "../includes/miniminiminishell.h"
 
+static void	set_old_pwd(t_info *info)
+{
+	char	**argv;
+
+	argv = malloc(sizeof(char *) * 3);
+	if (!argv)
+		return ;
+	argv[0] = ft_strdup("");
+	argv[1] = ft_strdup("OLDPWD");
+	argv[2] = NULL;
+	ms_unset(info, argv);
+	ms_export(info, argv);
+	free_2d_arr(argv);
+}
+
 static void	initialize(t_info *info_ptr, char **envp)
 {
 	info_ptr->stdin = dup(STDIN_FILENO);
@@ -11,6 +26,7 @@ static void	initialize(t_info *info_ptr, char **envp)
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	info_ptr->path_list = ft_split(*envp + 5, ':');
+	set_old_pwd(info_ptr);
 }
 
 void	print_token_list(t_token *token_list)///////////////
@@ -62,15 +78,16 @@ void	run_minishell(t_info *info)
 	t_token	*token_list;
 	t_cmd	*cmd_list;
 	char	*input;
-	printf("💖💫🌷🌼🐰🧸🎀🥨헬로🏅가이즈🌈🍟🍣✨💖\n");
+
 	while (1)
 	{
 		set_signal();
-		input = readline("🍄 minishell-1.0$ ");
+		cmd_list = NULL;
+		input = readline(CYAN"💎 minishell-1.0$ "RESET);
 		if (!input) // ctrl + D
 		{
 			printf("\033[1A");
-			printf("\033[14C");
+			printf("\033[18C");
 			ms_exit(info, cmd_list);
 		}
 		else if (*input != '\0')
@@ -80,11 +97,12 @@ void	run_minishell(t_info *info)
 			token_list = lexical_analysis(info, input);
 			if (!info->syntax_error)
 				info->syntax_error = syntax_analysis(token_list);
-			if (!info->syntax_error)
+			if (!info->syntax_error && token_list)
 				cmd_list = create_cmd_list(token_list);
 			free_token_list(token_list);
 			if (cmd_list)
 			{
+				// print_cmd_list(cmd_list);
 				ms_execute(info, cmd_list);
 				free_cmd_list(&cmd_list);
 			}
@@ -93,19 +111,14 @@ void	run_minishell(t_info *info)
 	}
 }
 
-void	check_leak(void)
-{
-	system("leaks miniminiminishell");
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
 
 	(void)argc;
 	(void)argv;
-	// atexit(check_leak);
 	initialize(&info, envp);
+	printf("💖💫🌷🌼🐰🧸🎀🥨헬로🏅가이즈🌈🍟🍣✨💖\n");////////////////////////
 	run_minishell(&info);
 	return (0);
 }

@@ -18,7 +18,7 @@ static void	set_error_flag(char *str, int *error_flag)
 	{
 		ft_putstr_fd("minishell: unset: \'", STDERR_FILENO);
 		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+		ft_putendl_fd("\': not a valid identifier", STDERR_FILENO);
 		*error_flag = 1;
 	}
 }
@@ -28,7 +28,10 @@ static int	do_unset(t_info *info, t_env_node *cur, t_env_node *prev, char *str)
 	if (ft_strncmp(cur->key, str, ft_strlen(str)) == 0)
 	{
 		if (ft_strncmp(cur->key, "PATH", 4) == 0)
+		{
 			free_2d_arr(info->path_list);
+			info->path_list = NULL;
+		}
 		if (prev == NULL)
 			info->env_list = delete_env_list(cur);
 		else

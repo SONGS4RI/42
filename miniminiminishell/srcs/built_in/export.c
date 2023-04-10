@@ -35,10 +35,15 @@ static void	print_env_list(t_env_node *env_list)
 {
 	while(env_list)
 	{
-		printf("declare -x %s", env_list->key);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		ft_putstr_fd(env_list->key, STDOUT_FILENO);
 		if (env_list->value)
-			printf("=\"%s\"", env_list->value);
-		printf("\n");
+		{
+			ft_putstr_fd("=\"", STDOUT_FILENO);
+			ft_putstr_fd(env_list->value, STDOUT_FILENO);
+			ft_putstr_fd("\"", STDOUT_FILENO);
+		}
+		ft_putstr_fd("\n", STDOUT_FILENO);
 		env_list = env_list->next;
 	}
 }
@@ -65,7 +70,7 @@ static int	set_error_flag(t_env_node *env_node, char *str, int *error_flag)
 	{
 		ft_putstr_fd("minishell: export: \'", STDERR_FILENO);
 		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
+		ft_putendl_fd("\': not a valid identifier", STDERR_FILENO);
 		free_env_list(env_node);
 		*error_flag = 1;
 		return (1);

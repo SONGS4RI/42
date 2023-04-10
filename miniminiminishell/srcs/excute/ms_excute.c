@@ -10,7 +10,7 @@ char	*get_cmd_file(char *cmd, char **path_list)
 	if (access(cmd, X_OK) == 0)
 		return (cmd);
 	temp = ft_strjoin("/", cmd);
-	while (*path_list)
+	while (path_list && *path_list)
 	{
 		cmd_file = ft_strjoin(*path_list, temp);
 		if (access(cmd_file, X_OK) == 0)
@@ -25,31 +25,30 @@ char	*get_cmd_file(char *cmd, char **path_list)
 	return (NULL);
 }
 
-
-void	set_io_fd(t_cmd *cmd_list)
-{
-	if (cmd_list->prev)
-	{
-		if (dup2(cmd_list->prev->pipe[0], STDIN_FILENO) == -1)
-		{
-			g_exit_status = errno; ////////////////
-			exit(g_exit_status);
-		}
-	}
-	if (cmd_list->next)
-	{
-		if (dup2(cmd_list->pipe[1], STDOUT_FILENO) == -1)
-		{
-			g_exit_status = errno; ////////////////
-			exit(g_exit_status);
-		}
-	}
-	if (set_redirection_fd(cmd_list) == -1)
-	{
-		g_exit_status = errno; ////////////////
-		exit(g_exit_status);
-	}
-}
+// void	set_io_fd(t_info *info, t_cmd *cmd_list)
+// {
+// 	if (cmd_list->prev)
+// 	{
+// 		if (dup2(cmd_list->prev->pipe[0], STDIN_FILENO) == -1)
+// 		{
+// 			g_exit_status = errno; ////////////////
+// 			exit(g_exit_status);
+// 		}
+// 	}
+// 	if (cmd_list->next)
+// 	{
+// 		if (dup2(cmd_list->pipe[1], STDOUT_FILENO) == -1)
+// 		{
+// 			g_exit_status = errno; ////////////////
+// 			exit(g_exit_status);
+// 		}
+// 	}
+// 	if (set_redirection_fd(info, cmd_list) == -1)
+// 	{
+// 		g_exit_status = errno; ////////////////
+// 		exit(g_exit_status);
+// 	}
+// }
 
 // void	execute_cmd(t_info *info, t_cmd *cmd_list)
 // {
@@ -71,7 +70,7 @@ void	set_io_fd(t_cmd *cmd_list)
 
 int	execute_builtin(t_info *info, t_cmd *cmd_list)
 {
-	if (set_redirection_fd(cmd_list) == -1)
+	if (set_redirection_fd(info, cmd_list) == -1)
 	{
 		g_exit_status = 1;
 		return (0);
@@ -118,13 +117,6 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 	char	*file;//
 	pid_t	pid;
 
-// Ctrl+d
-
-// EOF 를의미
-// 시그널이 아니다!.
-// stdin pipe를 닫는다.(read(STDIN) return 0)
-
-
 	if (!check_builtin(info, cmd_list))
 	{
 		pid = fork();
@@ -133,7 +125,7 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 		if (pid == 0)
 		{
 			// signal(SIGINT, child_handler);
-			if (set_redirection_fd(cmd_list) == -1)
+			if (set_redirection_fd(info, cmd_list) == -1)
 			{
 				g_exit_status = 1;
 				exit(g_exit_status);
@@ -145,7 +137,10 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 			{
 				ft_putstr_fd("minishell: ", STDERR_FILENO);
 				ft_putstr_fd(cmd_list->argv[0], STDERR_FILENO);
-				ft_putstr_fd(": command not found\n", STDERR_FILENO);
+				if (info->path_list)
+					ft_putendl_fd(": command not found", STDERR_FILENO);
+				else
+					ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 				g_exit_status = 127;
 				exit(g_exit_status);
 			}
@@ -173,4 +168,5 @@ void	ms_execute(t_info *info, t_cmd *cmd_list)
 	// else
 	// 	execute_single_cmd(info, cmd_list);
 	execute_single_cmd(info, cmd_list);
+	unlink("heredoc.tmp");
 }

@@ -64,7 +64,7 @@ void			remove_space_token(t_token **token_list);
 int				syntax_analysis(t_token *token_list);
 
 void			ms_execute(t_info *info, t_cmd *cmd_list);
-int				set_redirection_fd(t_cmd *cmd_list);
+int				set_redirection_fd(t_info *info, t_cmd *cmd_list);
 
 t_cmd			*make_cmd_node(void);
 t_redirection	*make_redirection_node(t_token *token_list);

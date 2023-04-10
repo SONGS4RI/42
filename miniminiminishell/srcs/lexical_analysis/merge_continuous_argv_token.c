@@ -8,7 +8,7 @@ void	merge_continuous_argv_token(t_token **token_list)
 
 	head = token_list;
 	cur = *token_list;
-	while (cur->next)
+	while (cur && cur->next)
 	{
 		if (cur->type == TOKEN_TYPE_ARGV && cur->next->type == TOKEN_TYPE_ARGV)
 		{
