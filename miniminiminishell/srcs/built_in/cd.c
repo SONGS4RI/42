@@ -1,6 +1,6 @@
 #include "../../includes/miniminiminishell.h"
 
-static void	set_pwd(t_info *info)
+static void	set_pwd(t_info *info, char *key)
 {
 	char	**argv;
 	char	current_working_dir[1024];
@@ -10,7 +10,7 @@ static void	set_pwd(t_info *info)
 		return ;
 	getcwd(current_working_dir, 1024);
 	argv[0] = ft_strdup("export");
-	argv[1] = ft_strjoin("PWD=", current_working_dir);
+	argv[1] = ft_strjoin(key, current_working_dir);
 	argv[2] = 0;
 	ms_export(info, argv);
 	free_2d_arr(argv);
@@ -20,8 +20,7 @@ int	ms_cd(t_info *info, char **argv)
 {
 	char	*path;
 
-	// if (argv[1] && ft_strncmp(argv[1], "~", 1) == 0)
-	// 	chdir(info->home_path);
+	set_pwd(info, "OLDPWD=");
 	if (argv[1] && (access(argv[1], F_OK) || chdir(argv[1])))
 	{
 		ms_error("cd", argv[1]);
@@ -39,6 +38,6 @@ int	ms_cd(t_info *info, char **argv)
 		chdir(path);
 		free(path);
 	}
-	set_pwd(info);
+	set_pwd(info, "PWD=");
 	return (0);
 }

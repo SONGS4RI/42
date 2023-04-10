@@ -32,7 +32,6 @@ typedef struct s_info
 	struct termios  ms_termios;
 	t_env_node		*env_list;
 	char			**path_list;//execve(명령어, 인자, 환경변수)
-	// char			*home_path;
 }	t_info;
 
 typedef struct s_redirection

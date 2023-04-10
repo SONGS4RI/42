@@ -11,7 +11,6 @@ static void	initialize(t_info *info_ptr, char **envp)
 	while (ft_strncmp(*envp, "PATH=", 5))
 		envp++;
 	info_ptr->path_list = ft_split(*envp + 5, ':');
-	// info_ptr->home_path = free_env_key_and_get_env_value(info_ptr->env_list, ft_strdup("HOME"));
 }
 
 void	print_token_list(t_token *token_list)///////////////

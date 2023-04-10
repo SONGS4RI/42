@@ -56,7 +56,7 @@ int	is_valid_key(char *key)
 	return (1);
 }
 
-static int	set_error_flag(t_env_node *env_node, int *error_flag)
+static int	set_error_flag(t_env_node *env_node, char *str, int *error_flag)
 {
 	char	*key;
 
@@ -64,7 +64,7 @@ static int	set_error_flag(t_env_node *env_node, int *error_flag)
 	if (!is_valid_key(key))
 	{
 		ft_putstr_fd("minishell: export: \'", STDERR_FILENO);
-		ft_putstr_fd(key, STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
 		ft_putstr_fd("\': not a valid identifier\n", STDERR_FILENO);
 		free_env_list(env_node);
 		*error_flag = 1;
@@ -86,7 +86,7 @@ int	ms_export(t_info *info, char **argv)
 		if (argv[idx][0] == '\0')
 			continue;
 		env_node = create_env_node(argv[idx]);
-		if (set_error_flag(env_node, &error_flag))
+		if (set_error_flag(env_node, argv[idx], &error_flag))
 			continue ;
 		else if (change_value_if_key_exist(info, env_node->key, env_node->value))
 			free_env_list(env_node);

@@ -5,7 +5,8 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	*dollar_idx = 0;
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
-	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0')
+	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0' \
+	|| str[*dollar_idx + 1] == '=')
 		return (0);
 	*next_idx = *dollar_idx + 1;
 	if (str[*next_idx] == '?')
@@ -88,9 +89,13 @@ static void	convert_result_to_token(t_token *token_list, char **strs)
 	token_list->next = NULL;
 	free(token_list->string);
 	token_list->string = ft_strdup(strs[0]);
-	add_token(&token_list, create_token(strs[1], TOKEN_TYPE_ARGV));
-	add_token(&token_list, create_token(strs[2], TOKEN_TYPE_SPACE));
-	add_token(&token_list, create_token(strs[3], TOKEN_TYPE_ARGV));
+	if (strs[1][0]) /////////// 환경변수 널 처리, export a$2=c 예외처리
+		add_token(&token_list, create_token(strs[1], TOKEN_TYPE_ARGV));
+	if (strs[3][0]) /////////// 환경변수 널 처리, export a$2=c 예외처리
+	{
+		add_token(&token_list, create_token(strs[2], TOKEN_TYPE_SPACE));
+		add_token(&token_list, create_token(strs[3], TOKEN_TYPE_ARGV));
+	}
 	token_list = add_token(&token_list, create_token(strs[4], TOKEN_TYPE_CHUNK));
 	free_2d_arr(strs);
 	token_list->next = temp;
