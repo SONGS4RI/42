@@ -6,8 +6,11 @@ static void	free_redirection_list(t_redirection *redirection_list)
 
 	while (redirection_list)
 	{
-		free(redirection_list->type);
-		free(redirection_list->file);
+		// printf("type = %s\n, file = %s\n", redirection_list->type, redirection_list->file);//////////
+		if (redirection_list->type)
+			free(redirection_list->type);
+		if (redirection_list->file)
+			free(redirection_list->file);
 		tmp = redirection_list;
 		redirection_list = redirection_list->next;
 		free(tmp);

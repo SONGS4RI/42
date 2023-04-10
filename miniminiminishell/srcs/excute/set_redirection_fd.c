@@ -43,7 +43,6 @@ static int	ms_heredoc(char *limiter)
 		input = NULL;////////////////////
 	}
 	close(fd);
-	free(limiter);
 	free(input);
 	return (open("heredoc.tmp", O_RDONLY));
 }
@@ -94,21 +93,23 @@ static int	get_append_fd(char *outfile)
 
 int	set_redirection_fd(t_cmd *cmd_list)
 {
-	int	result;
+	int				result;
+	t_redirection	*cur;
 
-	while (cmd_list->redirection)
+	cur = cmd_list->redirection;
+	while (cur)
 	{
-		if (ft_strncmp(cmd_list->redirection->type, "<<", 2) == 0)
-			result = get_heredoc_fd(cmd_list->redirection->file);
-		else if (ft_strncmp(cmd_list->redirection->type, "<", 1) == 0)
-			result = get_infile_fd(cmd_list->redirection->file);
-		else if (ft_strncmp(cmd_list->redirection->type, ">>", 2) == 0)
-			result = get_append_fd(cmd_list->redirection->file);
-		else if (ft_strncmp(cmd_list->redirection->type, ">", 1) == 0)
-			result = get_overwrite_fd(cmd_list->redirection->file);
+		if (ft_strncmp(cur->type, "<<", 2) == 0)
+			result = get_heredoc_fd(cur->file);
+		else if (ft_strncmp(cur->type, "<", 1) == 0)
+			result = get_infile_fd(cur->file);
+		else if (ft_strncmp(cur->type, ">>", 2) == 0)
+			result = get_append_fd(cur->file);
+		else if (ft_strncmp(cur->type, ">", 1) == 0)
+			result = get_overwrite_fd(cur->file);
 		if (result == -1)
 			return (-1);
-		cmd_list->redirection = cmd_list->redirection->next;
+		cur = cur->next;
 	}
 	return (0);
 }
