@@ -11,6 +11,7 @@ typedef struct s_env_node
 	struct s_env_node	*next;
 }	t_env_node;
 
+/* utils dir */
 t_env_node	*create_env_node(char *str);
 void		add_env_node(t_env_node **envp_list, t_env_node *new_envp_node);
 t_env_node	*init_env_list(char **envp);

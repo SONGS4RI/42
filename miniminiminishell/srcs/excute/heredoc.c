@@ -69,7 +69,6 @@ int	ms_heredoc(t_env_node *env_list, char *limiter)
 		handle_heredoc_env(env_list, fd, input);
 		write(fd, "\n", 1);
 		free(input);
-		
 	}
 	close(fd);
 	free(input);

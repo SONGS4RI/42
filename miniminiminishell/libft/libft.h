@@ -6,7 +6,7 @@
 /*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 19:18:20 by jikoo             #+#    #+#             */
-/*   Updated: 2023/04/07 19:17:02 by jikoo            ###   ########.fr       */
+/*   Updated: 2023/04/13 19:54:31 by jikoo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "./gnl/get_next_line.h"
 
 /* ctype.h */
 int 	ft_isalnum(int c);
@@ -54,7 +53,5 @@ int     ft_max(int n1, int n2);
 int     ft_min(int n1, int n2);
 
 char	*ft_itoa(int n);
-
-char	*get_next_line(int fd);
 
 #endif

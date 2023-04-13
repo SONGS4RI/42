@@ -21,6 +21,7 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+/* utils dir */
 t_token	*create_token(char *string, t_token_type type);
 t_token	*add_token(t_token **token_list, t_token *new_token);
 t_token	*delete_token(t_token *del_token, t_token **token_list);

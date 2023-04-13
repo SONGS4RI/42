@@ -50,8 +50,10 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }	t_cmd;
 
+// 프린트 해줄라고 만든 놈
 void			print_token_list(t_token *token_list);
 
+/* lexical_analysis dir */
 t_token			*lexical_analysis(t_info *info, char *input);
 void			handle_heredoc_limiter(t_info *info, t_token *token_list);
 void			handle_quotes(t_info *info, t_token *token_list);
@@ -61,6 +63,7 @@ void			handle_chunk(t_token **token_list);
 void			merge_continuous_argv_token(t_token **token_list);
 void			remove_space_token(t_token **token_list);
 
+/* syntax_analysis */
 int				syntax_analysis(t_token *token_list);
 
 /* cmd_list dir */
@@ -79,6 +82,7 @@ int				ms_export(t_info *info, char **argv);
 int				ms_pwd(void);
 int				ms_unset(t_info *info, char **argv);
 
+/* utils dir - utils.c */
 void			ms_error(char *blame, char *blame2);
 void			parent_handler(int signum);
 void			child_handler(int signum);
