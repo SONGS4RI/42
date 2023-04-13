@@ -15,45 +15,12 @@ static int	get_infile_fd(char *infile)
 	return (0);
 }
 
-void	heredoc_handler(int signum)
-{
-	(void)signum;
-	exit(1);
-}
-
-static int	ms_heredoc(char *limiter)
-{
-	int		fd;
-	char	*input;
-
-	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-		return (-1);
-	printf("들어왔!\n");
-	while (1)
-	{
-		signal(SIGINT, heredoc_handler);
-		input = readline("> ");
-		signal(SIGINT, child_handler);
-		if (input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
-		&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
-			break ;
-		write(fd, input, ft_strlen(input));
-		write(fd, "\n", 1);
-		free(input);
-		input = NULL;////////////////////
-	}
-	close(fd);
-	free(input);
-	return (open("heredoc.tmp", O_RDONLY));
-}
-
 static int	get_heredoc_fd(t_info *info, char *limiter)
 {
 	int	fd;
 
 	dup2(info->stdin, STDIN_FILENO);
-	fd = ms_heredoc(limiter);
+	fd = ms_heredoc(info->env_list, limiter);
 	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)
 	{
 		ms_error("heredoc", NULL);

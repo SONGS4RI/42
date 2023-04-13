@@ -63,15 +63,14 @@ void			remove_space_token(t_token **token_list);
 
 int				syntax_analysis(t_token *token_list);
 
-void			ms_execute(t_info *info, t_cmd *cmd_list);
-int				set_redirection_fd(t_info *info, t_cmd *cmd_list);
-
+/* cmd_list dir */
 t_cmd			*make_cmd_node(void);
 t_redirection	*make_redirection_node(t_token *token_list);
 int				get_argv_cnt(t_token *token_list);
 t_cmd			*create_cmd_list(t_token *token_list);
 void			free_cmd_list(t_cmd **cmd_list);
 
+/* bult_in dir */
 int				ms_cd(t_info *info, char **argv);
 int				ms_echo(char **argv);
 int				ms_env(t_env_node *env_list);
@@ -88,5 +87,11 @@ int				is_tokenable_sep(char c);
 void			free_2d_arr(char **arr);
 void			free_strs(char *str1, char *str2, char *str3, char *str4);
 char			*join_strs(char *str1, char *str2, char *str3);
+
+/* excute dir */
+void			handle_heredoc_env(t_env_node *env_list, int fd, char *str);
+int				ms_heredoc(t_env_node *env_list, char *limiter);
+void			ms_execute(t_info *info, t_cmd *cmd_list);
+int				set_redirection_fd(t_info *info, t_cmd *cmd_list);
 
 #endif

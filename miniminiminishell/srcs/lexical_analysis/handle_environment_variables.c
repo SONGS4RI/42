@@ -5,8 +5,7 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 	*dollar_idx = 0;
 	while (str[*dollar_idx] && str[*dollar_idx] != '$')
 		*dollar_idx += 1;
-	if (str[*dollar_idx] == '\0' || str[*dollar_idx + 1] == '\0' \
-	|| !ft_isalnum(str[*dollar_idx + 1])) //////////// 예외 : $=, $% 
+	if (str[*dollar_idx] == '\0')
 		return (0);
 	*next_idx = *dollar_idx + 1;
 	if (str[*next_idx] == '?')
@@ -14,6 +13,8 @@ static int	set_env_idx(char *str, int *dollar_idx, int *next_idx)
 		*next_idx += 1;
 		return (1);
 	}
+	if (str[*next_idx] == '\0' || !ft_isalnum(str[*next_idx])) //////////// 예외 : $=, $% 
+		return (0);
 	while (str[*next_idx] && (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
 		*next_idx += 1;
 	return (1);
