@@ -86,8 +86,7 @@ void	run_minishell(t_info *info)
 		input = readline(CYAN"💎 minishell-1.0$ "RESET);
 		if (!input) // ctrl + D
 		{
-			printf("\033[1A");
-			printf("\033[18C");
+			printf("\033[1A\033[18C");
 			ms_exit(info, cmd_list);
 		}
 		else if (*input != '\0')
@@ -102,7 +101,6 @@ void	run_minishell(t_info *info)
 			free_token_list(token_list);
 			if (cmd_list)
 			{
-				// print_cmd_list(cmd_list);
 				ms_execute(info, cmd_list);
 				free_cmd_list(&cmd_list);
 			}

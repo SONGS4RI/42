@@ -86,6 +86,7 @@ int				ms_unset(t_info *info, char **argv);
 void			ms_error(char *blame, char *blame2);
 void			parent_handler(int signum);
 void			child_handler(int signum);
+void			quit_handler(int signum);
 void			set_signal(void);
 int				is_tokenable_sep(char c);
 void			free_2d_arr(char **arr);
@@ -95,7 +96,11 @@ char			*join_strs(char *str1, char *str2, char *str3);
 /* excute dir */
 void			handle_heredoc_env(t_env_node *env_list, int fd, char *str);
 int				ms_heredoc(t_env_node *env_list, char *limiter);
+char			*get_cmd_file(char *cmd, char **path_list);
+int				check_builtin(t_info *info, t_cmd *cmd_list);
 void			ms_execute(t_info *info, t_cmd *cmd_list);
+void			execute_single_cmd(t_info *info, t_cmd *cmd_list);
 int				set_redirection_fd(t_info *info, t_cmd *cmd_list);
+
 
 #endif

@@ -29,9 +29,10 @@ LEXICAL		= lexical_analysis/lexical_analysis.c	\
 
 SYNTAX		= syntax_analysis/syntax_analysis.c \
 
-EXCUTE		= excute/ms_excute.c \
-			  excute/set_redirection_fd.c \
-			  excute/heredoc.c\
+EXCUTE		= execute/ms_execute.c \
+			  execute/single_cmd.c \
+			  execute/set_redirection_fd.c \
+			  execute/heredoc.c\
 
 CMD_LIST	= cmd_list/create_cmd_list.c \
 			  cmd_list/cmd_utils.c 		\

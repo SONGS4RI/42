@@ -1,11 +1,5 @@
 #include "../../includes/miniminiminishell.h"
 
-static void	heredoc_handler(int signum)
-{
-	(void)signum;
-	exit(1);
-}
-
 static char	*get_env_value_if(t_env_node *env_list, char *str, int *dollar_idx, int *next_idx)
 {
 	*next_idx = *dollar_idx + 1;
@@ -58,18 +52,20 @@ int	ms_heredoc(t_env_node *env_list, char *limiter)
 	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		return (-1);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		signal(SIGINT, heredoc_handler);
 		input = readline("> ");
-		signal(SIGINT, child_handler);
-		if (input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
+		if (input == NULL)
+			ft_putstr_fd("\033[1A\033[2C", 2);
+		if(input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
 		&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
 			break ;
 		handle_heredoc_env(env_list, fd, input);
 		write(fd, "\n", 1);
 		free(input);
 	}
+	signal(SIGQUIT, quit_handler);
 	close(fd);
 	free(input);
 	return (open("heredoc.tmp", O_RDONLY));

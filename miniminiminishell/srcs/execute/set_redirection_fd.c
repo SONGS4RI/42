@@ -18,9 +18,13 @@ static int	get_infile_fd(char *infile)
 static int	get_heredoc_fd(t_info *info, char *limiter)
 {
 	int	fd;
+	int	temp;
 
+	temp = dup(STDOUT_FILENO);
 	dup2(info->stdin, STDIN_FILENO);
+	dup2(info->stdout, STDOUT_FILENO);
 	fd = ms_heredoc(info->env_list, limiter);
+	dup2(temp, STDOUT_FILENO);
 	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)
 	{
 		ms_error("heredoc", NULL);

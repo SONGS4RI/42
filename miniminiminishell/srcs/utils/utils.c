@@ -25,17 +25,22 @@ static void	signal_handler(int signum)
 
 void	parent_handler(int signum)
 {
-	(void)signum;
-	ft_putstr_fd("\n", STDOUT_FILENO);
+	if (signum == SIGINT)
+		ft_putendl_fd("", 2);
 }
 
-///////오ㅐ냐면 우리 히어독 핸들러만들었더니 쓸모 없어졌어! 에이씨 퉤
-void	child_handler(int signum)///////////뺼까말까 마지막에 결정해!!
+void	child_handler(int signum)
 {
 	(void)signum;
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	rl_redisplay();
+}
+
+void	quit_handler(int signum)
+{
+	(void)signum;
+	exit(1);
 }
 
 void	set_signal(void)

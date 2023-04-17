@@ -25,7 +25,8 @@ static void	set_error_flag(char *str, int *error_flag)
 
 static int	do_unset(t_info *info, t_env_node *cur, t_env_node *prev, char *str)
 {
-	if (ft_strncmp(cur->key, str, ft_strlen(str)) == 0)
+	if (ft_strlen(cur->key) == ft_strlen(str) \
+	&& ft_strncmp(cur->key, str, ft_strlen(str)) == 0)
 	{
 		if (ft_strncmp(cur->key, "PATH", 4) == 0)
 		{
