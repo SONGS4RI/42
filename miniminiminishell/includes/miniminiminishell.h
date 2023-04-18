@@ -91,19 +91,20 @@ char			*join_strs(char *str1, char *str2, char *str3);
 /* utils dir - signal.c */
 void			signal_handler(int signum);
 void			parent_handler(int signum);
-void			child_handler(int signum);
 void			heredoc_handler(int signum);
 void			quit_handler(int signum);
 void			set_signal(void);
 
 /* excute dir */
 char			*get_cmd_file(char *cmd, char **path_list);
+void			print_command_not_found(char **path_list, char *str);
 int				check_builtin(t_info *info, t_cmd *cmd_list, int cnt);
 void			ms_execute(t_info *info, t_cmd *cmd_list);
 void			execute_heredoc(t_info *info, t_cmd *cmd_list);
 void			unlink_heredoc_tmp(t_cmd *cmd_list);
 int				set_redirection_fd(t_cmd *cmd_list, int cnt);
 void			execute_single_cmd(t_info *info, t_cmd *cmd_list);
+void			execute_multiple_cmd(t_info *info, t_cmd *cmd_list);
 
 
 #endif

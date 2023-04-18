@@ -1,14 +1,11 @@
 # compile options
-NAME		= miniminiminishell
+NAME		= minishell
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM			= rm -f
 LIBFT		= -Llibft -lft
-LDFLAGS		= -lreadline -L/${HOME}/.brew/opt/readline/lib
-CPPFLAGS	= -I/${HOME}/.brew/opt/readline/include
-# LDFLAGS		= -lreadline -L/opt/homebrew/opt/readline/lib
-# CPPFLAGS	= -I/opt/homebrew/opt/readline/include
-
+LDFLAGS		= -lreadline -L$(shell brew --prefix readline)/lib
+CPPFLAGS	= -I$(shell brew --prefix readline)/include
 
 # source files
 MS_DIR		= srcs/
@@ -32,6 +29,7 @@ SYNTAX		= syntax_analysis/syntax_analysis.c \
 
 EXCUTE		= execute/ms_execute.c \
 			  execute/single_cmd.c \
+			  execute/multiple_cmd.c \
 			  execute/set_redirection_fd.c \
 			  execute/heredoc.c\
 

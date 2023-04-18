@@ -57,7 +57,7 @@ static void	ms_heredoc(t_env_node *env_list, char *file_name, char *limiter)
 	{
 		input = readline("> ");
 		if (input == NULL)
-			ft_putstr_fd("\033[1A\033[2C", 2);
+			ft_putstr_fd("\033[1A\033[2C", STDOUT_FILENO);
 		if(input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
 		&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
 		{

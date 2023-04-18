@@ -66,7 +66,7 @@ void	print_cmd_list(t_cmd *cmd_list)
 		cur = cmd_list->redirection;
 		while (cur)
 		{
-			printf("redirection = t: %s, f: %s\n", cur->type, cur->file);
+			printf("redirection = t: %s, f: %s\n", cur->type, cur->file);////
 			cur = cur->next;
 		}
 		cmd_list = cmd_list->next;
@@ -81,12 +81,12 @@ void	run_minishell(t_info *info)
 
 	while (1)
 	{
-		set_signal();
+		set_signal();//확인
 		cmd_list = NULL;
 		input = readline(CYAN"💎 minishell-1.0$ "RESET);
 		if (!input) // ctrl + D
 		{
-			printf("\033[1A\033[18C");
+			ft_putstr_fd("\033[1A\033[18C", STDOUT_FILENO);
 			ms_exit(info, cmd_list);
 		}
 		else if (*input != '\0')
