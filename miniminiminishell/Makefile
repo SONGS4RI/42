@@ -16,6 +16,7 @@ MS_DIR		= srcs/
 UTILS		= utils/environment_variables.c \
 			  utils/token.c \
 			  utils/utils.c	\
+			  utils/signal.c
 
 LEXICAL		= lexical_analysis/lexical_analysis.c	\
 			  lexical_analysis/handle_heredoc_limiter.c	\

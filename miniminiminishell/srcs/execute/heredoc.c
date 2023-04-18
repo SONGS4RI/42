@@ -16,7 +16,7 @@ static char	*get_env_value_if(t_env_node *env_list, char *str, int *dollar_idx, 
 	ft_substr(str, *dollar_idx + 1, *next_idx - *dollar_idx - 1)));
 }
 
-void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
+static void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
 {
 	int		start_idx;
 	int		end_idx;
@@ -44,15 +44,15 @@ void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
 	write(fd, str + start_idx, end_idx - start_idx);
 }
 
-int	ms_heredoc(t_env_node *env_list, char *limiter)
+static void	ms_heredoc(t_env_node *env_list, char *file_name, char *limiter)
 {
 	int		fd;
 	char	*input;
 
-	fd = open("heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
-		return (-1);
-	signal(SIGQUIT, SIG_IGN);
+		return ;
+	signal(SIGINT, heredoc_handler);
 	while (1)
 	{
 		input = readline("> ");
@@ -60,13 +60,60 @@ int	ms_heredoc(t_env_node *env_list, char *limiter)
 			ft_putstr_fd("\033[1A\033[2C", 2);
 		if(input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
 		&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
-			break ;
+		{
+			close(fd);
+			return ;
+		}
 		handle_heredoc_env(env_list, fd, input);
 		write(fd, "\n", 1);
 		free(input);
 	}
-	signal(SIGQUIT, quit_handler);
 	close(fd);
 	free(input);
-	return (open("heredoc.tmp", O_RDONLY));
+}
+
+void	execute_heredoc(t_info *info, t_cmd *cmd_list)
+{
+	t_redirection	*cur;
+	int				cnt;
+	char			*file_cnt;
+	char			*file_name;
+
+	cnt = 0;
+	while (cmd_list)
+	{
+		cur = cmd_list->redirection;
+		while (cur)
+		{
+			if (ft_strncmp(cur->type, "<<", 2) == 0)
+			{
+				file_cnt = ft_itoa(cnt);
+				file_name = ft_strjoin(file_cnt, ".tmp");
+				ms_heredoc(info->env_list, file_name, cur->file);
+				free_strs(file_cnt, file_name, NULL, NULL);
+			}
+			cur = cur->next;
+		}
+		cnt++;
+		cmd_list = cmd_list->next;
+	}
+	exit(0);
+}
+
+void	unlink_heredoc_tmp(t_cmd *cmd_list)
+{
+	int		cnt;
+	char	*file_cnt;
+	char	*file_name;
+
+	cnt = 0;
+	while (cmd_list)
+	{
+		file_cnt = ft_itoa(cnt);
+		file_name = ft_strjoin(file_cnt, ".tmp");
+		unlink(file_name);
+		free_strs(file_cnt, file_name, NULL, NULL);
+		cmd_list = cmd_list->next;
+		cnt++;
+	}
 }

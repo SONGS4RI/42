@@ -116,7 +116,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	initialize(&info, envp);
-	printf("💖💫🌷🌼🐰🧸🎀🥨헬로🏅가이즈🌈🍟🍣✨💖\n");////////////////////////
+	// printf("💖💫🌷🌼🐰🧸🎀🥨헬로🏅가이즈🌈🍟🍣✨💖\n");////////////////////////
+	printf("\nAs beautiful as a shell🐚\n");
+	printf("By: jikoo jahlee donghyk2 seokang\n");
 	run_minishell(&info);
 	return (0);
 }

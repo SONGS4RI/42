@@ -13,42 +13,6 @@ void	ms_error(char *blame, char *blame2)
 	ft_putendl_fd(strerror(errno), STDERR_FILENO);
 }
 
-static void	signal_handler(int signum)
-{
-	(void)signum;
-	ft_putendl_fd(CYAN"💎 minishell-1.0$ "RESET, STDOUT_FILENO);
-	g_exit_status = 1;
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_redisplay();
-}
-
-void	parent_handler(int signum)
-{
-	if (signum == SIGINT)
-		ft_putendl_fd("", 2);
-}
-
-void	child_handler(int signum)
-{
-	(void)signum;
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	rl_redisplay();
-}
-
-void	quit_handler(int signum)
-{
-	(void)signum;
-	exit(1);
-}
-
-void	set_signal(void)
-{
-	signal(SIGINT, signal_handler);	// ctrl + C
-	signal(SIGQUIT, SIG_IGN);		// ctrl + "\"
-}
-
 int	is_tokenable_sep(char c)
 {
 	return (c == ' ' || c == '|' || c == '<' || c == '>' || c == '\0');

@@ -25,52 +25,9 @@ char	*get_cmd_file(char *cmd, char **path_list)
 	return (NULL);
 }
 
-// void	set_io_fd(t_info *info, t_cmd *cmd_list)
-// {
-// 	if (cmd_list->prev)
-// 	{
-// 		if (dup2(cmd_list->prev->pipe[0], STDIN_FILENO) == -1)
-// 		{
-// 			g_exit_status = errno; ////////////////
-// 			exit(g_exit_status);
-// 		}
-// 	}
-// 	if (cmd_list->next)
-// 	{
-// 		if (dup2(cmd_list->pipe[1], STDOUT_FILENO) == -1)
-// 		{
-// 			g_exit_status = errno; ////////////////
-// 			exit(g_exit_status);
-// 		}
-// 	}
-// 	if (set_redirection_fd(info, cmd_list) == -1)
-// 	{
-// 		g_exit_status = errno; ////////////////
-// 		exit(g_exit_status);
-// 	}
-// }
-
-// void	execute_cmd(t_info *info, t_cmd *cmd_list)
-// {
-// 	char	*file;
-
-// 	if (check_builtin(argv[0]))
-// 		execute_builtin(info, cmd_list);
-// 	file = get_cmd_file(cmd_list->argv[0], cmd_list->path_list);
-// 	if (file == NULL)
-// 	{
-// 		printf("minishell: %s: command not found\n", cmd_list->argv[0]);
-// 		g_exit_status = 127;
-// 		exit(g_exit_status);
-// 	}
-// 	set_io_fd(cmd_list);//
-// 	execve(file, cmd_list->argv, env_list_to_envp(info->env_list));
-// 	// error	
-// }
-
-int	execute_builtin(t_info *info, t_cmd *cmd_list)
+int	execute_builtin(t_info *info, t_cmd *cmd_list, int cnt)
 {
-	if (set_redirection_fd(info, cmd_list) == -1)
+	if (set_redirection_fd(cmd_list, cnt) == -1)
 	{
 		g_exit_status = 1;
 		return (0);
@@ -94,7 +51,7 @@ int	execute_builtin(t_info *info, t_cmd *cmd_list)
 	return (1);
 }
 
-int	check_builtin(t_info *info, t_cmd *cmd_list)
+int	check_builtin(t_info *info, t_cmd *cmd_list, int cnt)
 {
 	char	*cmd;
 
@@ -108,7 +65,7 @@ int	check_builtin(t_info *info, t_cmd *cmd_list)
 		|| (ft_strlen(cmd) == 6 && ft_strncmp(cmd, "export", 6) == 0) \
 		|| (ft_strlen(cmd) == 3 && ft_strncmp(cmd, "pwd", 3) == 0) \
 		|| (ft_strlen(cmd) == 5 && ft_strncmp(cmd, "unset", 5) == 0))
-		return (execute_builtin(info, cmd_list));
+		return (execute_builtin(info, cmd_list, cnt));
 	return (0);
 }
 
@@ -151,11 +108,11 @@ void	execute_multiple_cmd(t_info *info, t_cmd *cmd_list)
 					return ;
 				}
 			}
-			if (check_builtin(info, cmd_list))
+			if (check_builtin(info, cmd_list, cnt))
 				exit(g_exit_status);
 			else
 			{
-				if (set_redirection_fd(info, cmd_list) == -1)
+				if (set_redirection_fd(cmd_list, cnt) == -1)
 				{
 					g_exit_status = 1;
 					return ;
@@ -189,7 +146,7 @@ void	execute_multiple_cmd(t_info *info, t_cmd *cmd_list)
 	waitpid(pid, &g_exit_status, 0);
 	while (--cnt)
 		wait(0); // 자식이 있을 때만 !!!
-	signal(SIGINT, parent_handler);
+	// signal(SIGINT, parent_handler);
 	if (WIFSIGNALED(g_exit_status)) // signal에 의하여 terminate 되었는지를 확인
 		g_exit_status = 128 + WTERMSIG(g_exit_status); // WIFSIGNALED의 값이 참인 경우 어느 signal에 의하여 terminate 되었는지를 알아냄
 	if (WIFEXITED(g_exit_status))
@@ -198,9 +155,30 @@ void	execute_multiple_cmd(t_info *info, t_cmd *cmd_list)
 
 void	ms_execute(t_info *info, t_cmd *cmd_list)
 {
-	if (cmd_list->next)
-		execute_multiple_cmd(info, cmd_list);
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+	{
+		ms_error("fork", NULL);
+		g_exit_status = 1;
+		return ;
+	}
+	else if (pid == 0)
+		execute_heredoc(info, cmd_list);
+	signal(SIGINT, SIG_IGN);
+	wait(&g_exit_status);
+	// signal(SIGINT, parent_handler);
+	if (WIFEXITED(g_exit_status))
+		g_exit_status = WEXITSTATUS(g_exit_status); // exit code 알아냄
+	if (WIFSIGNALED(g_exit_status)) // signal에 의하여 terminate 되었는지를 확인
+		g_exit_status = 1; // WIFSIGNALED의 값이 참인 경우 어느 signal에 의하여 terminate 되었는지를 알아냄
 	else
-		execute_single_cmd(info, cmd_list);
-	unlink("heredoc.tmp");
+	{
+		if (cmd_list->next)
+			execute_multiple_cmd(info, cmd_list);
+		else
+			execute_single_cmd(info, cmd_list);
+	}
+	unlink_heredoc_tmp(cmd_list);
 } 

@@ -50,7 +50,6 @@ char	*free_env_key_and_get_env_value(t_env_node *env_list, char *env_key)
 {
 	char	*env_value;
 
-	printf("env key = %s\n", env_key);
 	while (env_list && (ft_strlen(env_list->key) != ft_strlen(env_key) \
 	|| ft_strncmp(env_list->key, env_key, ft_strlen(env_list->key))))
 		env_list = env_list->next;

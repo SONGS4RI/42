@@ -12,7 +12,7 @@ static void	execute_single_cmd_child(t_info *info, t_cmd *cmd_list)
 {
 	char	*file;
 
-	if (set_redirection_fd(info, cmd_list) == -1)
+	if (set_redirection_fd(cmd_list, 0) == -1)
 	{
 		g_exit_status = 1;
 		exit(g_exit_status);
@@ -41,7 +41,7 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 {
 	pid_t	pid;
 
-	if (!check_builtin(info, cmd_list))
+	if (!check_builtin(info, cmd_list, 0))
 	{
 		pid = fork();
 		if (pid < 0)
@@ -56,7 +56,7 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 		{
 			signal(SIGINT, SIG_IGN);
 			wait(&(g_exit_status));
-			signal(SIGINT, parent_handler);
+			// signal(SIGINT, parent_handler);
 			execute_single_cmd_parent();
 		}
 	}

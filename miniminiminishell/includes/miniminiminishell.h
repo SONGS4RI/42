@@ -49,7 +49,6 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }	t_cmd;
-
 // 프린트 해줄라고 만든 놈
 void			print_token_list(t_token *token_list);
 
@@ -84,23 +83,27 @@ int				ms_unset(t_info *info, char **argv);
 
 /* utils dir - utils.c */
 void			ms_error(char *blame, char *blame2);
-void			parent_handler(int signum);
-void			child_handler(int signum);
-void			quit_handler(int signum);
-void			set_signal(void);
 int				is_tokenable_sep(char c);
 void			free_2d_arr(char **arr);
 void			free_strs(char *str1, char *str2, char *str3, char *str4);
 char			*join_strs(char *str1, char *str2, char *str3);
 
+/* utils dir - signal.c */
+void			signal_handler(int signum);
+void			parent_handler(int signum);
+void			child_handler(int signum);
+void			heredoc_handler(int signum);
+void			quit_handler(int signum);
+void			set_signal(void);
+
 /* excute dir */
-void			handle_heredoc_env(t_env_node *env_list, int fd, char *str);
-int				ms_heredoc(t_env_node *env_list, char *limiter);
 char			*get_cmd_file(char *cmd, char **path_list);
-int				check_builtin(t_info *info, t_cmd *cmd_list);
+int				check_builtin(t_info *info, t_cmd *cmd_list, int cnt);
 void			ms_execute(t_info *info, t_cmd *cmd_list);
+void			execute_heredoc(t_info *info, t_cmd *cmd_list);
+void			unlink_heredoc_tmp(t_cmd *cmd_list);
+int				set_redirection_fd(t_cmd *cmd_list, int cnt);
 void			execute_single_cmd(t_info *info, t_cmd *cmd_list);
-int				set_redirection_fd(t_info *info, t_cmd *cmd_list);
 
 
 #endif

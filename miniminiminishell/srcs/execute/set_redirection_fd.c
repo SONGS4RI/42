@@ -1,6 +1,6 @@
 #include "../../includes/miniminiminishell.h"
 
-static int	get_infile_fd(char *infile)
+static int	set_infile_fd(char *infile)
 {
 	int	fd;
 
@@ -10,32 +10,30 @@ static int	get_infile_fd(char *infile)
 		ms_error(infile, NULL);
 		return (-1);
 	}
-	// return (fd);
 	close(fd);
 	return (0);
 }
 
-static int	get_heredoc_fd(t_info *info, char *limiter)
+static int	set_heredoc_fd(int num)
 {
-	int	fd;
-	int	temp;
+	int		fd;
+	char	*file_cnt;
+	char	*file_name;
 
-	temp = dup(STDOUT_FILENO);
-	dup2(info->stdin, STDIN_FILENO);
-	dup2(info->stdout, STDOUT_FILENO);
-	fd = ms_heredoc(info->env_list, limiter);
-	dup2(temp, STDOUT_FILENO);
-	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)
+	file_cnt = ft_itoa(num);
+	file_name = ft_strjoin(file_cnt, ".tmp");
+	fd = open(file_name, O_RDONLY);
+	free_strs(file_cnt, file_name, NULL, NULL);
+	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)// << end => < 1.tmp
 	{
-		ms_error("heredoc", NULL);
+		ms_error("heredoc", file_name);
 		return (-1);
 	}
-	// return (fd);
 	close(fd);
 	return (0);
 }
 
-static int	get_overwrite_fd(char *outfile)
+static int	set_overwrite_fd(char *outfile)
 {
 	int	fd;
 	
@@ -45,12 +43,11 @@ static int	get_overwrite_fd(char *outfile)
 		ms_error(outfile, NULL);
 		return (-1);
 	}
-	// return (fd);
 	close(fd);
 	return (0);
 }
 
-static int	get_append_fd(char *outfile)
+static int	set_append_fd(char *outfile)
 {
 	int	fd;
 	
@@ -60,31 +57,30 @@ static int	get_append_fd(char *outfile)
 		ms_error(outfile, NULL);
 		return (-1);
 	}
-	// return (fd);
 	close(fd);
 	return (0);
 }
 
-int	set_redirection_fd(t_info *info, t_cmd *cmd_list)
+int	set_redirection_fd(t_cmd *cmd_list, int cnt)
 {
-	int				result;
 	t_redirection	*cur;
+	int				result;
 
 	cur = cmd_list->redirection;
 	while (cur)
 	{
 		if (ft_strncmp(cur->type, "<<", 2) == 0)
-			result = get_heredoc_fd(info, cur->file);
+			result = set_heredoc_fd(cnt);
 		else if (ft_strncmp(cur->type, "<", 1) == 0)
-			result = get_infile_fd(cur->file);
+			result = set_infile_fd(cur->file);
 		else if (ft_strncmp(cur->type, ">>", 2) == 0)
-			result = get_append_fd(cur->file);
+			result = set_append_fd(cur->file);
 		else if (ft_strncmp(cur->type, ">", 1) == 0)
-			result = get_overwrite_fd(cur->file);
+			result = set_overwrite_fd(cur->file);
 		if (result == -1)
 			return (-1);
 		cur = cur->next;
+		cnt++;
 	}
-
 	return (0);
 }
