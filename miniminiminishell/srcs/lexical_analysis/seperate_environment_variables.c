@@ -46,7 +46,7 @@ static char	**interpret_and_split_env(t_env_node *env_list, char *str,
 	if (!strs)
 		return (NULL);
 	env_value = ft_substr(str, dollar_idx + 1, next_idx - dollar_idx - 1);
-	env_value = free_env_key_and_get_env_value(env_list, env_value);
+	env_value = get_env_value_and_free_env_key(env_list, env_value);
 	space_idx = 0;
 	while (env_value[space_idx] && env_value[space_idx] != ' ')
 		space_idx++;

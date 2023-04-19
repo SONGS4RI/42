@@ -50,6 +50,7 @@ static void	convert_result_to_token(t_token *token_list, char **strs, char *arg)
 	token_list->next = temp;
 }
 
+// CHUNK => CHUNK, ???, CHUNK
 void	seperate_token_by_arg(t_token *token_list, char *arg)
 {
 	char	**strs;

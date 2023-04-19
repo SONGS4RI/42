@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+// ARGV, ARGV => ARGV
 void	merge_continuous_argv_token(t_token **token_list)
 {
 	t_token	**head;

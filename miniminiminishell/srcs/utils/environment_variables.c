@@ -46,7 +46,7 @@ t_env_node	*init_env_list(char **envp)
 	return (env_list);
 }
 
-char	*free_env_key_and_get_env_value(t_env_node *env_list, char *env_key)
+char	*get_env_value_and_free_env_key(t_env_node *env_list, char *env_key)
 {
 	char	*env_value;
 

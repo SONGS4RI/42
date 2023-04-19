@@ -32,7 +32,7 @@ static char	*interpret_env_from_d_quotes(t_info *info, char *str)
 		{
 			str_arr[1] = ft_substr(str, dollar_idx + 1,
 					next_idx - dollar_idx - 1);
-			str_arr[1] = free_env_key_and_get_env_value(info->env_list,
+			str_arr[1] = get_env_value_and_free_env_key(info->env_list,
 					str_arr[1]);
 		}
 		str_arr[2] = ft_substr(str, next_idx, ft_strlen(str) - next_idx);
@@ -57,7 +57,7 @@ static int	set_quotes_idxs(t_info *info, char *str,
 		*end_idx += 1;
 	if (str[*end_idx] == '\0')
 	{
-		ft_putstr_fd("miniminiminishell: quotes error\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: quotes error\n", STDERR_FILENO);
 		info->syntax_error = 1;
 		return (0);
 	}

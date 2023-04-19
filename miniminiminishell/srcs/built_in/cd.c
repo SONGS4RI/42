@@ -28,7 +28,7 @@ int	ms_cd(t_info *info, char **argv)
 	}
 	if (argv[1] == NULL)
 	{
-		path = free_env_key_and_get_env_value(info->env_list,
+		path = get_env_value_and_free_env_key(info->env_list,
 				ft_strdup("HOME"));
 		if (path[0] == '\0')
 		{

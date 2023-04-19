@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 
+// CHUNK => ARGV
 void	handle_chunk(t_token **token_list)
 {
 	t_token	**head;

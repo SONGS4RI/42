@@ -12,7 +12,7 @@ static int	check_pipeline_syntax(t_token *token_list)
 			if (prev == NULL || token_list->next == NULL
 				|| token_list->next->type == TOKEN_TYPE_PIPELINE)
 			{
-				ft_putstr_fd("miniminiminishell: syntax error near unexpected"
+				ft_putstr_fd("minishell: syntax error near unexpected"
 					"token \'|\'\n", STDERR_FILENO);
 				return (1);
 			}
@@ -32,7 +32,7 @@ static int	check_redirection_syntax(t_token *token_list)
 			if (token_list->next == NULL
 				|| token_list->next->type != TOKEN_TYPE_ARGV)
 			{
-				ft_putstr_fd("miniminiminishell: syntax error near unexpected"
+				ft_putstr_fd("minishell: syntax error near unexpected"
 					"token \'newline\'\n", STDERR_FILENO);
 				return (1);
 			}

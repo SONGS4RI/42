@@ -14,7 +14,7 @@ static char	*get_env_value_if(t_env_node *env_list, char *str,
 	while (str[*next_idx]
 		&& (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
 		*next_idx += 1;
-	return (free_env_key_and_get_env_value(env_list, \
+	return (get_env_value_and_free_env_key(env_list,
 	ft_substr(str, *dollar_idx + 1, *next_idx - *dollar_idx - 1)));
 }
 
@@ -26,7 +26,7 @@ static void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
 
 	start_idx = 0;
 	end_idx = 0;
-	while (str[end_idx])
+	while (str[end_idx]) // hello $USER !
 	{
 		if (str[end_idx] == '$')
 		{

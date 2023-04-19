@@ -5,7 +5,7 @@ static void	set_io_fd(t_cmd *cmd_list)
 	if (cmd_list->prev && dup2(cmd_list->prev->pipe[0], STDIN_FILENO) == -1)
 	{
 		g_exit_status = 1;
-		return ;
+		exit(g_exit_status);
 	}
 	if (cmd_list->next)
 	{
@@ -13,7 +13,7 @@ static void	set_io_fd(t_cmd *cmd_list)
 		if (dup2(cmd_list->pipe[1], STDOUT_FILENO) == -1)
 		{
 			g_exit_status = 1;
-			return ;
+			exit(g_exit_status);
 		}
 	}
 }
@@ -32,7 +32,7 @@ static void	execute_multiple_cmd_child(t_info *info, t_cmd *cmd_list, int cnt)
 		if (set_redirection_fd(cmd_list, cnt) == -1)
 		{
 			g_exit_status = 1;
-			return ;
+			exit(g_exit_status);
 		}
 		if (cmd_list->argv == NULL)
 			exit(g_exit_status);
