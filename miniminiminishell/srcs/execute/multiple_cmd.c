@@ -48,7 +48,7 @@ static void	execute_multiple_cmd_child(t_info *info, t_cmd *cmd_list, int cnt)
 
 static void	wait_and_set_exit_status(pid_t pid, int cnt)
 {
-	signal(SIGINT, parent_handler);
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &g_exit_status, 0);
 	while (--cnt)
 		wait(0);

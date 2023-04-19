@@ -37,7 +37,9 @@ static void	set_exit_status(int arg_cnt, char *str)
 			g_exit_status = (unsigned char)exit_status;
 		else
 		{
-			printf("minishell: exit: %s: numeric argument required\n", str);
+			ft_putstr_fd("minishell: exit: ", STDOUT_FILENO);
+			ft_putstr_fd(str, STDOUT_FILENO);
+			ft_putendl_fd(": numeric argument required", STDOUT_FILENO);
 			g_exit_status = 255;
 		}
 	}
@@ -56,18 +58,18 @@ int	ms_exit(t_info *info, t_cmd *cmd_list)
 		while (cmd_list->argv[arg_cnt])
 			arg_cnt++;
 		if (cmd_list->prev == NULL && cmd_list->next == NULL)
-			printf("exit\n");
+			ft_putendl_fd("exit", STDOUT_FILENO);
 		if (arg_cnt > 2)
 		{
-			printf("minishell: exit: too many arguments\n");
+			ft_putendl_fd("minishell: exit: too many arguments", STDOUT_FILENO);
 			return (1);
 		}
 		set_exit_status(arg_cnt, cmd_list->argv[1]);
+		unlink_heredoc_tmp(cmd_list);
 		free_cmd_list(&cmd_list);
 	}
 	else
-		printf("exit\n");
-	unlink("heredoc.tmp");
+		ft_putendl_fd("exit", STDOUT_FILENO);\
 	free_env_list(info->env_list);
 	free_2d_arr(info->path_list);
 	exit(g_exit_status);

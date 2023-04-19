@@ -125,7 +125,6 @@ void			free_token_list(t_token *token_list);
 
 /* utils dir - signal.c */
 void			signal_handler(int signum);
-void			parent_handler(int signum);
 void			heredoc_handler(int signum);
 void			quit_handler(int signum);
 void			set_signal(void);
