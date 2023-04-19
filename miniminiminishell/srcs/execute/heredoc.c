@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 22:48:29 by jikoo             #+#    #+#             */
+/*   Updated: 2023/04/19 22:48:35 by jikoo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static char	*get_env_value_if(t_env_node *env_list, char *str,
@@ -15,7 +27,7 @@ static char	*get_env_value_if(t_env_node *env_list, char *str,
 		&& (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
 		*next_idx += 1;
 	return (get_env_value_and_free_env_key(env_list,
-	ft_substr(str, *dollar_idx + 1, *next_idx - *dollar_idx - 1)));
+			ft_substr(str, *dollar_idx + 1, *next_idx - *dollar_idx - 1)));
 }
 
 static void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
@@ -26,7 +38,7 @@ static void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
 
 	start_idx = 0;
 	end_idx = 0;
-	while (str[end_idx]) // hello $USER !
+	while (str[end_idx])
 	{
 		if (str[end_idx] == '$')
 		{

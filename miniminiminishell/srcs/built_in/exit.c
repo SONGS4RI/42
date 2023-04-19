@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jikoo <jikoo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 22:47:57 by jikoo             #+#    #+#             */
+/*   Updated: 2023/04/19 22:53:05 by jikoo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static int	ms_atoll_if(char *str, long long *n)
@@ -69,7 +81,7 @@ int	ms_exit(t_info *info, t_cmd *cmd_list)
 		free_cmd_list(&cmd_list);
 	}
 	else
-		ft_putendl_fd("exit", STDOUT_FILENO);\
+		ft_putendl_fd("exit", STDOUT_FILENO);
 	free_env_list(info->env_list);
 	free_2d_arr(info->path_list);
 	exit(g_exit_status);
