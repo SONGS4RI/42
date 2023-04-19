@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static int	set_infile_fd(char *infile)
 {
@@ -24,7 +24,7 @@ static int	set_heredoc_fd(int num)
 	file_name = ft_strjoin(file_cnt, ".tmp");
 	fd = open(file_name, O_RDONLY);
 	free_strs(file_cnt, file_name, NULL, NULL);
-	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)// << end => < 1.tmp
+	if (fd == -1 || dup2(fd, STDIN_FILENO) == -1)
 	{
 		ms_error("heredoc", file_name);
 		return (-1);
@@ -36,7 +36,7 @@ static int	set_heredoc_fd(int num)
 static int	set_overwrite_fd(char *outfile)
 {
 	int	fd;
-	
+
 	fd = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1)
 	{
@@ -50,7 +50,7 @@ static int	set_overwrite_fd(char *outfile)
 static int	set_append_fd(char *outfile)
 {
 	int	fd;
-	
+
 	fd = open(outfile, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1)
 	{

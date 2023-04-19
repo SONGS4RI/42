@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 char	*get_cmd_file(char *cmd, char **path_list)
 {
@@ -59,7 +59,7 @@ static int	execute_builtin(t_info *info, t_cmd *cmd_list, int cnt)
 		g_exit_status = ms_pwd();
 	if (ft_strncmp(cmd_list->argv[0], "unset", 5) == 0)
 		g_exit_status = ms_unset(info, cmd_list->argv);
-	dup2(info->stdout, STDOUT_FILENO); ///////// 메인으로 옮겨야 할수동 ...ㅇㅋㅇㅋ췍췍
+	dup2(info->stdout, STDOUT_FILENO);
 	return (1);
 }
 
@@ -95,11 +95,11 @@ void	ms_execute(t_info *info, t_cmd *cmd_list)
 	else if (pid == 0)
 		execute_heredoc(info, cmd_list);
 	signal(SIGINT, SIG_IGN);
-	wait(&g_exit_status);//히어독 기다림
+	wait(&g_exit_status);
 	if (WIFEXITED(g_exit_status))
-		g_exit_status = WEXITSTATUS(g_exit_status); // exit code 알아냄
-	if (WIFSIGNALED(g_exit_status)) // signal에 의하여 terminate 되었는지를 확인
-		g_exit_status = 1; // WIFSIGNALED의 값이 참인 경우 어느 signal에 의하여 terminate 되었는지를 알아냄
+		g_exit_status = WEXITSTATUS(g_exit_status);
+	if (WIFSIGNALED(g_exit_status))
+		g_exit_status = 1;
 	else
 	{
 		if (cmd_list->next)
@@ -108,4 +108,4 @@ void	ms_execute(t_info *info, t_cmd *cmd_list)
 			execute_single_cmd(info, cmd_list);
 	}
 	unlink_heredoc_tmp(cmd_list);
-} 
+}

@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static t_env_node	*delete_env_list(t_env_node *env_list)
 {
@@ -44,8 +44,8 @@ static int	do_unset(t_info *info, t_env_node *cur, t_env_node *prev, char *str)
 
 int	ms_unset(t_info *info, char **argv)
 {
-	t_env_node *cur;
-	t_env_node *prev;
+	t_env_node	*cur;
+	t_env_node	*prev;
 	int			idx;
 	int			error_flag;
 
@@ -54,7 +54,7 @@ int	ms_unset(t_info *info, char **argv)
 	while (argv[++idx])
 	{
 		set_error_flag(argv[idx], &error_flag);
-	    cur = info->env_list;
+		cur = info->env_list;
 		prev = NULL;
 		while (cur)
 		{

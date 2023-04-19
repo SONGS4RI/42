@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static void	do_echo(char **argv, int idx)
 {
@@ -15,7 +15,7 @@ static void	do_echo(char **argv, int idx)
 int	ms_echo(char **argv)
 {
 	int	idx;
-	int n_idx;
+	int	n_idx;
 	int	newline;
 
 	newline = 1;

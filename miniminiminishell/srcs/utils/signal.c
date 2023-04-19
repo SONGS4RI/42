@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 void	signal_handler(int signum)
 {
@@ -25,7 +25,7 @@ void	heredoc_handler(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();
-		ft_putendl_fd("", STDERR_FILENO);/////
+		ft_putendl_fd("", STDERR_FILENO);
 		exit(1);
 	}
 }
@@ -39,6 +39,6 @@ void	quit_handler(int signum)
 
 void	set_signal(void)
 {
-	signal(SIGINT, signal_handler);	// ctrl + C
-	signal(SIGQUIT, SIG_IGN);		// ctrl + "\"
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

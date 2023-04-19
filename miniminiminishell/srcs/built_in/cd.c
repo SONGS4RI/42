@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static void	set_pwd(t_info *info, char *key)
 {
@@ -15,7 +15,7 @@ static void	set_pwd(t_info *info, char *key)
 	ms_export(info, argv);
 	free_2d_arr(argv);
 }
-// 무조건 첫번째여
+
 int	ms_cd(t_info *info, char **argv)
 {
 	char	*path;
@@ -28,7 +28,8 @@ int	ms_cd(t_info *info, char **argv)
 	}
 	if (argv[1] == NULL)
 	{
-		path = free_env_key_and_get_env_value(info->env_list, ft_strdup("HOME"));
+		path = free_env_key_and_get_env_value(info->env_list,
+				ft_strdup("HOME"));
 		if (path[0] == '\0')
 		{
 			free(path);

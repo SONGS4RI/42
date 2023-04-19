@@ -1,8 +1,8 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
-int ms_pwd(void)
+int	ms_pwd(void)
 {
-	char current_working_dir[1024];
+	char	current_working_dir[1024];
 
 	if (getcwd(current_working_dir, 1024) == NULL)
 	{

@@ -11,14 +11,17 @@ CPPFLAGS	= -I$(shell brew --prefix readline)/include
 MS_DIR		= srcs/
 
 UTILS		= utils/environment_variables.c \
-			  utils/token.c \
-			  utils/utils.c	\
+			  utils/token.c 	\
+			  utils/utils.c		\
+			  utils/utils2.c	\
 			  utils/signal.c
 
 LEXICAL		= lexical_analysis/lexical_analysis.c	\
 			  lexical_analysis/handle_heredoc_limiter.c	\
+			  lexical_analysis/seperate_quotes.c \
 			  lexical_analysis/handle_quotes.c \
-			  lexical_analysis/handle_environment_variables.c \
+			  lexical_analysis/seperate_environment_variables.c \
+			  lexical_analysis/handle_environment_variables.c	\
 			  lexical_analysis/seperate_token_by_arg.c \
 			  lexical_analysis/handle_chunk.c \
 			  lexical_analysis/merge_continuous_argv_token.c \

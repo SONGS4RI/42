@@ -1,6 +1,7 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
-static char	*get_env_value_if(t_env_node *env_list, char *str, int *dollar_idx, int *next_idx)
+static char	*get_env_value_if(t_env_node *env_list, char *str,
+	int *dollar_idx, int *next_idx)
 {
 	*next_idx = *dollar_idx + 1;
 	if (str[*next_idx] == '?')
@@ -10,7 +11,8 @@ static char	*get_env_value_if(t_env_node *env_list, char *str, int *dollar_idx, 
 	}
 	if (str[*next_idx] == '\0' || !ft_isalnum(str[*next_idx]))
 		return (NULL);
-	while (str[*next_idx] && (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
+	while (str[*next_idx]
+		&& (ft_isalnum(str[*next_idx]) || str[*next_idx] == '_'))
 		*next_idx += 1;
 	return (free_env_key_and_get_env_value(env_list, \
 	ft_substr(str, *dollar_idx + 1, *next_idx - *dollar_idx - 1)));
@@ -27,7 +29,7 @@ static void	handle_heredoc_env(t_env_node *env_list, int fd, char *str)
 	while (str[end_idx])
 	{
 		if (str[end_idx] == '$')
-		{	
+		{
 			write(fd, str + start_idx, end_idx - start_idx);
 			start_idx = end_idx;
 			env_value = get_env_value_if(env_list, str, &start_idx, &end_idx);
@@ -58,8 +60,8 @@ static void	ms_heredoc(t_env_node *env_list, char *file_name, char *limiter)
 		input = readline("> ");
 		if (input == NULL)
 			ft_putstr_fd("\033[1A\033[2C", STDOUT_FILENO);
-		if(input == NULL || (ft_strlen(input) == ft_strlen(limiter) \
-		&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
+		if (input == NULL || (ft_strlen(input) == ft_strlen(limiter)
+				&& ft_strncmp(input, limiter, ft_strlen(input)) == 0))
 		{
 			close(fd);
 			return ;

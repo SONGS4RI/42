@@ -1,8 +1,8 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 void	merge_continuous_argv_token(t_token **token_list)
 {
-	t_token **head;
+	t_token	**head;
 	t_token	*cur;
 	char	*merge_str;
 

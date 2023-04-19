@@ -1,8 +1,8 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 int	ms_env(t_env_node *env_list)
 {
-	while(env_list)
+	while (env_list)
 	{
 		if (env_list->value)
 		{

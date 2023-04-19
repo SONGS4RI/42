@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static void	set_io_fd(t_cmd *cmd_list)
 {
@@ -51,11 +51,11 @@ static void	wait_and_set_exit_status(pid_t pid, int cnt)
 	signal(SIGINT, parent_handler);
 	waitpid(pid, &g_exit_status, 0);
 	while (--cnt)
-		wait(0); // 자식이 있을 때만 !!!
-	if (WIFSIGNALED(g_exit_status)) // signal에 의하여 terminate 되었는지를 확인
-		g_exit_status = 128 + WTERMSIG(g_exit_status); // WIFSIGNALED의 값이 참인 경우 어느 signal에 의하여 terminate 되었는지를 알아냄
+		wait(0);
+	if (WIFSIGNALED(g_exit_status))
+		g_exit_status = 128 + WTERMSIG(g_exit_status);
 	if (WIFEXITED(g_exit_status))
-		g_exit_status = WEXITSTATUS(g_exit_status); // exit code 알아냄
+		g_exit_status = WEXITSTATUS(g_exit_status);
 }
 
 void	execute_multiple_cmd(t_info *info, t_cmd *cmd_list)
@@ -72,7 +72,7 @@ void	execute_multiple_cmd(t_info *info, t_cmd *cmd_list)
 			return ;
 		}
 		if (cmd_list->prev)
-			close(cmd_list->prev->pipe[1]); // 안써서 닫아
+			close(cmd_list->prev->pipe[1]);
 		pid = fork();
 		if (pid < 0)
 			ms_error("fork", NULL);

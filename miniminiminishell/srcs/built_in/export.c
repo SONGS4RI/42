@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static int	change_value_if_key_exist(t_info *info, char *key, char *value)
 {
@@ -27,13 +27,10 @@ static int	change_value_if_key_exist(t_info *info, char *key, char *value)
 	}
 	return (0);
 }
-/*
-	a="echo a" {}[echo][-][a]{}
-	a$2=ko [a=ko] [a][=ko] => [a][=ko] {a}[][-][]{=ko}
-*/
+
 static void	print_env_list(t_env_node *env_list)
 {
-	while(env_list)
+	while (env_list)
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		ft_putstr_fd(env_list->key, STDOUT_FILENO);
@@ -48,7 +45,7 @@ static void	print_env_list(t_env_node *env_list)
 	}
 }
 
-int	is_valid_key(char *key)
+static int	is_valid_key(char *key)
 {
 	int	idx;
 
@@ -81,25 +78,25 @@ static int	set_error_flag(t_env_node *env_node, char *str, int *error_flag)
 int	ms_export(t_info *info, char **argv)
 {
 	int			idx;
-	t_env_node	*env_node;
+	t_env_node	*new;
 	int			error_flag;
-	
+
 	idx = 0;
 	error_flag = 0;
 	while (argv[++idx])
 	{
 		if (argv[idx][0] == '\0')
-			continue;
-		env_node = create_env_node(argv[idx]);
-		if (set_error_flag(env_node, argv[idx], &error_flag))
 			continue ;
-		else if (change_value_if_key_exist(info, env_node->key, env_node->value))
-			free_env_list(env_node);
-		else // 기존에 없던 환경변수면 추가
+		new = create_env_node(argv[idx]);
+		if (set_error_flag(new, argv[idx], &error_flag))
+			continue ;
+		else if (change_value_if_key_exist(info, new->key, new->value))
+			free_env_list(new);
+		else
 		{
-			if (ft_strncmp(env_node->key, "PATH", 4) == 0)
-				info->path_list = ft_split(env_node->value, ':');
-			add_env_node(&info->env_list, env_node);
+			if (ft_strncmp(new->key, "PATH", 4) == 0)
+				info->path_list = ft_split(new->value, ':');
+			add_env_node(&info->env_list, new);
 		}
 	}
 	if (idx == 1)

@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static int	ms_atoll_if(char *str, long long *n)
 {
@@ -48,7 +48,7 @@ static void	set_exit_status(int arg_cnt, char *str)
 int	ms_exit(t_info *info, t_cmd *cmd_list)
 {
 	int	arg_cnt;
-	
+
 	dup2(info->stdout, STDOUT_FILENO);
 	if (cmd_list)
 	{
@@ -56,7 +56,7 @@ int	ms_exit(t_info *info, t_cmd *cmd_list)
 		while (cmd_list->argv[arg_cnt])
 			arg_cnt++;
 		if (cmd_list->prev == NULL && cmd_list->next == NULL)
-			printf("exit\n");	
+			printf("exit\n");
 		if (arg_cnt > 2)
 		{
 			printf("minishell: exit: too many arguments\n");

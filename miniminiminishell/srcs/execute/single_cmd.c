@@ -1,4 +1,4 @@
-#include "../../includes/miniminiminishell.h"
+#include "../../includes/minishell.h"
 
 static void	execute_single_cmd_child(t_info *info, t_cmd *cmd_list)
 {
@@ -31,18 +31,18 @@ void	execute_single_cmd(t_info *info, t_cmd *cmd_list)
 			ms_error("fork", NULL);
 		else if (pid == 0)
 		{
-			signal(SIGINT, quit_handler);//확인
-			signal(SIGQUIT, quit_handler);//확인
+			signal(SIGINT, quit_handler);
+			signal(SIGQUIT, quit_handler);
 			execute_single_cmd_child(info, cmd_list);
 		}
 		else
 		{
-			signal(SIGINT, parent_handler);//확인
+			signal(SIGINT, parent_handler);
 			wait(&(g_exit_status));
-			if (WIFSIGNALED(g_exit_status)) // signal에 의하여 terminate 되었는지를 확인
-				g_exit_status = 128 + WTERMSIG(g_exit_status); // WIFSIGNALED의 값이 참인 경우 어느 signal에 의하여 terminate 되었는지를 알아냄
+			if (WIFSIGNALED(g_exit_status))
+				g_exit_status = 128 + WTERMSIG(g_exit_status);
 			if (WIFEXITED(g_exit_status))
-				g_exit_status = WEXITSTATUS(g_exit_status); // exit code 알아냄
+				g_exit_status = WEXITSTATUS(g_exit_status);
 		}
 	}
 }
