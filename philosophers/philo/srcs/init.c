@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/13 20:00:55 by jahlee           ###   ########.fr       */
+/*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
+/*   Updated: 2023/05/14 15:06:27 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	ft_isspace(char c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+static int	ft_atoi(const char *str)
 {
 	int		sign;
 	int		nbr;
@@ -42,12 +42,6 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (nbr);
-}
-
-int ph_print_error(char *message, int error)
-{
-	printf("%s\n", message);
-	return (error);
 }
 
 int	init_info(t_info *info, int argc, char **argv)
@@ -72,7 +66,7 @@ int	init_info(t_info *info, int argc, char **argv)
 int	init_info_mutex(t_info *info)
 {
 	static int	i = -1;
-	
+
 	if (pthread_mutex_init(&info->printable, NULL))
 		return (1);
 	info->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
@@ -89,38 +83,19 @@ int	init_info_mutex(t_info *info)
 
 int	init_philo(t_philo **philo, t_info *info)
 {
-	static int	i = 0;
+	static int	i = -1;
 
 	*philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philosophers);
 	if (!*philo)
 		return (1);
-	memset(*philo, 0, sizeof(t_philo *));
-	while (i < info->number_of_philosophers)
+	while (++i < info->number_of_philosophers)
 	{
 		philo[i]->info = info;
 		philo[i]->id = i;
 		philo[i]->left = i;
 		philo[i]->right = (i + 1) % info->number_of_philosophers;
+		philo[i]->eat_cnt = 0;
 		philo[i]->last_meal_time = 0;
-		philo[i]->status = THINKING;///////////////////
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	t_info	info;
-	t_philo	*philo;
-	int		exit_status;
-	
-	if (argc != 5 && argc != 6)
-		return (ph_print_error("input error\n", 3));
-	exit_status = init_info(&info, argc, argv);
-	if (exit_status)
-		return (exit_status);
-	exit_status = init_info_mutex(&info);
-	if (exit_status)
-		return (exit_status);
-	exit_status = init_philo(&philo, &info);
-	if (exit_status)
-		return (exit_status);
+	return (0);
 }
