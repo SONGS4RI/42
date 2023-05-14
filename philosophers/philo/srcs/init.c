@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 15:06:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 16:57:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	init_info(t_info *info, int argc, char **argv)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
+	info->start_time = get_current_time();
 	if (info->number_of_philosophers <= 0 || info->time_to_die < 0 || info->time_to_eat < 0 || info->time_to_sleep < 0)
 		return (5);/////
 	if (argc == 6)
@@ -59,7 +60,6 @@ int	init_info(t_info *info, int argc, char **argv)
 		if (info->number_of_times_each_philosopher_must_eat <= 0)
 			return (6);/////
 	}
-	printf("init_info good\n");///////////////////
 	return (0);
 }
 
@@ -77,7 +77,6 @@ int	init_info_mutex(t_info *info)
 		if (pthread_mutex_init(&info->forks[i], NULL))
 			return (1);
 	}
-	printf("init_mutex good\n");/////////////////////////
 	return (0);
 }
 
@@ -85,7 +84,7 @@ int	init_philo(t_philo **philo, t_info *info)
 {
 	static int	i = -1;
 
-	*philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philosophers);
+	*philo = (t_philo *)malloc(sizeof(t_philo) * (info->number_of_philosophers + 1));
 	if (!*philo)
 		return (1);
 	while (++i < info->number_of_philosophers)
@@ -97,5 +96,6 @@ int	init_philo(t_philo **philo, t_info *info)
 		philo[i]->eat_cnt = 0;
 		philo[i]->last_meal_time = 0;
 	}
+	philo[i] = NULL;
 	return (0);
 }

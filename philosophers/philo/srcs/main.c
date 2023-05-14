@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 15:08:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 16:56:33 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	main(int argc, char **argv)
 	if (exit_status)
 		return (ph_print_error("mutex init error\n", exit_status));
 	exit_status = init_philo(&philo, &info);
+	if (exit_status)
+		return (ph_print_error("thread init error\n", exit_status));
+	exit_status = work_philo(philo);
 	if (exit_status)
 		return (ph_print_error("thread init error\n", exit_status));
 }
