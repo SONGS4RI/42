@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 16:57:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 18:30:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,17 @@ int	init_philo(t_philo **philo, t_info *info)
 {
 	static int	i = -1;
 
-	*philo = (t_philo *)malloc(sizeof(t_philo) * (info->number_of_philosophers + 1));
-	if (!*philo)
+	*philo = (t_philo *)malloc(sizeof(t_philo) * info->number_of_philosophers);
+	if (!philo)
 		return (1);
 	while (++i < info->number_of_philosophers)
 	{
-		philo[i]->info = info;
-		philo[i]->id = i;
-		philo[i]->left = i;
-		philo[i]->right = (i + 1) % info->number_of_philosophers;
-		philo[i]->eat_cnt = 0;
-		philo[i]->last_meal_time = 0;
+		(*philo)[i].info = info;
+		(*philo)[i].id = i;
+		(*philo)[i].left = i;
+		(*philo)[i].right = (i + 1) % info->number_of_philosophers;
+		(*philo)[i].eat_cnt = 0;
+		(*philo)[i].last_meal_time = 0;
 	}
-	philo[i] = NULL;
 	return (0);
 }
