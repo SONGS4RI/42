@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 16:57:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 17:16:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	pass_time(long long wait_time, t_info *info)
 
 void	philo_print(char *message, int id, t_info *info)
 {
-	long long	now;
+	long long	current_time;
 
-	now = get_current_time();
+	current_time = get_current_time();
 	pthread_mutex_lock(&info->printable);
 	if (!info->finish)
-		printf("%lld %d %s\n", now - info->start_time, id + 1, message);
+		printf("[%lld ms] %d %s\n", current_time - info->start_time, id + 1, message);
 	pthread_mutex_unlock(&info->printable);
 }
 

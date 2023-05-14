@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:50:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 16:56:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 18:38:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ void	philo_action(t_philo *philo)
 		philo->eat_cnt++;
 		pass_time(info->time_to_eat, info);
 		pthread_mutex_unlock(&info->forks[philo->right]);
+		philo_print("has put down right fork", philo->id, info);
 	}
 	pthread_mutex_unlock(&info->forks[philo->left]);
+	philo_print("has put down left fork", philo->id, info);
 }
 
-void	thread_action(t_philo *philo)
+void	*thread_action(void *ptr)
 {
+	t_philo	*philo;
 	t_info	*info;
 
+	philo = ptr;
 	info = philo->info;
+	philo_print("has born", philo->id, info);
 	if (philo->id % 2)
 		usleep(1000);
 	while (!info->finish)
@@ -47,22 +52,24 @@ void	thread_action(t_philo *philo)
 			info->eating_done_cnt++;
 			break ;
 		}
-		philo_print("is sleeping", info, philo->id);
+		philo_print("is sleeping", philo->id, info);
 		pass_time(info->time_to_sleep, info);
-		philo_print("is thinking", info, philo->id);
+		philo_print("is thinking", philo->id, info);
 	}
+	return (NULL);
 }
 
 int	work_philo(t_philo *philo)
 {
-	static	int	i = -1;
+	int			i;
 	t_info 		*info;
 
 	info = philo->info;
+	i = -1;
 	while (++i < info->number_of_philosophers)
 	{
 		philo[i].last_meal_time = get_current_time();
-		if (pthread_create(&philo->thread, NULL, thread_action, &philo[i]))
+		if (pthread_create(&philo[i].thread, NULL, thread_action, &philo[i]))
 			return (1);
 	}
 	check_philo_finished(philo);
@@ -76,7 +83,7 @@ int	work_philo(t_philo *philo)
 void	check_philo_finished(t_philo *philo)
 {
 	long long	current_time;
-	static int	i = -1;
+	int			i;
 	t_info		*info;
 
 	info = philo->info;
@@ -84,12 +91,15 @@ void	check_philo_finished(t_philo *philo)
 	{
 		if (info->eating_done_cnt == info->number_of_philosophers)
 			break ;
+		i = -1;
 		while (++i < info->number_of_philosophers)
 		{
 			current_time = get_current_time();
-			if (current_time - philo[i].last_meal_time >= info->time_to_die)
+			if (current_time - philo[i].last_meal_time >= info->time_to_die)//////seg
 			{
-				philo_print("has died", info, philo->id);
+				printf("지난시간: %lld, 죽는시간: %d\n", philo[i].last_meal_time, info->time_to_die);///////
+				philo_print("has died", philo->id, info);
+				info->finish = 1;
 				break ;
 			}
 		}

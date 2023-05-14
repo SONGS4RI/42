@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 16:59:07 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/14 18:37:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_info
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
-	int				start_time;
+	long long		start_time;
 	int				finish;
 	int				eating_done_cnt;
 	pthread_mutex_t printable;
@@ -44,7 +44,7 @@ typedef struct s_philo
 	int			left;
 	int			right;
 	int			eat_cnt;
-	int			last_meal_time;
+	long long	last_meal_time;
 }	t_philo;
 
 // utils.c
@@ -60,7 +60,7 @@ int			init_philo(t_philo **philo, t_info *info);
 
 // thread.c
 void		philo_action(t_philo *philo);
-void		thread_action(t_philo *philo);
+void		*thread_action(void *ptr);
 int			work_philo(t_philo *philo);
 void		check_philo_finished(t_philo *philo);
 
