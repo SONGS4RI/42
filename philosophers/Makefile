@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 17:35:05 by jahlee            #+#    #+#              #
-#    Updated: 2023/05/14 14:54:18 by jahlee           ###   ########.fr        #
+#    Updated: 2023/05/14 15:24:06 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= @rm
 RMFLAGS		= -f
+INCLUDES	= ./philo/includes/philosophers.h
 
 # color
 RESET	= \033[0m
@@ -23,9 +24,9 @@ GREEN	= \033[1;92m
 CYAN	= \033[1;96m
 MAGENTA	= \033[1;95m
 
-SRCS		= ./philo/srcs/philosophers.c
-
-INCLUDES	= ./philo/includes/philosophers.h
+SRCS		= ./philo/srcs/main.c	\
+			  ./philo/srcs/init.c	\
+			  ./philo/srcs/utils.c	\
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -39,7 +40,7 @@ else
 endif
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
 
 all: $(NAME)
 
@@ -53,7 +54,7 @@ $(NAME): $(OBJS)
 	@echo "$(MAGENTA)╚═══════════════════════════════════════════════╝$(RESET)"
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║              make clean finished.             ║$(RESET)"
@@ -62,7 +63,7 @@ clean:
 
 fclean:
 	@make clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(GREEN)║                                               ║$(RESET)"
 	@echo "$(GREEN)║             make fclean finished.             ║$(RESET)"
