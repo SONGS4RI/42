@@ -6,30 +6,26 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 18:30:54 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:47:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_philo	*philo;
-	int		exit_status;
 
 	if (argc != 5 && argc != 6)
-		return (ph_print_error("input error\n", 3));
-	exit_status = init_info(&info, argc, argv);
-	if (exit_status)
-		return (ph_print_error("wrong argv\n", exit_status));
-	exit_status = init_info_mutex(&info);
-	if (exit_status)
-		return (ph_print_error("mutex init error\n", exit_status));
-	exit_status = init_philo(&philo, &info);
-	if (exit_status)
-		return (ph_print_error("thread init error\n", exit_status));
-	exit_status = work_philo(philo);
-	if (exit_status)
-		return (ph_print_error("thread init error\n", exit_status));
+		return (ph_error("usage: num_of_philosophers time_to_die time_to_eat"
+		" time_to_sleep [num_of_times_to_must_eat]\n"));
+	if (init_info(&info, argc, argv))
+		return (ph_error("wrong argv\n"));
+	if (init_info_mutex(&info))
+		return (ph_error("mutex init error\n"));
+	if (init_philo(&philo, &info))
+		return (ph_error("thread init error\n"));
+	if (work_philo(philo))
+		return (ph_error("thread init error\n"));
 }

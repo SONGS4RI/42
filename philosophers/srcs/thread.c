@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:50:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 18:38:24 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:03:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 void	philo_action(t_philo *philo)
 {
@@ -41,16 +41,17 @@ void	*thread_action(void *ptr)
 
 	philo = ptr;
 	info = philo->info;
-	philo_print("has born", philo->id, info);
 	if (philo->id % 2)
 		usleep(1000);
 	while (!info->finish)
 	{
 		philo_action(philo);
-		if (info->number_of_times_each_philosopher_must_eat == philo->eat_cnt)
+		if (info->number_of_times_each_philosopher_must_eat == philo->eat_cnt && \
+		info->number_of_times_each_philosopher_must_eat != 0)
 		{
+			printf("eaten: %d\n", philo->eat_cnt);///////
 			info->eating_done_cnt++;
-			break ;
+			// break ;
 		}
 		philo_print("is sleeping", philo->id, info);
 		pass_time(info->time_to_sleep, info);
@@ -76,6 +77,7 @@ int	work_philo(t_philo *philo)
 	i = -1;
 	while (++i < info->number_of_philosophers)
 		pthread_join(philo[i].thread, NULL);
+	printf("	free!!!!\n");///////
 	free(philo);
 	return (0);
 }
@@ -90,14 +92,17 @@ void	check_philo_finished(t_philo *philo)
 	while (!info->finish)
 	{
 		if (info->eating_done_cnt == info->number_of_philosophers)
+		{
+			printf("done eating: %d\n", info->eating_done_cnt);///
+			info->finish = 1;
 			break ;
+		}
 		i = -1;
 		while (++i < info->number_of_philosophers)
 		{
 			current_time = get_current_time();
-			if (current_time - philo[i].last_meal_time >= info->time_to_die)//////seg
+			if (current_time - philo[i].last_meal_time >= info->time_to_die)
 			{
-				printf("지난시간: %lld, 죽는시간: %d\n", philo[i].last_meal_time, info->time_to_die);///////
 				philo_print("has died", philo->id, info);
 				info->finish = 1;
 				break ;

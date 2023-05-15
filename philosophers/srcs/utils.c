@@ -6,16 +6,16 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 17:16:55 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:49:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
-int ph_print_error(char *message, int error)
+int ph_error(char *message)
 {
 	printf("%s\n", message);
-	return (error);
+	return (1);
 }
 
 long long	get_current_time(void)
@@ -50,7 +50,7 @@ void	philo_print(char *message, int id, t_info *info)
 	current_time = get_current_time();
 	pthread_mutex_lock(&info->printable);
 	if (!info->finish)
-		printf("[%lld ms] %d %s\n", current_time - info->start_time, id + 1, message);
+		printf("[%lld ms] %d %s\n", current_time - info->start_time, id, message);
 	pthread_mutex_unlock(&info->printable);
 }
 

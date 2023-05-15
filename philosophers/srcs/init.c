@@ -6,11 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 18:30:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:49:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
 static int	ft_isspace(char c)
 {
@@ -53,12 +53,12 @@ int	init_info(t_info *info, int argc, char **argv)
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->start_time = get_current_time();
 	if (info->number_of_philosophers <= 0 || info->time_to_die < 0 || info->time_to_eat < 0 || info->time_to_sleep < 0)
-		return (5);/////
+		return (1);
 	if (argc == 6)
 	{
 		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		if (info->number_of_times_each_philosopher_must_eat <= 0)
-			return (6);/////
+			return (1);
 	}
 	return (0);
 }
@@ -90,7 +90,7 @@ int	init_philo(t_philo **philo, t_info *info)
 	while (++i < info->number_of_philosophers)
 	{
 		(*philo)[i].info = info;
-		(*philo)[i].id = i;
+		(*philo)[i].id = i + 1;
 		(*philo)[i].left = i;
 		(*philo)[i].right = (i + 1) % info->number_of_philosophers;
 		(*philo)[i].eat_cnt = 0;

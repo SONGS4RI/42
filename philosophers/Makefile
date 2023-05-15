@@ -6,27 +6,27 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 17:35:05 by jahlee            #+#    #+#              #
-#    Updated: 2023/05/14 17:10:42 by jahlee           ###   ########.fr        #
+#    Updated: 2023/05/15 15:45:47 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
-NAME		= philosophers
+NAME		= philo
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= @rm
 RMFLAGS		= -f
-INCLUDES	= ./philo/includes/philosophers.h
+INCLUDES	= ./includes/philo.h
 
 # color
 RESET	= \033[0m
 GREEN	= \033[1;92m
 MAGENTA	= \033[1;95m
 
-SRCS		= ./philo/srcs/main.c	\
-			  ./philo/srcs/init.c	\
-			  ./philo/srcs/utils.c	\
-			  ./philo/srcs/thread.c	\
+SRCS		= ./srcs/main.c	\
+			  ./srcs/init.c	\
+			  ./srcs/utils.c	\
+			  ./srcs/thread.c	\
 
 OBJS	= $(SRCS:.c=.o)
 
