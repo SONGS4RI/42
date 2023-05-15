@@ -6,12 +6,12 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/14 18:37:45 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/15 15:44:22 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <sys/time.h>//gettimeofday
 # include <unistd.h>//write, usleep
@@ -48,7 +48,7 @@ typedef struct s_philo
 }	t_philo;
 
 // utils.c
-int			ph_print_error(char *message, int error);
+int			ph_error(char *message);
 long long	get_current_time(void);
 void		pass_time(long long wait_time, t_info *info);
 void		philo_print(char *message, int id, t_info *info);
