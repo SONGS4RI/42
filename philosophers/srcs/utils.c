@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/15 15:49:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/17 19:46:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,25 @@ void	philo_print(char *message, int id, t_info *info)
 {
 	long long	current_time;
 
+	pthread_mutex_lock(&info->printable);//////
 	current_time = get_current_time();
-	pthread_mutex_lock(&info->printable);
 	if (!info->finish)
 		printf("[%lld ms] %d %s\n", current_time - info->start_time, id, message);
 	pthread_mutex_unlock(&info->printable);
 }
 
+void	free_destroy_all(t_philo *philo)
+{
+	int		i;
+	t_info	*info;
+
+	i = -1;
+	info = philo->info;
+	free(philo);
+	free(info->forks);
+	while (++i < info->number_of_philosophers)
+	{
+		pthread_mutex_destroy(info->forks);
+		pthread_mutex_destroy(&info->printable);
+	}
+}
