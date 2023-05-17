@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/17 16:43:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/17 19:25:02 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	init_info(t_info *info, int argc, char **argv)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
-	info->start_time = get_current_time();
 	if (info->number_of_philosophers <= 0 || info->time_to_die < 0 || info->time_to_eat < 0 || info->time_to_sleep < 0)
 		return (1);
 	if (argc == 6)
@@ -68,6 +67,8 @@ int	init_info_mutex(t_info *info)
 	static int	i = -1;
 
 	if (pthread_mutex_init(&info->printable, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->start, NULL))
 		return (1);
 	info->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (!info->forks)
@@ -95,6 +96,10 @@ int	init_philo(t_philo **philo, t_info *info)
 		(*philo)[i].right = (i + 1) % info->number_of_philosophers;
 		(*philo)[i].eat_cnt = 0;
 		(*philo)[i].last_meal_time = 0;
+		if (pthread_mutex_init(&(*philo)[i].eat_cnt_mutex, NULL))
+			return (1);
+		if (pthread_mutex_init(&(*philo)[i].last_meal_time_mutex, NULL))
+			return (1);
 	}
 	return (0);
 }

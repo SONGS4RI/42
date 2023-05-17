@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/15 15:44:22 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/17 19:24:42 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_info
 	long long		start_time;
 	int				finish;
 	int				eating_done_cnt;
+	int				ready_cnt;
+	pthread_mutex_t start;
 	pthread_mutex_t printable;
 	pthread_mutex_t *forks;
 }	t_info;
@@ -45,6 +47,8 @@ typedef struct s_philo
 	int			right;
 	int			eat_cnt;
 	long long	last_meal_time;
+	pthread_mutex_t	eat_cnt_mutex;
+	pthread_mutex_t	last_meal_time_mutex;
 }	t_philo;
 
 // utils.c
@@ -52,6 +56,7 @@ int			ph_error(char *message);
 long long	get_current_time(void);
 void		pass_time(long long wait_time, t_info *info);
 void		philo_print(char *message, int id, t_info *info);
+void		free_destroy_all(t_philo *philo);
 
 // init.c
 int			init_info(t_info *info, int argc, char **argv);
