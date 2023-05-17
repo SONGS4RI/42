@@ -6,11 +6,27 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:50:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/15 16:03:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/17 16:41:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+// static int	check_died(t_philo *philo)////////
+// {
+// 	long long	current_time;
+// 	t_info		*info;
+
+// 	info = philo->info;
+// 	current_time = get_current_time();
+// 	if (current_time - philo->last_meal_time >= philo->info->time_to_die)
+// 	{
+// 		philo_print("has died", philo->id, info);
+// 		info->finish = 1;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 void	philo_action(t_philo *philo)
 {
@@ -28,10 +44,8 @@ void	philo_action(t_philo *philo)
 		philo->eat_cnt++;
 		pass_time(info->time_to_eat, info);
 		pthread_mutex_unlock(&info->forks[philo->right]);
-		philo_print("has put down right fork", philo->id, info);
 	}
 	pthread_mutex_unlock(&info->forks[philo->left]);
-	philo_print("has put down left fork", philo->id, info);
 }
 
 void	*thread_action(void *ptr)
@@ -48,11 +62,7 @@ void	*thread_action(void *ptr)
 		philo_action(philo);
 		if (info->number_of_times_each_philosopher_must_eat == philo->eat_cnt && \
 		info->number_of_times_each_philosopher_must_eat != 0)
-		{
-			printf("eaten: %d\n", philo->eat_cnt);///////
 			info->eating_done_cnt++;
-			// break ;
-		}
 		philo_print("is sleeping", philo->id, info);
 		pass_time(info->time_to_sleep, info);
 		philo_print("is thinking", philo->id, info);
@@ -77,8 +87,13 @@ int	work_philo(t_philo *philo)
 	i = -1;
 	while (++i < info->number_of_philosophers)
 		pthread_join(philo[i].thread, NULL);
-	printf("	free!!!!\n");///////
-	free(philo);
+	// free(philo);
+	i = -1;
+	while (++i < info->number_of_philosophers)
+	{
+		pthread_mutex_destroy(info->forks);
+		pthread_mutex_destroy(&info->printable);
+	}
 	return (0);
 }
 
@@ -93,7 +108,6 @@ void	check_philo_finished(t_philo *philo)
 	{
 		if (info->eating_done_cnt == info->number_of_philosophers)
 		{
-			printf("done eating: %d\n", info->eating_done_cnt);///
 			info->finish = 1;
 			break ;
 		}
@@ -103,10 +117,20 @@ void	check_philo_finished(t_philo *philo)
 			current_time = get_current_time();
 			if (current_time - philo[i].last_meal_time >= info->time_to_die)
 			{
-				philo_print("has died", philo->id, info);
+				printf("[%lld ms] %d has died\n", current_time - info->start_time, philo[i].id);
+				printf("last meal time: %lld\n",philo[i].last_meal_time - info->start_time);//////
 				info->finish = 1;
 				break ;
 			}
 		}
 	}
 }
+
+/*
+
+pthread_detach()// for(10) sleep(1) print
+
+for(5초)
+	sleep(1)
+
+*/
