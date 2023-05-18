@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/17 19:25:02 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/18 19:14:33 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,13 @@ int	init_info_mutex(t_info *info)
 {
 	static int	i = -1;
 
-	if (pthread_mutex_init(&info->printable, NULL))
-		return (1);
 	if (pthread_mutex_init(&info->start, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->ready_cnt_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->eat_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->finish_mutex, NULL))
 		return (1);
 	info->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (!info->forks)
@@ -96,9 +100,7 @@ int	init_philo(t_philo **philo, t_info *info)
 		(*philo)[i].right = (i + 1) % info->number_of_philosophers;
 		(*philo)[i].eat_cnt = 0;
 		(*philo)[i].last_meal_time = 0;
-		if (pthread_mutex_init(&(*philo)[i].eat_cnt_mutex, NULL))
-			return (1);
-		if (pthread_mutex_init(&(*philo)[i].last_meal_time_mutex, NULL))
+		if (pthread_mutex_init(&(*philo)[i].last_meal_time_mutex, NULL))//////
 			return (1);
 	}
 	return (0);
