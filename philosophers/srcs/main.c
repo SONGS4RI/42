@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/17 16:49:54 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/18 16:51:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void leaks()
 {
-
-system("leaks philo");
-
+	system("leaks philo");
 }
 
 int	main(int argc, char **argv)
