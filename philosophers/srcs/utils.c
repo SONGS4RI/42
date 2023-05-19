@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/18 19:15:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/19 17:22:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,6 @@ void	pass_time(long long wait_time)
 	}
 }
 
-void	philo_print(char *message, int id, t_info *info)
-{
-	long long	current_time;
-
-	pthread_mutex_lock(&info->finish_mutex);////////
-	current_time = get_current_time();
-	if (!info->finish)
-		printf("[%lld ms] %d %s\n", current_time - info->start_time, id, message);
-	pthread_mutex_unlock(&info->finish_mutex);////////
-}
-
 void	free_destroy_all(t_philo *philo)
 {
 	int		i;
@@ -73,3 +62,5 @@ void	free_destroy_all(t_philo *philo)
 	free(philo);
 	free(info->forks);
 }
+
+
