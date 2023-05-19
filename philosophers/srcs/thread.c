@@ -6,24 +6,29 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:50:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/18 19:52:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/19 17:37:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	philo_action(t_philo *philo)
+int	philo_action(t_philo *philo)
 {
 	t_info		*info;
 
 	info = philo->info;
 	pthread_mutex_lock(&info->forks[philo->left]);
-	philo_print("has taken left fork", philo->id, info);
+	if (philo_print("has taken left fork", philo, info, &info->forks[philo->left]))
+		return (1);
 	if (info->number_of_philosophers > 1)////고쳐야함
 	{
 		pthread_mutex_lock(&info->forks[philo->right]);
-		philo_print("has taken right fork", philo->id, info);
-		philo_print("is now eating", philo->id, info);
+		if (philo_print("has taken right fork", philo, info, &info->forks[philo->right]) \
+		|| philo_print("is now eating", philo, info, &info->forks[philo->right]))
+		{
+			pthread_mutex_unlock(&info->forks[philo->left]);
+			return (1);
+		}
 		pthread_mutex_lock(&philo->last_meal_time_mutex);
 		philo->last_meal_time = get_current_time();
 		pthread_mutex_unlock(&philo->last_meal_time_mutex);
@@ -35,6 +40,7 @@ void	philo_action(t_philo *philo)
 		pthread_mutex_unlock(&info->forks[philo->right]);
 	}
 	pthread_mutex_unlock(&info->forks[philo->left]);
+	return (0);
 }
 
 void	*thread_action(void *ptr)
@@ -56,14 +62,19 @@ void	*thread_action(void *ptr)
 	{
 		pthread_mutex_lock(&info->finish_mutex);////////
 		if (info->finish)
+		{
+			pthread_mutex_unlock(&info->finish_mutex);////////
 			break ;
+		}
 		pthread_mutex_unlock(&info->finish_mutex);////////
-		philo_action(philo);
-		philo_print("is sleeping", philo->id, info);
+		if (philo_action(philo))
+			break ;
+		if (philo_print("is sleeping", philo, info, NULL))
+			break ;
 		pass_time(info->time_to_sleep);
-		philo_print("is thinking", philo->id, info);
+		if (philo_print("is thinking", philo, info, NULL))
+			break ;
 	}
-	pthread_mutex_unlock(&info->finish_mutex);////////
 	return (NULL);
 }
 
@@ -82,7 +93,18 @@ int	work_philo(t_philo *philo)
 	}
 	info->start_time = get_current_time();
 	pthread_mutex_unlock(&info->start);
+	while (42)
+	{
+		pthread_mutex_lock(&info->ready_cnt_mutex);////////
+		if (info->ready_cnt == info->number_of_philosophers)
+			break;
+		pthread_mutex_unlock(&info->ready_cnt_mutex);
+	}
+	pthread_mutex_unlock(&info->ready_cnt_mutex);////////
 	check_philo_finished(philo);
+	i = -1;
+	while (++i < info->number_of_philosophers)
+		pthread_mutex_unlock(&info->forks[i]);
 	i = -1;
 	while (++i < info->number_of_philosophers)
 		pthread_join(philo[i].thread, NULL);
@@ -92,23 +114,19 @@ int	work_philo(t_philo *philo)
 
 void	check_philo_finished(t_philo *philo)
 {
-	// long long	current_time;
-	int			i;
 	t_info		*info;
 
 	info = philo->info;
-
-	while (42)
-	{
-		pthread_mutex_lock(&info->ready_cnt_mutex);////////
-		if (info->ready_cnt == info->number_of_philosophers)
-			break;
-		pthread_mutex_unlock(&info->ready_cnt_mutex);
-	}
-	pthread_mutex_unlock(&info->ready_cnt_mutex);////////
 	while (42)
 	{
 		usleep(500);
+		pthread_mutex_lock(&info->finish_mutex);////////
+		if (info->finish)
+		{
+			pthread_mutex_unlock(&info->finish_mutex);////////
+			break ;
+		}
+		pthread_mutex_unlock(&info->finish_mutex);////////
 		pthread_mutex_lock(&info->eat_mutex);////////
 		if (info->eating_done_cnt == info->number_of_philosophers)
 		{
@@ -119,21 +137,41 @@ void	check_philo_finished(t_philo *philo)
 			return ;
 		}
 		pthread_mutex_unlock(&info->eat_mutex);////////
-		i = -1;
-		while (++i < info->number_of_philosophers)
-		{
-			pthread_mutex_lock(&philo[i].last_meal_time_mutex);
-			if (get_current_time() - philo[i].last_meal_time >= info->time_to_die)
-			{
-				pthread_mutex_unlock(&philo[i].last_meal_time_mutex);
-				// philo_print("had died", philo[i].id, info);
-				pthread_mutex_lock(&info->finish_mutex);////////
-				info->finish = 1;
-				pthread_mutex_unlock(&info->finish_mutex);////////
-				printf("%d has died\n",philo[i].id);
-				return ;
-			}
-			pthread_mutex_unlock(&philo[i].last_meal_time_mutex);
-		}
 	}
+}
+
+int	philo_print(char *message, t_philo *philo, t_info *info, pthread_mutex_t *ptr)
+{
+	long long	current_time;
+
+	current_time = get_current_time();
+	pthread_mutex_lock(&philo->last_meal_time_mutex);
+	if (current_time - philo->last_meal_time >= info->time_to_die)
+	{
+		if (ptr)
+			pthread_mutex_unlock(ptr);
+		pthread_mutex_unlock(&philo->last_meal_time_mutex);
+		pthread_mutex_lock(&info->finish_mutex);
+		if (info->finish)
+		{
+			pthread_mutex_unlock(&info->finish_mutex);
+			return (1);
+		}
+		info->finish = 1;
+		pthread_mutex_unlock(&info->finish_mutex);
+		printf("[%lld ms] %d has died\n", current_time - info->start_time, philo->id);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->last_meal_time_mutex);
+	pthread_mutex_lock(&info->finish_mutex);
+	if (info->finish)
+	{
+		pthread_mutex_unlock(&info->finish_mutex);
+		if (ptr)
+			pthread_mutex_unlock(ptr);
+		return (1);
+	}
+	pthread_mutex_unlock(&info->finish_mutex);
+	printf("[%lld ms] %d %s\n", current_time - info->start_time, philo->id, message);
+	return (0);
 }
