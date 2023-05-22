@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 18:59:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/22 20:19:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_info
 	int				finish;
 	pthread_mutex_t finish_mutex;
 	pthread_mutex_t	eat_mutex;
-	pthread_mutex_t	print_mutex;
 	pthread_mutex_t *forks_mutex;
 }	t_info;
 
@@ -48,7 +47,6 @@ typedef struct s_philo
 	int			right;
 	int			eat_cnt;
 	long long	last_meal_time;
-	pthread_mutex_t	last_meal_time_mutex;
 }	t_philo;
 
 // utils.c
@@ -65,7 +63,9 @@ int			init_philo(t_philo **philo, t_info *info);
 int			check_forks_status(t_philo *philo, t_info *info);
 void		*thread_action(void *ptr);
 int			work_philo(t_philo *philo);
-void		check_philo_finished(t_philo *philo, t_info *info);
 int			philo_print(char *message, t_philo *philo, t_info *info);
+int			is_done_eating(t_info *info);
+int			is_dead_philo(t_philo *philo, t_info *info);
+int			start_eating(t_philo *philo, t_info *info);
 
 #endif
