@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 15:56:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/22 18:59:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct s_info
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
 	long long		start_time;
-	int				finish;
 	int				eating_done_cnt;
 	int				*forks_status;
-	pthread_mutex_t	eat_mutex;
+	int				finish;
 	pthread_mutex_t finish_mutex;
-	pthread_mutex_t *forks_status_mutex;
+	pthread_mutex_t	eat_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t *forks_mutex;
 }	t_info;
 
