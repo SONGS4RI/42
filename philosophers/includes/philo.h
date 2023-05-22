@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/19 17:38:34 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/22 15:56:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ typedef struct s_info
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
 	long long		start_time;
-	int				ready_cnt;
 	int				finish;
 	int				eating_done_cnt;
-	pthread_mutex_t ready_cnt_mutex;
-	pthread_mutex_t start;
+	int				*forks_status;
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t finish_mutex;
-	pthread_mutex_t *forks;
+	pthread_mutex_t *forks_status_mutex;
+	pthread_mutex_t *forks_mutex;
 }	t_info;
 
 typedef struct s_philo
@@ -56,7 +55,6 @@ typedef struct s_philo
 int			ph_error(char *message);
 long long	get_current_time(void);
 void		pass_time(long long wait_time);
-int			philo_print(char *message, t_philo *philo, t_info *info, pthread_mutex_t *ptr);
 void		free_destroy_all(t_philo *philo);
 // init.c
 int			init_info(t_info *info, int argc, char **argv);
@@ -64,9 +62,10 @@ int			init_info_mutex(t_info *info);
 int			init_philo(t_philo **philo, t_info *info);
 
 // thread.c
-int			philo_action(t_philo *philo);
+int			check_forks_status(t_philo *philo, t_info *info);
 void		*thread_action(void *ptr);
 int			work_philo(t_philo *philo);
-void		check_philo_finished(t_philo *philo);
+void		check_philo_finished(t_philo *philo, t_info *info);
+int			philo_print(char *message, t_philo *philo, t_info *info);
 
 #endif
