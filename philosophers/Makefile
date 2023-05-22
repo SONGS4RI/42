@@ -6,14 +6,14 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 17:35:05 by jahlee            #+#    #+#              #
-#    Updated: 2023/05/22 16:56:52 by jahlee           ###   ########.fr        #
+#    Updated: 2023/05/22 20:04:24 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # compile options
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread
+CFLAGS		= -Wall -Wextra -Werror -pthread -fsanitize=thread -g
 RM			= @rm
 RMFLAGS		= -f
 INCLUDES	= ./includes/philo.h
