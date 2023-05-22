@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 16:28:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/22 18:59:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,16 @@ int	init_info_mutex(t_info *info)
 
 	if (pthread_mutex_init(&info->eat_mutex, NULL))
 		return (1);
+	if (pthread_mutex_init(&info->print_mutex, NULL))
+		return (1);
 	if (pthread_mutex_init(&info->finish_mutex, NULL))
 		return (1);
 	info->forks_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (!info->forks_mutex)
 		return (1);
-	info->forks_status_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
-	if (!info->forks_status_mutex)
-		return (1);
 	while (++i < info->number_of_philosophers)
 	{
 		if (pthread_mutex_init(&info->forks_mutex[i], NULL))
-			return (1);
-		if (pthread_mutex_init(&info->forks_status_mutex[i], NULL))
 			return (1);
 	}
 	return (0);

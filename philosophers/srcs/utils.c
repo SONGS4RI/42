@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 15:09:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/22 18:59:50 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,13 @@ void	free_destroy_all(t_philo *philo)
 	i = -1;
 	info = philo->info;
 	pthread_mutex_destroy(&info->eat_mutex);
-	pthread_mutex_destroy(&info->finish_mutex);
 	while (++i < info->number_of_philosophers)
 	{
 		pthread_mutex_destroy(&philo[i].last_meal_time_mutex);
 		pthread_mutex_destroy(&info->forks_mutex[i]);
-		pthread_mutex_destroy(&info->forks_status_mutex[i]);
 	}
 	free(philo);
 	free(info->forks_status);
-	free(info->forks_status_mutex);
 	free(info->forks_mutex);
 }
 
