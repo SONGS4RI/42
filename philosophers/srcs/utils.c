@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 20:19:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:28:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,21 @@ long long	get_current_time(void)
 	return (current_time);
 }
 
-void	pass_time(long long wait_time)
+int	pass_time(long long wait_time, t_philo *philo)
 {
 	long long	start;
 	long long	current_time;
 
+	(void) philo;
 	start = get_current_time();
 	while (42)
 	{
 		current_time = get_current_time();
 		if (current_time - start >= wait_time)
-			return ;
-		usleep(10);
+			return (0);
+		if (is_dead_philo(philo, philo->info))
+			return (1);
+		usleep(1000);
 	}
 }
 
