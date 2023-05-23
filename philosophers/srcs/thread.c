@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 16:50:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 20:39:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 21:06:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	*thread_action(void *ptr)
 		pass_time(info->time_to_eat / 2, philo);
 	while (42)
 	{
-		if (check_left_fork(philo, info) || check_right_fork(philo, info))
+		if (check_fork(philo, info, philo->left) || \
+		check_fork(philo, info, philo->right))
 			break ;
 		if (start_eating(philo, info))
 			break ;

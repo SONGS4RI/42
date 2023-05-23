@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 19:17:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:48:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	init_philo(t_philo **philo, t_info *info)
 	static int	i = -1;
 
 	*philo = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
-	if (!philo)
+	if (!*philo)
 		return (1);
 	while (++i < info->num_of_philo)
 	{

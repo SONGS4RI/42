@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 19:16:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 21:24:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ph_error(char *message)
 {
 	printf("%s\n", message);
+	//free 해라
 	return (1);
 }
 
@@ -33,7 +34,6 @@ int	pass_time(long long wait_time, t_philo *philo)
 	long long	start;
 	long long	current_time;
 
-	(void) philo;
 	start = get_current_time();
 	while (42)
 	{
@@ -46,28 +46,33 @@ int	pass_time(long long wait_time, t_philo *philo)
 	}
 }
 
-void	unlock_destroy_free_all(t_philo *philo)
+void	unlock_destroy_free_all(t_philo *philo, int flag)
 {
 	t_info	*info;
 	int		i;
 
-	info = philo->info;
+	if (philo)
+		info = philo->info;
 	i = -1;
 	while (++i < info->num_of_philo)
 		pthread_mutex_unlock(&info->forks_mutex[i]);
-	pthread_mutex_unlock(&info->eat_mutex);
-	pthread_mutex_unlock(&info->finish_mutex);
 	pthread_mutex_unlock(&info->print_mutex);
+	pthread_mutex_unlock(&info->start_mutex);
+	pthread_mutex_unlock(&info->finish_mutex);
+	pthread_mutex_unlock(&info->eat_mutex);
 	i = -1;
+	while (++i < info->num_of_philo)
+		pthread_mutex_destroy(&info->forks_mutex[i]);
+	pthread_mutex_destroy(&info->print_mutex);
 	pthread_mutex_destroy(&info->start_mutex);
 	pthread_mutex_destroy(&info->finish_mutex);
 	pthread_mutex_destroy(&info->eat_mutex);
-	pthread_mutex_destroy(&info->print_mutex);
-	while (++i < info->num_of_philo)
-		pthread_mutex_destroy(&info->forks_mutex[i]);
-	free(philo);
-	free(info->forks_status);
-	free(info->forks_mutex);
+	if (philo)
+		free(philo);
+	if (info->forks_status)
+		free(info->forks_status);
+	if (info->forks_mutex)
+		free(info->forks_mutex);
 }
 
 int	philo_print(char *message, t_philo *philo, t_info *info)
