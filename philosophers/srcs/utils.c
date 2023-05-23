@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 16:28:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 17:27:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,27 @@ int	pass_time(long long wait_time, t_philo *philo)
 			return (0);
 		if (is_dead_philo(philo, philo->info))
 			return (1);
-		usleep(1000);
+		usleep(500);
 	}
 }
 
-void	free_destroy_all(t_philo *philo)
+void	unlock_destroy_free_all(t_philo *philo)
 {
-	int		i;
 	t_info	*info;
+	int		i;
 
-	i = -1;
 	info = philo->info;
-	pthread_mutex_destroy(&info->eat_mutex);
-	pthread_mutex_destroy(&info->finish_mutex);
+	i = -1;
 	while (++i < info->number_of_philosophers)
-	{
+		pthread_mutex_unlock(&info->forks_mutex[i]);
+	pthread_mutex_unlock(&info->eat_mutex);
+	pthread_mutex_unlock(&info->finish_mutex);
+	i = -1;
+	pthread_mutex_destroy(&info->start_mutex);
+	pthread_mutex_destroy(&info->finish_mutex);
+	pthread_mutex_destroy(&info->eat_mutex);
+	while (++i < info->number_of_philosophers)
 		pthread_mutex_destroy(&info->forks_mutex[i]);
-	}
 	free(philo);
 	free(info->forks_status);
 	free(info->forks_mutex);
