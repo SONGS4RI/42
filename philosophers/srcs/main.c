@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 16:29:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 17:08:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	t_info	info;
 	t_philo	*philo;
 
-	// atexit(leaks);
+	atexit(leaks);
 	if (argc != 5 && argc != 6)
 		return (ph_error("usage: num_of_philosophers time_to_die time_to_eat"
 		" time_to_sleep [num_of_times_to_must_eat]"));
