@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 19:19:57 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 21:05:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <pthread.h>
+
+# define RESET		"\033[0m"
+# define RED		"\033[1;91m"
+# define YELLOW		"\033[1;93m"
 
 typedef struct s_info
 {
@@ -70,7 +74,6 @@ int			work_philo(t_philo *philo);
 int			is_finished(t_info *info);
 int			is_done_eating(t_info *info);
 int			is_dead_philo(t_philo *philo, t_info *info);
-int			check_left_fork(t_philo *philo, t_info *info);
-int			check_right_fork(t_philo *philo, t_info *info);
+int			check_fork(t_philo *philo, t_info *info, int fork);
 
 #endif
