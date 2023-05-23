@@ -6,21 +6,19 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 19:12:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 19:19:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <sys/time.h>//gettimeofday
-# include <unistd.h>//write, usleep
-# include <stdio.h>//printf
-# include <string.h>//memset
-# include <stdlib.h>//malloc, free
+# include <sys/time.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
 # include <pthread.h>
-/*pthread_create, pthread_detach, pthread_join, pthread_mutex_init,
-pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock */
 
 typedef struct s_info
 {
