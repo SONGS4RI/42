@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chech_status.c                                     :+:      :+:    :+:   */
+/*   check_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:24:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 17:25:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 19:12:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_finished(t_info *info)
 int	is_done_eating(t_info *info)
 {
 	pthread_mutex_lock(&info->eat_mutex);
-	if (info->eating_done_cnt == info->number_of_philosophers)
+	if (info->eating_done_cnt == info->num_of_philo)
 	{
 		pthread_mutex_unlock(&info->eat_mutex);
 		if (is_finished(info))
@@ -35,7 +35,7 @@ int	is_done_eating(t_info *info)
 		pthread_mutex_lock(&info->finish_mutex);
 		info->finish = 1;
 		pthread_mutex_unlock(&info->finish_mutex);
-		printf("eating done!!!\n");/////
+		printf("eating done!!!\n");
 		return (1);
 	}
 	pthread_mutex_unlock(&info->eat_mutex);
@@ -57,6 +57,48 @@ int	is_dead_philo(t_philo *philo, t_info *info)
 		pthread_mutex_unlock(&info->finish_mutex);
 		printf("%lld %d died\n", current_time - info->start_time, philo->id);
 		return (1);
+	}
+	return (0);
+}
+
+int	check_left_fork(t_philo *philo, t_info *info)
+{
+	while (philo->left)
+	{
+		if (is_dead_philo(philo, info))
+			return (1);
+		pthread_mutex_lock(&info->forks_mutex[philo->left]);
+		if (info->forks_status[philo->left] == 0)
+		{
+			info->forks_status[philo->left] = 1;
+			pthread_mutex_unlock(&info->forks_mutex[philo->left]);
+			if (philo_print("has taken a fork", philo, info))
+				return (1);
+			break ;
+		}
+		pthread_mutex_unlock(&info->forks_mutex[philo->left]);
+		usleep(500);
+	}
+	return (0);
+}
+
+int	check_right_fork(t_philo *philo, t_info *info)
+{
+	while (philo->right)
+	{
+		if (is_dead_philo(philo, info))
+			return (1);
+		pthread_mutex_lock(&info->forks_mutex[philo->right]);
+		if (info->forks_status[philo->right] == 0)
+		{
+			info->forks_status[philo->right] = 1;
+			pthread_mutex_unlock(&info->forks_mutex[philo->right]);
+			if (philo_print("has taken a fork", philo, info))
+				return (1);
+			break ;
+		}
+		pthread_mutex_unlock(&info->forks_mutex[philo->right]);
+		usleep(500);
 	}
 	return (0);
 }
