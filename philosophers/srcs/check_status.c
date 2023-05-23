@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:24:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 19:12:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:38:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	is_done_eating(t_info *info)
 		pthread_mutex_lock(&info->finish_mutex);
 		info->finish = 1;
 		pthread_mutex_unlock(&info->finish_mutex);
+		pthread_mutex_lock(&info->print_mutex);
 		printf("eating done!!!\n");
+		pthread_mutex_unlock(&info->print_mutex);
 		return (1);
 	}
 	pthread_mutex_unlock(&info->eat_mutex);
@@ -55,7 +57,9 @@ int	is_dead_philo(t_philo *philo, t_info *info)
 		pthread_mutex_lock(&info->finish_mutex);
 		info->finish = 1;
 		pthread_mutex_unlock(&info->finish_mutex);
+		pthread_mutex_lock(&info->print_mutex);
 		printf("%lld %d died\n", current_time - info->start_time, philo->id);
+		pthread_mutex_unlock(&info->print_mutex);
 		return (1);
 	}
 	return (0);
@@ -63,7 +67,7 @@ int	is_dead_philo(t_philo *philo, t_info *info)
 
 int	check_left_fork(t_philo *philo, t_info *info)
 {
-	while (philo->left)
+	while (42)
 	{
 		if (is_dead_philo(philo, info))
 			return (1);
@@ -84,7 +88,7 @@ int	check_left_fork(t_philo *philo, t_info *info)
 
 int	check_right_fork(t_philo *philo, t_info *info)
 {
-	while (philo->right)
+	while (42)
 	{
 		if (is_dead_philo(philo, info))
 			return (1);
