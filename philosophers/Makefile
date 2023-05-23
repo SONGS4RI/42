@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/12 17:35:05 by jahlee            #+#    #+#              #
-#    Updated: 2023/05/23 17:19:24 by jahlee           ###   ########.fr        #
+#    Updated: 2023/05/23 18:54:02 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,21 +23,15 @@ RESET	= \033[0m
 GREEN	= \033[1;92m
 MAGENTA	= \033[1;95m
 
-SRCS		= ./srcs/main.c	\
-			  ./srcs/init.c	\
-			  ./srcs/utils.c	\
-			  ./srcs/thread.c	\
+SRCS		= ./srcs/main.c			\
+			  ./srcs/init.c			\
+			  ./srcs/utils.c		\
+			  ./srcs/thread.c		\
+			  ./srcs/check_status.c	\
 
 OBJS	= $(SRCS:.c=.o)
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
-
-ifdef BONUS_ON
-    REALOBJS = $(OBJS_BONUS)
-	INCLUDES = ./philo/includes/philosophers_bonus.h
-else
-    REALOBJS = $(OBJS)
-endif
+REALOBJS = $(OBJS)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
