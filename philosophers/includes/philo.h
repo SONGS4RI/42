@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 20:19:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 14:55:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_info
 	int				eating_done_cnt;
 	int				*forks_status;
 	int				finish;
+	pthread_mutex_t start_mutex;
 	pthread_mutex_t finish_mutex;
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t *forks_mutex;
@@ -52,7 +53,7 @@ typedef struct s_philo
 // utils.c
 int			ph_error(char *message);
 long long	get_current_time(void);
-void		pass_time(long long wait_time);
+int			pass_time(long long wait_time, t_philo *philo);
 void		free_destroy_all(t_philo *philo);
 // init.c
 int			init_info(t_info *info, int argc, char **argv);

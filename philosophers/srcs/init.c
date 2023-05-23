@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/22 20:19:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/23 16:05:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	init_info_mutex(t_info *info)
 	if (pthread_mutex_init(&info->eat_mutex, NULL))
 		return (1);
 	if (pthread_mutex_init(&info->finish_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&info->start_mutex, NULL))
 		return (1);
 	info->forks_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (!info->forks_mutex)
