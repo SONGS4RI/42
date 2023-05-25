@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 18:13:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/25 14:47:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/25 15:20:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ int	main(int argc, char **argv)
 		return (ph_error("work_philo: thread create error", &info, philo));
 	}
 }
-
-// leak check
