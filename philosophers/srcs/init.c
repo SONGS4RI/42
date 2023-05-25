@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:05:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 20:48:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/25 14:32:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int	init_info(t_info *info, int argc, char **argv)
 	info->forks_status = (int *)malloc(sizeof(int) * info->num_of_philo);
 	if (!info->forks_status)
 		return (1);
+	info->forks_mutex = \
+		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
+	if (!info->forks_mutex)
+		return (1);
 	memset(info->forks_status, 0, sizeof(int) * info->num_of_philo);
 	return (0);
 }
@@ -71,22 +75,25 @@ int	init_info_mutex(t_info *info)
 {
 	static int	i = -1;
 
-	if (pthread_mutex_init(&info->eat_mutex, NULL))
-		return (1);
-	if (pthread_mutex_init(&info->finish_mutex, NULL))
-		return (1);
-	if (pthread_mutex_init(&info->start_mutex, NULL))
-		return (1);
 	if (pthread_mutex_init(&info->print_mutex, NULL))
 		return (1);
-	info->forks_mutex = \
-		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->num_of_philo);
-	if (!info->forks_mutex)
-		return (1);
+	if (pthread_mutex_init(&info->start_mutex, NULL))
+		return (destroy_mutex(&info->print_mutex, 0, 0, 0));
+	if (pthread_mutex_init(&info->finish_mutex, NULL))
+		return (destroy_mutex(&info->print_mutex, &info->start_mutex, 0, 0));
+	if (pthread_mutex_init(&info->eat_mutex, NULL))
+		return (destroy_mutex(&info->print_mutex, &info->start_mutex, \
+		&info->finish_mutex, 0));
 	while (++i < info->num_of_philo)
 	{
 		if (pthread_mutex_init(&info->forks_mutex[i], NULL))
+		{
+			destroy_mutex(&info->print_mutex, &info->start_mutex, \
+			&info->finish_mutex, &info->eat_mutex);
+			while (--i >= 0)
+				pthread_mutex_destroy(&info->forks_mutex[i]);
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -97,7 +104,13 @@ int	init_philo(t_philo **philo, t_info *info)
 
 	*philo = (t_philo *)malloc(sizeof(t_philo) * info->num_of_philo);
 	if (!*philo)
+	{
+		destroy_mutex(&info->print_mutex, &info->start_mutex, \
+			&info->finish_mutex, &info->eat_mutex);
+		while (++i < info->num_of_philo)
+			pthread_mutex_destroy(&info->forks_mutex[i]);
 		return (1);
+	}
 	while (++i < info->num_of_philo)
 	{
 		(*philo)[i].info = info;

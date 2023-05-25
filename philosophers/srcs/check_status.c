@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:24:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 21:05:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/25 14:57:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ int	is_dead_philo(t_philo *philo, t_info *info)
 	current_time = get_current_time();
 	if (current_time - philo->last_meal_time >= info->time_to_die)
 	{
+		pthread_mutex_lock(&info->print_mutex);
 		if (is_finished(info))
+		{
+			pthread_mutex_unlock(&info->print_mutex);
 			return (1);
+		}
 		pthread_mutex_lock(&info->finish_mutex);
 		info->finish = 1;
 		pthread_mutex_unlock(&info->finish_mutex);
-		pthread_mutex_lock(&info->print_mutex);
 		printf(RED"%lld %d died\n"RESET, current_time - info->start_time, \
 		philo->id);
 		pthread_mutex_unlock(&info->print_mutex);
