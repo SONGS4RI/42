@@ -6,16 +6,24 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:06:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 21:24:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/25 15:01:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ph_error(char *message)
+int	ph_error(char *message, t_info *info, t_philo *philo)
 {
 	printf("%s\n", message);
-	//free 해라
+	if (info)
+	{
+		if (info->forks_status)
+			free(info->forks_status);
+		if (info->forks_mutex)
+			free(info->forks_mutex);
+	}
+	if (philo)
+		free(philo);
 	return (1);
 }
 
@@ -46,13 +54,12 @@ int	pass_time(long long wait_time, t_philo *philo)
 	}
 }
 
-void	unlock_destroy_free_all(t_philo *philo, int flag)
+void	unlock_destroy_all(t_philo *philo)
 {
 	t_info	*info;
 	int		i;
 
-	if (philo)
-		info = philo->info;
+	info = philo->info;
 	i = -1;
 	while (++i < info->num_of_philo)
 		pthread_mutex_unlock(&info->forks_mutex[i]);
@@ -63,27 +70,20 @@ void	unlock_destroy_free_all(t_philo *philo, int flag)
 	i = -1;
 	while (++i < info->num_of_philo)
 		pthread_mutex_destroy(&info->forks_mutex[i]);
-	pthread_mutex_destroy(&info->print_mutex);
-	pthread_mutex_destroy(&info->start_mutex);
-	pthread_mutex_destroy(&info->finish_mutex);
-	pthread_mutex_destroy(&info->eat_mutex);
-	if (philo)
-		free(philo);
-	if (info->forks_status)
-		free(info->forks_status);
-	if (info->forks_mutex)
-		free(info->forks_mutex);
+	destroy_mutex(&info->print_mutex, &info->start_mutex, \
+			&info->finish_mutex, &info->eat_mutex);
 }
 
-int	philo_print(char *message, t_philo *philo, t_info *info)
+int	destroy_mutex(pthread_mutex_t *ptr1, pthread_mutex_t *ptr2, \
+pthread_mutex_t *ptr3, pthread_mutex_t *ptr4)
 {
-	if (is_dead_philo(philo, info) || is_done_eating(info))
-		return (1);
-	if (is_finished(info))
-		return (1);
-	pthread_mutex_lock(&info->print_mutex);
-	printf("%lld %d %s\n", get_current_time() - info->start_time, \
-	philo->id, message);
-	pthread_mutex_unlock(&info->print_mutex);
-	return (0);
+	if (ptr1)
+		pthread_mutex_destroy(ptr1);
+	if (ptr2)
+		pthread_mutex_destroy(ptr1);
+	if (ptr3)
+		pthread_mutex_destroy(ptr1);
+	if (ptr4)
+		pthread_mutex_destroy(ptr1);
+	return (1);
 }

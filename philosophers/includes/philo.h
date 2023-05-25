@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:49:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/05/23 21:05:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/05/25 14:47:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ typedef struct s_philo
 }	t_philo;
 
 // utils.c
-int			ph_error(char *message);
+int			ph_error(char *message, t_info *info, t_philo *philo);
 long long	get_current_time(void);
 int			pass_time(long long wait_time, t_philo *philo);
-void		unlock_destroy_free_all(t_philo *philo);
-int			philo_print(char *message, t_philo *philo, t_info *info);
+void		unlock_destroy_all(t_philo *philo);
+int			destroy_mutex(pthread_mutex_t *ptr1, pthread_mutex_t *ptr2, \
+			pthread_mutex_t *ptr3, pthread_mutex_t *ptr4);
 
 // init.c
 int			init_info(t_info *info, int argc, char **argv);
@@ -68,7 +69,8 @@ int			init_philo(t_philo **philo, t_info *info);
 // thread.c
 int			start_eating(t_philo *philo, t_info *info);
 void		*thread_action(void *ptr);
-int			work_philo(t_philo *philo);
+int			work_philo(t_info *info, t_philo *philo);
+int			philo_print(char *message, t_philo *philo, t_info *info);
 
 // check_status.c
 int			is_finished(t_info *info);
