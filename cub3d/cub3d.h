@@ -69,6 +69,8 @@ struct s_img
 {
 	void			*img_ptr;
 	unsigned int	*buffer;
+	int				width;
+	int				height;
 	int				bits_per_pixel;
 	int				size_line;
 	int				endian;

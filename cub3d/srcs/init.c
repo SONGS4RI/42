@@ -17,13 +17,11 @@ void	init_map(t_cub *cub, char *filename)
 static t_img	*get_texture_img(t_cub *cub, char *path)
 {
 	t_img	*img;
-	int		width;
-	int		height;
 
 	img = malloc(sizeof(t_img));
 	if (img == NULL)
 		return (NULL);
-	img->img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, path, &width, &height);
+	img->img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, path, &img->width, &img->height);
 	if (img->img_ptr == NULL)
 	{
 		free(img);
