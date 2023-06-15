@@ -9,8 +9,6 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define TEXT_WIDTH			1080
-# define TEXT_HEIGHT		1080
 # define WIDTH				1280
 # define HEIGHT				920
 # define FOV				0.66
