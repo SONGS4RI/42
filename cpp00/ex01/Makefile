@@ -1,44 +1,62 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    MAKEFILE                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/06/20 16:55:21 by jahlee           ###   ########.fr        #
+#    Updated: 2023/06/20 17:33:18 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= so_long
+NAME		= megaphone
 
+# compile option
 CC			= @c++
-CFLAG		= -Wall -Wextra -Werror -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
+# remove option
 RM			= @rm
 RMFLAGS		= -f
 
-INCLUDES	= 
+# color
+RESET		= \033[0m
+GREEN		= \033[1;92m
+MAGENTA		= \033[1;95m
 
-SRCS		= 
+SRCS		= megaphone.cpp
 
-OBJS	= $(SRCS:.c=.o)
+OBJS	= $(SRCS:.cpp=.o)
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
-
-$(NAME) : $(OBJS)
-	$(CC) $(MLXFLAG) $(CFLAGS) $^ $(LIBFTFILE2) -o $@ -I $(INCLUDES)
+%.o : %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
+$(NAME) : $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
+	@echo "$(GREEN)╔═══════════════════════════════════════════════╗$(RESET)"
+	@echo "$(GREEN)║                                               ║$(RESET)"
+	@echo "$(GREEN)║               compile finished.               ║$(RESET)"
+	@echo "$(GREEN)║                                               ║$(RESET)"
+	@echo "$(GREEN)╚═══════════════════════════════════════════════╝$(RESET)"
+
 clean :
-	@make -C $(LIBFTDIR) clean
 	$(RM) $(RMFLAGS) $(OBJS)
+	@echo "$(MAGENTA)╔═══════════════════════════════════════════════╗$(RESET)"
+	@echo "$(MAGENTA)║                                               ║$(RESET)"
+	@echo "$(MAGENTA)║               clean finished.                 ║$(RESET)"
+	@echo "$(MAGENTA)║                                               ║$(RESET)"
+	@echo "$(MAGENTA)╚═══════════════════════════════════════════════╝$(RESET)"
 
 fclean : clean
-	@make -C $(LIBFTDIR) fclean
 	$(RM) $(RMFLAGS) $(LIBFTFILE2) $(NAME)
+	@echo "$(MAGENTA)╔═══════════════════════════════════════════════╗$(RESET)"
+	@echo "$(MAGENTA)║                                               ║$(RESET)"
+	@echo "$(MAGENTA)║               fclean finished.                ║$(RESET)"
+	@echo "$(MAGENTA)║                                               ║$(RESET)"
+	@echo "$(MAGENTA)╚═══════════════════════════════════════════════╝$(RESET)"
 
 re : clean all
 
