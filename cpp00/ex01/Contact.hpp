@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/21 17:50:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/21 20:27:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define CONTACT_HPP
 
 #include <iostream>
-
 class Contact
 {
 	private:

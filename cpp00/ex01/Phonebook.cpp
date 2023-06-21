@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/21 18:00:29 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/21 20:32:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,8 @@ void Phonebook::addContact(Contact contact) {
 		_contacts[this->_cnt] = contact;
 		this->_cnt++;
 	}
+}
+
+void Phonebook::hi() {
+	std::cout << "hi" << std::endl;
 }

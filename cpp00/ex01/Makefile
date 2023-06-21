@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/06/21 17:17:53 by jahlee           ###   ########.fr        #
+#    Updated: 2023/06/21 20:38:08 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,10 @@ RESET		= \033[0m
 GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
-SRCS		= Phonebook.cpp		\
+SRCS		= main.cpp			\
+			  Phonebook.cpp		\
 			  Contact.cpp		\
-			  main.cpp			\
+			  
 
 OBJS	= $(SRCS:.cpp=.o)
 
