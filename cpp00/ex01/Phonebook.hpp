@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/20 20:46:57 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/21 18:00:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,15 @@
 # include <iostream>
 # include "./Contact.hpp"
 
-class Phonebook
-{
+class Phonebook {
 	private:
-		Contact contacts[8];
-		unsigned int cnt;
-		unsigned int oldestIdx;
+		Contact _contacts[8];
+		unsigned int _cnt;
+		unsigned int _oldestIdx;
 
 	public:
-		Phonebook() {
-				this->cnt = 0;
-				this->oldestIdx = 0;
-				std:: cout << "Phonebook이 생성되었습니다." << std::endl;
-			}
-
-		void addContact(Contact contact) {
-			if (this->cnt == 8) {
-				contacts[this->oldestIdx] = contact;
-				this->oldestIdx = (this->oldestIdx + 1) % 8;
-			} else {
-				contacts[this->cnt] = contact;
-				this->cnt++;
-			}
-		}
-
-		~Phonebook() {
-			std:: cout << "Phonebook이 소멸되었습니다." << std::endl;
-		}
+		Phonebook();
+		void addContact(Contact contact);
+		void getContacts();
 };
-
 #endif

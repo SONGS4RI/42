@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/20 20:23:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:50:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@
 class Contact
 {
 	private:
-		std::string name;
-		std::string phoneNumber;
+		std::string _firstName;
+		std::string _lastName;
+		std::string _nickName;
+		std::string _phoneNumber;
+		std::string _darkestSecret;
 	public:
-		Contact(std::string name, std::string phoneNumber) {
-			this->name = name;
-			this->phoneNumber = phoneNumber;
-			std:: cout << "Contact가 생성되었습니다." << std::endl;
-		}
-		std::string getName() {
-			return (name);
-		}
-		std::string getPhoneNumber() {
-			return (phoneNumber);
-		}
+		std::string getFirstName();
+		std::string getlastName();
+		std::string getNickName();
+		std::string getPhoneNumber();
+		std::string getDarkestSecret();
+		void addFirstName(std::string firstname);
+		void addlastName(std::string lastName);
+		void addNickName(std::string nickName);
+		void addPhoneNumber(std::string phoneNumber);
+		void addDarkestSecret(std::string darkestSecret);
 };
 #endif
