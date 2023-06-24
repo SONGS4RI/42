@@ -6,48 +6,25 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:13:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/21 17:51:38 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:54:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Contact.hpp"
+#include "./includes.hpp"
 
-std::string Contact::getFirstName() {
-	return (this->_firstName);
+std::string Contact::getContactInfo(eContact infoType) {
+	return (this->_contactInfo[infoType]);
 }
 
-std::string Contact::getlastName() {
-	return (this->_lastName);
+void Contact::setContactInfo(std::string str, eContact type) {
+	this->_contactInfo[type] = str;
 }
 
-std::string Contact::getNickName() {
-	return (this->_nickName);
-}
-
-std::string Contact::getPhoneNumber() {
-	return (this->_phoneNumber);
-}
-
-std::string Contact::getDarkestSecret() {
-	return (this->_darkestSecret);
-}
-
-void Contact::addFirstName(std::string firstname) {
-	this->_firstName = firstname;
-}
-
-void Contact::addlastName(std::string lastName) {
-	this->_lastName = lastName;
-}
-
-void Contact::addNickName(std::string nickName) {
-	this->_nickName = nickName;
-}
-
-void Contact::addPhoneNumber(std::string phoneNumber) {
-	this->_phoneNumber = phoneNumber;
-}
-
-void Contact::addDarkestSecret(std::string darkestSecret) {
-	this->_darkestSecret = darkestSecret;
+bool Contact::isValidContactInput(eContact type) {
+	this->_contactInfo[type].resize(10, ' ');
+	int idx = 0;
+	for (; idx < 10; idx++)
+		if (this->_contactInfo[type][idx] != ' ') break ;
+	if (idx == 10) return (false);
+	return (true);
 }
