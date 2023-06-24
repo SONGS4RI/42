@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   includes.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/24 18:26:34 by jahlee           ###   ########.fr       */
+/*   Created: 2023/06/24 18:09:06 by jahlee            #+#    #+#             */
+/*   Updated: 2023/06/24 18:18:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef INCLUDES_HPP
+# define INCLUDES_HPP
 
-#include "./includes.hpp"
+#include <iostream>
+#include "./enum.hpp"
+#include "./Contact.hpp"
+#include "./Phonebook.hpp"
 
-class Phonebook {
-	private:
-		Contact			_contacts[8];
-		std::string		_message[6];
-		unsigned int	_cnt;
-		unsigned int	_oldestIdx;
+# define RESET		"\033[0m"
+# define RED		"\033[1;91m"
+# define YELLOW		"\033[1;93m"
+# define BLUE		"\033[1;94m"
 
-	public:
-		Phonebook();
-		void addContact(Contact contact);
-		void getContacts();
-		void printMessage(eMessage type, std::string color);
-		void commandAdd();
-		void commandSearch();
-		void commandExit();
-};
 #endif

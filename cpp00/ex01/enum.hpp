@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   enum.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/24 18:26:34 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:26:48 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-# define PHONEBOOK_HPP
+#ifndef ENUM_HPP
+# define ENUM_HPP
 
-#include "./includes.hpp"
+enum eMessage {
+	PROMPT,
+	ADD,
+	SEARCH,
+	EXIT,
+	WRONG,
+	ERROR
+};
 
-class Phonebook {
-	private:
-		Contact			_contacts[8];
-		std::string		_message[6];
-		unsigned int	_cnt;
-		unsigned int	_oldestIdx;
-
-	public:
-		Phonebook();
-		void addContact(Contact contact);
-		void getContacts();
-		void printMessage(eMessage type, std::string color);
-		void commandAdd();
-		void commandSearch();
-		void commandExit();
+enum eContact {
+	FIRST_NAME,
+	LAST_NAME,
+	NICK_NAME,
+	PHONE_NUMBER,
+	DARKEDST_SECRET
 };
 #endif
