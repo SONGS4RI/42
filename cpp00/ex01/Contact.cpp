@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:13:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/24 18:54:23 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/26 14:31:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void Contact::setContactInfo(std::string str, eContact type) {
 }
 
 bool Contact::isValidContactInput(eContact type) {
-	this->_contactInfo[type].resize(10, ' ');
 	int idx = 0;
-	for (; idx < 10; idx++)
+	int strSize = this->_contactInfo[type].size();
+	for (; idx < strSize; idx++)
 		if (this->_contactInfo[type][idx] != ' ') break ;
-	if (idx == 10) return (false);
+	if (idx == strSize) return (false);
 	return (true);
 }

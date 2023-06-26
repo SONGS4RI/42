@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:02:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/24 18:34:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/26 16:41:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int main() {
 			newPhonebook.commandSearch();
 		} else if (input == "exit") {
 			newPhonebook.commandExit();
-			break ;
 		} else {
-			newPhonebook.printMessage(WRONG, RED);
+			newPhonebook.printMessage(WRONG_COMMAND, RED);
 		}
 	}
 }
