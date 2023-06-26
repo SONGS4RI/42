@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/26 16:46:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/26 16:54:42 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void Phonebook::commandSearch() {
 	}
 	std::string inputIdx;
 	while (42) {
-		std::cout << BLUE "type in index 1 ~ " << this->_cnt << " want to see" RESET << std::endl;
+		std::cout << BLUE "type in index < 1 ~ " << this->_cnt << " >" RESET << std::endl;
 		std::getline(std::cin, inputIdx);
 		if (inputIdx.size() != 1) {
 			this->printMessage(WRONG_IDX, YELLOW);

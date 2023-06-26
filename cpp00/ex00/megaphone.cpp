@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:55:25 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/20 19:25:57 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/26 16:58:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,9 @@ void makeDefaultMegapehonSound() {
 }
 
 void argvToUpper(int argc, char ***argv){
-	for (int i = 1; i < argc; i++) {
-		for (int j = 0; (*argv)[i][j] != '\0'; j++) {
-			if (islower((*argv)[i][j])) {
-				(*argv)[i][j] = toupper((*argv)[i][j]);
-			}
-		}
-	}
+	for (int i = 1; i < argc; i++)
+		for (int j = 0; (*argv)[i][j] != '\0'; j++)
+			if (islower((*argv)[i][j])) (*argv)[i][j] = toupper((*argv)[i][j]);
 }
 
 void makeMegaphoneSound(int argc, char **argv) {
