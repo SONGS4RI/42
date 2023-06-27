@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/26 16:54:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/27 17:04:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes.hpp"
 
-Phonebook::Phonebook() {
+Phonebook::Phonebook(void) {
 	this->_message[PROMPT] = "Type Command [ ADD or SEARCH or EXIT ]";
 	this->_message[ADD] = "Type Contact Information One Field At A Time\n"
 	"[ First Name, Last Name, Nickname, Phone Number, And Darkest Secret ]";
@@ -41,7 +41,7 @@ void Phonebook::addContact(Contact newContact) {
 	}
 }
 
-void Phonebook::commandAdd() {
+void Phonebook::commandAdd(void) {
 	this->printMessage(ADD, BLUE);
 	Contact newContact = Contact();
 	std::string contactInput;
@@ -55,38 +55,26 @@ void Phonebook::commandAdd() {
 		newContact.setContactInfo(contactInput, (eContact) i);
 		if (!newContact.isValidContactInput((eContact) i)) {
 			this->printMessage(WRONG_CONTACT_INFO, RED);
+			this->commandAdd();////
 			return ;
 		}
 	}
 	this->addContact(newContact);
 }
 
-void Phonebook::printContactNames(unsigned int contactIdx) {
-	Contact targetContact = this->_contacts[contactIdx];
-	std::string names[3];
-	for(int i = 0; i < 3; i++) {
-		eContact infoType = (eContact) i;
-		names[i] = targetContact.getContactInfo(infoType);
-		if (names[i].size() > 10) {
-			names[i].resize(9);
-			names[i] += '.';
-		}
+void Phonebook::commandSearch(void) {
+	if (this->_cnt == 0) {
+		this->printMessage(EMPTY, YELLOW);
+		return ;
 	}
 	std::cout
 	<< "---------------------------------------------" << std::endl
 	<< "|     index|first name| last name|  nickname|" << std::endl
-	<< "---------------------------------------------" << std::endl
-	<< "|" << std::setw(10) << std::right << contactIdx + 1 << "|"
-	<< std::setw(10) << std::right << names[FIRST_NAME] << "|"
-	<< std::setw(10) << std::right << names[LAST_NAME] << "|"
-	<< std::setw(10) << std::right << names[NICK_NAME] << "|" << std::endl
 	<< "---------------------------------------------" << std::endl;
-}
-
-void Phonebook::commandSearch() {
-	if (this->_cnt == 0) {
-		this->printMessage(EMPTY, YELLOW);
-		return ;
+	for (int idx = 1; idx <= this->_cnt; idx++) {
+		std::cout << "|" << std::setw(10) << std::right << idx << "|";
+		this->_contacts[idx - 1].printContactNames();
+		std::cout << "---------------------------------------------" << std::endl;
 	}
 	std::string inputIdx;
 	while (42) {
@@ -100,10 +88,10 @@ void Phonebook::commandSearch() {
 			break ;
 		}
 	}
-	this->printContactNames(inputIdx[0] - '1');
+	this->_contacts[inputIdx[0] - '1'].printContactInfo();
 }
 
-void Phonebook::commandExit() {
+void Phonebook::commandExit(void) {
 	this->printMessage(EXIT, YELLOW);
 	exit(0);
 }

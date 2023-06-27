@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/06/21 20:38:08 by jahlee           ###   ########.fr        #
+#    Updated: 2023/06/27 16:34:01 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ MAGENTA		= \033[1;95m
 SRCS		= main.cpp			\
 			  Phonebook.cpp		\
 			  Contact.cpp		\
-			  
 
 OBJS	= $(SRCS:.cpp=.o)
 
