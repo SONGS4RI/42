@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/24 18:10:38 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:47:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ class Contact
 		std::string getContactInfo(eContact infoType);
 		void setContactInfo(std::string str, eContact type);
 		bool isValidContactInput(eContact type);
+		void printContactNames(void);
+		void printContactInfo(void);
 };
 #endif

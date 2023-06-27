@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/26 16:57:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:55:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ class Phonebook {
 		unsigned int	_oldestIdx;
 
 	public:
-		Phonebook();
+		Phonebook(void);
 		void addContact(Contact contact);
-		void getContacts();
 		void printMessage(eMessage type, std::string color);
-		void printContactNames(unsigned int contactIdx);
-		void commandAdd();
-		void commandSearch();
-		void commandExit();
+		void commandAdd(void);
+		void commandSearch(void);
+		void commandExit(void);
 };
 #endif
