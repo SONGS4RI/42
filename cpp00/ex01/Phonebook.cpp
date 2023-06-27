@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/27 17:04:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/27 19:59:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void Phonebook::commandAdd(void) {
 	std::string contactInput;
 	for (int i = 0; i < 5; i++) {
 		std::getline(std::cin, contactInput);
+		if (std::cin.eof()) {
+			std::cin.clear();
+			// clearerr(stdin);
+			return ;
+		}
 		int idx = 0;
 		for (;idx < contactInput.size(); idx++) {
 			if (contactInput[idx] != ' ') break ;
@@ -55,7 +60,7 @@ void Phonebook::commandAdd(void) {
 		newContact.setContactInfo(contactInput, (eContact) i);
 		if (!newContact.isValidContactInput((eContact) i)) {
 			this->printMessage(WRONG_CONTACT_INFO, RED);
-			this->commandAdd();////
+			this->commandAdd();
 			return ;
 		}
 	}
