@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:31:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/26 16:39:28 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:33:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ enum eMessage {
 	WRONG_CONTACT_INFO,
 	EMPTY,
 	WRONG_IDX,
-	WRONG_IDX_RANGE,
 };
 
 enum eContact {

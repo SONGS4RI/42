@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:13:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/27 16:57:05 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:30:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ std::string Contact::getContactInfo(eContact infoType) {
 	return (this->_contactInfo[infoType]);
 }
 
-void Contact::setContactInfo(std::string str, eContact type) {
-	this->_contactInfo[type] = str;
-}
-
-bool Contact::isValidContactInput(eContact type) {
-	int strSize = this->_contactInfo[type].size();
+bool Contact::setContactInfo(std::string str, eContact type) {
+	int strSize = str.size();
 	if (strSize == 0) return (false);
+	this->_contactInfo[type] = str;
 	return (true);
 }
 
@@ -37,11 +34,9 @@ void Contact::printContactNames(void) {
 		}
 	}
 	std::cout
-	// << "|" << std::setw(10) << std::right << contactIdx + 1 << "|"
 	<< std::setw(10) << std::right << names[FIRST_NAME] << "|"
 	<< std::setw(10) << std::right << names[LAST_NAME] << "|"
 	<< std::setw(10) << std::right << names[NICK_NAME] << "|" << std::endl;
-	// << "---------------------------------------------" << std::endl;
 }
 
 void Contact::printContactInfo(void) {
