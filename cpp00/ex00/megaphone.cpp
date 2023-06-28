@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:55:25 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/26 16:58:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:07:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void argvToUpper(int argc, char ***argv){
 
 void makeMegaphoneSound(int argc, char **argv) {
 	argvToUpper(argc, &argv);
-	for (int i = 1; i < argc; i++) {
-		std::cout << argv[i];
-	}
+	for (int i = 1; i < argc; i++) std::cout << argv[i];
 	std::cout << std::endl;
 	return ;
 }
