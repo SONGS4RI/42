@@ -6,11 +6,11 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/06/27 16:34:01 by jahlee           ###   ########.fr        #
+#    Updated: 2023/06/28 15:41:12 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ex01
+NAME		= Phonebook
 
 # compile option
 CC			= @c++
