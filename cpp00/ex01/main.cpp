@@ -6,27 +6,28 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:02:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/27 19:42:39 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/28 15:36:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes.hpp"
 
-void leaks(void) {
-	system("leaks ex01");
-}
+// void leaks(void) {
+// 	system("leaks ex01");
+// }
 
 int main() {
-	atexit(leaks);
+	// atexit(leaks);
 	Phonebook newPhonebook = Phonebook();
 	std::string input;
 
 	while (42) {
 		newPhonebook.printMessage(PROMPT, BLUE);
 		std::getline(std::cin, input);
-		if (input == "") {
-			newPhonebook.printMessage(EXIT, YELLOW);
-			break ;
+		if (std::cin.eof()) {
+			std::cin.clear();
+			clearerr(stdin);
+			continue ;
 		}
 		for (int i = 0; i < input.size(); i++)
 			if (isupper(input[i])) input[i] = tolower(input[i]);
@@ -40,4 +41,5 @@ int main() {
 			newPhonebook.printMessage(WRONG_COMMAND, RED);
 		}
 	}
+	return (0);
 }

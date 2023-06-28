@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/27 19:59:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/28 15:32:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void Phonebook::commandAdd(void) {
 		std::getline(std::cin, contactInput);
 		if (std::cin.eof()) {
 			std::cin.clear();
-			// clearerr(stdin);
+			clearerr(stdin);
 			return ;
 		}
 		int idx = 0;
@@ -85,7 +85,11 @@ void Phonebook::commandSearch(void) {
 	while (42) {
 		std::cout << BLUE "type in index < 1 ~ " << this->_cnt << " >" RESET << std::endl;
 		std::getline(std::cin, inputIdx);
-		if (inputIdx.size() != 1) {
+		if (std::cin.eof()) {
+			std::cin.clear();
+			clearerr(stdin);
+			return ;
+		} else if (inputIdx.size() != 1) {
 			this->printMessage(WRONG_IDX, YELLOW);
 		} else if (inputIdx[0] < '1' || inputIdx[0] > this->_cnt + '0') {
 			this->printMessage(WRONG_IDX_RANGE, YELLOW);
