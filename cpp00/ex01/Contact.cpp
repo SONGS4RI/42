@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:13:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/29 17:18:38 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:32:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool Contact::setContactInfo(std::string str, eContact type) {
 void Contact::printContactNames(void) {
 	std::string names[3];
 	for(int i = 0; i < 3; i++) {
-		eContact infoType = (eContact) i;
+		eContact infoType = static_cast<eContact>(i);
 		names[i] = this->getContactInfo(infoType);
 		if (names[i].size() > 10) {
 			names[i].resize(9);
