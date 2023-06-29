@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 19:43:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/28 18:33:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:06:29 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void Phonebook::commandAdd(void) {
 		std::getline(std::cin, contactInput);
 		if (std::cin.eof()) {
 			std::cin.clear();
-			clearerr(stdin);
+			std::clearerr(stdin);
 			return ;
 		}
 		int idx = 0;
-		for (;idx < contactInput.size(); idx++) {
-			if (contactInput[idx] != ' ') break ;
+		for (;idx < static_cast<int>(contactInput.size()); idx++) {
+			if (!std::isspace(contactInput[idx])) break ;
 		}
 		if (!newContact.setContactInfo(contactInput.substr(idx), (eContact) i)) {
 			this->printMessage(WRONG_CONTACT_INFO, RED);
@@ -77,7 +77,7 @@ void Phonebook::commandSearch(void) {
 	<< "==============================================" << std::endl
 	<< "|     index|first name| last name|  nickname|" << std::endl
 	<< "==============================================" << std::endl;
-	for (int idx = 1; idx <= this->_cnt; idx++) {
+	for (int idx = 1; idx <= static_cast<int>(this->_cnt); idx++) {
 		std::cout << "|" << std::setw(10) << std::right << idx << "|";
 		this->_contacts[idx - 1].printContactNames();
 		std::cout << "==============================================" << std::endl;
@@ -88,9 +88,10 @@ void Phonebook::commandSearch(void) {
 		std::getline(std::cin, inputIdx);
 		if (std::cin.eof()) {
 			std::cin.clear();
-			clearerr(stdin);
+			std::clearerr(stdin);
 			return ;
-		} else if (inputIdx.size() != 1 || inputIdx[0] < '1' || inputIdx[0] > this->_cnt + '0') {
+		} else if (inputIdx.size() != 1 || inputIdx[0] < '1' \
+		|| inputIdx[0] > static_cast<int>(this->_cnt) + '0') {
 			this->printMessage(WRONG_IDX, YELLOW);
 		} else {
 			break ;
@@ -101,5 +102,5 @@ void Phonebook::commandSearch(void) {
 
 void Phonebook::commandExit(void) {
 	this->printMessage(EXIT, YELLOW);
-	exit(0);
+	std::exit(0);
 }

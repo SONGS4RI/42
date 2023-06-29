@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 18:35:13 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/28 17:54:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:20:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	Account::displayStatus(void) const {
 	Account::_displayTimestamp();
 	std::cout
 	<< "index:" << this->_accountIndex << ";"
-	<< "amount:" << this->_amount << ";"
+	<< "amount:" << this->checkAmount() << ";"
 	<< "deposits:" << this->_nbDeposits << ";"
 	<< "withdrawals:" << this->_nbWithdrawals
 	<< std::endl;
