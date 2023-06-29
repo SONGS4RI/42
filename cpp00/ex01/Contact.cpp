@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 17:13:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/28 18:30:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:18:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ std::string Contact::getContactInfo(eContact infoType) {
 bool Contact::setContactInfo(std::string str, eContact type) {
 	int strSize = str.size();
 	if (strSize == 0) return (false);
+	if (type == FIRST_NAME || type == LAST_NAME || type == NICK_NAME) {
+		for (int i = 0; i < strSize; i++)
+			if (std::isspace(str[i])) return (false);
+	}
 	this->_contactInfo[type] = str;
 	return (true);
 }

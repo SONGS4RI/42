@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:55:25 by jahlee            #+#    #+#             */
-/*   Updated: 2023/06/28 18:07:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/06/29 17:02:19 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void makeDefaultMegapehonSound() {
 void argvToUpper(int argc, char ***argv){
 	for (int i = 1; i < argc; i++)
 		for (int j = 0; (*argv)[i][j] != '\0'; j++)
-			if (islower((*argv)[i][j])) (*argv)[i][j] = toupper((*argv)[i][j]);
+			if (std::islower((*argv)[i][j])) (*argv)[i][j] = std::toupper((*argv)[i][j]);
 }
 
 void makeMegaphoneSound(int argc, char **argv) {
