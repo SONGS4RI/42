@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/06/29 16:55:46 by jahlee           ###   ########.fr        #
+#    Updated: 2023/07/03 20:00:21 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ clean :
 	@echo "$(MAGENTA)╚═══════════════════════════════════════════════╝$(RESET)"
 
 fclean : clean
-	$(RM) $(RMFLAGS) $(LIBFTFILE2) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME)
 	@echo "$(MAGENTA)╔═══════════════════════════════════════════════╗$(RESET)"
 	@echo "$(MAGENTA)║                                               ║$(RESET)"
 	@echo "$(MAGENTA)║               fclean finished.                ║$(RESET)"
