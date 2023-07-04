@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 17:18:47 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/04 15:26:04 by jahlee           ###   ########.fr       */
+/*   Created: 2023/07/04 14:06:55 by jahlee            #+#    #+#             */
+/*   Updated: 2023/07/04 15:23:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
-#include <iostream>
+#include "./Weapon.hpp"
 
-class Zombie
-{
+class HumanB {
 	private:
+		Weapon* _weapon;
 		std::string _name;
 	public:
-		std::string getName(void) const;
-		void setZombieName(std::string name);
-		Zombie();
-		~Zombie(void);
-		void	announce(void);
+		const std::string& getName(void);
+		void setName(std::string name);
+		void attack(void);
+		void setWeapon(Weapon& weapon);
+		HumanB(std::string name);
+		~HumanB(void);
 };
 
 #endif
