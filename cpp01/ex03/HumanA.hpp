@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:06:55 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/04 15:24:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/04 16:01:33 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ class HumanA {
 	private:
 		Weapon& _weapon;
 		std::string _name;
-		void setName(std::string name);
 	public:
 		const std::string& getName(void);
+		void setName(std::string name);
 		void attack(void);
 		HumanA(std::string name, Weapon& weapon);
 		~HumanA(void);
