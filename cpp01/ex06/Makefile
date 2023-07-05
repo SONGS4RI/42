@@ -6,11 +6,11 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/07/05 15:13:46 by jahlee           ###   ########.fr        #
+#    Updated: 2023/07/05 15:32:44 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ex06
+NAME		= harlFilter
 
 # compile option
 CXX			= @c++
