@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:14:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/04 19:19:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 14:56:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ class Harl
 		void warning(void);
 		void error(void);
 	public:
+		void complain(std::string level);
 		Harl(void);
 		~Harl(void);
-		void complain(std::string level);
 };
 
 #endif
