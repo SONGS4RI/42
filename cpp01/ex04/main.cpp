@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:55:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 15:50:50 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 17:21:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ int main(int argc, char **argv) {
 	int s1_size = s1.size();
 	while (std::getline(ifs, input)) {// s1, s2 == ""일때 수정해주자
 		int pos = -s1_size;
-		while ((pos = input.find(s1, pos + s1_size)) != -1) {
+		while (s1 != "" && (pos = input.find(s1, pos + s1_size)) != -1) {
 			input = input.substr(0, pos) + s2 + input.substr(pos + s1_size);
 		}
 		ofs << input;
 		if (!ifs.eof()) ofs << std::endl;
 	}
+	if (s1 == "") ofs << s2;
 	ifs.close();
 	ofs.close();
 	return (0);
