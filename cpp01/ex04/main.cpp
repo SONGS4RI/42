@@ -6,14 +6,19 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:55:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 17:21:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 18:01:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 
+void leaks(void) {
+	std::system("leaks ex04");
+}
+
 int main(int argc, char **argv) {
+	// std::atexit(leaks);
 	if (argc != 4) {
 		std::cerr << "argv error" << std::endl;
 		return (1);
@@ -34,7 +39,7 @@ int main(int argc, char **argv) {
 
 	std::string input;
 	int s1_size = s1.size();
-	while (std::getline(ifs, input)) {// s1, s2 == ""일때 수정해주자
+	while (std::getline(ifs, input)) {
 		int pos = -s1_size;
 		while (s1 != "" && (pos = input.find(s1, pos + s1_size)) != -1) {
 			input = input.substr(0, pos) + s2 + input.substr(pos + s1_size);
