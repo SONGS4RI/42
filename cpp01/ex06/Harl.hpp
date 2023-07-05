@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 14:29:51 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 15:15:48 by jahlee           ###   ########.fr       */
+/*   Created: 2023/07/04 18:14:57 by jahlee            #+#    #+#             */
+/*   Updated: 2023/07/05 14:56:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Harl.hpp"
+#ifndef HARL_HPP
+#define HARL_HPP
 
-void leaks(void) {
-	system("leaks ex05");
-}
+#include <iostream>
 
-int main(void) {
-	atexit(leaks);
-	Harl newHarl = Harl();
+class Harl
+{
+	private:
+		void debug(void);
+		void info(void);
+		void warning(void);
+		void error(void);
+	public:
+		void complain(std::string level);
+		Harl(void);
+		~Harl(void);
+};
 
-	newHarl.complain("debug");
-	newHarl.complain("info");
-	newHarl.complain("warning");
-	newHarl.complain("error");
-
-	return (0);
-}
+#endif
