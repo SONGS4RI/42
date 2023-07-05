@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 13:43:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 15:52:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 17:50:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void leaks(void) {
 }
 
 int main(void) {
-	std::atexit(leaks);
+	// std::atexit(leaks);
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
