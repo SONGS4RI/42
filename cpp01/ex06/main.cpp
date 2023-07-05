@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:29:51 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 15:15:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 15:14:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int main(void) {
 	atexit(leaks);
 	Harl newHarl = Harl();
 
-	newHarl.complain("debug");
-	newHarl.complain("info");
-	newHarl.complain("warning");
-	newHarl.complain("error");
+	
 
 	return (0);
 }
