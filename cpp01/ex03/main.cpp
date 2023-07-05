@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 13:43:38 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/04 15:36:56 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/05 15:52:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "./HumanB.hpp"
 
 void leaks(void) {
-	system("leaks ex03");
+	std::system("leaks ex03");
 }
 
 int main(void) {
-	atexit(leaks);
+	std::atexit(leaks);
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
