@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:18:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 19:06:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:28:47 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void Harl::complain(std::string level) {
 			std::cout << std::endl;
 		case 3:
 			error();
+			std::cout << std::endl;
 			break;
 		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
