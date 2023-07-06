@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:55:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 18:01:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/06 16:28:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int main(int argc, char **argv) {
 	std::ofstream ofs(filename + ".replace", std::ios::out | std::ios::trunc);
 	if (ofs.fail()) {
 		std::cerr << "file make error" << std::endl;
+		return (1);
 	}
 
 	std::string input;
