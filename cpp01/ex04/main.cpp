@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:55:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/06 20:57:10 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:38:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,15 @@ int main(int argc, char **argv) {
 	std::string input;
 	int s1_size = s1.size();
 	int s2_size = s2.size();
-	int diff = s2_size - s1_size;
 
 	std::getline(ifs, input, '\000');
 	int pos = 0;
 	while (s1 != "" && (pos = input.find(s1, pos)) != -1) {
-		input.erase(input.begin() + pos, input.begin() + pos + s1_size);
+		std::string::iterator iter = input.begin() + pos;
+		input.erase(iter, iter + s1_size);
 		for (int i=0; i<s2_size; i++)
-			input.insert(input.begin() + pos + i, s2[i]);
-		pos += diff;
-		if (pos < 0) pos = 0;
+			input.insert(iter + i, s2[i]);
+		pos += s2_size;
 	}
 	ofs << input;
 	if (s1 == "") ofs << s2;
