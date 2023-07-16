@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/16 18:02:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/16 20:44:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@ Fixed::Fixed(const float num) {
 	data.data_f = num;
 	int sign, exponent, fraction;
 	sign = (data.data_i >> 31) & 1;
-	exponent = (data.data_i >> 23) & ((1 << 8) - 1);
-	fraction = data.data_i & ((1 << 23) - 1);
+	exponent = (data.data_i >> 23) & ((1 << 8) - 1) - 127;
+	fraction = (data.data_i & ((1 << 23) - 1)) | (1 << 23);
+	
+	// if (exponent >= 0) {
+
+	// } else {
+		
+	// }
 }
 
 Fixed::Fixed(const Fixed& obj) {
@@ -52,7 +58,7 @@ Fixed& Fixed::operator=(const Fixed& obj) {
 }
 
 Fixed& Fixed::operator<<(const Fixed& obj) {
-	std::cout << obj.getRawBits() << std::endl;
+	// std::cout << obj.toFloat() << std::endl;
 	return (*this);
 }
 
