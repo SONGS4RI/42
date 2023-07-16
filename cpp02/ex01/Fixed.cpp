@@ -6,12 +6,17 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/13 19:21:03 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/16 18:02:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Fixed.hpp"
 #include <iostream>
+
+union Fixed::SharedData {
+	int data_i;
+	float data_f;
+};
 
 Fixed::Fixed() {
 	std::cout << "Default constructor called" << std::endl;
@@ -24,12 +29,14 @@ Fixed::Fixed(const int num) {
 }
 
 Fixed::Fixed(const float num) {
+	SharedData data;
 	std::cout << "Float constructor called" << std::endl;
-	float tmp = num;
+	data.data_f = num;
+	int sign, exponent, fraction;
+	sign = (data.data_i >> 31) & 1;
+	exponent = (data.data_i >> 23) & ((1 << 8) - 1);
+	fraction = data.data_i & ((1 << 23) - 1);
 }
-
-// 0 1000 0000 101000000000000000
-// 0 101000000 000000000000000000
 
 Fixed::Fixed(const Fixed& obj) {
 	std::cout << "Copy constructor called" << std::endl;

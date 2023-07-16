@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/13 17:12:22 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/16 15:52:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ class Fixed {
 		int _value;
 		static const int _bits = 8;
 	public:
+		union SharedData;
 		Fixed(void);
 		Fixed(const int num);
 		Fixed(const float num);// 32bit!
