@@ -13,7 +13,7 @@
     - MySQLWorkbench 이용
     - MySQL workbench에서 외부 접속하기
         
-        [https://velog.io/@woals4815/MySQL-외부-접속-하기MySQLWorkbench-이용](https://velog.io/@woals4815/MySQL-%EC%99%B8%EB%B6%80-%EC%A0%91%EC%86%8D-%ED%95%98%EA%B8%B0MySQLWorkbench-%EC%9D%B4%EC%9A%A9)
+        [https://velog.io/@woals4815/MySQL-외부-접속-하기MySQLWorkbench-이용]
         
 - redis 설치
 
