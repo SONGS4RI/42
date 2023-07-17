@@ -25,7 +25,7 @@
 </br>
 
 ## EX00 Jpa 연관관계 매핑
-___
+
 - KeyWords
     - `@Embedded, @Embeddable`
     - `@Inheritance`
