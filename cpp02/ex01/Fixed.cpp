@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/19 19:25:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/19 20:26:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Fixed::Fixed() {
 Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
 	int sign = ((num >> 31) & 1) << 31;
+
 	if (sign) {// 2보수를 처리해주어야 한다.
 		_value = (~num + 1) << _bits;
 	} else {
@@ -37,8 +38,9 @@ Fixed::Fixed(const int num) {
 Fixed::Fixed(const float num) {
 	std::cout << "Float constructor called" << std::endl;
 	SharedData data;
-	data.data_f = num;
 	int sign, exponent, fractional_part;
+
+	data.data_f = num;
 	sign = ((data.data_i >> 31) & 1) << 31;
 	exponent = (data.data_i >> 23) & ((1 << 8) - 1) - 127;
 	fractional_part = data.data_i & ((1 << 23) - 1);
@@ -78,22 +80,22 @@ void Fixed::setRawBits(int const raw) {
 
 float Fixed::toFloat(void) const {
 	SharedData data;
-	int sign, fixed_point, exponent = 0;
-	int compare_bit = 1 << _bits;
+	int sign, fixed_point, exponent = -_bits - 1;
+	int fractional_part = 1;
 
 	sign = ((_value >> 31) & 1) << 31;
 	fixed_point = (_value << 1) >> 1;
 
-	exponent = -8;
-	while (compare_bit <= fixed_point) {
-		compare_bit = compare_bit << 1;
+	while (fractional_part <= fixed_point) {
+		fractional_part = fractional_part << 1;
 		exponent++;
 	}
-	exponent--;
-	// exponent += 127;//지수에 bias 더해준다.
-	// data.data_i = sign | (exponent << 23);// | 소수부;
+
+	fractional_part = ((fractional_part >> 1) - 1) & fixed_point;
+	data.data_i = sign | ((127 + exponent) << 23) | (fractional_part << (23 - (exponent + _bits)));
+	return (data.data_f);
 }
 
 int Fixed::toInt(void) const {
-	
+	return (roundf(toFloat()));
 }
