@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/16 20:44:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/19 17:48:26 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,24 @@ Fixed::Fixed() {
 
 Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
-	_value = num << 8;
+	int sign = ((num >> 31) & 1) << 31;
+	if (sign) {// 2보수를 처리해주어야 한다.
+		_value = (~num + 1) << _bits;
+	} else {
+		_value = num << _bits;
+	}
+	_value = sign | _value;
 }
 
 Fixed::Fixed(const float num) {
-	SharedData data;
 	std::cout << "Float constructor called" << std::endl;
+	SharedData data;
 	data.data_f = num;
 	int sign, exponent, fraction;
-	sign = (data.data_i >> 31) & 1;
+	sign = ((data.data_i >> 31) & 1) << 31;
 	exponent = (data.data_i >> 23) & ((1 << 8) - 1) - 127;
-	fraction = (data.data_i & ((1 << 23) - 1)) | (1 << 23);
-	
-	// if (exponent >= 0) {
-
-	// } else {
-		
-	// }
+	fraction = data.data_i & ((1 << 23) - 1);
+	_value = sign | ((fraction | (1 << 23)) >> (23 - _bits - exponent));
 }
 
 Fixed::Fixed(const Fixed& obj) {
