@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/19 17:48:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/19 19:25:25 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ Fixed::Fixed(const float num) {
 	std::cout << "Float constructor called" << std::endl;
 	SharedData data;
 	data.data_f = num;
-	int sign, exponent, fraction;
+	int sign, exponent, fractional_part;
 	sign = ((data.data_i >> 31) & 1) << 31;
 	exponent = (data.data_i >> 23) & ((1 << 8) - 1) - 127;
-	fraction = data.data_i & ((1 << 23) - 1);
-	_value = sign | ((fraction | (1 << 23)) >> (23 - _bits - exponent));
+	fractional_part = data.data_i & ((1 << 23) - 1);
+	_value = sign | ((fractional_part | (1 << 23)) >> (23 - _bits - exponent));
 }
 
 Fixed::Fixed(const Fixed& obj) {
@@ -74,4 +74,26 @@ int Fixed::getRawBits() const {
 
 void Fixed::setRawBits(int const raw) {
 	this->_value = raw;
+}
+
+float Fixed::toFloat(void) const {
+	SharedData data;
+	int sign, fixed_point, exponent = 0;
+	int compare_bit = 1 << _bits;
+
+	sign = ((_value >> 31) & 1) << 31;
+	fixed_point = (_value << 1) >> 1;
+
+	exponent = -8;
+	while (compare_bit <= fixed_point) {
+		compare_bit = compare_bit << 1;
+		exponent++;
+	}
+	exponent--;
+	// exponent += 127;//지수에 bias 더해준다.
+	// data.data_i = sign | (exponent << 23);// | 소수부;
+}
+
+int Fixed::toInt(void) const {
+	
 }
