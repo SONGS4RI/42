@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/19 20:26:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/20 20:25:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ Fixed::Fixed() {
 
 Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
-	int sign = ((num >> 31) & 1) << 31;
+	int sign = (num >> 31) & 1 ;
 
 	if (sign) {// 2보수를 처리해주어야 한다.
 		_value = (~num + 1) << _bits;
 	} else {
 		_value = num << _bits;
 	}
-	_value = sign | _value;
+	_value = (sign << 31) | _value;
 }
 
 Fixed::Fixed(const float num) {
@@ -41,10 +41,14 @@ Fixed::Fixed(const float num) {
 	int sign, exponent, fractional_part;
 
 	data.data_f = num;
-	sign = ((data.data_i >> 31) & 1) << 31;
-	exponent = (data.data_i >> 23) & ((1 << 8) - 1) - 127;
+	sign = (data.data_i >> 31) & 1;
+	exponent = ((data.data_i >> 23) & ((1 << 8) - 1)) - 127;
 	fractional_part = data.data_i & ((1 << 23) - 1);
-	_value = sign | ((fractional_part | (1 << 23)) >> (23 - _bits - exponent));
+	if ((23 - _bits - exponent) >= 32) {
+		_value = sign << 31;
+	} else {
+		_value = (sign << 31) | ((fractional_part | (1 << 23)) >> (23 - _bits - exponent));
+	}
 }
 
 Fixed::Fixed(const Fixed& obj) {
@@ -60,9 +64,9 @@ Fixed& Fixed::operator=(const Fixed& obj) {
 	return (*this);
 }
 
-Fixed& Fixed::operator<<(const Fixed& obj) {
-	// std::cout << obj.toFloat() << std::endl;
-	return (*this);
+std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
+	os << obj.toFloat();
+	return (os);
 }
 
 Fixed::~Fixed() {
@@ -70,7 +74,6 @@ Fixed::~Fixed() {
 }
 
 int Fixed::getRawBits() const {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (this->_value);
 }
 
@@ -83,16 +86,15 @@ float Fixed::toFloat(void) const {
 	int sign, fixed_point, exponent = -_bits - 1;
 	int fractional_part = 1;
 
-	sign = ((_value >> 31) & 1) << 31;
-	fixed_point = (_value << 1) >> 1;
-
+	sign = (_value >> 31) & 1;
+	fixed_point = _value & (~(1 << 31));
 	while (fractional_part <= fixed_point) {
 		fractional_part = fractional_part << 1;
 		exponent++;
 	}
 
 	fractional_part = ((fractional_part >> 1) - 1) & fixed_point;
-	data.data_i = sign | ((127 + exponent) << 23) | (fractional_part << (23 - (exponent + _bits)));
+	data.data_i = (sign << 31) | ((127 + exponent) << 23) | (fractional_part << (23 - (exponent + _bits)));
 	return (data.data_f);
 }
 
