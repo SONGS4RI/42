@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/20 20:25:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/21 16:57:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
 	int sign = (num >> 31) & 1 ;
 
-	if (sign) {// 2보수를 처리해주어야 한다.
-		_value = (~num + 1) << _bits;
-	} else {
-		_value = num << _bits;
-	}
-	_value = (sign << 31) | _value;
+	_value = (num << _bits);
+	if (sign) _value = _value | ((sign << _bits) - 1);
 }
+
+/*
+ex) -5가 들어왔다 생각
+고정 소수점
+정수부 -5 => 111111111111011, 소수부 => 11111111
+*/
 
 Fixed::Fixed(const float num) {
 	std::cout << "Float constructor called" << std::endl;
@@ -50,6 +52,21 @@ Fixed::Fixed(const float num) {
 		_value = (sign << 31) | ((fractional_part | (1 << 23)) >> (23 - _bits - exponent));
 	}
 }
+
+/*
+ex) -0.125가 부동소수점으로 들어온다 생각해보자.
+
+1 01111100 00000000000000000000000 => 부동소수점 표현
+부동소수점을 정수부, 소수부로 변환하여 준다.
+
+정수부가 음수이면 (정수부 -1), 소수부를 이진기수법으로 표현해주고 소수부는 반전 + 1을 해준다.
+0.001 에대해
+
+111111.11100000 으로 변환된다.
+
+000000000000000.0010000000
+
+*/
 
 Fixed::Fixed(const Fixed& obj) {
 	std::cout << "Copy constructor called" << std::endl;
