@@ -6,12 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/21 18:22:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:33:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Fixed.hpp"
-#include <iostream>
 
 union Fixed::SharedData {
 	int data_i;
@@ -26,9 +25,11 @@ Fixed::Fixed() {
 Fixed::Fixed(const int num) {
 	std::cout << "Int constructor called" << std::endl;
 	int sign = num >> 31;
-
-	_value = (num << _bits);
-	if (sign) _value = _value | ((sign << _bits) - 1);
+	if (sign) {
+		_value = ~((~num + 1) << _bits);
+	} else {
+		_value = (num << _bits);
+	}
 }
 
 /*
@@ -63,7 +64,7 @@ ex) -0.125가 부동소수점으로 들어온다 생각해보자.
 1 01111100 00000000000000000000000 => 부동소수점 표현
 부동소수점을 정수부, 소수부로 변환하여 준다.
 
-정수부가 음수이면 (정수부 -1), 소수부를 이진기수법으로 표현해주고 소수부는 반전 + 1을 해준다.
+정수부가 음수이면 (정수부 -1) => ~ , 소수부를 이진기수법으로 표현해주고 소수부는 반전 + 1을 해준다.
 0.001 에대해
 
 111111.11100000 으로 변환된다.
@@ -109,32 +110,30 @@ float Fixed::toFloat(void) const {
 	sign = _value >> 31;
 	fractional_part = _value & ((1 << _bits) - 1);
 	integer_part = _value >> _bits;
+	std::cout << "fractional_part: " << std::bitset<32>(fractional_part) << "\n";
 	if (sign) {
-		
+		integer_part = ~integer_part;
+		fractional_part = ~(fractional_part - 1) & ((1 << _bits) - 1);
 	}
-	//지수 구해야함! 구해서 합쳐주자
 	inter_fraction = (integer_part << _bits) | fractional_part;
-	//data.data_i = (sign << 31) | ((지수 + 127) << 23) | inter_fraction에서 맨앞하나 때고
+	exponent = -_bits - 1; fractional_part = 1;
+	while (fractional_part <= inter_fraction) {
+		fractional_part = fractional_part << 1;
+		exponent++;
+	}
+	if (exponent == -_bits - 1) {
+		exponent = -127;
+		fractional_part = 0;
+	} else {
+		fractional_part = (((fractional_part >> 1) - 1) & inter_fraction) << (23 - _bits - exponent);
+	}
+
+	data.data_i = sign << 31 | ((127 + exponent) << 23) | fractional_part;
 	return (data.data_f);
 }
 
 /*
-float Fixed::toFloat(void) const {
-	SharedData data;
-	int sign, fixed_point, exponent = -_bits - 1;
-	int fractional_part = 1;
-
-	sign = (_value >> 31) & 1;
-	fixed_point = _value & (~(1 << 31));
-	while (fractional_part <= fixed_point) {
-		fractional_part = fractional_part << 1;
-		exponent++;
-	}
-
-	fractional_part = ((fractional_part >> 1) - 1) & fixed_point;
-	data.data_i = (sign << 31) | ((127 + exponent) << 23) | (fractional_part << (23 - (exponent + _bits)));
-	return (data.data_f);
-}
+000000000000000000001010 00000001
 */
 
 int Fixed::toInt(void) const {
