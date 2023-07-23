@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/23 16:33:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/23 16:49:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ float Fixed::toFloat(void) const {
 	std::cout << "fractional_part: " << std::bitset<32>(fractional_part) << "\n";
 	if (sign) {
 		integer_part = ~integer_part;
-		fractional_part = ~(fractional_part - 1) & ((1 << _bits) - 1);
-	}
+		fractional_part = ~(fractional_part - 1) & ((1 << _bits) - 1);///
+	}// 정수로 들어오는거 음수 111111 일때 처리해줘야함
 	inter_fraction = (integer_part << _bits) | fractional_part;
 	exponent = -_bits - 1; fractional_part = 1;
 	while (fractional_part <= inter_fraction) {
