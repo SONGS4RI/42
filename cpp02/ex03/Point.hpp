@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/24 21:02:51 by jahlee           ###   ########.fr       */
+/*   Created: 2023/07/24 20:24:06 by jahlee            #+#    #+#             */
+/*   Updated: 2023/07/24 20:41:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Point.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
 
-int main( void ) {
+#include "./Fixed.hpp"
 
-	Point a;
-	Point b(1.5f, 1.5f);
-	a = b;
-	std::cout << a.getXCoordinate() << " " << a.getYCoordinate() << std::endl;
-	std::cout << b.getXCoordinate() << " " << b.getYCoordinate() << std::endl;
-	return 0;
-}
+class Point
+{
+	private:
+		Fixed _x;
+		Fixed _y;
+	public:
+		Point(void);
+		Point(const float x, const float y);
+		Point(const Point& obj);
+		Point& operator=(const Point& obj);
+		~Point(void);
+
+		const Fixed& getXCoordinate(void) const;
+		const Fixed& getYCoordinate(void) const;
+};
+
+#endif

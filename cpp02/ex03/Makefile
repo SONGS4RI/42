@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/07/24 20:11:57 by jahlee           ###   ########.fr        #
+#    Updated: 2023/07/24 20:52:12 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp		\
 				Fixed.cpp		\
+				Point.cpp		\
+				bsp.cpp			\
 
 OBJS	= $(SRCS:.cpp=.o)
 
