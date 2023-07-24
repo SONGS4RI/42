@@ -6,9 +6,12 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/11 19:50:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/24 20:30:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
 class Fixed {
 	private:
@@ -22,3 +25,5 @@ class Fixed {
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
 };
+
+#endif
