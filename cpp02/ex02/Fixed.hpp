@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/24 18:35:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/24 20:09:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ class Fixed {
 		Fixed(const Fixed& obj);
 		Fixed& operator=(const Fixed& obj);
 
-		bool operator>(const Fixed& obj);
-		bool operator<(const Fixed& obj);
-		bool operator>=(const Fixed& obj);
-		bool operator<=(const Fixed& obj);
-		bool operator==(const Fixed& obj);
-		bool operator!=(const Fixed& obj);
+		bool operator>(const Fixed& obj) const;
+		bool operator<(const Fixed& obj) const;
+		bool operator>=(const Fixed& obj) const;
+		bool operator<=(const Fixed& obj) const;
+		bool operator==(const Fixed& obj) const;
+		bool operator!=(const Fixed& obj) const;
 
 		Fixed& operator+(const Fixed& obj);
 		Fixed& operator-(const Fixed& obj);
@@ -49,6 +49,11 @@ class Fixed {
 		int getRawBits(void) const;
 		float toFloat(void) const;// converts the fixed-point value to a floating-point value.
 		int toInt(void) const;// converts the fixed-point value to an integer value.
+
+		static Fixed& min(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+		static Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& max(const Fixed& a, const Fixed& b);
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj);

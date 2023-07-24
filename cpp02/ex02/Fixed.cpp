@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/24 18:35:50 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/24 20:09:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,27 @@ Fixed& Fixed::operator=(const Fixed& obj) {
 	return (*this);
 }
 
-bool Fixed::operator>(const Fixed& obj) {
+bool Fixed::operator>(const Fixed& obj) const{
 	return (this->_value > obj.getRawBits());
 }
 
-bool Fixed::operator<(const Fixed& obj) {
+bool Fixed::operator<(const Fixed& obj) const{
 	return (this->_value < obj.getRawBits());
 }
 
-bool Fixed::operator>=(const Fixed& obj) {
+bool Fixed::operator>=(const Fixed& obj) const{
 	return (this->_value >= obj.getRawBits());
 }
 
-bool Fixed::operator<=(const Fixed& obj) {
+bool Fixed::operator<=(const Fixed& obj) const{
 	return (this->_value <= obj.getRawBits());
 }
 
-bool Fixed::operator==(const Fixed& obj) {
+bool Fixed::operator==(const Fixed& obj) const{
 	return (this->_value == obj.getRawBits());
 }
 
-bool Fixed::operator!=(const Fixed& obj) {
+bool Fixed::operator!=(const Fixed& obj) const{
 	return (this->_value != obj.getRawBits());
 }
 
@@ -183,4 +183,20 @@ int Fixed::toInt(void) const {
 std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
 	os << obj.toFloat();
 	return (os);
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b) {
+	return (a < b ? a : b);
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+	return (a < b ? a : b);
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b) {
+	return (a > b ? a : b);
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+	return (a > b ? a : b);
 }
