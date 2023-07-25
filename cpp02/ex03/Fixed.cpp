@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/24 20:09:55 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:54:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,24 +94,24 @@ bool Fixed::operator!=(const Fixed& obj) const{
 	return (this->_value != obj.getRawBits());
 }
 
-Fixed& Fixed::operator+(const Fixed& obj) {
-	_value = floatToFixed(this->toFloat() + obj.toFloat());
-	return (*this);
+Fixed Fixed::operator+(const Fixed& obj) {
+	Fixed res(this->toFloat() + obj.toFloat());
+	return (res);
 }
 
-Fixed& Fixed::operator-(const Fixed& obj) {
-	_value = floatToFixed(this->toFloat() - obj.toFloat());
-	return (*this);
+Fixed Fixed::operator-(const Fixed& obj) {
+	Fixed res(this->toFloat() - obj.toFloat());
+	return (res);
 }
 
-Fixed& Fixed::operator*(const Fixed& obj) {
-	_value = floatToFixed(this->toFloat() * obj.toFloat());
-	return (*this);
+Fixed Fixed::operator*(const Fixed& obj) {
+	Fixed res(this->toFloat() * obj.toFloat());
+	return (res);
 }
 
-Fixed& Fixed::operator/(const Fixed& obj) {
-	_value = floatToFixed(this->toFloat() / obj.toFloat());
-	return (*this);
+Fixed Fixed::operator/(const Fixed& obj) {
+	Fixed res(this->toFloat() / obj.toFloat());
+	return (res);
 }
 
 Fixed& Fixed::operator++() {
