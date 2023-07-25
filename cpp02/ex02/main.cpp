@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 16:51:57 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:26:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main( void ) {
 
 	return 0;
 }
+
 /*
 0
 0.00390625
@@ -34,3 +35,15 @@ int main( void ) {
 10.1016
 10.1016
 */
+
+// int main() {
+// 	Fixed a(42);
+// 	Fixed b(4.2f);
+
+// 	std::cout << a + b << std::endl;
+// 	std::cout << a - b << std::endl;
+// 	std::cout << a * b << std::endl;
+// 	std::cout << a / b << std::endl;
+// 	std::cout << a << std::endl;
+// 	std::cout << b << std::endl;
+// }
