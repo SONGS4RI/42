@@ -6,10 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 20:18:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:36:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cmath>
 #include "./Fixed.hpp"
 
 union Fixed::SharedData {

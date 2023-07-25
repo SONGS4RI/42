@@ -6,10 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/24 16:32:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:34:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cmath>
 #include "./Fixed.hpp"
 
 union Fixed::SharedData {
@@ -38,7 +39,7 @@ Fixed::Fixed(const float num) {
 	int sign, exponent, inter_fraction, integer_part, fractional_part;
 
 	fractional_part = 1 << _bits;
-	data.data_f = roundf(num * fractional_part) / fractional_part;
+	data.data_f = std::roundf(num * fractional_part) / fractional_part;
 	sign = data.data_i >> 31;
 	exponent = ((data.data_i >> 23) & ((1 << 8) - 1)) - 127;
 	inter_fraction = data.data_i & ((1 << 23) - 1);
@@ -111,5 +112,5 @@ float Fixed::toFloat(void) const {
 }
 
 int Fixed::toInt(void) const {
-	return (roundf(toFloat()));
+	return (std::roundf(toFloat()));
 }
