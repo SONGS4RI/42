@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:24:06 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 15:32:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 15:37:48 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class Point
 		const Fixed& getYCoordinate(void) const;
 		const Fixed& getZCoordinate(void) const;
 		Point makeVector(const Point& a, const Point& b) const;
-		Fixed innerProduct(const Point& vec_a, const Point& vec_b) const;
-		Point crossProduct(const Point& vec_a, const Point& vec_b) const;
+		static Fixed innerProduct(const Point& vec_a, const Point& vec_b);
+		static Point crossProduct(const Point& vec_a, const Point& vec_b);
 };
 
 #endif
