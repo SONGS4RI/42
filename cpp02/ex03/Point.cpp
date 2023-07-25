@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:28:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 16:20:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 17:12:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ const Fixed& Point::getZCoordinate() const {
 	return (_z);
 }
 
-Point Point::makeVector(const Point& a, const Point& b) const {
+Point Point::makeVector(const Point& a, const Point& b) {
 	Fixed vec_x(b.getXCoordinate().toFloat() - a.getXCoordinate().toFloat());
 	Fixed vec_y(b.getYCoordinate().toFloat() - a.getYCoordinate().toFloat());
 	Fixed vec_z(b.getZCoordinate().toFloat() - a.getZCoordinate().toFloat());
