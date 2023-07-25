@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 19:10:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 17:06:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:18:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int Fixed::floatToFixed(const float num) {
 }
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 	this->_value = 0;
 }
 
 Fixed::Fixed(const int num) {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	int sign = num >> 31;
 	if (sign) {
 		_value = ~((~num + 1) << _bits);
@@ -53,17 +53,17 @@ Fixed::Fixed(const int num) {
 }
 
 Fixed::Fixed(const float num) {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	_value = floatToFixed(num);
 }
 
 Fixed::Fixed(const Fixed& obj) {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	*this = obj;
 }
 
 Fixed& Fixed::operator=(const Fixed& obj) {
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &obj) {
 		this->_value = obj.getRawBits();
 	}
@@ -138,7 +138,7 @@ Fixed Fixed::operator--(int) {
 
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const {
