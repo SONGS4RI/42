@@ -6,14 +6,31 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:54:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/26 17:39:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/26 19:30:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ClapTrap.hpp"
 
+void ClapTrap::setName(std::string name) {
+	_name = name;
+}
+
+void ClapTrap::setHitPoint(unsigned int amount) {
+	_hit_point = amount;
+}
+
+void ClapTrap::setEnergyPoint(unsigned int amount) {
+	_energy_point = amount;
+}
+
+void ClapTrap::setAttackDamage(unsigned int amount) {
+	_attack_damage = amount;
+}
+
+
 ClapTrap::ClapTrap() {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Constructor (ClapTrap) called" << std::endl;
 
 	_name = "";
 	_hit_point = 10;
@@ -22,7 +39,7 @@ ClapTrap::ClapTrap() {
 }
 
 ClapTrap::ClapTrap(const std::string& name) {
-	std::cout << "Parameter constructor called" << std::endl;
+	std::cout << "Constructor (ClapTrap) called" << std::endl;
 
 	_name = name;
 	_hit_point = 10;
@@ -31,17 +48,17 @@ ClapTrap::ClapTrap(const std::string& name) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor (ClapTrap) called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& obj) {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Constructor (ClapTrap) called" << std::endl;
 
 	*this = obj;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& obj) {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Copy assignment (ClapTrap) operator called" << std::endl;
 
 	if (this != &obj) {
 		_name = obj.getName();
