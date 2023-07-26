@@ -6,22 +6,22 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:47:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/26 19:41:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/26 20:14:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ScavTrap.hpp"
 
-ScavTrap::ScavTrap() {
-	std::cout << "Constructor (ScavTrap) called" << std::endl;
+// ScavTrap::ScavTrap() : ClapTrap() {
+// 	std::cout << "Constructor (ScavTrap) called" << std::endl;
 
-	setName("");
-	setHitPoint(100);
-	setEnergyPoint(50);
-	setAttackDamage(20);
-}
+// 	setName("");
+// 	setHitPoint(100);
+// 	setEnergyPoint(50);
+// 	setAttackDamage(20);
+// }
 
-ScavTrap::ScavTrap(const std::string& name) {
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
 	std::cout << "Constructor (ScavTrap) called" << std::endl;
 
 	setName(name);
@@ -34,7 +34,7 @@ ScavTrap::~ScavTrap() {
 	std::cout << "Destructor (ScavTrap) called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& obj) {
+ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj) {
 	std::cout << "Constructor (ScavTrap) called" << std::endl;
 
 	*this = obj;
@@ -50,3 +50,4 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& obj) {
 	}
 	return (*this);
 }
+
