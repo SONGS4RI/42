@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/07/26 14:40:05 by jahlee           ###   ########.fr        #
+#    Updated: 2023/07/26 16:44:09 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp		\
+				ClapTrap.cpp	\
+				ScavTrap.cpp	\
 
 OBJS	= $(SRCS:.cpp=.o)
 
