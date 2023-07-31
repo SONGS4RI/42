@@ -6,34 +6,24 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:28:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 20:19:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/31 19:17:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Point.hpp"
 
-Point::Point() {
+Point::Point() : _x(Fixed()), _y(Fixed()), _z(Fixed()) {
 	// std::cout << "Default constructor called" << std::endl;
-
-	_x = Fixed();
-	_y = Fixed();
-	_z = Fixed();
 }
 
-Point::Point(const float x, const float y) {
+Point::Point(const float x, const float y) : _x(Fixed(x)), _y(Fixed(y)), _z(Fixed()) {
 	// std::cout << "Default constructor(const float x,y parameters) called" << std::endl;
 
-	_x = Fixed(x);
-	_y = Fixed(y);
-	_z = Fixed();
 }
 
-Point::Point(const Fixed& x, const Fixed& y, const Fixed& z) {
+Point::Point(const Fixed& x, const Fixed& y, const Fixed& z) : _x(x), _y(y), _z(z) {
 	// std::cout << "Default constructor(const float x,y,z parameters) called" << std::endl;
 
-	_x = x;
-	_y = y;
-	_z = z;
 }
 
 Point::Point(const Point& obj) {
@@ -44,9 +34,9 @@ Point::Point(const Point& obj) {
 Point& Point::operator=(const Point& obj) {
 	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &obj) {
-		this->_x = obj.getXCoordinate();
-		this->_y = obj.getYCoordinate();
-		this->_z = obj.getZCoordinate();
+		const_cast<Fixed&>(_x) = obj.getXCoordinate();
+		const_cast<Fixed&>(_y) = obj.getYCoordinate();
+		const_cast<Fixed&>(_z) = obj.getZCoordinate();
 	}
 	return (*this);
 }

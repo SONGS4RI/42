@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:24:06 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/25 17:12:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/31 18:57:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 class Point
 {
 	private:
-		Fixed _x;
-		Fixed _y;
-		Fixed _z;
+		const Fixed _x;
+		const Fixed _y;
+		const Fixed _z;
 	public:
 		Point(void);
 		Point(const float x, const float y);
