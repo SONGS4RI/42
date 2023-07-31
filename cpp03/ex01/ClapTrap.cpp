@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 14:54:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/26 19:30:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/31 13:59:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ void ClapTrap::setEnergyPoint(unsigned int amount) {
 
 void ClapTrap::setAttackDamage(unsigned int amount) {
 	_attack_damage = amount;
-}
-
-
-ClapTrap::ClapTrap() {
-	std::cout << "Constructor (ClapTrap) called" << std::endl;
-
-	_name = "";
-	_hit_point = 10;
-	_energy_point = 10;
-	_attack_damage = 0;
 }
 
 ClapTrap::ClapTrap(const std::string& name) {

@@ -6,20 +6,11 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:47:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/26 20:14:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/31 14:20:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./ScavTrap.hpp"
-
-// ScavTrap::ScavTrap() : ClapTrap() {
-// 	std::cout << "Constructor (ScavTrap) called" << std::endl;
-
-// 	setName("");
-// 	setHitPoint(100);
-// 	setEnergyPoint(50);
-// 	setAttackDamage(20);
-// }
 
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
 	std::cout << "Constructor (ScavTrap) called" << std::endl;
@@ -51,3 +42,18 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& obj) {
 	return (*this);
 }
 
+void ScavTrap::attack(const std::string& target) {
+	if (getHitPoint() == 0 || getEnergyPoint() == 0) {
+		std::cout << "ScavTrap " << getName() << " can't attack" << std::endl;
+		return ;
+	}
+	setEnergyPoint(getEnergyPoint() - 1);
+
+	std::cout << "ScavTrap " << getName() << " attacks " << target
+	<< ", causing " << getAttackDamage() << " points of damage!" << std::endl;
+
+}
+
+void ScavTrap::guardGate() {
+	std::cout << "ScavTrap " << getName() << " is now in Gatekeeper mode" << std::endl;
+}
