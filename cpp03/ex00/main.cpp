@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/26 16:41:27 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/07/31 14:02:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main( void ) {
 	ClapTrap A("A");
+	// ClapTrap C;///////기본 생성자 막아놓음
 	std::cout << "hit_point: " << A.getHitPoint() << ", energy_point: " << A.getEnergyPoint() << std::endl;
 
 	// 1
