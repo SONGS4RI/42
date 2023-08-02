@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 20:24:06 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/31 18:57:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/02 18:16:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ class Point
 		const Fixed _x;
 		const Fixed _y;
 		const Fixed _z;
+		Point(const Fixed& x, const Fixed& y, const Fixed& z);
 	public:
 		Point(void);
 		Point(const float x, const float y);
-		Point(const Fixed& x, const Fixed& y, const Fixed& z);
 		Point(const Point& obj);
 		Point& operator=(const Point& obj);
 		~Point(void);
