@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/04 14:13:01 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/04 15:26:08 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp		\
 				Animal.cpp		\
+				Dog.cpp		\
+				Cat.cpp		\
 
 OBJS	= $(SRCS:.cpp=.o)
 

@@ -6,11 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 14:13:11 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/04 15:28:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
 int main( void ) {
 	const Animal* meta = new Animal();
