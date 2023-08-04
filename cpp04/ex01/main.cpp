@@ -6,43 +6,47 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 17:59:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/04 20:28:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Animal.hpp"
+#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
-
+#include "Brain.hpp"
 void leaks() {
-	system("leaks ex00");
+	system("leaks ex01");
 }
 
 int main( void ) {
-	// atexit(leaks);
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound();// meow~~!!가 나와야함
-	j->makeSound();// bark~~!!가 나와야함
-	meta->makeSound();// @#$%^&*!!!가 나와야함
-	std::cout << "==========================" << std::endl;
-	// 업캐스팅을 하면 베이스의 메모리 만큼만 접근하기 때문에 파생클래스에서 오버라이드가 의도한대로 되지 않는다.
-	const WrongAnimal* meta2 = new WrongAnimal();
-	const WrongAnimal* wrong_cat = new WrongCat();
-	std::cout << meta2->getType() << " " << std::endl;
-	std::cout << wrong_cat->getType() << " " << std::endl;
-	meta2->makeSound();// @#$%^&*!!!가 나와야함
-	wrong_cat->makeSound();// meow~~!!가 나와야함
+	atexit(leaks);
+	Animal* dog1 = new Dog();
+	const Animal* cat1 = new Cat();
 
-	// delete meta;
-	// delete i;
-	// delete j;
-	// delete meta2;
-	// delete wrong_cat;
+
+	const Animal* dog2 = new Dog(*static_cast<Dog*>(dog1));
+	Animal dog3 = *dog2;
+
+	delete dog1;//should not create a leak
+	delete cat1;
+	delete dog2;
+
+	std::cout << "======================" << std::endl;
+
+	int n = 10;
+	Animal *animals[n];
+
+	// create
+	for (int i=0; i<n; i++) {
+		if (i%2) {
+			animals[i] = new Dog();
+		} else {
+			animals[i] = new Cat();
+		}
+	}
+
+	// delete
+	for (int i=0; i<n; i++) delete animals[i];
+
 	return 0;
 }
