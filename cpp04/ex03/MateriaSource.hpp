@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:04:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 16:05:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/05 18:31:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class MateriaSource : IMateriaSource {
 	private:
-		/* data */
+		AMateria *_sources[4];
 	public:
 		MateriaSource(void);
 		MateriaSource(const MateriaSource& obj);
