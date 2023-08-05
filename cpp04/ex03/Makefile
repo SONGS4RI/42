@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/05 15:19:18 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/05 16:46:47 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp		\
-				
+				AMateria.cpp	\
 
 OBJS	= $(SRCS:.cpp=.o)
 
