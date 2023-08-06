@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:55:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/07 15:38:39 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/06 17:43:55 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <fstream>
 
 void leaks(void) {
-	std::system("leaks ex04");
+	system("leaks ex04");
 }
 
 int main(int argc, char **argv) {
-	// std::atexit(leaks);
+	// atexit(leaks);
 	if (argc != 4) {
 		std::cerr << "argv error" << std::endl;
 		return (1);
@@ -26,13 +26,14 @@ int main(int argc, char **argv) {
 	std::string filename(argv[1]);
 	std::string s1(argv[2]);
 	std::string s2(argv[3]);
-	std::ifstream ifs(filename, std::ios::in);
+	std::ifstream ifs(filename.c_str(), std::ios::in);
 
 	if (ifs.fail()) {
 		std::cerr << "open error" << std::endl;
 		return (1);
 	}
-	std::ofstream ofs(filename + ".replace", std::ios::out | std::ios::trunc);
+	filename += ".replace";
+	std::ofstream ofs(filename.c_str(), std::ios::out | std::ios::trunc);
 	if (ofs.fail()) {
 		std::cerr << "file make error" << std::endl;
 		return (1);
