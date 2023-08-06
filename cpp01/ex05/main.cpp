@@ -6,18 +6,18 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:29:51 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 17:50:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/06 17:44:58 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Harl.hpp"
 
 void leaks(void) {
-	std::system("leaks ex05");
+	system("leaks ex05");
 }
 
 int main(void) {
-	// std::atexit(leaks);
+	// atexit(leaks);
 	Harl newHarl = Harl();
 
 	newHarl.complain("debug");

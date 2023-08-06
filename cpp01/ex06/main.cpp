@@ -6,18 +6,18 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 14:29:51 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/05 17:49:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/06 17:45:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Harl.hpp"
 
-void leaks(void) {
-	std::system("leaks harlFilter");
-}
+// void leaks(void) {
+// 	system("leaks harlFilter");
+// }
 
 int main(int argc, char **argv) {
-	// std::atexit(leaks);
+	// atexit(leaks);
 	if (argc != 2) {
 		std::cout << "arg error" << std::endl;
 		return (1);
