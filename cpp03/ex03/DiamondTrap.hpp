@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:52:15 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/31 17:11:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/06 18:28:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class DiamondTrap : public ScavTrap, public FragTrap {
 		~DiamondTrap();
 
 		const std::string& getName(void) const;
+		void whoAmI() const;
 };
 
 #endif
