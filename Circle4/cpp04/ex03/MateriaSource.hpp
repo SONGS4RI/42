@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:04:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 18:31:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 16:19:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ class MateriaSource : IMateriaSource {
 
 		void learnMateria(AMateria*);
 		AMateria* createMateria(std::string const & type);
+		const AMateria* getSources(void);
 };
 
 #endif

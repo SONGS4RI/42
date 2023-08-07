@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:30:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/31 17:06:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 16:51:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ FragTrap::FragTrap(const FragTrap& obj) : ClapTrap(obj) {
 
 FragTrap& FragTrap::operator=(const FragTrap& obj) {
 	std::cout << "Copy assignment (FragTrap) operator called" << std::endl;
-	if (this == &obj) {
+	if (this != &obj) {
 		setName(obj.getName());
 		setHitPoint(obj.getHitPoint());
 		setEnergyPoint(obj.getEnergyPoint());
