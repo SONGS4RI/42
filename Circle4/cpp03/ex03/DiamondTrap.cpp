@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 15:23:45 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 16:51:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& obj) : ClapTrap(obj), ScavTrap(obj),
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& obj) {
 	std::cout << "Copy assignment (DiamondTrap) operator called" << std::endl;
-	if (this == &obj) {
+	if (this != &obj) {
 		_new_name = obj.getName();
 		setName(obj.ClapTrap::getName());
 		ClapTrap::setHitPoint(obj.ClapTrap::getHitPoint());

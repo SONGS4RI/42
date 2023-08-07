@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 16:47:50 by jahlee            #+#    #+#             */
-/*   Updated: 2023/07/31 14:20:10 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 16:51:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj) {
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& obj) {
 	std::cout << "Copy assignment (ScavTrap) operator called" << std::endl;
-	if (this == &obj) {
+	if (this != &obj) {
 		setName(obj.getName());
 		setHitPoint(obj.getHitPoint());
 		setEnergyPoint(obj.getEnergyPoint());
