@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 14:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/06 19:04:15 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 15:23:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ DiamondTrap::~DiamondTrap() {
 
 const std::string& DiamondTrap::getName(void) const {
 	return (_new_name);
+}
+
+void DiamondTrap::attack(const std::string& target) {
+	ScavTrap::attack(target);
 }
 
 void DiamondTrap::whoAmI() const {
