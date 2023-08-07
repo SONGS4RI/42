@@ -6,15 +6,18 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:45:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 16:49:20 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 19:30:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+
 
 int main() {
 
-	AMateria A("hi");
-
+	// AMateria* tmp = new Ice();
+	
 	return (0);
 }

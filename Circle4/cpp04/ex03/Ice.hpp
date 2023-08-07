@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:56:30 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 16:58:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 19:27:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "AMateria.hpp"
 
-class Ice : AMateria {
+class Ice : public AMateria {
 	private:
 		/* data */
 	public:
