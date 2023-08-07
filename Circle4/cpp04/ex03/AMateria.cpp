@@ -6,16 +6,23 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:20:20 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 16:54:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 20:35:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "AMateria.hpp"
 
+AMateria::AMateria(const std::string& type) {
+    std::cout << "default constructor called " << "[AMateria]" << std::endl;
+
+    _type = type;
+}
+
 AMateria::AMateria(const AMateria& obj) {
     std::cout << "Copy constructor called " << "[AMateria]" << std::endl;
-    *this=obj;
+
+    *this = obj;
 }
 
 AMateria& AMateria::operator=(const AMateria& obj) {
@@ -30,12 +37,15 @@ AMateria::~AMateria() {
     std::cout << "Destructor called " << "[AMateria]" << std::endl;
 }
 
-AMateria::AMateria(std::string const & type) {
-    std::cout << "default constructor called " << "[AMateria]" << std::endl;
-
+void AMateria::setType(const std::string& type) {
     _type = type;
 }
 
-void AMateria::setType(std::string const & type) {
-    _type = type;
+const std::string& AMateria::getType() const {
+    return (_type);
 }
+
+void AMateria::use(ICharacter& target) {
+    std::cout << "target " << target.getName() << std::endl;
+}
+

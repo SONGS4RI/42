@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:01:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 17:01:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/07 19:03:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "AMateria.hpp"
 
-class Cure {
+class Cure : public AMateria {
 	private:
 		/* data */
 	public:
