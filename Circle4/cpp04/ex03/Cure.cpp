@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:04:53 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 17:12:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 20:42:23 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Cure::Cure() : AMateria("cure") {
 	std::cout << "default constructor called " << "[Cure]" << std::endl;
 }
 
-Cure::Cure(const Cure& obj) : AMateria(obj) {
+Cure::Cure(const Cure& obj) : AMateria("cure") {
 	std::cout << "Copy constructor called " << "[Cure]" << std::endl;
 	*this = obj;
 }
