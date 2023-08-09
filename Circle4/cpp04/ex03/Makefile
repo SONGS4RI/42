@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/09 17:03:35 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/09 20:46:28 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= ex03
 
 # compile option
 CXX			= @c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
 
 # remove option
 RM			= @rm
@@ -25,12 +25,12 @@ RESET		= \033[0m
 GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
-SRCS		= 	AMateria.cpp	\
-				Character.cpp	\
-				Cure.cpp		\
-				Floor.cpp		\
-				Ice.cpp			\
-				main.cpp		\
+SRCS		= 	AMateria.cpp		\
+				Character.cpp		\
+				Cure.cpp			\
+				Ice.cpp				\
+				main.cpp			\
+				MateriaSource.cpp	\
 
 OBJS	= $(SRCS:.cpp=.o)
 

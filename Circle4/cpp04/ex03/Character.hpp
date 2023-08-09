@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:31:11 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 17:00:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 18:56:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
-#include "Floor.hpp"
+
+struct Floor {
+    AMateria *materia;
+    Floor* next;
+};
 
 class Character : public ICharacter {
     private:

@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:23:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 17:12:31 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 20:42:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Ice::Ice() : AMateria("ice") {
 	std::cout << "default constructor called " << "[Ice]" << std::endl;
 }
 
-Ice::Ice(const Ice& obj) : AMateria(obj) {
+Ice::Ice(const Ice& obj) : AMateria("ice") {
 	std::cout << "Copy constructor called " << "[Ice]" << std::endl;
 	*this = obj;
 }

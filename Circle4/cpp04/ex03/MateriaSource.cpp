@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:28:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 17:21:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 20:53:44 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 MateriaSource::MateriaSource() {
 	std::cout << "default constructor called " << "[MateriaSource]" << std::endl;
+
+	for (int i=0; i<4; i++) {
+		_sources[i] = NULL;
+	}
 }
 
 MateriaSource::MateriaSource(const MateriaSource& obj) {
@@ -27,7 +31,8 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj) {
 	std::cout << "Copy assignment operator called " << "[MateriaSource]" << std::endl;
 	if (this != &obj) {
 		for (int i=0; i<4; i++) {
-			_sources[i] = obj._sources[i]->clone();
+			if (obj._sources[i]) _sources[i] = obj._sources[i]->clone();
+			else _sources[i] = NULL;
 		}
 	}
 	return (*this);
@@ -59,6 +64,7 @@ AMateria* MateriaSource::createMateria(std::string const & type) {
 	return (0);
 }
 
-const AMateria* MateriaSource::getSources(int idx) const {
+const AMateria* MateriaSource::getSource(int idx) const {
+	if (idx<0 || idx>=4) return NULL;
 	return (_sources[idx]);
 }
