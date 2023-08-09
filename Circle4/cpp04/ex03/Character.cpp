@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:02:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 20:28:32 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:13:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Character::Character(const std::string& name) {
 	for (int i=0; i<4; i++) {
 		_inventory[i] = NULL;
 	}
+	_floor = new Floor();
 }
 
 Character::Character(const Character& obj) {
@@ -31,14 +32,22 @@ Character::Character(const Character& obj) {
 Character& Character::operator=(const Character& obj) {
 	std::cout << "Copy assignment operator called " << "[Character]" << std::endl;
 	if (this != &obj) {
-		_name = obj.getName();
+		_name = obj._name;
+		for (int i=0; i<4; i++) {
+			if (obj._inventory[i]) _inventory[i] = obj._inventory[i];
+		}
+		_floor = new Floor(*obj._floor);
 	}
 	return (*this);
 }
 
 Character::~Character() {
 	std::cout << "Destructor called " << "[Character]" << std::endl;
-	// 들고있는거 다 해제
+
+	for (int i=0; i<4; i++) {
+		if (_inventory[i]) delete _inventory[i];
+	}
+	delete _floor;
 }
 
 const std::string& Character::getName() const {
@@ -55,17 +64,14 @@ void Character::equip(AMateria* m) {
 }
 
 void Character::unequip(int idx) {
-	if (idx < 0 || idx >= 4) return ;
-	// 버리기 전에 주소 기억해야함
+	if (idx < 0 || idx >= 4 || _inventory[idx] == NULL) return ;
+	_floor->setMaterias(_inventory[idx]);
 	_inventory[idx] = NULL;
 }
 
-void Character::use(int idx, ICharacter& target) const {
-	if (_inventory[idx]) {//??????외안되???
-		
+void Character::use(int idx, ICharacter& target) {
+	if (idx < 0 || idx >= 4) return ;
+	if (_inventory[idx]) {
+		_inventory[idx]->use(target);
 	}
-}
-
-const AMateria* Character::getInventory() const {
-	return (*_inventory);
 }

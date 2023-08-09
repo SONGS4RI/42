@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Floor.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 16:45:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 17:06:29 by jahlee           ###   ########.fr       */
+/*   Created: 2023/08/09 14:34:15 by jahlee            #+#    #+#             */
+/*   Updated: 2023/08/09 17:17:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FLOOR_HPP
+# define FLOOR_HPP
+
 #include "AMateria.hpp"
-#include "Cure.hpp"
-#include "Ice.hpp"
-#include "Character.hpp"
 
-int main() {
+class Floor {
+	private:
+		AMateria *_materias[8];
+		unsigned int _idx;
+	public:
+		Floor(void);
+		Floor(const Floor& obj);
+		Floor& operator=(const Floor& obj);
+		~Floor(void);
 
-	// AMateria* tmp = new Ice();
-	Character* a = new Character("a");
+		const AMateria* getMateria(int idx) const;
+		void setMaterias(AMateria *obj);
+};
 
-	Character* b = new Character(*a);
-	
-	std::cout << "name: " << b->getName() << "\n";
-	
-	delete b;
-	return (0);
-}
+#endif

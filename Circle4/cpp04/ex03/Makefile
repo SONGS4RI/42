@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/07 19:29:15 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/09 17:03:35 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,12 @@ RESET		= \033[0m
 GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
-SRCS		= 	main.cpp		\
-				AMateria.cpp	\
+SRCS		= 	AMateria.cpp	\
+				Character.cpp	\
 				Cure.cpp		\
+				Floor.cpp		\
 				Ice.cpp			\
+				main.cpp		\
 
 OBJS	= $(SRCS:.cpp=.o)
 

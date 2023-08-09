@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:20:23 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 19:39:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:12:50 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ class AMateria {
     private:
         std::string _type;
         AMateria(void);
-    protected:
-        void setType(std::string const & type);
     public:
         AMateria(std::string const & type);
         AMateria(const AMateria& obj);

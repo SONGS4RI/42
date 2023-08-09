@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:28:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 19:02:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:21:43 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ MateriaSource::MateriaSource() {
 
 MateriaSource::MateriaSource(const MateriaSource& obj) {
 	std::cout << "Copy constructor called " << "[MateriaSource]" << std::endl;
+
 	*this = obj;
 }
 
@@ -26,7 +27,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj) {
 	std::cout << "Copy assignment operator called " << "[MateriaSource]" << std::endl;
 	if (this != &obj) {
 		for (int i=0; i<4; i++) {
-			_sources[i] = (obj.getSources())[i].clone();
+			_sources[i] = obj._sources[i]->clone();
 		}
 	}
 	return (*this);
@@ -43,7 +44,7 @@ MateriaSource::~MateriaSource() {
 void MateriaSource::learnMateria(AMateria* obj) {
 	for (int i=0; i<4; i++) {
 		if (_sources[i] == NULL) {
-			_sources[i] = obj->clone();
+			_sources[i] = obj;
 			return ;
 		}
 	}
@@ -58,6 +59,6 @@ AMateria* MateriaSource::createMateria(std::string const & type) {
 	return (0);
 }
 
-const AMateria* MateriaSource::getSources(void) const {
-	return (_sources[4]);
+const AMateria* MateriaSource::getSources(int idx) const {
+	return (_sources[idx]);
 }
