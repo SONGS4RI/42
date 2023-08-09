@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:23:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 19:25:22 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:12:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Ice::Ice(const Ice& obj) : AMateria(obj) {
 Ice& Ice::operator=(const Ice& obj) {
 	std::cout << "Copy assignment operator called " << "[Ice]" << std::endl;
 	if (this != &obj) {
-		setType(obj.getType());
+
 	}
 	return (*this);
 }

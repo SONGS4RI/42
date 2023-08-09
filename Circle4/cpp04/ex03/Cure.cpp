@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 19:04:53 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/07 19:37:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:12:40 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Cure::Cure(const Cure& obj) : AMateria(obj) {
 Cure& Cure::operator=(const Cure& obj) {
 	std::cout << "Copy assignment operator called " << "[Cure]" << std::endl;
 	if (this != &obj) {
-		setType(obj.getType());
+
 	}
 	return (*this);
 }
