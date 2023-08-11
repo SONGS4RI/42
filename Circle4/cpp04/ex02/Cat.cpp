@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:16:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/11 15:49:36 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ Cat::Cat() {
     _brain = new Brain();
 }
 
+Cat::Cat(const std::string ideas[100]) {
+    std::cout << "default constructor called " << "[Cat]" << std::endl;
+
+    _type = "Cat";
+    _brain = new Brain(ideas);
+}
+
 Cat::Cat(const Cat& obj) {
     std::cout << "Copy constructor called " << "[Cat]" << std::endl;
     *this=obj;
@@ -29,6 +36,7 @@ Cat& Cat::operator=(const Cat& obj) {
     std::cout << "Copy assignment operator called " << "[Cat]" << std::endl;
     if (this != &obj) {
         _type = obj.getType();
+        _brain = new Brain(*obj._brain);
     }
     return (*this);
 }
