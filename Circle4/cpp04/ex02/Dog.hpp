@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:10:20 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 19:47:29 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/11 15:37:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Dog : public Animal {
 		Brain* _brain;
 	public:
 		Dog(void);
+		Dog(const std::string ideas[100]);
 		Dog(const Dog& obj);
 		Dog& operator=(const Dog& obj);
 		~Dog(void);

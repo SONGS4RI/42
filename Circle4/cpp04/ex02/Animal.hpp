@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 14:11:54 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/05 15:13:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/11 15:58:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 class Animal {
 	private:
+
 	protected:
 		std::string _type;
 	public:

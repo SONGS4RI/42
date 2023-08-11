@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/09 20:46:28 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/11 14:30:33 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= ex03
 
 # compile option
 CXX			= @c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 # remove option
 RM			= @rm

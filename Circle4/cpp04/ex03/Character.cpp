@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:02:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 20:53:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/11 14:32:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ Character& Character::operator=(const Character& obj) {
 		}
 		Floor* obj_cur = obj._floor;
 		Floor* prev = _floor;
+		_floor = NULL;
 		while (obj_cur) {
 			Floor* copied = new Floor;
 			copied->materia = obj_cur->materia->clone();
@@ -85,6 +86,7 @@ void Character::equip(AMateria* m) {
 
 void Character::unequip(int idx) {
 	if (idx < 0 || idx >= 4 || _inventory[idx] == NULL) return ;
+	std::cout << _name << " unequiped " << _inventory[idx]->getType() << std::endl;
 	Floor* unequiped = new Floor;
 	unequiped->materia = _inventory[idx];
 	unequiped->next = NULL;
