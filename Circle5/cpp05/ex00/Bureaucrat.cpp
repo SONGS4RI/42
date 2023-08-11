@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 19:28:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/11 19:32:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name) {
 	_grade = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& obj) {
+Bureaucrat::Bureaucrat(const Bureaucrat& obj) : _name(obj.getName()) {
 	std::cout << "Copy constructor called " << "[Bureaucrat]" << std::endl;
 
 	*this = obj;
@@ -44,7 +44,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat& obj) {
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& obj) {
 	std::cout << "Copy assignment operator called " << "[Bureaucrat]" << std::endl;
 	if (this != &obj) {
-		const_cast<std::string&>(_name) = obj._name;
 		_grade = obj._grade;
 	}
 	return (*this);
