@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:39:49 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 14:56:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 15:34:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ const unsigned int& AForm::getExecuteGrade(void) const {
 	return (_execute_grade);
 }
 
-void AForm::beSigned(const Bureaucrat& obj) {
-	if (obj.getGrade() > _sign_grade) throw GradeTooLowException();
-	_signature = true;
+void AForm::setSignature(bool signature) {
+	_signature = signature;
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& obj) {
