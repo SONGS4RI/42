@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 20:52:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 14:49:15 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void Bureaucrat::signForm(Form& obj) {
 		obj.beSigned(*this);
 	} catch (std::exception& e) {
 		std::cout << _name << " couldn’t sign " << obj.getName()
-		<< " because " << e.what() << std::endl;
-		return ;
+		<< " because ";
+		throw (Form::GradeTooLowException());
 	}
 	std::cout << _name << " signed " << obj.getName() << std::endl;
 }
