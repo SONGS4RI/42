@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 15:00:34 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 16:51:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 19:59:28 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,16 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
-	if (executor.getGrade() > getExecuteGrade()) throw GradeTooLowException();
-	if (!getSignature()) throw NotSignedException();
+	try {
+		checkExecutable(executor);
+	} catch (const std::exception* e) {
+		throw (e);
+	}
 
 	std::ofstream ofs((_target + "_shrubbery").c_str(), std::ios::trunc);
-	if (ofs.fail()) throw SystemErrorException();
+	if (ofs.fail()) throw new SystemErrorException();
+
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 
 	ofs
 	<< "       (    .        +          .      .          ." << std::endl
@@ -62,7 +67,7 @@ void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
 	<< "   .                 `.:.  /:'  }      ." << std::endl
 	<< "           .           ):_(:;   \\           ." << std::endl
 	<< "                      /:. _/ ,  |" << std::endl
-	<< "                   . (|::.     ,`                  ." << std::endl
+	<< "                   . /(|::.     ,`                  ." << std::endl
 	<< "     .                |::.    {\\" << std::endl
 	<< "                      |::.\\  \\ `." << std::endl
 	<< "                      |:::(\\    |" << std::endl

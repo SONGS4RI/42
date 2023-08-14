@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:09:18 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 17:00:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 19:59:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 }
 
 void RobotomyRequestForm::execute(const Bureaucrat& executor) const {
-	if (executor.getGrade() > getExecuteGrade()) throw GradeTooLowException();
-	if (!getSignature()) throw NotSignedException();
+	try {
+		checkExecutable(executor);
+	} catch (const std::exception* e) {
+		throw (e);
+	}
 
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 	std::cout << "* drilling noises *	";
 	srand(static_cast<unsigned int>(time(NULL)));
 	if (rand() % 2) {

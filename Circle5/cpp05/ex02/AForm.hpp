@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:40:05 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 16:50:36 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 20:01:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ class AForm {
 			const unsigned int& execute_grade);
 		AForm(const AForm& obj);
 		AForm& operator=(const AForm& obj);
-		~AForm(void);
+		virtual ~AForm(void);
 
 		const std::string& getName(void) const;
 		const bool& getSignature(void) const;
 		const unsigned int& getSignGrade(void) const;
 		const unsigned int& getExecuteGrade(void) const;
 
-		void setSignature(bool signature);
+		void checkExecutable(const Bureaucrat& executor) const;
 
 		virtual void beSigned(const Bureaucrat& obj);
 		virtual void execute(const Bureaucrat& executor) const = 0;
