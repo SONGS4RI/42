@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:40:05 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 15:34:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 16:50:36 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ class AForm {
 		class GradeTooLowException : public std::exception {
 			const char* what(void) const throw();
 		};
+		class NotSignedException : public std::exception {
+			const char* what(void) const throw();
+		};
+		class SystemErrorException : public std::exception {
+			const char* what(void) const throw();
+		};
 		AForm(const std::string& name);
 		AForm(const std::string& name, const unsigned int& sign_grade,
 			const unsigned int& execute_grade);
@@ -44,8 +50,8 @@ class AForm {
 
 		void setSignature(bool signature);
 
-		virtual void beSigned(const Bureaucrat& obj) = 0;
-		virtual void execute(const Bureaucrat& executor) = 0;
+		virtual void beSigned(const Bureaucrat& obj);
+		virtual void execute(const Bureaucrat& executor) const = 0;
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& obj);
