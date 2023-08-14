@@ -6,33 +6,64 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:21:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 17:01:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 20:17:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Bureaucrat.hpp"
-#include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-int main() {
-	Bureaucrat A("A", 1);
-	Bureaucrat B("B", 150);
+void leaks() {
+	system("leaks ex02");
+}
 
-	// AForm F1("F1", 1, 1);
-	// AForm F2("F2", 150, 150);
+int main() {
+	atexit(leaks);
+	AForm* form = NULL;
+	Bureaucrat* test = NULL;
 
 	try {
-		// A.signForm(F1);
-		// A.signForm(F2);
+		std::cout << "====================test1====================" << std::endl;
+		/* ShrubberyCreationForm: Required grades: sign 145, exec 137 */
 
-		// B.signForm(F1);// 사인 불가능
-		// B.signForm(F2);
+		form = new ShrubberyCreationForm("home");
+		// test = new Bureaucrat("test", 146);
+		test = new Bureaucrat("test", 145);
+		// test = new Bureaucrat("test", 137);
+		test->signForm(*form);
+		test->executeForm(*form);
 
-	} catch (std::exception & e) {
-		std::cout << e.what() << std::endl;
+		delete form; delete test;
+		std::cout << "====================test2====================" << std::endl;
+		/* RobotomyRequestForm: Required grades: sign 72, exec 45 */
+
+		form = new RobotomyRequestForm("jack");
+		test = new Bureaucrat("test", 73);
+		// test = new Bureaucrat("test", 72);
+		// test = new Bureaucrat("test", 45);
+		test->signForm(*form);
+		test->executeForm(*form);
+
+		delete form; delete test;
+		std::cout << "====================test3====================" << std::endl;
+		/* PresidentialPardonForm: Required grades: sign 25, exec 5 */
+
+		form = new PresidentialPardonForm("daniel");
+		test = new Bureaucrat("test", 26);
+		// test = new Bureaucrat("test", 25);
+		// test = new Bureaucrat("test", 5);
+		test->signForm(*form);
+		test->executeForm(*form);
+
+		delete form; delete test;
+	} catch (const std::exception* e) {
+		std::cout << e->what() << std::endl;
+		if (form) delete form;
+		if (test) delete test;
+		delete e;
 	}
 	return 0;
 }

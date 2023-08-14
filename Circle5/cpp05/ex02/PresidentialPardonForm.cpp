@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 16:35:10 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 16:50:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 19:58:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 }
 
 void PresidentialPardonForm::execute(const Bureaucrat& executor) const {
-	if (executor.getGrade() > getExecuteGrade()) throw GradeTooLowException();
-	if (!getSignature()) throw NotSignedException();
+	try {
+		checkExecutable(executor);
+	} catch (const std::exception* e) {
+		throw (e);
+	}
 
-	std::cout << "[ "<< _target << "] has been pardoned by Zaphod Beeblebrox" << std::endl;
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
+	std::cout << "[ "<< _target << " ] has been pardoned by Zaphod Beeblebrox" << std::endl;
 }

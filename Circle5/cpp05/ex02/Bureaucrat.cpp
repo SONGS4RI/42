@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 17:02:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 16:58:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 19:57:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ Bureaucrat::Bureaucrat(std::string name) : _name(name) {
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name) {
 	std::cout << "Default constructor called " << "[Bureaucrat]" << std::endl;
 
-	if (grade == 0) throw GradeTooHighException();
-	else if (grade > 150) throw GradeTooLowException();
+	if (grade == 0) throw new GradeTooHighException();
+	else if (grade > 150) throw new GradeTooLowException();
 	_grade = grade;
 }
 
@@ -63,13 +63,13 @@ const unsigned int& Bureaucrat::getGrade(void) const {
 }
 
 void Bureaucrat::increaseGrade(void) {
-	if (_grade == 1) throw GradeTooHighException();
+	if (_grade == 1) throw new GradeTooHighException();
 
 	_grade--;
 }
 
 void Bureaucrat::decreaseGrade(void) {
-	if (_grade == 150) throw GradeTooLowException();
+	if (_grade == 150) throw new GradeTooLowException();
 
 	_grade++;
 }
@@ -77,9 +77,9 @@ void Bureaucrat::decreaseGrade(void) {
 void Bureaucrat::signForm(AForm& obj) {
 	try {
 		obj.beSigned(*this);
-	} catch (std::exception& e) {
-		std::cout << _name << " couldn’t sign " << obj.getName()
-		<< " because ";
+	} catch (const std::exception* e) {
+		std::cout << _name << " couldn’t sign "
+		<< obj.getName() << " because ";
 		throw (e);
 	}
 	std::cout << _name << " signed " << obj.getName() << std::endl;
@@ -88,9 +88,9 @@ void Bureaucrat::signForm(AForm& obj) {
 void Bureaucrat::executeForm(const AForm& form) {
 	try {
 		form.execute(*this);
-	} catch (std::exception& e) {
-		std::cout << _name << " couldn’t execute " << form.getName()
-		<< " because ";
+	} catch (const std::exception* e) {
+		std::cout << _name << " couldn’t execute "
+		<< form.getName() << " because ";
 		throw (e);
 	}
 }
