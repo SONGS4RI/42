@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:39:49 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 15:34:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/14 16:42:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ const char* AForm::GradeTooHighException::what() const throw() {
 
 const char* AForm::GradeTooLowException::what() const throw() {
 	return ("Exception [AForm]: Grade (1 ~ 150) is too low");
+}
+
+const char* AForm::NotSignedException::what() const throw() {
+	return ("Exception [AForm]: Form is not signed");
+}
+
+const char* AForm::SystemErrorException::what() const throw() {
+	return ("Exception [AForm]: System Error occured");
 }
 
 AForm::AForm(const std::string& name) : _name(name), _sign_grade(150), _execute_grade(150) {
@@ -69,6 +77,12 @@ const unsigned int& AForm::getExecuteGrade(void) const {
 
 void AForm::setSignature(bool signature) {
 	_signature = signature;
+}
+
+void AForm::beSigned(const Bureaucrat& obj) {
+	if (obj.getGrade() > getSignGrade()) throw GradeTooLowException();
+
+	setSignature(true);
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& obj) {
