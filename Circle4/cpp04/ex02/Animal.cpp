@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 14:12:46 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 19:13:24 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:38:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ Animal::Animal() {
 
 Animal::Animal(const Animal& obj) {
 	std::cout << "Copy constructor called " << "[Animal]" << std::endl;
-	*this=obj;
+	*this = obj;
 }
 
 Animal& Animal::operator=(const Animal& obj) {
 	std::cout << "Copy assignment operator called " << "[Animal]" << std::endl;
 	if (this != &obj) {
-		_type = obj.getType();
+		_type = obj._type;
 	}
 	return (*this);
 }

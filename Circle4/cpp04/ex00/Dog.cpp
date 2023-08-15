@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:09:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 15:25:20 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:36:54 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Dog::Dog(const Dog& obj) {
 Dog& Dog::operator=(const Dog& obj) {
 	std::cout << "Copy assignment operator called " << "[Dog] " << std::endl;
 	if (this != &obj) {
-		_type = obj.getType();
+		_type = obj._type;
 	}
 	return (*this);
 }

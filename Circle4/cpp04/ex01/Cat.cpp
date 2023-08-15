@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:16:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 19:05:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:37:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ Cat::Cat(const Cat& obj) {
     std::cout << "Copy constructor called " << "[Cat]" << std::endl;
 
     _brain = NULL;
-    *this=obj;
+    *this = obj;
 }
 
 Cat& Cat::operator=(const Cat& obj) {
     std::cout << "Copy assignment operator called " << "[Cat]" << std::endl;
     if (this != &obj) {
-        _type = obj.getType();
+        _type = obj._type;
         if (_brain) delete _brain;
         _brain = new Brain(*obj._brain);
     }
