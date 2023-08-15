@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:31:11 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 18:56:05 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 19:17:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,11 @@
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
 
-struct Floor {
-    AMateria *materia;
-    Floor* next;
-};
 
 class Character : public ICharacter {
     private:
         std::string _name;
         AMateria *_inventory[4];
-        Floor* _floor;
         Character(void);
     public:
         Character(const std::string& name);
