@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:16:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 15:49:36 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 19:12:20 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ Cat::Cat(const std::string ideas[100]) {
 
 Cat::Cat(const Cat& obj) {
     std::cout << "Copy constructor called " << "[Cat]" << std::endl;
+
+    _brain = NULL;
     *this=obj;
 }
 
@@ -36,6 +38,7 @@ Cat& Cat::operator=(const Cat& obj) {
     std::cout << "Copy assignment operator called " << "[Cat]" << std::endl;
     if (this != &obj) {
         _type = obj.getType();
+        if (_brain) delete _brain;
         _brain = new Brain(*obj._brain);
     }
     return (*this);
@@ -45,6 +48,7 @@ Cat::~Cat() {
     std::cout << "Destructor called " << "[Cat]" << std::endl;
 
     delete _brain;
+	_brain = NULL;
 }
 
 void Cat::makeSound() const {
