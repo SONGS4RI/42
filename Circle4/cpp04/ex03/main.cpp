@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:45:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 20:20:47 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:28:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,30 @@ void leaks() {
 	system("leaks $PPID");
 }
 
-// int main() {
-// 	atexit(leaks);
-// 	Floor* floor1 = Floor::getFloor();
-// 	IMateriaSource* src = new MateriaSource();
-// 	src->learnMateria(new Ice());
-// 	src->learnMateria(new Cure());
-// 	ICharacter* me = new Character("me");
-// 	AMateria* tmp;
-// 	tmp = src->createMateria("ice");
-// 	me->equip(tmp);
-// 	tmp = src->createMateria("cure");
-// 	me->equip(tmp);
-// 	ICharacter* bob = new Character("bob");
-// 	me->use(0, *bob);
-// 	me->use(1, *bob);
+void	basicTest(void) {
+	std::cout << "\n[basicTest]" << std::endl;
+	std::cout << "================================================================" << std::endl;
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
 
-// 	delete floor1;
-// 	delete src;
-// 	delete me;
-// 	delete bob;
-
-// 	return 0;
-// }
-
-
+	delete src;
+	delete me;
+	delete bob;
+}
 
 void    iMaterSourceTest(IMateriaSource& skillBook)
 {
-	std::cout << "[IMateriaSource test]" << std::endl;
+	std::cout << "\n[IMateriaSource test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	std::cout << "Filling skill book [ice][ice][ice][cure]" << std::endl;
 	skillBook.learnMateria(new Ice());
@@ -119,7 +114,7 @@ void    unequipTest(ICharacter& target)
 
 void    rangeTest(ICharacter& target)
 {
-	std::cout << "\n[range test]" << std::endl;
+	std::cout << "\n\n[range test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	target.unequip(4);
 	target.unequip(-2147483648);
@@ -129,6 +124,7 @@ void    rangeTest(ICharacter& target)
 
 void    interactiveTest(ICharacter& target, IMateriaSource& skillBook)
 {
+	basicTest();
 	iMaterSourceTest(skillBook);
 	equipTest(target, skillBook);
 	useTest(target);
@@ -149,10 +145,14 @@ int main()
 
 	interactiveTest(*me, *skillBook);
 
+	me->use(0, *monster);
+	me->use(1, *monster);
+	me->use(2, *monster);
+	me->use(3, *monster);
 	me->unequip(0);
-	me->unequip(0);
-	me->unequip(0);
-	me->unequip(0);
+	me->unequip(1);
+	me->unequip(2);
+	me->unequip(3);
 	me->equip(skillBook->createMateria("ice"));
 	me->equip(skillBook->createMateria("cure"));
 	me->equip(skillBook->createMateria("ice"));
