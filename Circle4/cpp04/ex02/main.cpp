@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 15:59:50 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 17:46:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "Brain.hpp"
 
 void leaks() {
-	system("leaks ex02");
+	system("leaks $PPID");
 }
 
 int main( void ) {
