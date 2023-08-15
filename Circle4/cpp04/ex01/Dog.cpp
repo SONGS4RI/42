@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:09:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 17:59:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 19:05:34 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ Dog::Dog(const std::string ideas[100]) : Animal() {
 
 Dog::Dog(const Dog& obj) : Animal(obj) {
 	std::cout << "Copy constructor called " << "[Dog] " << std::endl;
-	_brain = NULL;
 
+	_brain = NULL;
 	*this=obj;
 }
 
@@ -48,6 +48,7 @@ Dog::~Dog() {
 	std::cout << "Destructor called " << "[Dog] " << std::endl;
 
 	delete _brain;
+	_brain = NULL;
 }
 
 void Dog::makeSound() const {
