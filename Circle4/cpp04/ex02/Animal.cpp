@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 14:12:46 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 15:43:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 19:13:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,4 @@ Animal::~Animal() {
 
 const std::string& Animal::getType(void) const {
 	return (_type);
-}
-
-void Animal::makeSound() const {
-	std::cout << "@#$%^&*!!!" << std::endl;
 }
