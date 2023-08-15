@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:09:11 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 15:34:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:39:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Brain::Brain(const std::string ideas[100]) {
 
 Brain::Brain(const Brain& obj) {
     std::cout << "Copy constructor called " << "[Brain]" << std::endl;
-    *this=obj;
+    *this = obj;
 }
 
 Brain& Brain::operator=(const Brain& obj) {

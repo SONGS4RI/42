@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:16:43 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 15:24:56 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:36:38 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Cat::Cat(const Cat& obj) {
 Cat& Cat::operator=(const Cat& obj) {
     std::cout << "Copy assignment operator called " << "[Cat]" << std::endl;
     if (this != &obj) {
-        _type = obj.getType();
+        _type = obj._type;
     }
     return (*this);
 }

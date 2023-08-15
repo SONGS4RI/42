@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:09:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 19:12:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:39:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ Dog::Dog(const Dog& obj) : Animal(obj) {
 	std::cout << "Copy constructor called " << "[Dog] " << std::endl;
 
 	_brain = NULL;
-	*this=obj;
+	*this = obj;
 }
 
 Dog& Dog::operator=(const Dog& obj) {
 	std::cout << "Copy assignment operator called " << "[Dog] " << std::endl;
 	if (this != &obj) {
-		_type = obj.getType();
+		_type = obj._type;
         if (_brain) delete _brain;
 		_brain = new Brain(*obj._brain);
 	}
