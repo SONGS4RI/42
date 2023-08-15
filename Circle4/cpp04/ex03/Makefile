@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 16:44:10 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/11 14:30:33 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/15 20:14:19 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		= 	AMateria.cpp		\
 				Ice.cpp				\
 				main.cpp			\
 				MateriaSource.cpp	\
+				Floor.cpp			\
 
 OBJS	= $(SRCS:.cpp=.o)
 

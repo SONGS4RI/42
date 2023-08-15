@@ -6,12 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:28:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/09 20:53:44 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:12:47 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "MateriaSource.hpp"
+#include "Floor.hpp"
 
 MateriaSource::MateriaSource() {
 	std::cout << "default constructor called " << "[MateriaSource]" << std::endl;
@@ -31,8 +32,11 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& obj) {
 	std::cout << "Copy assignment operator called " << "[MateriaSource]" << std::endl;
 	if (this != &obj) {
 		for (int i=0; i<4; i++) {
+			if (_sources[i]) {
+				delete _sources[i];
+				_sources[i] = NULL;
+			}
 			if (obj._sources[i]) _sources[i] = obj._sources[i]->clone();
-			else _sources[i] = NULL;
 		}
 	}
 	return (*this);
@@ -48,11 +52,17 @@ MateriaSource::~MateriaSource() {
 
 void MateriaSource::learnMateria(AMateria* obj) {
 	for (int i=0; i<4; i++) {
+		if (_sources[i] == obj) return ;
+	}
+
+	for (int i=0; i<4; i++) {
 		if (_sources[i] == NULL) {
 			_sources[i] = obj;
 			return ;
 		}
 	}
+
+	Floor::getFloor()->addToList(obj);
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type) {

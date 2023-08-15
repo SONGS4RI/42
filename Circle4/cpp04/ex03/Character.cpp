@@ -6,12 +6,13 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 17:02:07 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/11 14:32:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:06:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Character.hpp"
+#include "Floor.hpp"
 
 Character::Character(const std::string& name) {
 	std::cout << "default constructor called " << "[Character]" << std::endl;
@@ -20,7 +21,7 @@ Character::Character(const std::string& name) {
 	for (int i=0; i<4; i++) {
 		_inventory[i] = NULL;
 	}
-	_floor = NULL;
+	// _floor = NULL;
 }
 
 Character::Character(const Character& obj) {
@@ -34,22 +35,11 @@ Character& Character::operator=(const Character& obj) {
 	if (this != &obj) {
 		_name = obj._name;
 		for (int i=0; i<4; i++) {
-			if (obj._inventory[i]) _inventory[i] = obj._inventory[i]->clone();
-			else _inventory[i] = NULL;
-		}
-		Floor* obj_cur = obj._floor;
-		Floor* prev = _floor;
-		_floor = NULL;
-		while (obj_cur) {
-			Floor* copied = new Floor;
-			copied->materia = obj_cur->materia->clone();
-			copied->next = NULL;
-			if (_floor == NULL) _floor = copied;
-			else {
-				prev->next = copied;
-				prev = copied;
+			if (_inventory[i]) {
+				delete _inventory[i];
+				_inventory[i] = NULL;
 			}
-			obj_cur = obj_cur->next;
+			if (obj._inventory[i]) _inventory[i] = obj._inventory[i]->clone();
 		}
 	}
 	return (*this);
@@ -61,14 +51,6 @@ Character::~Character() {
 	for (int i=0; i<4; i++) {
 		if (_inventory[i]) delete _inventory[i];
 	}
-	Floor* cur = _floor;
-	Floor* del;
-	while (cur) {
-		del = cur;
-		cur = cur->next;
-		delete del->materia;
-		delete del;
-	}
 }
 
 const std::string& Character::getName() const {
@@ -77,25 +59,22 @@ const std::string& Character::getName() const {
 
 void Character::equip(AMateria* m) {
 	for (int i=0; i<4; i++) {
+		if (_inventory[i] == m) return ;
+	}
+
+	for (int i=0; i<4; i++) {
 		if (_inventory[i] == NULL) {
 			_inventory[i] = m;
 			return ;
 		}
 	}
+	Floor::getFloor()->addToList(m);
 }
 
 void Character::unequip(int idx) {
 	if (idx < 0 || idx >= 4 || _inventory[idx] == NULL) return ;
 	std::cout << _name << " unequiped " << _inventory[idx]->getType() << std::endl;
-	Floor* unequiped = new Floor;
-	unequiped->materia = _inventory[idx];
-	unequiped->next = NULL;
-	Floor* cur = _floor;
-	while (cur && cur->next) {
-		cur = cur->next;
-	}
-	if (cur == NULL) _floor = unequiped;
-	else cur->next = unequiped;
+	Floor::getFloor()->addToList(_inventory[idx]);
 	_inventory[idx] = NULL;
 }
 
