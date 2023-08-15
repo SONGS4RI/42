@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:45:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 20:28:16 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:30:53 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	basicTest(void) {
 	delete bob;
 }
 
-void    iMaterSourceTest(IMateriaSource& skillBook)
-{
+void    iMaterSourceTest(IMateriaSource& skillBook) {
 	std::cout << "\n[IMateriaSource test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	std::cout << "Filling skill book [ice][ice][ice][cure]" << std::endl;
@@ -56,8 +55,7 @@ void    iMaterSourceTest(IMateriaSource& skillBook)
 	skillBook.learnMateria(new Ice());
 }
 
-void    equipTest(ICharacter& target, IMateriaSource& skillBook)
-{
+void    equipTest(ICharacter& target, IMateriaSource& skillBook) {
 	std::cout << "\n[Equip test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	AMateria* tmp;
@@ -84,8 +82,7 @@ void    equipTest(ICharacter& target, IMateriaSource& skillBook)
 	target.equip(tmp);
 }
 
-void    useTest(ICharacter& target)
-{
+void    useTest(ICharacter& target) {
 	std::cout << "\n[Use test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	std::cout << "\nTesting a character's use of a skill (material) in order" << std::endl;
@@ -95,8 +92,7 @@ void    useTest(ICharacter& target)
 	target.use(3, target);
 }
 
-void    unequipTest(ICharacter& target)
-{
+void    unequipTest(ICharacter& target) {
 	std::cout << "\n[Unequip test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	target.unequip(0);
@@ -112,8 +108,7 @@ void    unequipTest(ICharacter& target)
 	target.use(3, target);
 }
 
-void    rangeTest(ICharacter& target)
-{
+void    rangeTest(ICharacter& target) {
 	std::cout << "\n\n[range test]" << std::endl;
 	std::cout << "================================================================" << std::endl;
 	target.unequip(4);
@@ -122,8 +117,7 @@ void    rangeTest(ICharacter& target)
 	target.use(-2147483648, target);
 }
 
-void    interactiveTest(ICharacter& target, IMateriaSource& skillBook)
-{
+void    interactiveTest(ICharacter& target, IMateriaSource& skillBook) {
 	basicTest();
 	iMaterSourceTest(skillBook);
 	equipTest(target, skillBook);
@@ -132,8 +126,7 @@ void    interactiveTest(ICharacter& target, IMateriaSource& skillBook)
 	rangeTest(target);
 }
 
-int main()
-{
+int main() {
 	atexit(leaks);
 	Floor* floor1 = Floor::getFloor();
 	Floor* floor2 = Floor::getFloor(); (void)floor2;
@@ -144,25 +137,6 @@ int main()
 	ICharacter* monster = new Character("monster");
 
 	interactiveTest(*me, *skillBook);
-
-	me->use(0, *monster);
-	me->use(1, *monster);
-	me->use(2, *monster);
-	me->use(3, *monster);
-	me->unequip(0);
-	me->unequip(1);
-	me->unequip(2);
-	me->unequip(3);
-	me->equip(skillBook->createMateria("ice"));
-	me->equip(skillBook->createMateria("cure"));
-	me->equip(skillBook->createMateria("ice"));
-	me->equip(skillBook->createMateria("cure"));
-	me->equip(skillBook->createMateria("ice"));
-	me->equip(skillBook->createMateria("cure"));
-	me->use(0, *monster);
-	me->use(1, *monster);
-	me->use(2, *monster);
-	me->use(3, *monster);
 
 	delete monster;
 	delete me;
