@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/15 14:36:54 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/15 15:29:24 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		= 	main.cpp					\
 				ShrubberyCreationForm.cpp	\
 				RobotomyRequestForm.cpp		\
 				PresidentialPardonForm.cpp	\
+				Intern.cpp					\
 
 OBJS	= $(SRCS:.cpp=.o)
 
