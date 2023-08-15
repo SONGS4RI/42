@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:45:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 17:42:26 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 17:46:59 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "MateriaSource.hpp"
 
 void leaks() {
-	system("leaks ex03");
+	system("leaks $PPID");
 }
 
 int main() {
@@ -81,11 +81,6 @@ int main() {
 }
 
 /*
-
-void leak(void)
-{
-	system("leaks $PPID");
-}
 
 void    iMaterSourceTest(IMateriaSource& skillBook)
 {

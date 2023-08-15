@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 18:52:17 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/04 17:59:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 17:47:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include "WrongCat.hpp"
 
 void leaks() {
-	system("leaks ex00");
+	system("leaks $PPID");
 }
 
 int main( void ) {
-	// atexit(leaks);
+	atexit(leaks);
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
@@ -37,12 +37,12 @@ int main( void ) {
 	std::cout << meta2->getType() << " " << std::endl;
 	std::cout << wrong_cat->getType() << " " << std::endl;
 	meta2->makeSound();// @#$%^&*!!!가 나와야함
-	wrong_cat->makeSound();// meow~~!!가 나와야함
+	wrong_cat->makeSound();// @#$%^&*!!!가 나와야함
 
-	// delete meta;
-	// delete i;
-	// delete j;
-	// delete meta2;
-	// delete wrong_cat;
+	delete meta;
+	delete i;
+	delete j;
+	delete meta2;
+	delete wrong_cat;
 	return 0;
 }
