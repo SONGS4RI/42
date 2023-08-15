@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:21:37 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/14 14:51:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/15 14:49:29 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main() {
 		A.signForm(F1);
 		A.signForm(F2);
 
-		// B.signForm(F1);// 사인 불가능
+		B.signForm(F1);// 사인 불가능
 		B.signForm(F2);
 
 	} catch (std::exception & e) {
