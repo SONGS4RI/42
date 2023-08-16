@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/16 19:22:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 20:34:46 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,34 @@
 #include "ScalarConverter.hpp"
 
 void ScalarConverter::convert(std::string input) {
-
-	double num = atof(input.c_str());
-	std::cout << "char : " << static_cast<char>(num) << std::endl;
-	std::cout << "int : " << static_cast<int>(num) << std::endl;
-	std::cout << "float : " << static_cast<float>(num) << std::endl;
-	std::cout << "double: " << num << std::endl;
+	ScalarConverter::convertToChar(input);
+	ScalarConverter::convertToInt(input);
+	ScalarConverter::convertToFloat(input);
+	ScalarConverter::convertToDouble(input);
 }
 
-char ScalarConverter::convertToChar(std::string input) {
-	
+void ScalarConverter::convertToChar(std::string input) {
+	if (input.size() != 1 && )
+	std::strtod();
+	// std::cout << "char : ";
+	// if (c >= 256 || c < 0) {
+	// 	std::cout << "impossible" << std::endl;
+	// } else if (isspace(c) || iscntrl(c) || isblank(c)) {
+	// 	std::cout << "not displayable" << std::endl;
+	// } else {
+	// 	std::cout << static_cast<char>(c) << std::endl;
+	// }
 }
 
-int ScalarConverter::convertToInt(std::string input) {
-	
+void ScalarConverter::convertToInt(std::string input) {
+	std::cout << "int : " << atoi(input.c_str()) << std::endl;
 }
 
-float ScalarConverter::convertToFloat(std::string input) {
-	
+void ScalarConverter::convertToFloat(std::string input) {
+	std::cout << "float : " << atof(input.c_str()) << std::endl;
 }
 
-double ScalarConverter::convertToDouble(std::string input) {
-	
+void ScalarConverter::convertToDouble(std::string input) {
+	std::cout << "double: " << atof(input.c_str()) << std::endl;
 }
 
