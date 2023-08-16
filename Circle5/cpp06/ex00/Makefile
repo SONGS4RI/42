@@ -6,11 +6,11 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/16 16:08:54 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/16 16:32:23 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ex00
+NAME		= convert
 
 # compile option
 CXX			= @c++
@@ -26,6 +26,7 @@ GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp					\
+				ScalarConverter.cpp			\
 
 OBJS	= $(SRCS:.cpp=.o)
 
