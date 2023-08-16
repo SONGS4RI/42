@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/16 16:27:46 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 16:33:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void ScalarConverter::convert(std::string input) {
 
-	
+	(void) input;
 	std::cout << "char : " << std::endl;
 	std::cout << "int : " << std::endl;
 	std::cout << "float : " << std::endl;
-	std::cout << "double: 0.0 : " << std::endl;
+	std::cout << "double: " << std::endl;
 }
 
