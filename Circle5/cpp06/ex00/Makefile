@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/16 16:32:23 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/16 20:52:58 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,9 @@ fclean : clean
 	@echo "$(MAGENTA)║                                               ║$(RESET)"
 	@echo "$(MAGENTA)╚═══════════════════════════════════════════════╝$(RESET)"
 
-build : all clean
+build :
+	@make re
+	@make clean
 
 re : clean all
 
