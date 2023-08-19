@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:19:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/16 20:11:43 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 21:01:17 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 #include <string>
 
+enum EType {
+	TYPE_CHAR,
+	TYPE_INT,
+	TYPE_FLOAT,
+	TYPE_DOUBLE
+};
+
 class ScalarConverter {
 	private:
 		ScalarConverter(void);
@@ -22,11 +29,16 @@ class ScalarConverter {
 		ScalarConverter& operator=(const ScalarConverter& obj);
 		~ScalarConverter(void);
 	public:
-		static void convert(std::string input);
-		static void convertToChar(std::string input);
-		static void convertToInt(std::string input);
-		static void convertToFloat(std::string input);
-		static void convertToDouble(std::string input);
+		class CanNotConvertException : public std::exception {
+			const char* what(void) const throw();
+		};
+		static EType detectType(const std::string& input);
+		static void convert(const std::string& input);
+
+		static void convertToChar(double converted);
+		static void convertToInt(double converted);
+		static void convertToFloat(double converted);
+		static void convertToDouble(double converted);
 };
 
 #endif
