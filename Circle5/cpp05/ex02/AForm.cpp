@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 19:39:49 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 14:51:49 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 13:55:07 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ const char* AForm::GradeTooLowException::what() const throw() {
 }
 
 const char* AForm::NotSignedException::what() const throw() {
-	return ("Exception : Form is not signed");
+	return ("Exception : AForm is not signed");
 }
 
 const char* AForm::SystemErrorException::what() const throw() {
@@ -76,14 +76,14 @@ const unsigned int& AForm::getExecuteGrade(void) const {
 }
 
 void AForm::beSigned(const Bureaucrat& obj) {
-	if (obj.getGrade() > getSignGrade()) throw GradeTooLowException();
+	if (obj.getGrade() > getSignGrade()) throw new GradeTooLowException();
 
 	_signature = true;
 }
 
 void AForm::checkExecutable(const Bureaucrat& executor) const {
 	if (executor.getGrade() > getExecuteGrade()) throw new GradeTooLowException();
-	if (!getSignature()) throw new NotSignedException();
+	if (!_signature) throw new NotSignedException();
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& obj) {
