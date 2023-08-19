@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:37:14 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/15 16:16:09 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 14:02:45 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ AForm* Intern::makeForm(const std::string& form, const std::string& target) cons
 	for (; i<3; i++) {
 		if (form == form_name[i]) break;
 	}
+	if (i != 3) std::cout << "Intern creates " << form_name[i] << std::endl;
 	switch (i)
 	{
 		case 0:
