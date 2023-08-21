@@ -6,12 +6,17 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:19:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/21 17:40:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:42:03 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
+
+# define FLOAT_BITS_EXP 0x7F800000
+# define FLOAT_BITS_MANTISSA 0x007FFFFF
+# define DOUBLE_BITS_EXP 0x7FF0000000000000
+# define DOUBLE_BITS_MANTISSA 0x000FFFFFFFFFFFF
 
 #include <string>
 
@@ -41,6 +46,8 @@ class ScalarConverter {
 		static void convertToInt(double converted);
 		static void convertToFloat(double converted);
 		static void convertToDouble(double converted);
+
+		
 };
 
 #endif
