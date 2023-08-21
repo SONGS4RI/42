@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/21 18:07:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:08:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void ScalarConverter::convert(const std::string& input) {
 EType ScalarConverter::detectType(const std::string& input) {
 	int input_size = input.size();
 	double converted = std::strtod(input.c_str(), NULL);
-	// if (std::abs(converted) == INFINITY) return (TYPE_INF);
-	// if (std::isnan(converted)) return (TYPE_NAN);
+	if (std::abs(converted) == 1.0 / 0.0) {
+		return (TYPE_INF);
+	}
 	if (input_size == 1 && !std::isdigit(input[0])) return (TYPE_CHAR);
 	int dot_idx = -1, f_idx = -1;
 	for (int i=0; i<input_size; i++) {
@@ -59,7 +60,7 @@ EType ScalarConverter::detectType(const std::string& input) {
 		} else if (input[i] == 'f' && i == input_size - 1) {
 			f_idx = i;
 		} else if (!std::isdigit(input[i])) {
-			throw (CanNotConvertException());
+			return (TYPE_NAN);
 		}
 	}
 	if (dot_idx == -1) {
