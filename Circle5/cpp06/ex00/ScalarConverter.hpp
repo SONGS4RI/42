@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:19:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/19 21:01:17 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/21 17:40:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ enum EType {
 	TYPE_CHAR,
 	TYPE_INT,
 	TYPE_FLOAT,
-	TYPE_DOUBLE
+	TYPE_DOUBLE,
+	TYPE_NAN,
+	TYPE_INF
 };
 
 class ScalarConverter {
