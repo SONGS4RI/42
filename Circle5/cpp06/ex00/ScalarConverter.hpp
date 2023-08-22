@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:19:39 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/22 17:47:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/22 19:53:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ enum EType {
 	TYPE_INT,
 	TYPE_FLOAT,
 	TYPE_DOUBLE,
-	TYPE_NAN,
-	TYPE_FLOWS
+	TYPE_NAN
 };
 
 class ScalarConverter {
@@ -33,7 +32,6 @@ class ScalarConverter {
 		~ScalarConverter(void);
 	public:
 		static EType detectType();
-		static EType checkFlows(const EType& type);
 		static void convert(const std::string& input);
 
 		static char convertToChar(const EType& type);

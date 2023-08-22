@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/22 17:47:50 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/22 20:47:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,17 @@
 #include <cctype>
 #include "ScalarConverter.hpp"
 
+#define _IMPOSSIBLE "impossible"
+#define _NOT_DISPLAYABLE "Non displayable"
+#define _NOT_A_NUMBER_F "nanf"
+#define _NOT_A_NUMBER_D "nan"
+
 std::string ScalarConverter::_input = "";
 
 void ScalarConverter::convert(const std::string& input) {
-	ScalarConverter::_input = input;
-	EType type = checkFlows(detectType());
+	std::cout.precision(30);
+	_input = input;
+	EType type = detectType();
 	switch (type) {
 		case TYPE_CHAR:
 			std::cout << "Type: Char" << std::endl;
@@ -34,16 +40,16 @@ void ScalarConverter::convert(const std::string& input) {
 			std::cout << "Type: Double" << std::endl;
 			break;
 		case TYPE_NAN:
-			std::cout << "NaN" << std::endl;
+			std::cout << "Type: NaN" << std::endl;
 			break;
 		default:
-			std::cout << "Input Flows" << std::endl;
 			break;
 	}
+
 	std::cout << "char: ";
 	try {
 		std::cout << convertToChar(type);
-	} catch (const std::string& e) {
+	} catch (const char* e) {
 		std::cout << e;
 	}
 	std::cout<< std::endl;
@@ -51,7 +57,7 @@ void ScalarConverter::convert(const std::string& input) {
 	std::cout << "int: ";
 	try {
 		std::cout << convertToInt(type);
-	} catch (const std::string& e) {
+	} catch (const char* e) {
 		std::cout << e;
 	}
 	std::cout<< std::endl;
@@ -59,16 +65,21 @@ void ScalarConverter::convert(const std::string& input) {
 	std::cout << "float: ";
 	try {
 		std::cout << convertToFloat(type);
-	} catch (const std::string& e) {
+		if (convertToFloat(type) == static_cast<float>(stoi(_input))) std::cout << ".0";/////고쳐야함
+		std::cout << "f";
+	} catch (const char* e) {
 		std::cout << e;
+	} catch (std::out_of_range& o) {
 	}
 	std::cout<< std::endl;
 
 	std::cout << "double: ";
 	try {
 		std::cout << convertToDouble(type);
-	} catch (const std::string& e) {
+		if (convertToDouble(type) == static_cast<double>(stoi(_input))) std::cout << ".0";
+	} catch (const char* e) {
 		std::cout << e;
+	} catch (std::out_of_range& o) {
 	}
 	std::cout<< std::endl;
 }
@@ -85,7 +96,7 @@ EType ScalarConverter::detectType() {
 	for (int i=0; i<input_size; i++) {
 		if (_input[i] == '.' && dot_idx == -1 && i != 0) {
 			dot_idx = i;
-		} else if (_input[i] == 'f' && i == input_size - 1) {
+		} else if (_input[i] == 'f' && i == input_size - 1 && dot_idx != -1) {
 			f_idx = i;
 		} else if (!std::isdigit(_input[i])) {
 			return (TYPE_NAN);
@@ -99,77 +110,126 @@ EType ScalarConverter::detectType() {
 	return (TYPE_DOUBLE);
 }
 
-EType ScalarConverter::checkFlows(const EType& type) {
-	switch (type) {
-		case TYPE_CHAR:
-			if (!isascii(std::stoi(_input))) return (TYPE_FLOWS);
-			break;
-		case TYPE_INT:
-			if (static_cast<double>(std::stoi(_input)) != std::stod(_input)) return (TYPE_FLOWS);
-			break;
-		case TYPE_FLOAT:
-			if (static_cast<double>(std::stof(_input)) != std::stod(_input)) return (TYPE_FLOWS);
-			break;
-		default:
-			break;
-	}
-	return (type);
-}
-
 char ScalarConverter::convertToChar(const EType& type) {
-	std::string impossible = "impossible";
+	int res_i; float res_f; double res_d;
 	switch (type) {
 		case TYPE_CHAR:
+			if (!std::isprint(_input[0])) throw (_NOT_DISPLAYABLE);
 			return (_input[0]);
-		case TYPE_INT: case TYPE_FLOAT: case TYPE_DOUBLE:
-			if (checkFlows(TYPE_CHAR) == TYPE_FLOWS) throw (impossible);
-			return (static_cast<char>(std::stoi(_input)));
+		case TYPE_INT:
+			try {
+				res_i = std::stoi(_input);
+			} catch (std::out_of_range& o) {
+				throw (_IMPOSSIBLE);
+			}
+			if (res_i < 0 || 256 <= res_i) throw (_IMPOSSIBLE);
+			if (!std::isprint(res_i)) throw (_NOT_DISPLAYABLE);
+			return (static_cast<char>(res_i));
+		case TYPE_FLOAT:
+			try {
+				res_f = std::stof(_input);
+			} catch (std::out_of_range& o) {
+				throw (_IMPOSSIBLE);
+			}
+			if (res_f < 0 || 256 <= res_f) throw (_IMPOSSIBLE);
+			if (!std::isprint(res_f)) throw (_NOT_DISPLAYABLE);
+			return (static_cast<char>(res_f));
+		case TYPE_DOUBLE:
+			try {
+				res_d = std::stod(_input);
+			} catch (std::out_of_range& o) {
+				throw (_IMPOSSIBLE);
+			}
+			if (res_d < 0 || 256 <= res_d) throw (_IMPOSSIBLE);
+			if (!std::isprint(res_d)) throw (_NOT_DISPLAYABLE);
+			return (static_cast<char>(res_d));
 		default:
-			throw (impossible);
+			throw (_IMPOSSIBLE);
 	}
 }
 
 int ScalarConverter::convertToInt(const EType& type) {
-	std::string impossible = "impossible";
+	int res_i; float res_f; double res_d;
 	switch (type) {
 		case TYPE_CHAR:
-			return (static_cast<const int>(_input[0]));
-		case TYPE_INT: case TYPE_FLOAT: case TYPE_DOUBLE:
-			if (checkFlows(TYPE_INT) == TYPE_FLOWS) throw (impossible);
-			return (static_cast<int>(std::stoi(_input)));
+			return (static_cast<int>(_input[0]));
+		case TYPE_INT:
+			try {
+				res_i = std::stoi(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (res_i);
+		case TYPE_FLOAT:
+			try {
+				res_i = std::stoi(_input);
+				res_f = std::stof(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (static_cast<int>(res_f));
+		case TYPE_DOUBLE:
+			try {
+				res_i = std::stoi(_input);
+				res_d = std::stod(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (static_cast<int>(res_d));
 		default:
-			throw (impossible);
+			throw (_IMPOSSIBLE);
 	}
 }
 
 float ScalarConverter::convertToFloat(const EType& type) {
-	std::string impossible = "impossible";
-	std::string not_a_number = "nanf";
+	float res_f; double res_d;
 	switch (type) {
 		case TYPE_CHAR:
 			return (static_cast<float>(_input[0]));
-		case TYPE_INT: case TYPE_FLOAT: case TYPE_DOUBLE:
-			if (checkFlows(TYPE_FLOAT) == TYPE_FLOWS) throw (impossible);
-			return (static_cast<float>(std::stof(_input)));
+		case TYPE_INT:
+			return (static_cast<float>(std::stoi(_input)));
+		case TYPE_FLOAT:
+			try {
+				res_f = std::stof(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (res_f);
+		case TYPE_DOUBLE:
+			try {
+				res_f = std::stof(_input);
+				res_d = std::stod(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (static_cast<float>(res_d));
 		case TYPE_NAN:
-			throw (not_a_number);
+			throw (_NOT_A_NUMBER_F);
 		default:
-			throw (impossible);
+			throw (_IMPOSSIBLE);
 	}
 }
 
 double ScalarConverter::convertToDouble(const EType& type) {
-	std::string impossible = "impossible";
-	std::string not_a_number = "nan";
+	double res_d;
 	switch (type) {
 		case TYPE_CHAR:
 			return (static_cast<double>(_input[0]));
-		case TYPE_INT: case TYPE_FLOAT: case TYPE_DOUBLE:
-			return (static_cast<double>(std::stod(_input)));
+		case TYPE_INT:
+			return (static_cast<double>(std::stoi(_input)));
+		case TYPE_FLOAT:
+			return (static_cast<double>(std::stof(_input)));
+		case TYPE_DOUBLE:
+			try {
+				res_d = std::stod(_input);
+			} catch (std::out_of_range& e) {
+				throw (_IMPOSSIBLE);
+			}
+			return (res_d);
 		case TYPE_NAN:
-			throw (not_a_number);
+			throw (_NOT_A_NUMBER_D);
 		default:
-			throw (impossible);
+			throw (_IMPOSSIBLE);
 	}
 }
 
