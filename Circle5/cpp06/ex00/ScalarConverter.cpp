@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/23 17:30:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/23 20:39:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ std::string ScalarConverter::_input;
 void ScalarConverter::convert(const std::string& input) {
 	_input = input;
 	EType type = detectType();
-
+	// printType(type); 현재 무슨 타입인지 출력
 	std::cout << "char: ";
 	try {
 		std::cout << convertToChar(type);
@@ -77,19 +77,17 @@ void ScalarConverter::convert(const std::string& input) {
 
 EType ScalarConverter::detectType() {
 	int input_size = _input.size();
-	double converted = std::strtod(_input.c_str(), NULL);
-	if (std::abs(converted) == 1.0 / 0.0) {
-		if (_input[input_size-2] == 'f') {
-			std::cout << "Type: Float" << std::endl;
-			return (TYPE_FLOAT);
-		}
-		std::cout << "Type: Double" << std::endl;
-		return (TYPE_DOUBLE);
-	}
+
 	if (input_size == 1 && !std::isdigit(_input[0])) {
-		std::cout << "Type: Char" << std::endl;
 		return (TYPE_CHAR);
 	}
+	if (_input == "inff" || _input == "+inff" || _input == "-inff") {
+		return (TYPE_FLOAT);
+	}
+	if (_input == "inf" || _input == "+inf" || _input == "-inf") {
+		return (TYPE_DOUBLE);
+	}
+
 	int dot_idx = -1, f_idx = -1, sign = 0;
 	if (_input[0] == '+' || _input[0] == '-') sign++;
 	for (int i=sign; i<input_size; i++) {
@@ -98,20 +96,37 @@ EType ScalarConverter::detectType() {
 		} else if (_input[i] == 'f' && i == input_size - 1 && dot_idx != -1) {
 			f_idx = i;
 		} else if (!std::isdigit(_input[i])) {
-			std::cout << "Type: NaN" << std::endl;
 			return (TYPE_NAN);
 		}
 	}
 	if (dot_idx == -1) {
-		std::cout << "Type: Int" << std::endl;
 		return (TYPE_INT);
 	}
 	if (f_idx != -1) {
-		std::cout << "Type: Float" << std::endl;
 		return (TYPE_FLOAT);
 	}
-	std::cout << "Type: Double" << std::endl;
 	return (TYPE_DOUBLE);
+}
+
+void ScalarConverter::printType(const EType& type) {
+	switch (type)
+	{
+		case TYPE_CHAR:
+			std::cout << "Type: Char" << std::endl;
+			break;
+		case TYPE_INT:
+			std::cout << "Type: Int" << std::endl;
+			break;
+		case TYPE_FLOAT:
+			std::cout << "Type: Float" << std::endl;
+			break;
+		case TYPE_DOUBLE:
+			std::cout << "Type: Double" << std::endl;
+			break;
+	default:
+		std::cout << "Type: NaN" << std::endl;
+		break;
+	}
 }
 
 char ScalarConverter::convertToChar(const EType& type) {
