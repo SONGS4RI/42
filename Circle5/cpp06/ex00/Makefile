@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/16 20:52:58 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/23 17:41:55 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ build :
 	@make re
 	@make clean
 
-re : clean all
+re : clean
+	@make all
 
 .PHONY : all clean fclean re build
