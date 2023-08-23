@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/22 20:47:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/23 16:01:04 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void ScalarConverter::convert(const std::string& input) {
 		std::cout << convertToChar(type);
 	} catch (const char* e) {
 		std::cout << e;
+	} catch (std::out_of_range& o) {
+		std::cout << _IMPOSSIBLE;
 	}
 	std::cout<< std::endl;
 
@@ -59,27 +61,32 @@ void ScalarConverter::convert(const std::string& input) {
 		std::cout << convertToInt(type);
 	} catch (const char* e) {
 		std::cout << e;
+	} catch (std::out_of_range& o) {
+		std::cout << _IMPOSSIBLE;
 	}
 	std::cout<< std::endl;
 
 	std::cout << "float: ";
 	try {
 		std::cout << convertToFloat(type);
-		if (convertToFloat(type) == static_cast<float>(stoi(_input))) std::cout << ".0";/////고쳐야함
+		std::cout << "(11)";
+		if (convertToFloat(type) == std::floor(stof(_input))) std::cout << ".0";
 		std::cout << "f";
 	} catch (const char* e) {
 		std::cout << e;
 	} catch (std::out_of_range& o) {
+		std::cout << _IMPOSSIBLE;
 	}
 	std::cout<< std::endl;
 
 	std::cout << "double: ";
 	try {
 		std::cout << convertToDouble(type);
-		if (convertToDouble(type) == static_cast<double>(stoi(_input))) std::cout << ".0";
+		if (convertToDouble(type) == std::floor(stod(_input))) std::cout << ".0";
 	} catch (const char* e) {
 		std::cout << e;
 	} catch (std::out_of_range& o) {
+		std::cout << _IMPOSSIBLE;
 	}
 	std::cout<< std::endl;
 }
