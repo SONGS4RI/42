@@ -49,8 +49,8 @@ void ScalarConverter::convert(const std::string& input) {
 	try {
 		float res_f = convertToFloat(type);
 		std::cout << res_f;
-		if (std::abs(res_f) < std::powf(10,6) &&
-			convertToFloat(type) == std::floor(stof(_input)) &&
+		if (std::abs(res_f) < powf(10,6) &&
+			convertToFloat(type) == std::floor(std::stof(_input)) &&
 			std::abs(res_f) != 1.0f/0.0f) std::cout << ".0";
 		std::cout << "f";
 	} catch (const char* e) {
@@ -64,8 +64,8 @@ void ScalarConverter::convert(const std::string& input) {
 	try {
 		double res_d = convertToDouble(type);
 		std::cout << res_d;
-		if (std::abs(res_d) < std::powf(10,6) &&
-			convertToDouble(type) == std::floor(stod(_input)) &&
+		if (std::abs(res_d) < pow(10,6) &&
+			convertToDouble(type) == std::floor(std::stod(_input)) &&
 			std::abs(res_d) != 1.0/0.0) std::cout << ".0";
 	} catch (const char* e) {
 		std::cout << e;
