@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/25 15:38:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/25 15:48:16 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void ScalarConverter::convert(const std::string& input) {
 	// printType(type); 현재 무슨 타입인지 출력
 	std::cout << "char: ";
 	try {
-		std::cout << convertToChar(type);
+		char c = convertToChar(type);
+		std::cout << "\'" << c << "\'";
 	} catch (const char* e) {
 		std::cout << e;
 	} catch (std::out_of_range& o) {
