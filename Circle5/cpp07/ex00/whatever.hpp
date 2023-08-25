@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:11:04 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/25 16:18:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/25 20:29:30 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ template <typename T>
 void swap(T& a, T& b) {
 	T tmp = a;
 	a = b;
-	b= tmp;
+	b = tmp;
 }
 
 template <typename T>
