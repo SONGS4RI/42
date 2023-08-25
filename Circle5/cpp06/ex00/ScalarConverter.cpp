@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:24:57 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/23 20:39:56 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/25 15:38:08 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ void ScalarConverter::convert(const std::string& input) {
 	try {
 		float res_f = convertToFloat(type);
 		std::cout << res_f;
-		if (std::abs(res_f) < powf(10,6) &&
+		if (std::abs(res_f) < powf(10,6) && type != TYPE_CHAR &&
 			convertToFloat(type) == std::floor(std::stof(_input)) &&
-			std::abs(res_f) != 1.0f/0.0f) std::cout << ".0";
+			std::abs(res_f) != 1.0f/0.0f ) std::cout << ".0";
+		if (type == TYPE_CHAR) std::cout << ".0";
 		std::cout << "f";
 	} catch (const char* e) {
 		std::cout << e << "f";
@@ -64,9 +65,10 @@ void ScalarConverter::convert(const std::string& input) {
 	try {
 		double res_d = convertToDouble(type);
 		std::cout << res_d;
-		if (std::abs(res_d) < pow(10,6) &&
+		if (std::abs(res_d) < pow(10,6) && type != TYPE_CHAR &&
 			convertToDouble(type) == std::floor(std::stod(_input)) &&
 			std::abs(res_d) != 1.0/0.0) std::cout << ".0";
+		if (type == TYPE_CHAR) std::cout << ".0";
 	} catch (const char* e) {
 		std::cout << e;
 	} catch (std::out_of_range& o) {
