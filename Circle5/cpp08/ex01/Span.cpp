@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:58:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/27 17:57:33 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/27 18:43:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ Span::~Span() {
 void Span::addNumber(int val) {
 	if (_v.size() == _n) throw std::exception();
 	_v.push_back(val);
+}
+
+template <typename T>
+void Span::addNumbers(typename T::iterator begin, typename T::iterator end) {
+	_v.insert(_v.end(), begin, end);
 }
 
 unsigned int Span::shortestSpan(void) {
