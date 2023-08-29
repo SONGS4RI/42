@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:44:54 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/27 18:43:13 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:26:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ class Span {
 
 		void addNumber(int val);
 		template <typename T>
-		void addNumbers(typename T::iterator begin, typename T::iterator end);
+		void addNumbers(typename T::iterator begin, typename T::iterator end) {
+			if (_v.size() + std::distance(begin, end) > _n) throw std::exception();
+			_v.insert(_v.end(), begin, end);
+		}
 		unsigned int shortestSpan(void);
 		unsigned int longestSpan(void);
 };

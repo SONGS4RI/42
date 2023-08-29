@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:41:40 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/27 18:57:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/29 14:27:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main() {
 	}
 
 	try {
-		Span sp = Span(5);
+		Span sp = Span(25);
 		sp.addNumber(6);
 		sp.addNumber(3);
 		sp.addNumber(17);
@@ -36,10 +36,12 @@ int main() {
 		sp.addNumber(11);
 
 		std::vector<int> test;
-		for (int i=20; i<200; i+=3) test.push_back(i);
-		sp.addNumbers(test.begin(), test.end());
+		for (int i=10; i<=200; i+=10) test.push_back(i);
+		sp.addNumbers<std::vector<int> >(test.begin(), test.end());
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
+		// sp.addNumber(1);
+		// sp.addNumbers<std::vector<int> >(test.begin(), test.end());
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
