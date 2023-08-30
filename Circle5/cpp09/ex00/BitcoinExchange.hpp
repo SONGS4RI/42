@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:27:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/30 17:04:18 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/30 19:34:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class BitcoinExchange {
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange& obj);
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
-		~BitcoinExchange(void);
 	public:
+		~BitcoinExchange(void);
 		class FileOpenException : public std::exception {
 			public:
 				const char* what(void) const throw();
@@ -42,13 +42,9 @@ class BitcoinExchange {
 			public:
 				const char* what(void) const throw();
 		};
-		class InvalidValueException : public std::exception {
-			public:
-				const char* what(void) const throw();
-		};
 		static BitcoinExchange* getBitcoinExchange(void);
-		void getDataBase(const std::string& filename);
-		void checkVaildDate(const int& year, const int& month, const int& day) const;
+		bool checkVaildDate(const int& year, const int& month, const int& day) const;
+		void calculateInputs(const std::string& filename);
 };
 
 #endif
