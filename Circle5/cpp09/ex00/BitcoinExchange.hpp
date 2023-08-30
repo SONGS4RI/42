@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:27:48 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 20:44:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:04:18 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,22 @@
 
 class BitcoinExchange {
 	private:
-		static BitcoinExchange* _ptr;
-		std::map<std::string, double> _data;
+		static BitcoinExchange* _btc;
+		std::map<int, double> _data;
 		BitcoinExchange(void);
 		BitcoinExchange(const BitcoinExchange& obj);
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
 		~BitcoinExchange(void);
 	public:
 		class FileOpenException : public std::exception {
+			public:
+				const char* what(void) const throw();
+		};
+		class InvalidFormatException : public std::exception {
+			public:
+				const char* what(void) const throw();
+		};
+		class DuplicatedDateException : public std::exception {
 			public:
 				const char* what(void) const throw();
 		};
@@ -40,6 +48,7 @@ class BitcoinExchange {
 		};
 		static BitcoinExchange* getBitcoinExchange(void);
 		void getDataBase(const std::string& filename);
+		void checkVaildDate(const int& year, const int& month, const int& day) const;
 };
 
 #endif

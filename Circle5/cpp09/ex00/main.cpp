@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 20:53:37 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:04:49 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int main(int argc, char** argv) {
 		return (1);
 	}
 	try {
-		BitcoinExchange* btc = BitcoinExchange::getBitcoinExchange();
-		
+		BitcoinExchange* ptr = BitcoinExchange::getBitcoinExchange();
+		(void)argv;
+		(void)ptr;
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		return (1);
