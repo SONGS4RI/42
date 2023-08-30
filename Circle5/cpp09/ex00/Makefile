@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/08/29 18:53:18 by jahlee           ###   ########.fr        #
+#    Updated: 2023/08/30 16:55:56 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ GREEN		= \033[1;92m
 MAGENTA		= \033[1;95m
 
 SRCS		= 	main.cpp					\
+				BitcoinExchange.cpp			\
 
 OBJS	= $(SRCS:.cpp=.o)
 
