@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 18:40:19 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/25 21:02:05 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:08:02 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ class Array {
 	public:
 		Array(void) {_size = 0; _arr = new T[0];};
 		Array(unsigned int n) {_size = n; _arr = new T[n];};
-		Array(const Array& obj) {*this = obj;};
+		Array(const Array& obj) {_arr = NULL; *this = obj;};
 		Array& operator=(const Array& obj) {
 			if (this != &obj) {
 				if (_arr) delete[] _arr;
 				_size = obj._size;
 				_arr = new T[_size];
 				for (unsigned int i = 0; i<obj._size; i++) {
-					_arr[i] = obj._size[i];
+					_arr[i] = obj._arr[i];
 				}
 			}
 			return (*this);
