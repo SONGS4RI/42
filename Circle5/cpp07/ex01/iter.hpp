@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:27:02 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/25 18:30:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/08/30 14:21:11 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 template <typename T, typename Func>
 void iter(T* address, unsigned int len, Func& func) {
 	for (unsigned int i=0; i<len; i++) {
-		func(*(address + i));
+		func(address[i]);
 	}
 }
 
