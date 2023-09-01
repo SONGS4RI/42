@@ -6,15 +6,29 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 20:27:10 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/01 17:06:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "BitcoinExchange.hpp"
+#include "PmergeMe.hpp"
 
-int main() {
-	
+//  ./PmergeMe `jot -r 3000 1 100000 | tr '\n' ' '
+
+int main(int argc, char** argv) {
+	if (argc < 2) {
+		std::cout << "Usage ./PmergeMe [num] [...]" << std::endl;
+		return (1);
+	}
+	try {
+		PmergeMe* ptr = PmergeMe::getPmergeMe(argv);
+		(void)ptr;
+	} catch (const char* e) {
+		std::cout << e << std::endl;
+		delete PmergeMe::getPmergeMe(argv);
+		return (1);
+	}
+	delete PmergeMe::getPmergeMe(argv);
 	return (0);
 }
 

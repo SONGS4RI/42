@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 15:02:03 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 16:58:51 by jahlee           ###   ########.fr       */
+/*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
+/*   Updated: 2023/09/01 17:11:02 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
-int main(int argc, char** argv) {
-	if (argc != 2) {
-		std::cout << "Wrong Usage: ./RPN [ inverted Polish mathematical expression ]" << std::endl;
-		return (1);
+#define INVALID_INPUT "Error"
+
+PmergeMe* PmergeMe::_ptr;
+PmergeMe::~PmergeMe(void) {}
+
+PmergeMe::PmergeMe(char** argv) {
+	int idx = 0, num;
+	while (argv[++idx]) {
+		num = std::atoi(argv[idx]);
+		if (num <= 0) throw INVALID_INPUT;
+		_input_nums.push_back(num);
 	}
-	try {
-		std::cout << RPN::calcuateRPN(argv[1]) << std::endl;
-	} catch (const char* e) {
-		std::cout << e << std::endl;
-		return (1);
+}
+
+PmergeMe* PmergeMe::getPmergeMe(char** argv) {
+	if (!_ptr) {
+		_ptr = new PmergeMe(argv);
 	}
-	return (0);
+	return (_ptr);
 }
