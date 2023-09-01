@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:31:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 14:44:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/01 15:05:48 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ BitcoinExchange::BitcoinExchange() {
 			delimeters[1] != '-' || delimeters[2] != ',') throw InvalidFormatException();
 		if (!checkVaildDate(year, month, day)) throw InvalidDateException();
 		if (_data[year*10000+month*100+day]) throw DuplicatedDateException();
-		_data[year*10000+month*100+day] = exchange_rate + 1.0;
+		_data[year*10000+month*100+day] = exchange_rate;
 	}
 	ifs.close();
 }
@@ -101,13 +101,13 @@ void BitcoinExchange::calculateInputs(const std::string& filename) {
 		}
 		date = year*10000+month*100+day;
 		if (_data.find(date) != _data.end()) {
-			res = (_data[date] - 1.0) * value;
+			res = _data[date] * value;
 		} else {
 			std::map<int,double>::iterator iter = _data.begin();
 			for (; iter != _data.end(); iter++) {
 				if (iter->first > date) break ;
 			}
-			res = ((--iter)->second - 1.0) * value;
+			res = (--iter)->second * value;
 		}
 		std::cout << input.substr(0, 10) << " => " << value << " = " << res << std::endl;
 	}
