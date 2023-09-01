@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:31:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/30 20:26:40 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/01 14:44:12 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,12 @@ BitcoinExchange::BitcoinExchange() {
 			delimeters[1] != '-' || delimeters[2] != ',') throw InvalidFormatException();
 		if (!checkVaildDate(year, month, day)) throw InvalidDateException();
 		if (_data[year*10000+month*100+day]) throw DuplicatedDateException();
-		_data[year*1000+month*10+day] = exchange_rate + 1.0;
+		_data[year*10000+month*100+day] = exchange_rate + 1.0;
 	}
 	ifs.close();
 }
 
-BitcoinExchange::~BitcoinExchange() {
-	for (std::map<int, double>::iterator iter = _data.begin(); iter != _data.end(); iter++) {
-	std::cout << iter->first << " | " << iter->second << std::endl;
-	}
-}
+BitcoinExchange::~BitcoinExchange() {}
 
 BitcoinExchange* BitcoinExchange::getBitcoinExchange(void) {
 	if (_btc == NULL) {
@@ -82,26 +78,38 @@ void BitcoinExchange::calculateInputs(const std::string& filename) {
 	std::ifstream ifs(filename.c_str());
 
 	std::string input;
-	int year, month, day;
+	int year, month, day, date;
 	char delimeters[3];
-	double value;
+	double value, res;
 	std::getline(ifs, input);// 첫줄 버림
 	while (std::getline(ifs, input)) {
 		std::istringstream iss(input);
 		iss >> year >> delimeters[0] >> month >> delimeters[1]
 			>> day >> delimeters[2] >> value;
 		if (!iss.eof() || iss.fail() || delimeters[0] != '-' ||
-			delimeters[1] != '-' || delimeters[2] != '|') throw InvalidFormatException();
+			delimeters[1] != '-' || delimeters[2] != '|') {
+				std::cout << "Error: bad input => " << input << std::endl;
+				continue;
+			}
 		if (!checkVaildDate(year, month, day)) {
-			std::cout << "Error: bad input => " << input << std::endl;
+			std::cout << "Error: wrong date => " << input << std::endl;
 			continue;
 		}
 		if (value < 0.0 || value > 1000.0) {
 			std::cout << "Error: not a valid number" << std::endl;
 			continue;
 		}
-		
+		date = year*10000+month*100+day;
+		if (_data.find(date) != _data.end()) {
+			res = (_data[date] - 1.0) * value;
+		} else {
+			std::map<int,double>::iterator iter = _data.begin();
+			for (; iter != _data.end(); iter++) {
+				if (iter->first > date) break ;
+			}
+			res = ((--iter)->second - 1.0) * value;
+		}
+		std::cout << input.substr(0, 10) << " => " << value << " = " << res << std::endl;
 	}
-
 	ifs.close();
 }
