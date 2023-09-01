@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 14:35:20 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/01 17:03:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
 		ptr->calculateInputs(argv[1]);
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		delete BitcoinExchange::getBitcoinExchange();
 		return (1);
 	}
 	delete BitcoinExchange::getBitcoinExchange();
