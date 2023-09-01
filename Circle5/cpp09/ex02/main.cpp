@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 17:06:51 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/01 18:00:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int main(int argc, char** argv) {
 	}
 	try {
 		PmergeMe* ptr = PmergeMe::getPmergeMe(argv);
-		(void)ptr;
+		ptr->sortVector();
+		ptr->sortDeque();
 	} catch (const char* e) {
 		std::cout << e << std::endl;
 		delete PmergeMe::getPmergeMe(argv);
