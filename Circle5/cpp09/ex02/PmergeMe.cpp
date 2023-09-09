@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 20:03:25 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 16:56:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ PmergeMe* PmergeMe::getPmergeMe(char** argv) {
 	return (_ptr);
 }
 
-bool PmergeMe::compare(const std::pair<int, int>& a, const std::pair<int, int>& b) {
-	return (a.first < b.first);
-}
 
 void PmergeMe::sortVector() {
 	std::vector<std::pair<int, int> > v;
@@ -49,12 +46,29 @@ void PmergeMe::sortVector() {
 		if (chain.first < chain.second) std::swap(chain.first, chain.second);
 		v.push_back(chain);
 	}
-	std::sort(v.begin(), v.end(), compare);
+	recursiveInsertSortVector(v, v.size());
+	std::vector<int> main_chain, sub_chain;
+	for (unsigned int i=0; i<v.size(); i++) {
+		main_chain.push_back(v[i].first);
+		sub_chain.push_back(v[i].second);
+	}
+	fordJohnsonSortVector(main_chain, sub_chain);
+}
 
-	// for (unsigned int i=0; i<v.size(); i++) {
-	// 	std::cout << v[i].first << " " << v[i].second << " ";
-	// }
-	// std::cout << "\n";
+void fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
+	
+}
+
+void PmergeMe::recursiveInsertSortVector(std::vector<std::pair<int, int> >& container, int size) {
+	if (size == 1) return;
+	recursiveInsertSortVector(container, size - 1);
+	std::pair<int, int> last = container[size - 1];
+	int j = size - 2;
+	while (j >= 0 && container[j].first > last.first) {
+		container[j + 1] = container[j];
+		j = j - 1;
+	}
+	container[j+1] = last;
 }
 
 void PmergeMe::sortDeque() {
@@ -67,10 +81,27 @@ void PmergeMe::sortDeque() {
 		if (chain.first < chain.second) std::swap(chain.first, chain.second);
 		dq.push_back(chain);
 	}
-	std::sort(dq.begin(), dq.end(), compare);
-	// for (unsigned int i=0; i<dq.size(); i++) {
-	// 	std::cout << dq[i].first << " " << dq[i].second << " ";
-	// }
-	// std::cout << "\n";
+	recursiveInsertSortDeque(dq, dq.size());
+	std::deque<int> main_chain, sub_chain;
+	for (unsigned int i=0; i<dq.size(); i++) {
+		main_chain.push_back(dq[i].first);
+		sub_chain.push_back(dq[i].second);
+	}
+	fordJohnsonSortDeque(main_chain, sub_chain);
+}
 
+void PmergeMe::recursiveInsertSortDeque(std::deque<std::pair<int, int> >& container, int size) {
+	if (size == 1) return;
+	recursiveInsertSortDeque(container, size - 1);
+	std::pair<int, int> last = container[size - 1];
+	int j = size - 2;
+	while (j >= 0 && container[j].first > last.first) {
+		container[j + 1] = container[j];
+		j = j - 1;
+	}
+	container[j+1] = last;
+}
+
+void fordJohnsonSortDeque(std::deque<int>& mainChain, std::deque<int>&subChain) {
+	
 }
