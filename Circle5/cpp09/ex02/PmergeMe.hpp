@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/09 16:55:29 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 17:02:56 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class PmergeMe {
 		static PmergeMe* _ptr;
 		std::vector<int> _before;
 		std::vector<int> _after;
+		std::vector<int> _jacobsthal_numbers;
 		std::pair<int,int> _v_time;
 		std::pair<int,int> _dq_time;
 		PmergeMe(void);
