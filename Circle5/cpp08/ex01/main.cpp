@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:41:40 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 14:27:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 14:54:57 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,13 @@ int main() {
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		sp.addNumber(-2);
+		sp.addNumber(-1);
+		// sp.addNumber(INT32_MAX);
+		// sp.addNumber(INT32_MIN);
 
 		std::vector<int> test;
-		for (int i=10; i<=200; i+=10) test.push_back(i);
+		for (int i=30; i<=200; i+=10) test.push_back(i);
 		sp.addNumbers<std::vector<int> >(test.begin(), test.end());
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
