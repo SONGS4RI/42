@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 20:02:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 16:55:29 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ class PmergeMe {
 		PmergeMe(char** argv);
 		PmergeMe(const PmergeMe& obj);
 		PmergeMe& operator=(const PmergeMe& obj);
-		static bool compare(const std::pair<int, int>& a, const std::pair<int, int>& b);
 	public:
 		~PmergeMe(void);
 		static PmergeMe* getPmergeMe(char** argv);
+
 		void sortVector(void);
+		void recursiveInsertSortVector(std::vector<std::pair<int, int> >& container, int size);
+		void fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>& subChain);
+
 		void sortDeque(void);
-		template <typename T>
-		void fordJohnsonSort(T& mainChain, T&subChain) {
-			(void)mainChain;
-			(void)subChain;
-		};
+		void recursiveInsertSortDeque(std::deque<std::pair<int, int> >& container, int size);
+		void fordJohnsonSortDeque(std::deque<int>& mainChain, std::deque<int>& subChain);
 };
 
 #endif
