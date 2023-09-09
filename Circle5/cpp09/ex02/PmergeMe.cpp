@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/09 16:56:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 17:29:37 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,18 @@ void PmergeMe::recursiveInsertSortDeque(std::deque<std::pair<int, int> >& contai
 
 void fordJohnsonSortDeque(std::deque<int>& mainChain, std::deque<int>&subChain) {
 	
+}
+
+const std::vector<int>& PmergeMe::getJacobsthalNumbers(int size) {
+	if (_jacobsthal_numbers.size() != 0) {
+		return (_jacobsthal_numbers);
+	}
+	std::vector<int> jacob(2, 0);
+	jacob[1] = 1;
+	int idx = 2;
+	do {
+		jacob.push_back(jacob[idx-1] + 2*jacob[idx-2]);
+		idx++;
+	} while (jacob[idx-1] + 2*jacob[idx-2] < size);
+
 }
