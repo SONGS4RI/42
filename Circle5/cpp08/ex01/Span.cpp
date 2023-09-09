@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:58:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 14:18:04 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/09 14:51:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ unsigned int Span::shortestSpan(void) {
 	unsigned int res = longestSpan();
 	std::vector<int>::iterator iter = _v.begin() + 1;
 	for (; iter != _v.end(); iter++) {
-		res = std::min(res, static_cast<unsigned int>(*iter - *(iter - 1)));
+		res = std::min(res, static_cast<unsigned int>(*iter) - *(iter - 1));
 	}
 	return (res);
 }
@@ -51,5 +51,5 @@ unsigned int Span::shortestSpan(void) {
 unsigned int Span::longestSpan(void) {
 	if (_v.size() <= 1) throw std::exception();
 	std::sort(_v.begin(), _v.end());
-	return (_v.back() - _v.front());
+	return (static_cast<unsigned int>(_v.back()) - _v.front());
 }
