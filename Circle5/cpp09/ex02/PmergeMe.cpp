@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/11 20:58:19 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/11 21:01:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,7 @@ void PmergeMe::sortVector() {
 	for (unsigned int i=0; i<chains.size(); i++) {
 		main_chain.push_back(chains[i].first);
 		sub_chain.push_back(chains[i].second);
-		// std::cout << "[" << chains[i].first << " " << chains[i].first << "] ";
 	}
-	// std::cout << "\n";
 	// fordJohnsonSortVector(main_chain, sub_chain);
 }
 
@@ -87,14 +85,12 @@ void PmergeMe::sortList(void) {
 		chains.push_back(chain);
 	}
 	recursiveInsertSortList(chains, chains.size());
-	// std::list<int> main_chain, sub_chain;
-	// std::list<std::pair<int, int> >::iterator iter = chains.begin();
-	// for (; iter!= chains.end(); iter++) {
-	// 	main_chain.push_back(iter->first);
-	// 	sub_chain.push_back(iter->second);
-	// 	// std::cout << "[" << iter->first << " " << iter->second << "] ";
-	// }
-	// std::cout << "\n";
+	std::list<int> main_chain, sub_chain;
+	std::list<std::pair<int, int> >::iterator iter = chains.begin();
+	for (; iter!= chains.end(); iter++) {
+		main_chain.push_back(iter->first);
+		sub_chain.push_back(iter->second);
+	}
 }
 
 void PmergeMe::recursiveInsertSortList(std::list<std::pair<int, int> >& container, int size) {
