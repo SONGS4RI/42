@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/11 20:42:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 13:47:31 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class PmergeMe {
 		
 		void sortVector(void);
 		void recursiveInsertSortVector(std::vector<std::pair<int, int> >& container, int size);
-		// void fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>& subChain);
+		void fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>& subChain);
 
 		void sortList(void);
 		void recursiveInsertSortList(std::list<std::pair<int, int> >& container, int size);
