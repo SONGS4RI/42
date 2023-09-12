@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/11 21:01:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/12 13:48:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void PmergeMe::sortVector() {
 		main_chain.push_back(chains[i].first);
 		sub_chain.push_back(chains[i].second);
 	}
-	// fordJohnsonSortVector(main_chain, sub_chain);
+	fordJohnsonSortVector(main_chain, sub_chain);
 }
 
 void PmergeMe::recursiveInsertSortVector(std::vector<std::pair<int, int> >& container, int size) {
@@ -70,9 +70,11 @@ void PmergeMe::recursiveInsertSortVector(std::vector<std::pair<int, int> >& cont
 	container[j+1] = last;
 }
 
-// void PmergeMe::fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
-	
-// }
+void PmergeMe::fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
+	for (unsigned int i=0; i<_jacobsthal_idx.size(); i++) {
+		
+	}
+}
 
 void PmergeMe::sortList(void) {
 	std::list<std::pair<int, int> > chains;
