@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <cmath>
 using namespace std;
 
 int n, m, answer, safe_begin = -3;
@@ -11,19 +10,18 @@ void spreadViruse(queue<pair<int,int> > virus, vector<vector<int> > board) {
 	int safe_cnt = safe_begin;
 	while (!virus.empty()) {
 		pair<int ,int> cur = virus.front(); virus.pop();
-		if (safe_cnt <= answer) return ;
 		for (int dir=0; dir<4; dir++) {
 			int nx = cur.first + dx[dir];
 			int ny = cur.second + dy[dir];
 			if (nx<0 || ny<0 || nx >=n || ny>=m) continue;
 			if (board[nx][ny]) continue;
-			safe_cnt--;
+			if (--safe_cnt <= answer) return ;
 			board[nx][ny] = 2;
 			virus.push({nx, ny});
 		}
 	}
 
-	answer = max(answer, safe_cnt);
+	answer = safe_cnt;
 }
 
 void setWall(int cnt, int x, int y, queue<pair<int,int> >& virus, vector<vector<int> >& board) {
