@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:58:28 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/09 14:51:14 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/18 16:57:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ Span& Span::operator=(const Span& obj) {
 	return (*this);
 }
 
-Span::~Span() {
-
-}
+Span::~Span() {}
 
 void Span::addNumber(int val) {
 	if (_v.size() == _n) throw std::exception();
