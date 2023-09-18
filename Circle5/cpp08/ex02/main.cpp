@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:41:40 by jahlee            #+#    #+#             */
-/*   Updated: 2023/08/29 15:06:53 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/18 17:12:09 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,26 @@ int main() {
 			++it;
 		}
 		std::list<int> s(list);
+	}
+	{
+		std::cout << "====================test 3====================" << std::endl;
+		MutantStack<int> mstack1;// 3 2 1
+		MutantStack<int> mstack2;// 1 2 3
+		mstack1.push(1);
+		mstack1.push(2);
+		mstack1.push(3);
+		mstack2.push(3);
+		mstack2.push(2);
+		mstack2.push(1);
+		for (MutantStack<int>::iterator iter = mstack2.begin(); iter != mstack2.end(); iter++) {
+			std::cout << *iter << " ";
+		}
+		std::cout << "\n";
+		mstack2 = mstack1;
+		for (MutantStack<int>::iterator iter = mstack2.begin(); iter != mstack2.end(); iter++) {
+			std::cout << *iter << " ";
+		}
+		std::cout << "\n";
 	}
 	return (0);
 }
