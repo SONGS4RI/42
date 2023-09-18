@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 18:01:18 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/16 17:28:08 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/09/18 17:10:24 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@ class MutantStack : public std::stack<T> {
 		MutantStack(const MutantStack& obj) {*this = obj;};
 		MutantStack& operator=(const MutantStack& obj) {
 			if (this != &obj) {
-				while (!obj.empty()) {
-					obj.pop();
-				}
-				for (MutantStack::iterator iter = obj.begin(); iter != obj.end(); iter++) {
-					this->push(*iter);
-				}
+				this->c = obj.c;
 			}
 			return (*this);
 		};
