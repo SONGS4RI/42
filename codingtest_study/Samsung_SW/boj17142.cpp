@@ -11,51 +11,40 @@ vector<pair<int, int>> virus;
 vector<int> idxs(10);
 
 
-void spread(vector<vector<int>>& board) {
+void spread(vector<vector<int>>& board) {// bfs
 	deque<pair<int, int>> dq;
 	for (auto& r : vis) fill(r.begin(), r.end(), -1);
 	for (int i=0; i<M; i++) {
 		dq.push_back(virus[idxs[i]]);
 		vis[virus[idxs[i]].first][virus[idxs[i]].second] = 0;
 	}
-	int cnt = 0;
 	while (!dq.empty()) {
 		pair<int, int> cur = dq.front();
 		dq.pop_front();
-		// if (board[cur.first][cur.second] == 2 && vis[cur.first][cur.second]) {
-		// 	vis[cur.first][cur.second]--;
-		// }
-		if (board[cur.first][cur.second] == 0) cnt++;
 		for (int dir=0; dir<4; dir++) {
 			int nx = cur.first + dx[dir], ny = cur.second + dy[dir];
 			if (nx<0 || ny<0 || nx>=N || ny>=N) continue;
 			if (vis[nx][ny] >= 0 || board[nx][ny] == 1) continue;
 			vis[nx][ny] = vis[cur.first][cur.second] + 1;
-			if (board[nx][ny] == 2) {
-				dq.push_front({nx, ny});
-			} else {
-				dq.push_back({nx, ny});
-			}
+			dq.push_back({nx, ny});
 		}
 	}
 	int day = 0;
-	for (auto& r : vis) day = max(day, *max_element(r.begin(), r.end()));
-	// if (day == 5) {
-	// 	cout << "================\n";
-	// 	for (int i=0; i<N; i++) {
-	// 		for (int j=0; j<N; j++) cout << vis[i][j] << " ";
-	// 		cout << "\n";
-	// 	}
-	// }
 	for (int i=0; i<N; i++) {
 		for (int j=0; j<N; j++) {
-			if (vis[i][j] == -1 && board[i][j] == 0) return ;
+			if (vis[i][j] == -1 && board[i][j] == 0) return;// 빈공간인데 방문 못했다면
+			if (board[i][j] == 2 && vis[i][j]) continue;// 비활성화 바이러스이면
+            /*
+            	비활성화 바이러스일때 넘기는 이유는 마지막 이동한 부분이 비활성화 바이러스인경우를 제외해주려했기 때문이다.
+            */
+			day = max(day, vis[i][j]);
 		}
 	}
 	answer = min(answer, day);
 }
 
 void dfs(int cnt, int idx, vector<vector<int>>& board) {
+	// 활성화 바이러스 골라주기
 	if (cnt == M) {
 		spread(board);
 		return ;
