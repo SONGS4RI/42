@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+  <div>
+    <h1>Post</h1>
+      <form action="/new" method="post">
+        <div class="form-group">
+          <label for="name">제목</label>
+          <input type="text" id="name" name="name" placeholder="제목을
+  입력하세요">
+        </div>
+        <div class="form-group">
+          <label for="text">내용</label>
+          <input type="text" id="text" name="text" placeholder="내용을
+  입력하세요">
+          <button type="submit">등록</button>
+        </div>
+      </form>
+  </div>
+</div> <!-- /container -->
+</body>
+<body>
+<div class="container">
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th><h3>#</h3></th>
+        <th><h3>제목</h3></th>
+        <th><h3>내용</h3></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td th:text="${post.name}"></td>
+        <td th:text="${post.text}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div> <!-- /container -->
+</body>
+</html>
