@@ -1,4 +1,4 @@
-package gg.onboarding03.entity;
+package gg.onboarding03.redis;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,3 +17,4 @@ public class AddressRedisEntity {
     private String street;
     private String zipCode;
 }
+

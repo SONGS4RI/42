@@ -1,4 +1,4 @@
-package gg.onboarding03.config;
+package gg.onboarding03.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
