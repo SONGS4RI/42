@@ -1,4 +1,4 @@
-package entity;
+package gg.onboarding03.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

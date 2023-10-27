@@ -1,4 +1,4 @@
-package entity;
+package gg.onboarding03.entity;
 
 public enum DeliveryStatus {
     PREPARING,

@@ -1,4 +1,4 @@
-package entity;
+package gg.onboarding03.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@Table(name = "MEMBER")
 public class MemberEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,9 +17,6 @@ public class MemberEntity {
     @Embedded
     private Address address;
 
-    @OneToMany
-    private List<OrdersEntity> orders = new ArrayList<OrdersEntity>();
-
-//    public Optional<OrdersEntity> addOrder() {
-//    }
+    @OneToMany(mappedBy = "member")
+    private List<OrderEntity> orders = new ArrayList<>();
 }

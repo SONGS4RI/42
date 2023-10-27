@@ -1,4 +1,4 @@
-package entity;
+package gg.onboarding03.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,18 +9,19 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class OrdersEntity extends BaseEntity {
+@Table(name = "ORDERS")
+public class OrderEntity extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne//done
     @JoinColumn(name = "MEMBER_ID")
     private MemberEntity member;
 
-    @OneToMany
-    private List<OrderItemEntity> orderItem = new ArrayList<OrderItemEntity>();
+    @OneToMany(mappedBy = "order")//done
+    private List<OrderItemEntity> orderItem = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne//done
     @JoinColumn(name = "DELIVERY_ID")
     private DeliveryEntity delivery;
 
