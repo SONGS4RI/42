@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:31:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/01 15:05:48 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/12/22 19:16:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ const char* BitcoinExchange::InvalidDateException::what() const throw() {
 BitcoinExchange::BitcoinExchange() {
 	std::ifstream ifs("data.csv");
 
-	if (ifs.fail()) throw FileOpenException();
+	if (ifs.fail()) {
+		throw FileOpenException();
+	}
 	std::string input;
 	int year, month, day;
 	char delimeters[3];
 	double exchange_rate;
-	std::getline(ifs, input);// 첫줄 버림
+	std::getline(ifs, input);
 	while (std::getline(ifs, input)) {
 		std::istringstream iss(input);
 		iss >> year >> delimeters[0] >> month >> delimeters[1]
@@ -69,8 +71,7 @@ bool BitcoinExchange::checkVaildDate(const int& year, const int& month, const in
 	int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) leap_year = true;
 	if (month <= 0 || month > 12) return (false);
-	if ((day <= 0 || day > days[month]) &&
-		!(leap_year && month == 2 && day == 29)) return (false);
+	if ((day <= 0 || day > days[month]) && !(leap_year && month == 2 && day == 29)) return (false);
 	return (true);
 }
 
@@ -81,7 +82,7 @@ void BitcoinExchange::calculateInputs(const std::string& filename) {
 	int year, month, day, date;
 	char delimeters[3];
 	double value, res;
-	std::getline(ifs, input);// 첫줄 버림
+	std::getline(ifs, input);
 	while (std::getline(ifs, input)) {
 		std::istringstream iss(input);
 		iss >> year >> delimeters[0] >> month >> delimeters[1]
