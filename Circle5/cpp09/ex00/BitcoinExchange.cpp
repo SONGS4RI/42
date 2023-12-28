@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:31:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/12/22 19:16:21 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/12/28 16:11:10 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void BitcoinExchange::calculateInputs(const std::string& filename) {
 			continue;
 		}
 		if (value < 0.0 || value > 1000.0) {
-			std::cout << "Error: not a valid number" << std::endl;
+			std::cout << "Error: invalid number" << std::endl;
 			continue;
 		}
 		date = year*10000+month*100+day;
-		if (_data.find(date) != _data.end()) {
+		if (_data.find(date) != _data.end()) {// 데이터를 찾았다면
 			res = _data[date] * value;
-		} else {
+		} else { // 못찾았다면
 			std::map<int,double>::iterator iter = _data.begin();
 			for (; iter != _data.end(); iter++) {
 				if (iter->first > date) break ;
