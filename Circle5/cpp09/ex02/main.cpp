@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2023/09/11 20:53:12 by jahlee           ###   ########.fr       */
+/*   Updated: 2023/12/28 16:58:21 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,8 @@ int main(int argc, char** argv) {
 	}
 	try {
 		PmergeMe* ptr = PmergeMe::getPmergeMe(argv);
-		ptr->isValidElements();
 		ptr->sortVector();
 		ptr->sortList();
-		std::vector<int> test = ptr->getJacobsthalNumbers();
-		for (unsigned int i=0; i<test.size(); i++) {
-		std::cout << test[i] << " ";
-	}
-	std::cout << "\n";
 	} catch (const char* e) {
 		std::cout << e << std::endl;
 		delete PmergeMe::getPmergeMe(argv);
