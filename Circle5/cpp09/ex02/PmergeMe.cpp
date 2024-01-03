@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/03 20:57:00 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:28:01 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void PmergeMe::sortVector() {
 		chains.push_back(chain);
 	}
 	mergeInsertionSortVector(chains, 0, chains.size() - 1);
-	// std::vector<int> main_chain, sub_chain;
-	// for (unsigned int i=0; i<chains.size(); i++) {
-	// 	main_chain.push_back(chains[i].first);
-	// 	sub_chain.push_back(chains[i].second);
-	// }
-	// fordJohnsonSortVector(main_chain, sub_chain);
+	std::vector<int> main_chain, sub_chain;
+	for (unsigned int i=0; i<chains.size(); i++) {
+		main_chain.push_back(chains[i].first);
+		sub_chain.push_back(chains[i].second);
+	}
+	sortUsingJacobsthalNumberVector(main_chain, sub_chain);
 }
 
 void PmergeMe::mergeInsertionSortVector(std::vector<std::pair<int, int> >& container, int low, int high) {
@@ -87,12 +87,6 @@ void PmergeMe::mergeInsertionSortVector(std::vector<std::pair<int, int> >& conta
 	mergeInsertionSortVector(container, low, mid);
 	mergeInsertionSortVector(container, mid + 1, high);
 	mergeUsingInsertionVector(container, low, high);
-	if ((int)container.size() == high - low) {
-		for (unsigned int i=0; i<container.size(); i++) {
-			std::cout << container[i].first << "(" << container[i].second << ") ";
-		}
-		std::cout << "\n";
-	}
 }
 
 void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& container, int low, int high) {
@@ -100,18 +94,22 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
     int leftSize = mid - low + 1, rightSize = high - mid;
 	std::vector<std::pair<int, int> >::iterator iterLow = container.begin() + low;
 
-    std::vector<std::pair<int, int> > leftArr(container.begin(), container.begin() + mid);
-	std::vector<std::pair<int, int> > rightArr(container.begin() + mid + 1, container.begin() + high);
+    std::vector<std::pair<int, int> > leftArr, rightArr;
+	for (int i=0; i<leftSize; i++) {
+		leftArr.push_back(container[low + i]);
+	}
+	for (int i=0; i<rightSize; i++) {
+		rightArr.push_back(container[mid + 1 + i]);
+	}
     //low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
     int i = 0, j = 0;
-    while (i < leftSize && j < rightSize) {
+    while (i < leftSize && j < rightSize) {// 여기서 에러 남
         if (leftArr[i] <= rightArr[j]) {
             *(iterLow++) = leftArr[i++];
         } else {
             *(iterLow++) = rightArr[j++];
         }
     }
-
     while (i < leftSize) {
         *iterLow = leftArr[i++];
 		iterLow++;
@@ -122,11 +120,9 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
     }
 }
 
-// void PmergeMe::fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
-// 	for (unsigned int i=0; i<_jacobsthal_idx.size(); i++) {
-		
-// 	}
-// }
+void PmergeMe::sortUsingJacobsthalNumberVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
+	
+}
 
 void PmergeMe::sortList(void) {
 	std::list<std::pair<int, int> > chains;

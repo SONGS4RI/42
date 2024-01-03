@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:12 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/03 20:33:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:26:42 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ class PmergeMe {
 		void isValidElements(void);
 
 		void mergeUsingInsertionVector(std::vector<std::pair<int, int> >& container, int low, int high);
-		void fordJohnsonSortVector(std::vector<int>& mainChain, std::vector<int>& subChain);
+		void sortUsingJacobsthalNumberVector(std::vector<int>& mainChain, std::vector<int>& subChain);
 
 		void mergeSortList(std::list<std::pair<int, int> >& container, int size);
 		// void fordJohnsonSortList(std::list<int>& mainChain, std::list<int>& subChain);
