@@ -6,17 +6,18 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2023/12/28 18:44:05 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:57:00 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "PmergeMe.hpp"
 
-#define INVALID_INPUT "invalid input error"
+#define INVALID_INPUT "invalid input"
 
 PmergeMe* PmergeMe::_ptr;
 PmergeMe::~PmergeMe() {}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(char** argv) {
 	int idx = 0, num;
@@ -24,7 +25,6 @@ PmergeMe::PmergeMe(char** argv) {
 		num = std::atoi(argv[idx]);
 		_before.push_back(num);
 	}
-	isValidElements();
 	getJacobsthalNumbers();
 }
 
@@ -64,6 +64,7 @@ void PmergeMe::getJacobsthalNumbers() {
 void PmergeMe::sortVector() {
 	std::vector<std::pair<int, int> > chains;
 
+	isValidElements();
 	for (unsigned int i=0; i<_before.size(); i += 2) {
 		std::pair<int, int> chain(-1, -1);
 		chain.first = _before[i];
@@ -71,35 +72,44 @@ void PmergeMe::sortVector() {
 		if (chain.first < chain.second) std::swap(chain.first, chain.second);
 		chains.push_back(chain);
 	}
-	mergeSortVector(chains, 0, chains.size() - 1, 0);
-	std::vector<int> main_chain, sub_chain;
-	for (unsigned int i=0; i<chains.size(); i++) {
-		main_chain.push_back(chains[i].first);
-		sub_chain.push_back(chains[i].second);
-	}
+	mergeInsertionSortVector(chains, 0, chains.size() - 1);
+	// std::vector<int> main_chain, sub_chain;
+	// for (unsigned int i=0; i<chains.size(); i++) {
+	// 	main_chain.push_back(chains[i].first);
+	// 	sub_chain.push_back(chains[i].second);
+	// }
 	// fordJohnsonSortVector(main_chain, sub_chain);
 }
 
-void PmergeMe::mergeSortVector(std::vector<std::pair<int, int> >& container, int low, int high, int depth) {
-	
+void PmergeMe::mergeInsertionSortVector(std::vector<std::pair<int, int> >& container, int low, int high) {
+	int mid = (low + high) / 2;
+	if (low >= high) return ;
+	mergeInsertionSortVector(container, low, mid);
+	mergeInsertionSortVector(container, mid + 1, high);
+	mergeUsingInsertionVector(container, low, high);
+	if ((int)container.size() == high - low) {
+		for (unsigned int i=0; i<container.size(); i++) {
+			std::cout << container[i].first << "(" << container[i].second << ") ";
+		}
+		std::cout << "\n";
+	}
 }
 
-void PmergeMe::mergeVector(std::vector<std::pair<int, int> >& container, int low, int high) {
+void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& container, int low, int high) {
 	int mid = (low + high) / 2;
     int leftSize = mid - low + 1, rightSize = high - mid;
 	std::vector<std::pair<int, int> >::iterator iterLow = container.begin() + low;
 
-    std::vector<std::pair<int, int>> leftArr(iterLow, container.begin() + mid);
-	std::vector<std::pair<int, int>> rightArr(container.begin() + mid + 1, container.begin() + high);
+    std::vector<std::pair<int, int> > leftArr(container.begin(), container.begin() + mid);
+	std::vector<std::pair<int, int> > rightArr(container.begin() + mid + 1, container.begin() + high);
     //low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
     int i = 0, j = 0;
     while (i < leftSize && j < rightSize) {
         if (leftArr[i] <= rightArr[j]) {
-            *iterLow = leftArr[i++];
+            *(iterLow++) = leftArr[i++];
         } else {
-            *iterLow = rightArr[j++];
+            *(iterLow++) = rightArr[j++];
         }
-        iterLow++;
     }
 
     while (i < leftSize) {
@@ -128,7 +138,7 @@ void PmergeMe::sortList(void) {
 		if (chain.first < chain.second) std::swap(chain.first, chain.second);
 		chains.push_back(chain);
 	}
-	mergeSortList(chains, chains.size());
+	// mergeSortList(chains, chains.size());
 	std::list<int> main_chain, sub_chain;
 	std::list<std::pair<int, int> >::iterator iter = chains.begin();
 	for (; iter!= chains.end(); iter++) {
@@ -137,7 +147,7 @@ void PmergeMe::sortList(void) {
 	}
 }
 
-void PmergeMe::mergeSortList(std::list<std::pair<int, int> >& container, int size) {
+// void PmergeMe::mergeSortList(std::list<std::pair<int, int> >& container, int size) {
 	
-}
+// }
 
