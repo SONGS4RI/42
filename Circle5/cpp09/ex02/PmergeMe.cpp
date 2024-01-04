@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/03 21:28:01 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:28:39 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void PmergeMe::isValidElements(void) {
 }
 
 void PmergeMe::getJacobsthalNumbers() {
-	unsigned int size = _before.size();
+	unsigned int size = (_before.size() + 1) / 2;
 	_jacobsthal_idx.push_back(1);
 
 	std::vector<unsigned int> jacob(2, 1);
 	int idx = 2;
-	while (size > 2 && jacob[idx-1] + 2*jacob[idx-2] < size) {
+	while (jacob[idx-1] + 2*jacob[idx-2] < size) {
 		jacob.push_back(jacob[idx-1] + 2*jacob[idx-2]);
 		idx++;
 	}
@@ -56,7 +56,7 @@ void PmergeMe::getJacobsthalNumbers() {
 			_jacobsthal_idx.push_back(j);
 		}
 	}
-	for (unsigned int i=_before.size(); i>jacob.back(); i--) {
+	for (unsigned int i=size; i>jacob.back(); i--) {
 		_jacobsthal_idx.push_back(i);
 	}
 }
@@ -103,7 +103,7 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
 	}
     //low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
     int i = 0, j = 0;
-    while (i < leftSize && j < rightSize) {// 여기서 에러 남
+    while (i < leftSize && j < rightSize) {
         if (leftArr[i] <= rightArr[j]) {
             *(iterLow++) = leftArr[i++];
         } else {
@@ -121,7 +121,12 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
 }
 
 void PmergeMe::sortUsingJacobsthalNumberVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
-	
+	std::vector<int> result(mainChain);
+	subChain.empty();
+	for (unsigned int i=0; i<_jacobsthal_idx.size(); i++) {
+		// std::vector<int>::iterator iter = result.begin() + _jacobsthal_idx[i] - 1;
+		
+	}
 }
 
 void PmergeMe::sortList(void) {
