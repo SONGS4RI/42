@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/04 21:28:39 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/05 23:24:06 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
 	for (int i=0; i<rightSize; i++) {
 		rightArr.push_back(container[mid + 1 + i]);
 	}
-    //low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
+    // low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
     int i = 0, j = 0;
     while (i < leftSize && j < rightSize) {
         if (leftArr[i] <= rightArr[j]) {
