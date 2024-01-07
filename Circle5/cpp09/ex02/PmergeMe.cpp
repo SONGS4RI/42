@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/05 23:24:06 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/07 20:01:35 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void PmergeMe::getJacobsthalNumbers() {
 }
 
 void PmergeMe::sortVector() {
+	clock_t startTime = clock();
 	std::vector<std::pair<int, int> > chains;
 
 	isValidElements();
@@ -78,7 +79,13 @@ void PmergeMe::sortVector() {
 		main_chain.push_back(chains[i].first);
 		sub_chain.push_back(chains[i].second);
 	}
-	sortUsingJacobsthalNumberVector(main_chain, sub_chain);
+	main_chain.insert(main_chain.begin(), sub_chain[0]);
+	for (unsigned int i=1; i<_jacobsthal_idx.size(); i++) {
+		sortUsingJacobsthalNumberVector(0, main_chain.size() - 1, sub_chain[_jacobsthal_idx[i] - 1], main_chain);
+	}
+	_after_vector = main_chain;
+	// _v_time = (double)(clock() - startTime) / CLOCKS_PER_SEC;
+	_v_time = (double)(clock() - startTime) / CLOCKS_PER_SEC * 1000000;
 }
 
 void PmergeMe::mergeInsertionSortVector(std::vector<std::pair<int, int> >& container, int low, int high) {
@@ -120,12 +127,17 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
     }
 }
 
-void PmergeMe::sortUsingJacobsthalNumberVector(std::vector<int>& mainChain, std::vector<int>&subChain) {
-	std::vector<int> result(mainChain);
-	subChain.empty();
-	for (unsigned int i=0; i<_jacobsthal_idx.size(); i++) {
-		// std::vector<int>::iterator iter = result.begin() + _jacobsthal_idx[i] - 1;
-		
+void PmergeMe::sortUsingJacobsthalNumberVector(int low, int high, int num, std::vector<int>& result) {
+	if (low >= high) {
+		if (*(result.begin() + low) < num) low++;
+		result.insert(result.begin() + low, num);
+		return ;
+	}
+	int mid = (low + high) / 2;
+	if (num < *(result.begin() + mid)) {
+		sortUsingJacobsthalNumberVector(low, mid - 1, num, result);
+	} else {
+		sortUsingJacobsthalNumberVector(mid + 1, high, num, result);
 	}
 }
 

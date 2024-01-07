@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:12 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/03 21:26:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/07 19:53:52 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 #include <vector>
 #include <list>
-#include <cstdlib>
+// #include <cstdlib>
+#include <ctime>
 
 class PmergeMe {
 	private:
 		static PmergeMe* _ptr;
 		std::vector<int> _before;
-		std::vector<int> _after;
 		std::vector<int> _jacobsthal_idx;
-		std::pair<int,int> _v_time;
-		std::pair<int,int> _dq_time;
 		PmergeMe(void);
 		PmergeMe(char** argv);
 		PmergeMe(const PmergeMe& obj);
@@ -34,12 +32,16 @@ class PmergeMe {
 		void isValidElements(void);
 
 		void mergeUsingInsertionVector(std::vector<std::pair<int, int> >& container, int low, int high);
-		void sortUsingJacobsthalNumberVector(std::vector<int>& mainChain, std::vector<int>& subChain);
+		void sortUsingJacobsthalNumberVector(int low, int high, int num, std::vector<int>& result);
 
 		void mergeSortList(std::list<std::pair<int, int> >& container, int size);
 		// void fordJohnsonSortList(std::list<int>& mainChain, std::list<int>& subChain);
 	public:
 		~PmergeMe(void);
+		std::vector<int> _after_vector;
+		std::vector<int> _after_list;
+		double _v_time;
+		double _list_time;
 		void mergeInsertionSortVector(std::vector<std::pair<int, int> >& container, int low, int high);
 		static PmergeMe* getPmergeMe(char** argv);
 		void sortVector(void);
