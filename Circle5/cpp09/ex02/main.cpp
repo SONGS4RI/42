@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/07 19:56:59 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/08 20:47:13 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int main(int argc, char** argv) {
 	try {
 		PmergeMe* ptr = PmergeMe::getPmergeMe(argv);
 		ptr->sortVector();
-		// ptr->sortList();
-		
-		for (unsigned int i=0; i<ptr->_after_vector.size(); i++) {
-			std::cout << ptr->_after_vector[i] << " ";
-		}
-		std::cout << "\n";
-		std::cout << "Time to process a range of " << ptr->_after_vector.size()
-		<< " elements with std::vector : " << ptr->_v_time << " us";
+		ptr->sortList();
+		// ptr->checkResult();
+		// for (unsigned int i=0; i<ptr->_after_vector.size(); i++) {
+		// 	std::cout << ptr->_after_vector[i] << " ";
+		// }
+		// std::cout << "\n";
+		// std::cout << std::fixed << "Time to process a range of " << ptr->_after_vector.size()
+		// << " elements with std::vector : " << ptr->_v_time << " us";
 	} catch (const char* e) {
 		std::cout << e << std::endl;
 		delete PmergeMe::getPmergeMe(argv);
