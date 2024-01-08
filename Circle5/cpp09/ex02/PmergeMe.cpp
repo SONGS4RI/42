@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/07 20:01:35 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:20:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ void PmergeMe::getJacobsthalNumbers() {
 	}
 }
 
+void PmergeMe::checkResult() {
+	if (_after_vector.size() != _after_list.size()) {
+		std::cout << "wrong sorting\n";
+		return ;
+	}
+	for (unsigned int i=0; i<_after_vector.size(); i++) {
+		if (_after_list[i] != _after_list[i]) {
+			std::cout << "wrong sorting\n";
+			return ;
+		}
+	}
+}
+
 void PmergeMe::sortVector() {
 	clock_t startTime = clock();
 	std::vector<std::pair<int, int> > chains;
@@ -81,11 +94,17 @@ void PmergeMe::sortVector() {
 	}
 	main_chain.insert(main_chain.begin(), sub_chain[0]);
 	for (unsigned int i=1; i<_jacobsthal_idx.size(); i++) {
-		sortUsingJacobsthalNumberVector(0, main_chain.size() - 1, sub_chain[_jacobsthal_idx[i] - 1], main_chain);
+		int range = 0;
+		while (std::pow(2, range) <= _jacobsthal_idx[i]) {
+			range++;
+		}
+		sortUsingJacobsthalNumberVector(0, std::pow(2, range), sub_chain[_jacobsthal_idx[i] - 1], main_chain);
+	}
+	if (main_chain[0] == -1) {
+		main_chain.erase(main_chain.begin());
 	}
 	_after_vector = main_chain;
-	// _v_time = (double)(clock() - startTime) / CLOCKS_PER_SEC;
-	_v_time = (double)(clock() - startTime) / CLOCKS_PER_SEC * 1000000;
+	_v_time = (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
 void PmergeMe::mergeInsertionSortVector(std::vector<std::pair<int, int> >& container, int low, int high) {
@@ -118,12 +137,10 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
         }
     }
     while (i < leftSize) {
-        *iterLow = leftArr[i++];
-		iterLow++;
+        *(iterLow++) = leftArr[i++];
     }
     while (j < rightSize) {
-        *iterLow = rightArr[j++];
-		iterLow++;
+        *(iterLow++) = rightArr[j++];
     }
 }
 
@@ -151,16 +168,57 @@ void PmergeMe::sortList(void) {
 		if (chain.first < chain.second) std::swap(chain.first, chain.second);
 		chains.push_back(chain);
 	}
-	// mergeSortList(chains, chains.size());
-	std::list<int> main_chain, sub_chain;
+	mergeInsertionSortList(chains, 0, chains.size() - 1);
 	std::list<std::pair<int, int> >::iterator iter = chains.begin();
-	for (; iter!= chains.end(); iter++) {
-		main_chain.push_back(iter->first);
-		sub_chain.push_back(iter->second);
+	while (iter != chains.end()) {
+		std::cout << iter->first << "(" << iter->second << "), ";
+		iter++;
 	}
+	std::cout << "\n";
+	// std::list<int> main_chain, sub_chain;
+	// std::list<std::pair<int, int> >::iterator iter = chains.begin();
+	// for (; iter!= chains.end(); iter++) {
+	// 	main_chain.push_back(iter->first);
+	// 	sub_chain.push_back(iter->second);
+	// }
 }
 
-// void PmergeMe::mergeSortList(std::list<std::pair<int, int> >& container, int size) {
-	
-// }
+void PmergeMe::mergeInsertionSortList(std::list<std::pair<int, int> >& container, int low, int high) {
+	int mid = (low + high) / 2;
+	if (low >= high) return ;
+	mergeInsertionSortList(container, low, mid);
+	mergeInsertionSortList(container, mid + 1, high);
+	mergeUsingInsertionList(container, low, high);
+}
 
+void PmergeMe::mergeUsingInsertionList(std::list<std::pair<int, int> >& container, int low, int high) {
+	int mid = (low + high) / 2;
+    std::list<std::pair<int, int> > leftArr, rightArr;
+	std::list<std::pair<int, int> >::iterator iter = container.begin();
+	for (int i=0; i<=high; i++, iter++) {
+		if (low <= i && i <= mid) {
+			leftArr.push_back(*iter);
+		} else if (mid < i) {
+			rightArr.push_back(*iter);
+		}
+	}
+	iter = container.begin();
+	for (int i=0; i<low; i++) {
+		iter++;
+	}
+    // low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
+	std::list<std::pair<int, int> >::iterator leftIter = leftArr.begin(), rightIter = rightArr.begin();
+    while (leftIter != leftArr.end() && rightIter != rightArr.end()) {
+        if (*leftIter <= *rightIter) {
+            *(iter++) = *(leftIter++);
+        } else {
+            *(iter++) = *(rightIter++);
+        }
+    }
+    while (leftIter != leftArr.end()) {
+        *(iter++) = *(leftIter++);
+    }
+    while (rightIter != rightArr.end()) {
+        *(iter++) = *(rightIter++);
+    }
+}
