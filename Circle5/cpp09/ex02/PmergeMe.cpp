@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/09 21:16:42 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/10 20:39:41 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void PmergeMe::sortVector() {
 		sub_chain.push_back(chains[i].second);
 	}
 	main_chain.insert(main_chain.begin(), sub_chain[0]);
+
+	int jacobNum=0, range = 2;
 	for (unsigned int i=1; i<_jacob_vector.size(); i++) {
-		int range = 1;
-		while (range <= _jacob_vector[i]) {
-			range *= 2;
+		if (jacobNum < _jacob_vector[i] - 1) {
+			jacobNum = _jacob_vector[i] - 1;
+			range = range * 2 > (int)main_chain.size() ? main_chain.size() : range * 2;
 		}
 		sortUsingJacobsthalNumberVector(0, range, sub_chain[_jacob_vector[i] - 1], main_chain);
 	}
@@ -153,8 +155,8 @@ void PmergeMe::sortUsingJacobsthalNumberVector(int low, int high, int num, std::
 		result.insert(result.begin() + low, num);
 		return ;
 	}
-	int mid = (low + high) / 2;// 1 1 2
-	if (num < *(result.begin() + mid)) {// 1 0
+	int mid = (low + high) / 2;
+	if (num < *(result.begin() + mid)) {
 		sortUsingJacobsthalNumberVector(low, mid - 1, num, result);
 	} else {
 		sortUsingJacobsthalNumberVector(mid + 1, high, num, result);
@@ -182,25 +184,17 @@ void PmergeMe::sortList(void) {
 	}
 	main_chain.insert(main_chain.begin(), sub_chain.front());
 	std::list<int>::iterator jacob = ++_jacob_list.begin();
-	std::cout << "list\n";//////////////////////
-	int range = 0;
+	int jacobNum = 0, range = 2;
 	for (; jacob != _jacob_list.end(); jacob++) {
-		range = std::max(range, *jacob - 1);
-		// while (range <= *jacob) {
-		// 	range *= 2;
-		// }
+		if (jacobNum < *jacob - 1) {
+			jacobNum = *jacob - 1;
+			range = range * 2 > (int)main_chain.size() ? main_chain.size() : range * 2;
+		}
 		std::list<int>::iterator subChainIter = sub_chain.begin();
 		for (int i=0; i < *jacob - 1; i++) {
 			subChainIter++;
 		}
 		sortUsingJacobsthalNumberList(0, range, *subChainIter, main_chain);
-		/////////////////////////////////////////
-		std::list<int>::iterator tmp = main_chain.begin();
-		std::cout << *subChainIter << ": " << range << ": ";
-		for (; tmp != main_chain.end(); tmp++) {
-			std::cout << *tmp << " ";
-		}
-		std::cout << "\n";////////////////////////////
 	}
 	if (main_chain.front() == -1) {
 		main_chain.pop_front();
@@ -215,8 +209,8 @@ void PmergeMe::getJacobsthalNumbersList() {
 
 	std::list<int> jacob(2, 1);
 	std::list<int>::iterator iter = jacob.begin();
-	while (2*(*(iter++)) + *(iter--) < size) {
-		jacob.push_back(2*(*iter++) + *(iter));
+	while (2 * (*(iter++)) + *(iter--) < size) {
+		jacob.push_back(2 * (*iter++) + *(iter));
 	}
 	iter = jacob.begin()++;
 	iter++;
