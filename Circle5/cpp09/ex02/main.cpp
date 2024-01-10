@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 18:56:33 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/09 20:38:52 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/10 20:39:51 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,6 @@ int main(int argc, char** argv) {
 		iter = ptr->_after_vector.begin();
 		for (; iter != ptr->_after_vector.end(); iter++) {
 			std::cout << " " << *iter;
-		}
-		std::cout << "\n";
-		std::cout << "After:";
-		std::list<int>::iterator l = ptr->_after_list.begin();
-		for (; l != ptr->_after_list.end(); l++) {
-			std::cout << " " << *l;
 		}
 		std::cout << "\n";
 		std::cout << std::fixed << "Time to process a range of " << ptr->_after_vector.size()
