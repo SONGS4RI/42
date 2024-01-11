@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 16:25:08 by jahlee            #+#    #+#             */
-/*   Updated: 2024/01/10 20:39:41 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/11 19:46:05 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void PmergeMe::sortVector() {
 	for (unsigned int i=1; i<_jacob_vector.size(); i++) {
 		if (jacobNum < _jacob_vector[i] - 1) {
 			jacobNum = _jacob_vector[i] - 1;
-			range = range * 2 > (int)main_chain.size() ? main_chain.size() : range * 2;
+			range = range * 2 >= static_cast<int>(main_chain.size()) ? main_chain.size() - 1 : range * 2;
 		}
 		sortUsingJacobsthalNumberVector(0, range, sub_chain[_jacob_vector[i] - 1], main_chain);
 	}
@@ -98,7 +98,7 @@ void PmergeMe::getJacobsthalNumbersVector() {
 
 	std::vector<unsigned int> jacob(2, 1);
 	int idx = 2;
-	while (jacob[idx-1] + 2*jacob[idx-2] < size) {
+	while (jacob[idx-1] + 2 * jacob[idx-2] < size) {
 		jacob.push_back(jacob[idx-1] + 2*jacob[idx-2]);
 		idx++;
 	}
@@ -132,7 +132,6 @@ void PmergeMe::mergeUsingInsertionVector(std::vector<std::pair<int, int> >& cont
 	for (int i=0; i<rightSize; i++) {
 		rightArr.push_back(container[mid + 1 + i]);
 	}
-    // low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
     int i = 0, j = 0;
     while (i < leftSize && j < rightSize) {
         if (leftArr[i] <= rightArr[j]) {
@@ -166,6 +165,7 @@ void PmergeMe::sortUsingJacobsthalNumberVector(int low, int high, int num, std::
 void PmergeMe::sortList(void) {
 	clock_t startTime = clock();
 	std::list<std::pair<int, int> > chains;
+	isValidElements();
 	getJacobsthalNumbersList();
 
 	for (unsigned int i=0; i<_before.size(); i += 2) {
@@ -188,7 +188,7 @@ void PmergeMe::sortList(void) {
 	for (; jacob != _jacob_list.end(); jacob++) {
 		if (jacobNum < *jacob - 1) {
 			jacobNum = *jacob - 1;
-			range = range * 2 > (int)main_chain.size() ? main_chain.size() : range * 2;
+			range = range * 2 >= (int)main_chain.size() ? main_chain.size() - 1 : range * 2;
 		}
 		std::list<int>::iterator subChainIter = sub_chain.begin();
 		for (int i=0; i < *jacob - 1; i++) {
@@ -249,7 +249,6 @@ void PmergeMe::mergeUsingInsertionList(std::list<std::pair<int, int> >& containe
 	for (int i=0; i<low; i++) {
 		iter++;
 	}
-    // low ~ mid 까지의 배열과 mid + 1~ high 까지의 배열을 차례로 조합해서 정렬한다.
 	std::list<std::pair<int, int> >::iterator leftIter = leftArr.begin(), rightIter = rightArr.begin();
     while (leftIter != leftArr.end() && rightIter != rightArr.end()) {
         if (*leftIter <= *rightIter) {
