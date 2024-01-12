@@ -6,7 +6,7 @@
 #    By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/11 16:55:26 by jahlee            #+#    #+#              #
-#    Updated: 2023/09/01 17:08:46 by jahlee           ###   ########.fr        #
+#    Updated: 2024/01/10 20:41:30 by jahlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= PmergeMe
 
 # compile option
 CXX			= @c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g3
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98# -fsanitize=address -g3
 
 # remove option
 RM			= @rm
