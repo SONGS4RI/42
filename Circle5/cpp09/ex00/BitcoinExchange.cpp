@@ -6,7 +6,7 @@
 /*   By: jahlee <jahlee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 20:31:12 by jahlee            #+#    #+#             */
-/*   Updated: 2023/12/28 16:11:10 by jahlee           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:13:14 by jahlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ void BitcoinExchange::calculateInputs(const std::string& filename) {
 			std::map<int,double>::iterator iter = _data.begin();
 			for (; iter != _data.end(); iter++) {
 				if (iter->first > date) break ;
+			}
+			if (iter == _data.begin()) {
+				std::cout << "Error: data not found" << " => " << input << std::endl;
+				continue;
 			}
 			res = (--iter)->second * value;
 		}
