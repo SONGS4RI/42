@@ -7,15 +7,15 @@ setup-dirs:
 	@mkdir -p /home/jahlee/data/wp-files
 
 up:
-	@echo "Starting containers ..."
+	@echo "컨테이너 시작"
 	@docker compose -f srcs/docker-compose.yml up -d
 
 down:
-	@echo "Stopping containers ..."
+	@echo "컨테이너 종료"
 	@docker compose -f srcs/docker-compose.yml down
 
 clean: down
-	@echo "Cleaning unused Docker resources ..."
+	@echo "미사용 도커 리소스 정리"
 	@docker system prune -af
 
 vclean:
