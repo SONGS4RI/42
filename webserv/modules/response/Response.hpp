@@ -1,0 +1,31 @@
+#pragma once
+#ifndef RESPONSE_HPP
+#define RESPONSE_HPP
+
+#include <unistd.h>
+#include "../utils/Utils.hpp"
+#include "ResponseBody.hpp"
+#include "../utils/Enums.hpp"
+
+using namespace std;
+
+class Response {
+	private:
+		EResponseStatus status;
+		size_t			nextIdx;
+		string			statusLine;
+		string			header;
+		ResponseBody*	body;
+		
+		void	setStatusLine(const StatusCode& statusCode);
+		void	setHeader();
+	public:
+		bool	isDone();
+		Response(ResponseBody* _body);
+		Response(StatusCode errCode, int port);
+		void	writeToSocket(int fd);
+		EResponseStatus getStatus() {return (status);};
+		~Response();
+};
+
+#endif
